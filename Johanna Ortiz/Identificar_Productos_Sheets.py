@@ -7,6 +7,7 @@ from gspread.exceptions import APIError, SpreadsheetNotFound
 # --- Configuración ---
 TXT_PATH = "Productos_Pendientes.txt"
 SPREADSHEETS = [
+    "1U7BuK-z9CYdYNb_6b2UY4AAjCYWp2QLVuOwaVgxiYb8",
     "1Abd2kbIc5qIxjHokYGwdKtHp0X137xgZ_5EeLPY5IPI", 
     "18ofBTsQeZCLMYIZh8Q3n3B9XM01hrz6-voo2gZunxAM",
     "1-iiYxxo39Nj9oGB4sKeXtdRofUeMGLjMpUD_kVjGSko",
@@ -38,7 +39,11 @@ SPREADSHEETS = [
     "1AC0rOHHS4YlAXdlf-5Nckybwju1QqJ2UToqU8ONmx7c",
     "1nZVcvL_9WHS-NXg_yFzwdLK50okL6gTl2lFDgsXeQVw",
     "14wiOvdhhyTzhu9dxmUncClO1VanQr-pbEYJwI9ZNlrQ",
-    "1D07kZYCJw1ztPaqhygASQca3r_ul44m7MzlddaGDBXY"
+    "1D07kZYCJw1ztPaqhygASQca3r_ul44m7MzlddaGDBXY",
+    "1AC0rOHHS4YlAXdlf-5Nckybwju1QqJ2UToqU8ONmx7c",
+    "15oT_aREdalFmXLKlgLkX5NOel8XvJNSPS6LmZorp9Ss",
+    "1xekPDOCKw4V_zeMrxrPJa06qSSDoYp65Z3b7poPuOTE"
+    
 ]
 OUTPUT_CSV = "resultados.csv"
 
