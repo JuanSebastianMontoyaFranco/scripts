@@ -318,10 +318,10 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 12px;   
-      border-radius: 999px;   
-      background: rgba(255, 255, 255, 0.14);      
-      font-size: 14px;   
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      font-size: 14px;
       font-weight: 500;
     }
 
@@ -458,6 +458,17 @@
         width: auto !important;
         padding: 20px 18px !important;
       }
+
+      /* Aumentar overlay en mobile para mejorar legibilidad del texto sobre imágenes */
+      .product-card::before {
+        /* Gradiente más oscuro en móvil */
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.88) 100%);
+      }
+
+      /* Si se expande, mantener overlay aún más marcado para bloques largos */
+      .product-card.expanded::before {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.92) 100%);
+      }
     }
 
     @media (max-width: 560px) {
@@ -527,9 +538,9 @@
           <div class="product-details">
             <p class="product-description">Un aliado diseñado para mantener tus músculos, articulaciones y corazón en
               equilibrio, sin pesadez ni malestar digestivo.</p>
-            <div class="product-benefits"><span>✔️ Recuperación inteligente después de la actividad
-                física</span><span>✔️ Articulaciones fuertes y flexibles</span><span>✔️ Refuerzo natural de tus defensas
-                con antioxidantes</span></div>
+            <div class="product-benefits"><span>✔️ Recuperación funcional
+                física</span><span>✔️ Articulaciones fuertes</span><span>✔️ Defensas naturales
+              </span></div>
             <button class="product-cta2" type="button">DESCUBRE SYNERGY</button>
           </div>
         </div>
