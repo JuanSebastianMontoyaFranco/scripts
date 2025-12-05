@@ -42,7 +42,12 @@ def guardar_nombres_imagenes(
             vistos.add(n)
             nombres_ordenados.append(n)
 
-    ruta_salida = os.path.join(carpeta_raiz, archivo_txt)
+    # Si `archivo_txt` es una ruta absoluta, úsala tal cual.
+    # Si es solo un nombre o ruta relativa, se guarda dentro de `carpeta_raiz`.
+    if os.path.isabs(archivo_txt):
+        ruta_salida = archivo_txt
+    else:
+        ruta_salida = os.path.join(carpeta_raiz, archivo_txt)
     with open(ruta_salida, "w", encoding="utf-8") as f:
         for n in nombres_ordenados:
             f.write(n + "\n")
@@ -50,10 +55,13 @@ def guardar_nombres_imagenes(
     print(f"Se guardaron {len(nombres_ordenados)} nombres en: {ruta_salida}")
 
 
-# Ejemplo de uso (ajusta la ruta de la carpeta):
-guardar_nombres_imagenes(
-    carpeta_raiz=r"C:\\Users\\smontoya\\Documents\\Scripts\\Johanna Ortiz\\Fotos",
-    archivo_txt="C:\\Users\\smontoya\\Documents\\Scripts\\Johanna Ortiz\\imagenes.txt",
-    incluir_subcarpetas=True,   # True = recorre subcarpetas
-    incluir_extension=False     # False = sin extensión
-)
+# Ejemplo de uso:
+# - Asume que tienes una carpeta "Fotos" al lado de este script.
+# - Genera un archivo "imagenes.txt" dentro de esa carpeta.
+if __name__ == "__main__":
+    guardar_nombres_imagenes(
+        carpeta_raiz="Fotos",
+        archivo_txt="imagenes.txt",
+        incluir_subcarpetas=True,   # True = recorre subcarpetas
+        incluir_extension=False     # False = sin extensión
+    )
