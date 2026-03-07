@@ -1,0 +1,1977 @@
+{
+  "id": 7046194594104,
+  "admin_graphql_api_id": "gid://shopify/Order/7046194594104",
+  "app_id": 580111,
+  "browser_ip": "179.1.74.142",
+  "buyer_accepts_marketing": true,
+  "cancel_reason": null,
+  "cancelled_at": null,
+  "cart_token": "hWN8cu0sLZEuOuwdZC3dx598",
+  "checkout_id": 40630521168184,
+  "checkout_token": "41ac35cbeb0677579128608d1f8756bf",
+  "client_details": {
+    "accept_language": "es-CO",
+    "browser_height": null,
+    "browser_ip": "179.1.74.142",
+    "browser_width": null,
+    "session_hash": null,
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+  },
+  "closed_at": null,
+  "confirmation_number": "ALY0XG7XQ",
+  "confirmed": true,
+  "contact_email": "juan.avila162@gmail.com",
+  "created_at": "2026-02-18T09:38:53-05:00",
+  "currency": "COP",
+  "current_shipping_price_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "current_subtotal_price": "2777910.00",
+  "current_subtotal_price_set": {
+    "shop_money": {
+      "amount": "2777910.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "2777910.00",
+      "currency_code": "COP"
+    }
+  },
+  "current_total_additional_fees_set": null,
+  "current_total_discounts": "0.00",
+  "current_total_discounts_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "current_total_duties_set": null,
+  "current_total_price": "3305712.90",
+  "current_total_price_set": {
+    "shop_money": {
+      "amount": "3305712.90",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "3305712.90",
+      "currency_code": "COP"
+    }
+  },
+  "current_total_tax": "527802.90",
+  "current_total_tax_set": {
+    "shop_money": {
+      "amount": "527802.90",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "527802.90",
+      "currency_code": "COP"
+    }
+  },
+  "customer_locale": "es-CO",
+  "device_id": null,
+  "discount_codes": [],
+  "duties_included": false,
+  "email": "juan.avila162@gmail.com",
+  "estimated_taxes": false,
+  "financial_status": "pending",
+  "fulfillment_status": null,
+  "landing_site": "/?srsltid=AfmBOoqtNfWR9_DyToUsxAPC2A6mAfpAPDQukygTPRKRIDpK8udky_yP",
+  "landing_site_ref": null,
+  "location_id": null,
+  "merchant_business_entity_id": "MTk0Mjc1MjczMDE2",
+  "merchant_of_record_app_id": null,
+  "name": "AR1055",
+  "note": null,
+  "note_attributes": [],
+  "number": 55,
+  "order_number": 1055,
+  "order_status_url": "https://andinarep.com.co/94275273016/orders/4ef2e51f3939cdc81ce6a9432112b69b/authenticate?key=a05efb96e1ead668093e29d3005968b5",
+  "original_total_additional_fees_set": null,
+  "original_total_duties_set": null,
+  "payment_gateway_names": [
+    "Finalizar con un asesor"
+  ],
+  "phone": "+573105752084",
+  "po_number": null,
+  "presentment_currency": "COP",
+  "processed_at": "2026-02-18T09:38:51-05:00",
+  "reference": null,
+  "referring_site": "https://www.google.com/",
+  "source_identifier": null,
+  "source_name": "web",
+  "source_url": null,
+  "subtotal_price": "2777910.00",
+  "subtotal_price_set": {
+    "shop_money": {
+      "amount": "2777910.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "2777910.00",
+      "currency_code": "COP"
+    }
+  },
+  "tags": "hola",
+  "tax_exempt": false,
+  "tax_lines": [
+    {
+      "price": "527802.90",
+      "rate": 0.19,
+      "title": "VAT",
+      "price_set": {
+        "shop_money": {
+          "amount": "527802.90",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "527802.90",
+          "currency_code": "COP"
+        }
+      },
+      "channel_liable": false
+    }
+  ],
+  "taxes_included": false,
+  "test": false,
+  "token": "4ef2e51f3939cdc81ce6a9432112b69b",
+  "total_cash_rounding_payment_adjustment_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_cash_rounding_refund_adjustment_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_discounts": "0.00",
+  "total_discounts_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_line_items_price": "2777910.00",
+  "total_line_items_price_set": {
+    "shop_money": {
+      "amount": "2777910.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "2777910.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_outstanding": "3305712.90",
+  "total_price": "3305712.90",
+  "total_price_set": {
+    "shop_money": {
+      "amount": "3305712.90",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "3305712.90",
+      "currency_code": "COP"
+    }
+  },
+  "total_shipping_price_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_tax": "527802.90",
+  "total_tax_set": {
+    "shop_money": {
+      "amount": "527802.90",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "527802.90",
+      "currency_code": "COP"
+    }
+  },
+  "total_tip_received": "0.00",
+  "total_weight": 0,
+  "updated_at": "2026-02-20T13:21:00-05:00",
+  "user_id": null,
+  "billing_address": {
+    "first_name": "MOTO PROMET S A S",
+    "address1": "CR 28 47 11 BR PALMIRA",
+    "phone": "+573002985204",
+    "city": "Barrancabermeja",
+    "zip": null,
+    "province": "Santander",
+    "country": "Colombia",
+    "last_name": "MOTO PROMET SAS",
+    "address2": "Almacén",
+    "company": "901064593",
+    "latitude": 7.058409999999999,
+    "longitude": -73.85103099999999,
+    "name": "MOTO PROMET S A S MOTO PROMET SAS",
+    "country_code": "CO",
+    "province_code": "SAN"
+  },
+  "customer": {
+    "id": 9452808569144,
+    "created_at": "2025-08-06T10:12:46-04:00",
+    "updated_at": "2026-02-18T09:38:54-05:00",
+    "first_name": "MOTO PROMET S A S",
+    "last_name": "MOTO PROMET SAS",
+    "state": "disabled",
+    "note": "CLIENTE",
+    "verified_email": true,
+    "multipass_identifier": null,
+    "tax_exempt": false,
+    "email": "juan.avila162@gmail.com",
+    "phone": "+573105752084",
+    "currency": "COP",
+    "tax_exemptions": [],
+    "admin_graphql_api_id": "gid://shopify/Customer/9452808569144",
+    "default_address": {
+      "id": 11160555454776,
+      "customer_id": 9452808569144,
+      "first_name": "MOTO PROMET S A S",
+      "last_name": "MOTO PROMET SAS",
+      "company": "901064593",
+      "address1": "CR 28 47 11 BR PALMIRA",
+      "address2": "Almacén",
+      "city": "Barrancabermeja",
+      "province": "Santander",
+      "country": "Colombia",
+      "zip": null,
+      "phone": "+573002985204",
+      "name": "MOTO PROMET S A S MOTO PROMET SAS",
+      "province_code": "SAN",
+      "country_code": "CO",
+      "country_name": "Colombia",
+      "default": true
+    }
+  },
+  "discount_applications": [],
+  "fulfillments": [],
+  "line_items": [
+    {
+      "id": 18213778358584,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778358584",
+      "attributed_staffs": [],
+      "current_quantity": 6,
+      "fulfillable_quantity": 6,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ESTATOR DE BOBINAS (6 NUCLEOS) \"CROWN\" WAVE 100",
+      "price": "45660.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "45660.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "45660.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128783737144,
+      "properties": [],
+      "quantity": 6,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1029",
+      "taxable": true,
+      "title": "ESTATOR DE BOBINAS (6 NUCLEOS) \"CROWN\" WAVE 100",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656921121080,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800011650",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "52052.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "52052.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "52052.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778391352,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778391352",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT BIELA \"CROWN\" PULSAR-180",
+      "price": "39420.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "39420.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "39420.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128872964408,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2797",
+      "taxable": true,
+      "title": "KIT BIELA \"CROWN\" PULSAR-180",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656924463416,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800800076",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "14979.60",
+          "price_set": {
+            "shop_money": {
+              "amount": "14979.60",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "14979.60",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778424120,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778424120",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT BIELA \"CROWN\" CRYPTON-110",
+      "price": "34290.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "34290.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "34290.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128834298168,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2108",
+      "taxable": true,
+      "title": "KIT BIELA \"CROWN\" CRYPTON-110",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656923152696,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800800090",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "13030.20",
+          "price_set": {
+            "shop_money": {
+              "amount": "13030.20",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "13030.20",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778456888,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778456888",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT CILINDRO (COLOR NEGRO) \"CROWN\" AKT-110/ACTIVE-110",
+      "price": "78520.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "78520.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "78520.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128798712120,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1337",
+      "taxable": true,
+      "title": "KIT CILINDRO (COLOR NEGRO) \"CROWN\" AKT-110/ACTIVE-110",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656924889400,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "801000001",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "14918.80",
+          "price_set": {
+            "shop_money": {
+              "amount": "14918.80",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "14918.80",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778489656,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778489656",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT CILINDRO RAIDER-125 \"CROWN\"",
+      "price": "134680.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "134680.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "134680.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10202553024824,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "4026",
+      "taxable": true,
+      "title": "KIT CILINDRO RAIDER-125 \"CROWN\"",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51659214356792,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "801000161",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "25589.20",
+          "price_set": {
+            "shop_money": {
+              "amount": "25589.20",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "25589.20",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778522424,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778522424",
+      "attributed_staffs": [],
+      "current_quantity": 16,
+      "fulfillable_quantity": 16,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT CUNAS DIRECCION \"CROWN\" XTZ-125 (2013/2017)",
+      "price": "12590.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "12590.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "12590.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128861626680,
+      "properties": [],
+      "quantity": 16,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2580",
+      "taxable": true,
+      "title": "KIT CUNAS DIRECCION \"CROWN\" XTZ-125 (2013/2017)",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656925741368,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800011338",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "38273.60",
+          "price_set": {
+            "shop_money": {
+              "amount": "38273.60",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "38273.60",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778555192,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778555192",
+      "attributed_staffs": [],
+      "current_quantity": 4,
+      "fulfillable_quantity": 4,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT DISCOS CLUTCH X3 PCS \"CROWN\" C90 / C70 / AKT110 ESPECIAL",
+      "price": "7750.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "7750.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "7750.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128871653688,
+      "properties": [],
+      "quantity": 4,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2770",
+      "taxable": true,
+      "title": "KIT DISCOS CLUTCH X3 PCS \"CROWN\" C90 / C70 / AKT110 ESPECIAL",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656925905208,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800011440",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "5890.00",
+          "price_set": {
+            "shop_money": {
+              "amount": "5890.00",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "5890.00",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778587960,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778587960",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT CILINDRO XR-150 \"CROWN\"",
+      "price": "110450.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "110450.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "110450.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10202552926520,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "4024",
+      "taxable": true,
+      "title": "KIT CILINDRO XR-150 \"CROWN\"",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51659214422328,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "801000078",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "20985.50",
+          "price_set": {
+            "shop_money": {
+              "amount": "20985.50",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "20985.50",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778620728,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778620728",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "PEDAL ARRANQUE NXR-125 BROS \"CROWN\"",
+      "price": "20390.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "20390.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "20390.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10202552140088,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "3992",
+      "taxable": true,
+      "title": "PEDAL ARRANQUE NXR-125 BROS \"CROWN\"",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51659216617784,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800012337",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "7748.20",
+          "price_set": {
+            "shop_money": {
+              "amount": "7748.20",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "7748.20",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778653496,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778653496",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "PEDAL ARRANQUE SPLENDOR \"CROWN\"",
+      "price": "18310.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "18310.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "18310.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128884793656,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2983",
+      "taxable": true,
+      "title": "PEDAL ARRANQUE SPLENDOR \"CROWN\"",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656935342392,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "200012360",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "3478.90",
+          "price_set": {
+            "shop_money": {
+              "amount": "3478.90",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "3478.90",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778686264,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778686264",
+      "attributed_staffs": [],
+      "current_quantity": 4,
+      "fulfillable_quantity": 4,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "CENTRO Y PLATO EMBRAGUE COMPLETO \"CROWN\" GN-125H/GS-125",
+      "price": "49720.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "49720.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "49720.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128824107320,
+      "properties": [],
+      "quantity": 4,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1848",
+      "taxable": true,
+      "title": "CENTRO Y PLATO EMBRAGUE COMPLETO \"CROWN\" GN-125H/GS-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687235879224,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800011076",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "37787.20",
+          "price_set": {
+            "shop_money": {
+              "amount": "37787.20",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "37787.20",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778719032,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778719032",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT CILINDRO XTZ-150 \"CROWN\"",
+      "price": "120750.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "120750.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "120750.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10202552992056,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "4025",
+      "taxable": true,
+      "title": "KIT CILINDRO XTZ-150 \"CROWN\"",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51659214455096,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "801000135",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "22942.50",
+          "price_set": {
+            "shop_money": {
+              "amount": "22942.50",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "22942.50",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778751800,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778751800",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "MEDIDOR DE COMBUSTIBLE \"CROWN\" ECO DELUXE STARTER",
+      "price": "19450.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "19450.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "19450.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128786129208,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1088",
+      "taxable": true,
+      "title": "MEDIDOR DE COMBUSTIBLE \"CROWN\" ECO DELUXE STARTER",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656933507384,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800012241",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "7391.00",
+          "price_set": {
+            "shop_money": {
+              "amount": "7391.00",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "7391.00",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778784568,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778784568",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "MEDIDOR DE COMBUSTIBLE \"CROWN\" BWS-125",
+      "price": "20750.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "20750.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "20750.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128786161976,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1089",
+      "taxable": true,
+      "title": "MEDIDOR DE COMBUSTIBLE \"CROWN\" BWS-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656933441848,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800012242",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "7885.00",
+          "price_set": {
+            "shop_money": {
+              "amount": "7885.00",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "7885.00",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778817336,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778817336",
+      "attributed_staffs": [],
+      "current_quantity": 4,
+      "fulfillable_quantity": 4,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "TENSOR HIDRAULICO \"CROWN\" PULSAR DTSi/UG/BLACK TEC",
+      "price": "11550.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "11550.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "11550.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128790389048,
+      "properties": [],
+      "quantity": 4,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1188",
+      "taxable": true,
+      "title": "TENSOR HIDRAULICO \"CROWN\" PULSAR DTSi/UG/BLACK TEC",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656941371704,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800013080",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "8778.00",
+          "price_set": {
+            "shop_money": {
+              "amount": "8778.00",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "8778.00",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778850104,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778850104",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "TENSOR HIDRAULICO \"CROWN\" DISCOVER 125 ST",
+      "price": "10140.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "10140.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "10140.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128790487352,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1191",
+      "taxable": true,
+      "title": "TENSOR HIDRAULICO \"CROWN\" DISCOVER 125 ST",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656941273400,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800013083",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "3853.20",
+          "price_set": {
+            "shop_money": {
+              "amount": "3853.20",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "3853.20",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778882872,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778882872",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT CILINDRO (COLOR GRIS) \"CROWN\" AGILITY-125",
+      "price": "84040.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "84040.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "84040.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128819159352,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1789",
+      "taxable": true,
+      "title": "KIT CILINDRO (COLOR GRIS) \"CROWN\" AGILITY-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656924725560,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "801000040",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "31935.20",
+          "price_set": {
+            "shop_money": {
+              "amount": "31935.20",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "31935.20",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778915640,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778915640",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ARBOL DE LEVAS  BOXER-CT100 KS-ES \"CROWN\"",
+      "price": "36610.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "36610.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "36610.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10202549944632,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "3951",
+      "taxable": true,
+      "title": "ARBOL DE LEVAS  BOXER-CT100 KS-ES \"CROWN\"",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687199113528,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800010161",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "6955.90",
+          "price_set": {
+            "shop_money": {
+              "amount": "6955.90",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "6955.90",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778948408,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778948408",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ARBOL DE LEVAS \"CROWN\" FZ-16/SZR/FAZER",
+      "price": "51990.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "51990.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "51990.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128776036664,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "897",
+      "taxable": true,
+      "title": "ARBOL DE LEVAS \"CROWN\" FZ-16/SZR/FAZER",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687200031032,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800010177",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "9878.10",
+          "price_set": {
+            "shop_money": {
+              "amount": "9878.10",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "9878.10",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213778981176,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213778981176",
+      "attributed_staffs": [],
+      "current_quantity": 20,
+      "fulfillable_quantity": 20,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT DISTRIBUCION (NO RUIDO) \"CROWN\" ECODELUXE/ECO100+/ECO100/SPLENDOR+/SPLENDOR",
+      "price": "20490.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "20490.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "20490.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128784687416,
+      "properties": [],
+      "quantity": 20,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1054",
+      "taxable": true,
+      "title": "KIT DISTRIBUCION (NO RUIDO) \"CROWN\" ECODELUXE/ECO100+/ECO100/SPLENDOR+/SPLENDOR",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656926298424,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800011980",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "77862.00",
+          "price_set": {
+            "shop_money": {
+              "amount": "77862.00",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "77862.00",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213779013944,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213779013944",
+      "attributed_staffs": [],
+      "current_quantity": 12,
+      "fulfillable_quantity": 12,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT DISTRIBUCION (NO RUIDO) \"CROWN\" CB-110/DREAM NEO",
+      "price": "22990.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "22990.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "22990.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128817127736,
+      "properties": [],
+      "quantity": 12,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1739",
+      "taxable": true,
+      "title": "KIT DISTRIBUCION (NO RUIDO) \"CROWN\" CB-110/DREAM NEO",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656926200120,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800011981",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "52417.20",
+          "price_set": {
+            "shop_money": {
+              "amount": "52417.20",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "52417.20",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213779046712,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213779046712",
+      "attributed_staffs": [],
+      "current_quantity": 6,
+      "fulfillable_quantity": 6,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT GUIA TENSOR CADENILLA X2 PCS \"CROWN\" GIXXER-150",
+      "price": "11240.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "11240.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "11240.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128871719224,
+      "properties": [],
+      "quantity": 6,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2772",
+      "taxable": true,
+      "title": "KIT GUIA TENSOR CADENILLA X2 PCS \"CROWN\" GIXXER-150",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656926593336,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800012112",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "12813.60",
+          "price_set": {
+            "shop_money": {
+              "amount": "12813.60",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "12813.60",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213779079480,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213779079480",
+      "attributed_staffs": [],
+      "current_quantity": 6,
+      "fulfillable_quantity": 6,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT GUIA TENSOR CADENILLA X2 PCS \"CROWN\" GN-125H",
+      "price": "9680.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "9680.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "9680.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128860053816,
+      "properties": [],
+      "quantity": 6,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2544",
+      "taxable": true,
+      "title": "KIT GUIA TENSOR CADENILLA X2 PCS \"CROWN\" GN-125H",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656926626104,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800012113",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "11035.20",
+          "price_set": {
+            "shop_money": {
+              "amount": "11035.20",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "11035.20",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18213779112248,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18213779112248",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT CILINDRO (COLOR GRIS) \"CROWN\" NXR-125 BROS",
+      "price": "103480.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "103480.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "103480.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128819257656,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1791",
+      "taxable": true,
+      "title": "KIT CILINDRO (COLOR GRIS) \"CROWN\" NXR-125 BROS",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656924791096,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "801000080",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "39322.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "39322.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "39322.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    }
+  ],
+  "payment_terms": null,
+  "refunds": [],
+  "shipping_address": {
+    "first_name": "MOTO PROMET S A S",
+    "address1": "CR 28 47 11 BR PALMIRA",
+    "phone": "+573002985204",
+    "city": "Barrancabermeja",
+    "zip": null,
+    "province": "Santander",
+    "country": "Colombia",
+    "last_name": "MOTO PROMET SAS",
+    "address2": "Almacén",
+    "company": "901064593",
+    "latitude": 7.058409999999999,
+    "longitude": -73.85103099999999,
+    "name": "MOTO PROMET S A S MOTO PROMET SAS",
+    "country_code": "CO",
+    "province_code": "SAN"
+  },
+  "shipping_lines": [
+    {
+      "id": 5600758432056,
+      "carrier_identifier": null,
+      "code": "Envío por paquetería",
+      "current_discounted_price_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "discounted_price": "0.00",
+      "discounted_price_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "is_removed": false,
+      "phone": null,
+      "price": "0.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "requested_fulfillment_service_id": null,
+      "source": "shopify",
+      "title": "Envío por paquetería",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "0.00",
+          "price_set": {
+            "shop_money": {
+              "amount": "0.00",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "0.00",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "discount_allocations": []
+    }
+  ],
+  "returns": [],
+  "line_item_groups": []
+}

@@ -1,0 +1,3853 @@
+{
+  "id": 7044056252728,
+  "admin_graphql_api_id": "gid://shopify/Order/7044056252728",
+  "app_id": 580111,
+  "browser_ip": "186.118.81.229",
+  "buyer_accepts_marketing": true,
+  "cancel_reason": null,
+  "cancelled_at": null,
+  "cart_token": "hWN8raQ6uclOJjDrhyG7Wjcg",
+  "checkout_id": 40623939060024,
+  "checkout_token": "8beade6c34838ecf85750c2d77361451",
+  "client_details": {
+    "accept_language": "es-CO",
+    "browser_height": null,
+    "browser_ip": "186.118.81.229",
+    "browser_width": null,
+    "session_hash": null,
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+  },
+  "closed_at": null,
+  "confirmation_number": "GTDUC0NGJ",
+  "confirmed": true,
+  "contact_email": "franciscoramos93466@gmail.com",
+  "created_at": "2026-02-16T19:49:16-05:00",
+  "currency": "COP",
+  "current_shipping_price_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "current_subtotal_price": "1855400.00",
+  "current_subtotal_price_set": {
+    "shop_money": {
+      "amount": "1855400.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "1855400.00",
+      "currency_code": "COP"
+    }
+  },
+  "current_total_additional_fees_set": null,
+  "current_total_discounts": "0.00",
+  "current_total_discounts_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "current_total_duties_set": null,
+  "current_total_price": "2207926.00",
+  "current_total_price_set": {
+    "shop_money": {
+      "amount": "2207926.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "2207926.00",
+      "currency_code": "COP"
+    }
+  },
+  "current_total_tax": "352526.00",
+  "current_total_tax_set": {
+    "shop_money": {
+      "amount": "352526.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "352526.00",
+      "currency_code": "COP"
+    }
+  },
+  "customer_locale": "es-CO",
+  "device_id": null,
+  "discount_codes": [],
+  "duties_included": false,
+  "email": "franciscoramos93466@gmail.com",
+  "estimated_taxes": false,
+  "financial_status": "pending",
+  "fulfillment_status": null,
+  "landing_site": "/",
+  "landing_site_ref": null,
+  "location_id": null,
+  "merchant_business_entity_id": "MTk0Mjc1MjczMDE2",
+  "merchant_of_record_app_id": null,
+  "name": "AR1054",
+  "note": null,
+  "note_attributes": [],
+  "number": 54,
+  "order_number": 1054,
+  "order_status_url": "https://andinarep.com.co/94275273016/orders/c9431b9186182891cf9a41badaa29eff/authenticate?key=298349c6ca25ff518f578f0198f75585",
+  "original_total_additional_fees_set": null,
+  "original_total_duties_set": null,
+  "payment_gateway_names": [
+    "Finalizar con un asesor"
+  ],
+  "phone": "+573006276878",
+  "po_number": null,
+  "presentment_currency": "COP",
+  "processed_at": "2026-02-16T19:49:12-05:00",
+  "reference": null,
+  "referring_site": null,
+  "source_identifier": null,
+  "source_name": "web",
+  "source_url": null,
+  "subtotal_price": "1855400.00",
+  "subtotal_price_set": {
+    "shop_money": {
+      "amount": "1855400.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "1855400.00",
+      "currency_code": "COP"
+    }
+  },
+  "tags": "",
+  "tax_exempt": false,
+  "tax_lines": [
+    {
+      "price": "352526.00",
+      "rate": 0.19,
+      "title": "VAT",
+      "price_set": {
+        "shop_money": {
+          "amount": "352526.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "352526.00",
+          "currency_code": "COP"
+        }
+      },
+      "channel_liable": false
+    }
+  ],
+  "taxes_included": false,
+  "test": false,
+  "token": "c9431b9186182891cf9a41badaa29eff",
+  "total_cash_rounding_payment_adjustment_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_cash_rounding_refund_adjustment_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_discounts": "0.00",
+  "total_discounts_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_line_items_price": "1855400.00",
+  "total_line_items_price_set": {
+    "shop_money": {
+      "amount": "1855400.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "1855400.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_outstanding": "2207926.00",
+  "total_price": "2207926.00",
+  "total_price_set": {
+    "shop_money": {
+      "amount": "2207926.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "2207926.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_shipping_price_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_tax": "352526.00",
+  "total_tax_set": {
+    "shop_money": {
+      "amount": "352526.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "352526.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_tip_received": "0.00",
+  "total_weight": 0,
+  "updated_at": "2026-02-20T13:08:10-05:00",
+  "user_id": null,
+  "billing_address": {
+    "first_name": "JOSE FRANCISCO",
+    "address1": "Carrera 28 #47-59",
+    "phone": "+573006276878",
+    "city": "Barrancabermeja",
+    "zip": "680003",
+    "province": "Santander",
+    "country": "Colombia",
+    "last_name": "RAMOS LEMES",
+    "address2": "001",
+    "company": "77156340",
+    "latitude": 7.0617085,
+    "longitude": -73.8519319,
+    "name": "JOSE FRANCISCO RAMOS LEMES",
+    "country_code": "CO",
+    "province_code": "SAN"
+  },
+  "customer": {
+    "id": 9975815668024,
+    "created_at": "2026-02-04T14:22:00-05:00",
+    "updated_at": "2026-02-17T09:40:54-05:00",
+    "first_name": "JOSE FRANCISCO",
+    "last_name": "RAMOS LEMES",
+    "state": "disabled",
+    "note": "CLIENTE",
+    "verified_email": true,
+    "multipass_identifier": null,
+    "tax_exempt": false,
+    "email": "franciscoramos93466@gmail.com",
+    "phone": "+573006276878",
+    "currency": "COP",
+    "tax_exemptions": [],
+    "admin_graphql_api_id": "gid://shopify/Customer/9975815668024",
+    "default_address": {
+      "id": 11157101936952,
+      "customer_id": 9975815668024,
+      "first_name": "JOSE FRANCISCO",
+      "last_name": "RAMOS LEMES",
+      "company": "77156340",
+      "address1": "Carrera 28 #47-59",
+      "address2": "001",
+      "city": "Barrancabermeja",
+      "province": "Santander",
+      "country": "Colombia",
+      "zip": "680003",
+      "phone": "+573006276878",
+      "name": "JOSE FRANCISCO RAMOS LEMES",
+      "province_code": "SAN",
+      "country_code": "CO",
+      "country_name": "Colombia",
+      "default": true
+    }
+  },
+  "discount_applications": [],
+  "fulfillments": [],
+  "line_items": [
+    {
+      "id": 18207852790072,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207852790072",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "TENSOR HIDRAULICO \"CROWN\" DISCOVER-135",
+      "price": "11390.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "11390.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "11390.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128790421816,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1189",
+      "taxable": true,
+      "title": "TENSOR HIDRAULICO \"CROWN\" DISCOVER-135",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656941306168,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800013081",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "4328.20",
+          "price_set": {
+            "shop_money": {
+              "amount": "4328.20",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "4328.20",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207852822840,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207852822840",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "TENSOR HIDRAULICO \"CROWN\" PULSAR-200NS",
+      "price": "11570.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "11570.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "11570.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128838492472,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2186",
+      "taxable": true,
+      "title": "TENSOR HIDRAULICO \"CROWN\" PULSAR-200NS",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656941470008,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800013084",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "2198.30",
+          "price_set": {
+            "shop_money": {
+              "amount": "2198.30",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "2198.30",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207852855608,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207852855608",
+      "attributed_staffs": [],
+      "current_quantity": 3,
+      "fulfillable_quantity": 3,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "TENSOR HIDRAULICO \"CROWN\" CBF-150/XR-150L/INVICTA/MRX-150/THRILLER-150",
+      "price": "9570.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "9570.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "9570.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128790356280,
+      "properties": [],
+      "quantity": 3,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1187",
+      "taxable": true,
+      "title": "TENSOR HIDRAULICO \"CROWN\" CBF-150/XR-150L/INVICTA/MRX-150/THRILLER-150",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656941142328,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800013079",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "5454.90",
+          "price_set": {
+            "shop_money": {
+              "amount": "5454.90",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "5454.90",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207852888376,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207852888376",
+      "attributed_staffs": [],
+      "current_quantity": 4,
+      "fulfillable_quantity": 4,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "TENSOR CADENA CRYPTON-115 Fi \"CROWN\"",
+      "price": "3590.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "3590.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "3590.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10202578682168,
+      "properties": [],
+      "quantity": 4,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "4003",
+      "taxable": true,
+      "title": "TENSOR CADENA CRYPTON-115 Fi \"CROWN\"",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51659218977080,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800013049",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "2728.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "2728.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "2728.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207852921144,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207852921144",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "CADENILLA DE DISTRIBUCION (25H X 98) \"CROWN\" GN-125H/XL125/PULSAR-180",
+      "price": "8530.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "8530.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "8530.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128779116856,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "922",
+      "taxable": true,
+      "title": "CADENILLA DE DISTRIBUCION (25H X 98) \"CROWN\" GN-125H/XL125/PULSAR-180",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687225393464,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800010811",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "3241.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "3241.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "3241.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207852953912,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207852953912",
+      "attributed_staffs": [],
+      "current_quantity": 4,
+      "fulfillable_quantity": 4,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "CADENILLA DISTRIBUCION (2X3X 92L) \"CROWN\" BEST-125/AX-4/VIVA-R/GLAMOUR/IGNITOR-125",
+      "price": "12070.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "12070.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "12070.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128779149624,
+      "properties": [],
+      "quantity": 4,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "923",
+      "taxable": true,
+      "title": "CADENILLA DISTRIBUCION (2X3X 92L) \"CROWN\" BEST-125/AX-4/VIVA-R/GLAMOUR/IGNITOR-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687225819448,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800010812",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "9173.20",
+          "price_set": {
+            "shop_money": {
+              "amount": "9173.20",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "9173.20",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207852986680,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207852986680",
+      "attributed_staffs": [],
+      "current_quantity": 4,
+      "fulfillable_quantity": 4,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "CADENILLA DE DISTRIBUCION (2X3X94L) \"CROWN\" BWS-125",
+      "price": "10340.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "10340.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "10340.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128817029432,
+      "properties": [],
+      "quantity": 4,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1737",
+      "taxable": true,
+      "title": "CADENILLA DE DISTRIBUCION (2X3X94L) \"CROWN\" BWS-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687225426232,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800010819",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "7858.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "7858.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "7858.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853019448,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853019448",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "CADENILLA DISTRIBUCION (2X3X88L) \"CROWN\" VIVAX-115",
+      "price": "9780.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "9780.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "9780.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128812802360,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1636",
+      "taxable": true,
+      "title": "CADENILLA DISTRIBUCION (2X3X88L) \"CROWN\" VIVAX-115",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687225917752,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800010817",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "3716.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "3716.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "3716.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853052216,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853052216",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT GUIA TENSOR CADENILLA X2 PCS \"CROWN\" BEST-125/AX-4",
+      "price": "11960.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "11960.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "11960.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128852353336,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2417",
+      "taxable": true,
+      "title": "KIT GUIA TENSOR CADENILLA X2 PCS \"CROWN\" BEST-125/AX-4",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656926429496,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800012116",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "4544.80",
+          "price_set": {
+            "shop_money": {
+              "amount": "4544.80",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "4544.80",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853084984,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853084984",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "PEDAL DE CAMBIOS \"CROWN\" BEST-125 / VIVA / VIVAX",
+      "price": "11860.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "11860.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "11860.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128871948600,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2777",
+      "taxable": true,
+      "title": "PEDAL DE CAMBIOS \"CROWN\" BEST-125 / VIVA / VIVAX",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656935539000,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800012349",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "2253.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "2253.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "2253.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853117752,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853117752",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS 0.50 \"CROWN\" TVS-100 SPORT",
+      "price": "10400.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "10400.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "10400.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128795664696,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1271",
+      "taxable": true,
+      "title": "ANILLOS 0.50 \"CROWN\" TVS-100 SPORT",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687194886456,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600512",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "1976.00",
+          "price_set": {
+            "shop_money": {
+              "amount": "1976.00",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "1976.00",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853150520,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853150520",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS 0.25 \"CROWN\" PULSAR-180",
+      "price": "10560.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "10560.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "10560.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128833216824,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2090",
+      "taxable": true,
+      "title": "ANILLOS 0.25 \"CROWN\" PULSAR-180",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687193739576,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600251",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "2006.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "2006.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "2006.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853183288,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853183288",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS 0.50 \"CROWN\" PULSAR-180",
+      "price": "11240.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "11240.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "11240.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128833282360,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2091",
+      "taxable": true,
+      "title": "ANILLOS 0.50 \"CROWN\" PULSAR-180",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687194853688,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600252",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "2135.60",
+          "price_set": {
+            "shop_money": {
+              "amount": "2135.60",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "2135.60",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853216056,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853216056",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS STD \"CROWN\" PULSAR-180",
+      "price": "10560.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "10560.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "10560.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128833151288,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2089",
+      "taxable": true,
+      "title": "ANILLOS STD \"CROWN\" PULSAR-180",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687196983608,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600250",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "2006.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "2006.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "2006.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853248824,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853248824",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS 0.50 \"CROWN\" CB-1/ CB-125F",
+      "price": "10510.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "10510.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "10510.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128859529528,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2532",
+      "taxable": true,
+      "title": "ANILLOS 0.50 \"CROWN\" CB-1/ CB-125F",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687194427704,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600147",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "1996.90",
+          "price_set": {
+            "shop_money": {
+              "amount": "1996.90",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "1996.90",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853281592,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853281592",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS 0.25 \"CROWN\" CB-1/ CB-125F",
+      "price": "10510.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "10510.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "10510.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128859431224,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2531",
+      "taxable": true,
+      "title": "ANILLOS 0.25 \"CROWN\" CB-1/ CB-125F",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687193313592,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600146",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "1996.90",
+          "price_set": {
+            "shop_money": {
+              "amount": "1996.90",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "1996.90",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853314360,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853314360",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS STD \"CROWN\" CB-1/ CB-125",
+      "price": "10510.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "10510.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "10510.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128859398456,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2530",
+      "taxable": true,
+      "title": "ANILLOS STD \"CROWN\" CB-1/ CB-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687196557624,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600145",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "1996.90",
+          "price_set": {
+            "shop_money": {
+              "amount": "1996.90",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "1996.90",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853347128,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853347128",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS 0,25 FD-125 (BEST-125)",
+      "price": "11290.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "11290.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "11290.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128832594232,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2077",
+      "taxable": true,
+      "title": "ANILLOS 0,25 FD-125 (BEST-125)",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687192592696,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600461",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "2145.10",
+          "price_set": {
+            "shop_money": {
+              "amount": "2145.10",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "2145.10",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853379896,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853379896",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS STD \"CROWN\" YBR-125/LIBERO-125/XTZ-125",
+      "price": "10820.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "10820.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "10820.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128795042104,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1256",
+      "taxable": true,
+      "title": "ANILLOS STD \"CROWN\" YBR-125/LIBERO-125/XTZ-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687197409592,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600360",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "4111.60",
+          "price_set": {
+            "shop_money": {
+              "amount": "4111.60",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "4111.60",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853412664,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853412664",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS STD \"CROWN\" T-110 CRYPTON",
+      "price": "9000.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "9000.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "9000.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128794779960,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1250",
+      "taxable": true,
+      "title": "ANILLOS STD \"CROWN\" T-110 CRYPTON",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687197311288,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600340",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "1710.00",
+          "price_set": {
+            "shop_money": {
+              "amount": "1710.00",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "1710.00",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853445432,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853445432",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS 0.50 \"CROWN\" ECODELUXE/WAVE100/SPLENDOR",
+      "price": "9030.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "9030.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "9030.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128793665848,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1228",
+      "taxable": true,
+      "title": "ANILLOS 0.50 \"CROWN\" ECODELUXE/WAVE100/SPLENDOR",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687194689848,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600122",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "1715.70",
+          "price_set": {
+            "shop_money": {
+              "amount": "1715.70",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "1715.70",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853478200,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853478200",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS STD \"CROWN\" ECODELUXE/WAVE100/SPLENDOR",
+      "price": "9000.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "9000.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "9000.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128793600312,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1226",
+      "taxable": true,
+      "title": "ANILLOS STD \"CROWN\" ECODELUXE/WAVE100/SPLENDOR",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687196819768,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600120",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "3420.00",
+          "price_set": {
+            "shop_money": {
+              "amount": "3420.00",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "3420.00",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853510968,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853510968",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS 0.25 \"CROWN\" AGILITY-125",
+      "price": "9330.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "9330.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "9330.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128793403704,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1221",
+      "taxable": true,
+      "title": "ANILLOS 0.25 \"CROWN\" AGILITY-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687192985912,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600101",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "1772.70",
+          "price_set": {
+            "shop_money": {
+              "amount": "1772.70",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "1772.70",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853543736,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853543736",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS 0.50  \"CROWN\" BWS-125 \"CROWN\"",
+      "price": "9510.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "9510.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "9510.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128810410296,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1584",
+      "taxable": true,
+      "title": "ANILLOS 0.50  \"CROWN\" BWS-125 \"CROWN\"",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687194001720,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600388",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "1806.90",
+          "price_set": {
+            "shop_money": {
+              "amount": "1806.90",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "1806.90",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853576504,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853576504",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS 0.25 \"CROWN\" BWS-125",
+      "price": "9760.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "9760.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "9760.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128810377528,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1583",
+      "taxable": true,
+      "title": "ANILLOS 0.25 \"CROWN\" BWS-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687193248056,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600387",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "3708.80",
+          "price_set": {
+            "shop_money": {
+              "amount": "3708.80",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "3708.80",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853609272,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853609272",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS 0.25 \"CROWN\" AKT-110/SCOOTER-125",
+      "price": "9310.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "9310.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "9310.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128792813880,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1206",
+      "taxable": true,
+      "title": "ANILLOS 0.25 \"CROWN\" AKT-110/SCOOTER-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687193018680,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600002",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "1768.90",
+          "price_set": {
+            "shop_money": {
+              "amount": "1768.90",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "1768.90",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853642040,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853642040",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS 0.25 \"CROWN\" AKT-125 TTR/NKD-125R/NXR-125 BROSS",
+      "price": "10140.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "10140.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "10140.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128793174328,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1215",
+      "taxable": true,
+      "title": "ANILLOS 0.25 \"CROWN\" AKT-125 TTR/NKD-125R/NXR-125 BROSS",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687193051448,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600021",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "3853.20",
+          "price_set": {
+            "shop_money": {
+              "amount": "3853.20",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "3853.20",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853674808,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853674808",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS 0.50 \"CROWN\" BOXER CT100 TEC/PLATINO-100",
+      "price": "10510.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "10510.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "10510.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128793567544,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1225",
+      "taxable": true,
+      "title": "ANILLOS 0.50 \"CROWN\" BOXER CT100 TEC/PLATINO-100",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687194296632,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600112",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "1996.90",
+          "price_set": {
+            "shop_money": {
+              "amount": "1996.90",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "1996.90",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853707576,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853707576",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "VALVULA ADM/ESC \"CROWN\" (CALIDAD PLUS) CBF-150/XR-150/INVICTA/MRX-150/THRILLER-150/RTX-150",
+      "price": "18930.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "18930.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "18930.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128934797624,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "3506",
+      "taxable": true,
+      "title": "VALVULA ADM/ESC \"CROWN\" (CALIDAD PLUS) CBF-150/XR-150/INVICTA/MRX-150/THRILLER-150/RTX-150",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51657192866104,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800013505",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "7193.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "7193.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "7193.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853740344,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853740344",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "VALVULA ADM/ESC \"CROWN\" (CALIDAD PLUS) VIVAX-115",
+      "price": "17580.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "17580.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "17580.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128934961464,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "3510",
+      "taxable": true,
+      "title": "VALVULA ADM/ESC \"CROWN\" (CALIDAD PLUS) VIVAX-115",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51657201615160,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800013573",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "6680.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "6680.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "6680.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853773112,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853773112",
+      "attributed_staffs": [],
+      "current_quantity": 3,
+      "fulfillable_quantity": 3,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "BALANCIN ADM/ESC X2 PCS \"CROWN\" VIVAX-115/BEST-125",
+      "price": "13940.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "13940.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "13940.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128809328952,
+      "properties": [],
+      "quantity": 3,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1557",
+      "taxable": true,
+      "title": "BALANCIN ADM/ESC X2 PCS \"CROWN\" VIVAX-115/BEST-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687208616248,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800010208",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "7945.80",
+          "price_set": {
+            "shop_money": {
+              "amount": "7945.80",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "7945.80",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853805880,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853805880",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "PEDAL FRENO GN-125H \"CROWN\"",
+      "price": "16330.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "16330.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "16330.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128787079480,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1109",
+      "taxable": true,
+      "title": "PEDAL FRENO GN-125H \"CROWN\"",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656935604536,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800012356",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "6205.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "6205.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "6205.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853838648,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853838648",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ESTATOR DE BOBINAS (6 NUCLEOS) \"CROWN\" WAVE 100",
+      "price": "45660.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "45660.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "45660.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128783737144,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1029",
+      "taxable": true,
+      "title": "ESTATOR DE BOBINAS (6 NUCLEOS) \"CROWN\" WAVE 100",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656921121080,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800011650",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "17350.80",
+          "price_set": {
+            "shop_money": {
+              "amount": "17350.80",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "17350.80",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853871416,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853871416",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "GUIA VALVULA X 2 PCS \"CROWN\" PULSAR-150NS",
+      "price": "8960.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "8960.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "8960.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128933454136,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "3474",
+      "taxable": true,
+      "title": "GUIA VALVULA X 2 PCS \"CROWN\" PULSAR-150NS",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51657159082296,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800011779",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "1702.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "1702.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "1702.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853904184,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853904184",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "GUIA VALVULA X 2 PCS \"CROWN\" (CON ORING) BWS-125",
+      "price": "10300.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "10300.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "10300.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128933650744,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "3479",
+      "taxable": true,
+      "title": "GUIA VALVULA X 2 PCS \"CROWN\" (CON ORING) BWS-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51657149743416,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800011784",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "3914.00",
+          "price_set": {
+            "shop_money": {
+              "amount": "3914.00",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "3914.00",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853936952,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853936952",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "GUIA VALVULA X 2 PCS \"CROWN\" CB-110/DREAM NEO/CB-125F",
+      "price": "7800.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "7800.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "7800.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128932995384,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "3464",
+      "taxable": true,
+      "title": "GUIA VALVULA X 2 PCS \"CROWN\" CB-110/DREAM NEO/CB-125F",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51657151119672,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800011768",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "2964.00",
+          "price_set": {
+            "shop_money": {
+              "amount": "2964.00",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "2964.00",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207853969720,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207853969720",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "GUIA VALVULA X 2 PCS \"CROWN\" (CON ORING) ECO DELUXE/AKT-110 SPECIAL/WAVE-100/VICTORY ONE/FLEX-125",
+      "price": "7800.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "7800.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "7800.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128933716280,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "3481",
+      "taxable": true,
+      "title": "GUIA VALVULA X 2 PCS \"CROWN\" (CON ORING) ECO DELUXE/AKT-110 SPECIAL/WAVE-100/VICTORY ONE/FLEX-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51657150071096,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800011786",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "2964.00",
+          "price_set": {
+            "shop_money": {
+              "amount": "2964.00",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "2964.00",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207854002488,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207854002488",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "GUIA VALVULA X 2 PCS \"CROWN\" PULSAR-180/PULSAR-200NS/PULSAR-200/220",
+      "price": "8120.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "8120.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "8120.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128933486904,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "3475",
+      "taxable": true,
+      "title": "GUIA VALVULA X 2 PCS \"CROWN\" PULSAR-180/PULSAR-200NS/PULSAR-200/220",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51657159115064,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800011780",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "1542.80",
+          "price_set": {
+            "shop_money": {
+              "amount": "1542.80",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "1542.80",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207854035256,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207854035256",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "GUIA VALVULA X 2 PCS \"CROWN\" CRYPTON-110/CRYPTON-115",
+      "price": "8630.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "8630.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "8630.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128933093688,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "3466",
+      "taxable": true,
+      "title": "GUIA VALVULA X 2 PCS \"CROWN\" CRYPTON-110/CRYPTON-115",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51657155641656,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800011771",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "3279.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "3279.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "3279.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207854068024,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207854068024",
+      "attributed_staffs": [],
+      "current_quantity": 3,
+      "fulfillable_quantity": 3,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT CILINDRO (COLOR GRIS) \"CROWN\" BWS-125",
+      "price": "99220.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "99220.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "99220.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128798908728,
+      "properties": [],
+      "quantity": 3,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1343",
+      "taxable": true,
+      "title": "KIT CILINDRO (COLOR GRIS) \"CROWN\" BWS-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656924758328,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "801000133",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "56555.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "56555.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "56555.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207854100792,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207854100792",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT CILINDRO (COLOR NEGRO) \"CROWN\" PULSAR-135",
+      "price": "108160.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "108160.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "108160.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128834789688,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2121",
+      "taxable": true,
+      "title": "KIT CILINDRO (COLOR NEGRO) \"CROWN\" PULSAR-135",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656925282616,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "801000110",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "20550.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "20550.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "20550.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207854133560,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207854133560",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT CILINDRO CRYPTON-115 \"CROWN\"",
+      "price": "108680.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "108680.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "108680.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128819323192,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1793",
+      "taxable": true,
+      "title": "KIT CILINDRO CRYPTON-115 \"CROWN\"",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656925446456,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "801000126",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "20649.20",
+          "price_set": {
+            "shop_money": {
+              "amount": "20649.20",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "20649.20",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207854166328,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207854166328",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT BIELA \"CROWN\" DISCOVER-100S (2 VALVULAS)",
+      "price": "31120.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "31120.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "31120.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128831119672,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2053",
+      "taxable": true,
+      "title": "KIT BIELA \"CROWN\" DISCOVER-100S (2 VALVULAS)",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656923283768,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800800071",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "5912.80",
+          "price_set": {
+            "shop_money": {
+              "amount": "5912.80",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "5912.80",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207854199096,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207854199096",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT BIELA \"CROWN\" CBF-125",
+      "price": "32210.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "32210.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "32210.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128862773560,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2599",
+      "taxable": true,
+      "title": "KIT BIELA \"CROWN\" CBF-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656923119928,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800800045",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "12239.80",
+          "price_set": {
+            "shop_money": {
+              "amount": "12239.80",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "12239.80",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207854231864,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207854231864",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT BIELA \"CROWN\" CRYPTON-110",
+      "price": "34290.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "34290.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "34290.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128834298168,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2108",
+      "taxable": true,
+      "title": "KIT BIELA \"CROWN\" CRYPTON-110",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656923152696,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800800090",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "13030.20",
+          "price_set": {
+            "shop_money": {
+              "amount": "13030.20",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "13030.20",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207854264632,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207854264632",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT BIELA \"CROWN\" PULSAR-135/BM-150",
+      "price": "33280.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "33280.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "33280.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128798548280,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1334",
+      "taxable": true,
+      "title": "KIT BIELA \"CROWN\" PULSAR-135/BM-150",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656924430648,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800800075",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "6323.20",
+          "price_set": {
+            "shop_money": {
+              "amount": "6323.20",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "6323.20",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207854297400,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207854297400",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT BIELA \"CROWN\" NXR BROSS/CG-125 TITAN/XR-125L",
+      "price": "36010.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "36010.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "36010.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128820207928,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1817",
+      "taxable": true,
+      "title": "KIT BIELA \"CROWN\" NXR BROSS/CG-125 TITAN/XR-125L",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656924397880,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800800072",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "6841.90",
+          "price_set": {
+            "shop_money": {
+              "amount": "6841.90",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "6841.90",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207854330168,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207854330168",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT BIELA \"CROWN\" BWS-125",
+      "price": "36090.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "36090.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "36090.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128834199864,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2106",
+      "taxable": true,
+      "title": "KIT BIELA \"CROWN\" BWS-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656922759480,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800800093",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "13714.20",
+          "price_set": {
+            "shop_money": {
+              "amount": "13714.20",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "13714.20",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207854362936,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207854362936",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT BIELA \"CROWN\" CRYPTON-115",
+      "price": "37760.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "37760.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "37760.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128834330936,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2109",
+      "taxable": true,
+      "title": "KIT BIELA \"CROWN\" CRYPTON-115",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656923218232,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800800091",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "7174.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "7174.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "7174.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207854395704,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207854395704",
+      "attributed_staffs": [],
+      "current_quantity": 2,
+      "fulfillable_quantity": 2,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT BIELA AX-4 \"CROWN\"",
+      "price": "37960.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "37960.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "37960.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128851861816,
+      "properties": [],
+      "quantity": 2,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "2407",
+      "taxable": true,
+      "title": "KIT BIELA AX-4 \"CROWN\"",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656924627256,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800800103",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "14424.80",
+          "price_set": {
+            "shop_money": {
+              "amount": "14424.80",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "14424.80",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207854428472,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207854428472",
+      "attributed_staffs": [],
+      "current_quantity": 4,
+      "fulfillable_quantity": 4,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "KIT DISTRIBUCION (NO RUIDO) \"CROWN\" ECODELUXE/ECO100+/ECO100/SPLENDOR+/SPLENDOR",
+      "price": "20490.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "20490.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "20490.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128784687416,
+      "properties": [],
+      "quantity": 4,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1054",
+      "taxable": true,
+      "title": "KIT DISTRIBUCION (NO RUIDO) \"CROWN\" ECODELUXE/ECO100+/ECO100/SPLENDOR+/SPLENDOR",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51656926298424,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800011980",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "15572.40",
+          "price_set": {
+            "shop_money": {
+              "amount": "15572.40",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "15572.40",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    },
+    {
+      "id": 18207854461240,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18207854461240",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "BALINERA CIGUEÑAL (30X58X17) CBF-150 \"FAG\"",
+      "price": "53540.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "53540.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "53540.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128936436024,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "3695",
+      "taxable": true,
+      "title": "BALINERA CIGUEÑAL (30X58X17) CBF-150 \"FAG\"",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687210942776,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "400010261",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "10172.60",
+          "price_set": {
+            "shop_money": {
+              "amount": "10172.60",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "10172.60",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    }
+  ],
+  "payment_terms": null,
+  "refunds": [],
+  "shipping_address": {
+    "first_name": "JOSE FRANCISCO",
+    "address1": "Carrera 28 #47-59",
+    "phone": "+573006276878",
+    "city": "Barrancabermeja",
+    "zip": "680003",
+    "province": "Santander",
+    "country": "Colombia",
+    "last_name": "RAMOS LEMES",
+    "address2": "001",
+    "company": "77156340",
+    "latitude": 7.0617085,
+    "longitude": -73.8519319,
+    "name": "JOSE FRANCISCO RAMOS LEMES",
+    "country_code": "CO",
+    "province_code": "SAN"
+  },
+  "shipping_lines": [
+    {
+      "id": 5598930075960,
+      "carrier_identifier": null,
+      "code": "Envío por paquetería",
+      "current_discounted_price_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "discounted_price": "0.00",
+      "discounted_price_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "is_removed": false,
+      "phone": null,
+      "price": "0.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "requested_fulfillment_service_id": null,
+      "source": "shopify",
+      "title": "Envío por paquetería",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "0.00",
+          "price_set": {
+            "shop_money": {
+              "amount": "0.00",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "0.00",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "discount_allocations": []
+    }
+  ],
+  "returns": [],
+  "line_item_groups": []
+}

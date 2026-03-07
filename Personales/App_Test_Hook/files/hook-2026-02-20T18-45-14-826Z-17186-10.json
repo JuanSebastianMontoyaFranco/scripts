@@ -1,0 +1,436 @@
+{
+  "id": 7049288089912,
+  "admin_graphql_api_id": "gid://shopify/Order/7049288089912",
+  "app_id": 580111,
+  "browser_ip": "186.168.154.90",
+  "buyer_accepts_marketing": false,
+  "cancel_reason": null,
+  "cancelled_at": null,
+  "cart_token": "hWN90ofPyZd6vYuASnW2c07W",
+  "checkout_id": 40640194085176,
+  "checkout_token": "10ebc12e99b23e437b93ae541e853273",
+  "client_details": {
+    "accept_language": "es-CO",
+    "browser_height": null,
+    "browser_ip": "186.168.154.90",
+    "browser_width": null,
+    "session_hash": null,
+    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36"
+  },
+  "closed_at": null,
+  "confirmation_number": "HNDXCTXIH",
+  "confirmed": true,
+  "contact_email": "juansmontoyaf@gmail.com",
+  "created_at": "2026-02-20T13:45:12-05:00",
+  "currency": "COP",
+  "current_shipping_price_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "current_subtotal_price": "9310.00",
+  "current_subtotal_price_set": {
+    "shop_money": {
+      "amount": "9310.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "9310.00",
+      "currency_code": "COP"
+    }
+  },
+  "current_total_additional_fees_set": null,
+  "current_total_discounts": "0.00",
+  "current_total_discounts_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "current_total_duties_set": null,
+  "current_total_price": "11078.90",
+  "current_total_price_set": {
+    "shop_money": {
+      "amount": "11078.90",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "11078.90",
+      "currency_code": "COP"
+    }
+  },
+  "current_total_tax": "1768.90",
+  "current_total_tax_set": {
+    "shop_money": {
+      "amount": "1768.90",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "1768.90",
+      "currency_code": "COP"
+    }
+  },
+  "customer_locale": "es-CO",
+  "device_id": null,
+  "discount_codes": [],
+  "duties_included": false,
+  "email": "juansmontoyaf@gmail.com",
+  "estimated_taxes": false,
+  "financial_status": "pending",
+  "fulfillment_status": null,
+  "landing_site": "/",
+  "landing_site_ref": null,
+  "location_id": null,
+  "merchant_business_entity_id": "MTk0Mjc1MjczMDE2",
+  "merchant_of_record_app_id": null,
+  "name": "AR1059",
+  "note": null,
+  "note_attributes": [],
+  "number": 59,
+  "order_number": 1059,
+  "order_status_url": "https://andinarep.com.co/94275273016/orders/0954fd026d73ea9530a97674483e1a73/authenticate?key=da0ccf77d57a880be86cece3753720c5",
+  "original_total_additional_fees_set": null,
+  "original_total_duties_set": null,
+  "payment_gateway_names": [
+    "Finalizar con un asesor"
+  ],
+  "phone": null,
+  "po_number": null,
+  "presentment_currency": "COP",
+  "processed_at": "2026-02-20T13:45:10-05:00",
+  "reference": null,
+  "referring_site": "https://admin.shopify.com/",
+  "source_identifier": null,
+  "source_name": "web",
+  "source_url": null,
+  "subtotal_price": "9310.00",
+  "subtotal_price_set": {
+    "shop_money": {
+      "amount": "9310.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "9310.00",
+      "currency_code": "COP"
+    }
+  },
+  "tags": "",
+  "tax_exempt": false,
+  "tax_lines": [
+    {
+      "price": "1768.90",
+      "rate": 0.19,
+      "title": "VAT",
+      "price_set": {
+        "shop_money": {
+          "amount": "1768.90",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "1768.90",
+          "currency_code": "COP"
+        }
+      },
+      "channel_liable": false
+    }
+  ],
+  "taxes_included": false,
+  "test": false,
+  "token": "0954fd026d73ea9530a97674483e1a73",
+  "total_cash_rounding_payment_adjustment_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_cash_rounding_refund_adjustment_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_discounts": "0.00",
+  "total_discounts_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_line_items_price": "9310.00",
+  "total_line_items_price_set": {
+    "shop_money": {
+      "amount": "9310.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "9310.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_outstanding": "11078.90",
+  "total_price": "11078.90",
+  "total_price_set": {
+    "shop_money": {
+      "amount": "11078.90",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "11078.90",
+      "currency_code": "COP"
+    }
+  },
+  "total_shipping_price_set": {
+    "shop_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "0.00",
+      "currency_code": "COP"
+    }
+  },
+  "total_tax": "1768.90",
+  "total_tax_set": {
+    "shop_money": {
+      "amount": "1768.90",
+      "currency_code": "COP"
+    },
+    "presentment_money": {
+      "amount": "1768.90",
+      "currency_code": "COP"
+    }
+  },
+  "total_tip_received": "0.00",
+  "total_weight": 0,
+  "updated_at": "2026-02-20T13:45:13-05:00",
+  "user_id": null,
+  "billing_address": {
+    "first_name": "Juan",
+    "address1": "302C",
+    "phone": "+573217538490",
+    "city": "Cali",
+    "zip": "760001",
+    "province": "Valle del Cauca",
+    "country": "Colombia",
+    "last_name": "Montoya",
+    "address2": "302C",
+    "company": "1006106284",
+    "latitude": 3.4947009,
+    "longitude": -76.488118,
+    "name": "Juan Montoya",
+    "country_code": "CO",
+    "province_code": "VAC"
+  },
+  "customer": {
+    "id": 9357955334456,
+    "created_at": "2025-06-26T10:54:05-04:00",
+    "updated_at": "2026-02-20T13:45:12-05:00",
+    "first_name": "Juan",
+    "last_name": "Montoya",
+    "state": "enabled",
+    "note": "",
+    "verified_email": true,
+    "multipass_identifier": null,
+    "tax_exempt": false,
+    "email": "juansmontoyaf@gmail.com",
+    "phone": null,
+    "currency": "COP",
+    "tax_exemptions": [],
+    "admin_graphql_api_id": "gid://shopify/Customer/9357955334456",
+    "default_address": {
+      "id": 11065768739128,
+      "customer_id": 9357955334456,
+      "first_name": "Juan",
+      "last_name": "Montoya",
+      "company": "1006106284",
+      "address1": "302C",
+      "address2": "302C",
+      "city": "Cali",
+      "province": "Valle del Cauca",
+      "country": "Colombia",
+      "zip": "760001",
+      "phone": "+573217538490",
+      "name": "Juan Montoya",
+      "province_code": "VAC",
+      "country_code": "CO",
+      "country_name": "Colombia",
+      "default": true
+    }
+  },
+  "discount_applications": [],
+  "fulfillments": [],
+  "line_items": [
+    {
+      "id": 18221946732856,
+      "admin_graphql_api_id": "gid://shopify/LineItem/18221946732856",
+      "attributed_staffs": [],
+      "current_quantity": 1,
+      "fulfillable_quantity": 1,
+      "fulfillment_service": "manual",
+      "fulfillment_status": null,
+      "gift_card": false,
+      "grams": 0,
+      "name": "ANILLOS STD \"CROWN\" AKT-110-SCOOTER-125",
+      "price": "9310.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "9310.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "9310.00",
+          "currency_code": "COP"
+        }
+      },
+      "product_exists": true,
+      "product_id": 10128792781112,
+      "properties": [],
+      "quantity": 1,
+      "requires_shipping": true,
+      "sales_line_item_group_id": null,
+      "sku": "1205",
+      "taxable": true,
+      "title": "ANILLOS STD \"CROWN\" AKT-110-SCOOTER-125",
+      "total_discount": "0.00",
+      "total_discount_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "variant_id": 51687196229944,
+      "variant_inventory_management": "shopify",
+      "variant_title": null,
+      "vendor": "800600001",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "1768.90",
+          "price_set": {
+            "shop_money": {
+              "amount": "1768.90",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "1768.90",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "duties": [],
+      "discount_allocations": []
+    }
+  ],
+  "payment_terms": null,
+  "refunds": [],
+  "shipping_address": {
+    "first_name": "Juan",
+    "address1": "302C",
+    "phone": "+573217538490",
+    "city": "Cali",
+    "zip": "760001",
+    "province": "Valle del Cauca",
+    "country": "Colombia",
+    "last_name": "Montoya",
+    "address2": "302C",
+    "company": "1006106284",
+    "latitude": 3.4947009,
+    "longitude": -76.488118,
+    "name": "Juan Montoya",
+    "country_code": "CO",
+    "province_code": "VAC"
+  },
+  "shipping_lines": [
+    {
+      "id": 5603286483256,
+      "carrier_identifier": null,
+      "code": "Envío por paquetería",
+      "current_discounted_price_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "discounted_price": "0.00",
+      "discounted_price_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "is_removed": false,
+      "phone": null,
+      "price": "0.00",
+      "price_set": {
+        "shop_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        },
+        "presentment_money": {
+          "amount": "0.00",
+          "currency_code": "COP"
+        }
+      },
+      "requested_fulfillment_service_id": null,
+      "source": "shopify",
+      "title": "Envío por paquetería",
+      "tax_lines": [
+        {
+          "channel_liable": false,
+          "price": "0.00",
+          "price_set": {
+            "shop_money": {
+              "amount": "0.00",
+              "currency_code": "COP"
+            },
+            "presentment_money": {
+              "amount": "0.00",
+              "currency_code": "COP"
+            }
+          },
+          "rate": 0.19,
+          "title": "VAT"
+        }
+      ],
+      "discount_allocations": []
+    }
+  ],
+  "returns": [],
+  "line_item_groups": []
+}
