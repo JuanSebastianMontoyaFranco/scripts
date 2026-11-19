@@ -1,0 +1,11 @@
+{% liquid
+  assign class = 'm-header__logo m-logo m-logo--has-image'
+%}
+
+<div class="{{ class | strip_newlines }}">
+  <a href="{{ routes.root_url }}" class="m-logo__image m:block" title="{{ collection.title }}">
+    <div class="m-logo__image-default m-image">
+      {{ collection.metafields.custom.logo_de_header | image_url: width: 400 | image_tag: class: 'm:inline-block', style: 'max-height: 45px; width: auto;', alt: collection.title }}
+    </div>
+  </a>
+</div>

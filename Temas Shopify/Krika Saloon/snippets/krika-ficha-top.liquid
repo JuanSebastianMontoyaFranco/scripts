@@ -1,0 +1,52 @@
+{%- comment -%} Krika: codigo, EAN y 3 beneficios (metafield custom.beneficios, uno por linea) {%- endcomment -%}
+{%- assign kf_v = product.selected_or_first_available_variant -%}
+<div class="kf-top">
+  <div class="kf-codes">
+    <span class="kf-sku"{% if kf_v.sku == blank %} hidden{% endif %}>Cód: <span data-kf-sku>{{ kf_v.sku }}</span></span>
+    <span class="kf-ean"{% if kf_v.barcode == blank %} hidden{% endif %}>EAN: <span data-kf-ean>{{ kf_v.barcode }}</span></span>
+  </div>
+  {%- assign kf_ben = product.metafields.custom.beneficios.value | newline_to_br | split: '<br />' -%}
+  {%- if product.metafields.custom.beneficios != blank -%}
+  <ul class="kf-benefits">
+    {%- for b in kf_ben -%}
+      {%- assign t = b | strip -%}
+      {%- if t != blank -%}
+      <li><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#1f9d55" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg><span>{{ t }}</span></li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+  {%- endif -%}
+</div>
+<script type="application/json" id="kf-money-sample">{{ 123456 | money | json }}</script>
+<style>
+.kf-top{margin:4px 0 14px}
+.kf-codes{font-size:12px;color:#777;display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.kf-benefits{list-style:none;margin:0;padding:0}
+.kf-benefits li{display:flex;gap:8px;align-items:flex-start;font-size:14px;line-height:1.45;margin:0 0 6px;color:#222}
+.kf-benefits svg{flex:0 0 16px;margin-top:3px}
+</style>
+<script>
+(function(){
+  if (window.__kfVariantListener) return; window.__kfVariantListener = true;
+  function fmt(c){
+    var sample = '';
+    try { sample = JSON.parse(document.getElementById('kf-money-sample').textContent); } catch(e) {}
+    var hasDecimals = /\d[.,]\d{2}$/.test(sample.replace(/[^\d.,]/g,''));
+    var n = (c||0)/100;
+    var s = n.toLocaleString('en-US',{minimumFractionDigits: hasDecimals ? 2 : 0, maximumFractionDigits: hasDecimals ? 2 : 0});
+    return '$' + s;
+  }
+  document.addEventListener('variant:changed', function(e){
+    var v = e.detail && e.detail.variant; if(!v) return;
+    document.querySelectorAll('[data-kf-sku]').forEach(function(el){ el.textContent = v.sku || ''; el.parentNode.hidden = !v.sku; });
+    document.querySelectorAll('[data-kf-ean]').forEach(function(el){ el.textContent = v.barcode || ''; el.parentNode.hidden = !v.barcode; });
+    var box = document.querySelector('.product-price-container'); if(!box) return;
+    var cur = box.querySelector('.price-current'); if(cur) cur.textContent = fmt(v.price);
+    box.querySelectorAll('.price-compare,.price-discount-tag').forEach(function(el){ el.remove(); });
+    if (v.compare_at_price && v.compare_at_price > v.price) {
+      var c = document.createElement('span'); c.className = 'price-compare'; c.textContent = fmt(v.compare_at_price); box.appendChild(c);
+      var d = document.createElement('span'); d.className = 'price-discount-tag'; d.textContent = '-' + Math.round((v.compare_at_price - v.price) * 100 / v.compare_at_price) + '%'; box.appendChild(d);
+    }
+  });
+})();
+</script>

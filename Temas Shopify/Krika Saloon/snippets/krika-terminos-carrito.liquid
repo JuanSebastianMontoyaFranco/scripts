@@ -1,0 +1,163 @@
+{%- comment -%}
+  KRIKA · Casilla obligatoria de términos en el carrito (2026-10-26)
+
+  Se renderiza antes de </body> en layout/theme.liquid. Es independiente de la casilla
+  propia de Minimog (settings.show_agree_on_cart), que queda apagada.
+
+  A) Inserta la casilla antes del botón de pago del carrito lateral y de la página /cart.
+     El carrito lateral se vuelve a dibujar por AJAX, por eso un MutationObserver la repone.
+  B) Sin la casilla marcada, el botón de pago, los botones de pago acelerado y cualquier
+     enlace a /checkout quedan bloqueados (aria-disabled + freno de click y submit).
+  C) Al marcarla, guarda el atributo del carrito "Términos y condiciones" con la fecha
+     (POST /cart/update.js) y además manda un input oculto con el formulario, por si se
+     paga antes de que termine el guardado. El atributo llega al pedido.
+{%- endcomment -%}
+
+{%- liquid
+  assign krika_tyc_key = 'Términos y condiciones'
+  assign krika_tyc_value = cart.attributes[krika_tyc_key]
+  assign krika_tyc_url = shop.terms_of_service.url | default: '/policies/terms-of-service'
+-%}
+
+<style>
+  .krika-tyc { width: 100%; margin: 0 0 12px; font-size: 14px; line-height: 1.4; text-align: left; }
+  .krika-tyc__label { display: flex; align-items: flex-start; gap: 8px; cursor: pointer; }
+  .krika-tyc__input { flex: 0 0 auto; width: 18px; height: 18px; margin: 1px 0 0; accent-color: #000; cursor: pointer; }
+  .krika-tyc__label a { text-decoration: underline; }
+  .krika-tyc__error { display: none; margin: 6px 0 0 26px; color: #d32f2f; font-size: 13px; }
+  .krika-tyc--error .krika-tyc__error { display: block; }
+  [data-krika-tyc-locked] { opacity: 0.5; cursor: not-allowed; }
+  .additional-checkout-buttons[data-krika-tyc-locked] { position: relative; }
+  .additional-checkout-buttons[data-krika-tyc-locked]::after { content: ''; position: absolute; inset: 0; z-index: 2; }
+</style>
+
+<template id="krika-tyc-template">
+  <div class="krika-tyc">
+    <label class="krika-tyc__label">
+      <input type="checkbox" class="krika-tyc__input">
+      <span>
+        He leído y acepto los
+        <a href="{{ krika_tyc_url }}" target="_blank" rel="noopener">términos y condiciones</a>
+      </span>
+    </label>
+    <p class="krika-tyc__error" role="alert">Debes aceptar los términos y condiciones para continuar con el pago.</p>
+  </div>
+</template>
+
+<script>
+  (function () {
+    var KEY = {{ krika_tyc_key | json }};
+    var accepted = {{ krika_tyc_value | json }} || '';
+    var CHECKOUT = 'button[name="checkout"], input[name="checkout"]';
+    var LOCKABLE = CHECKOUT + ', .additional-checkout-buttons, a[href*="/checkout"]';
+    var template = document.getElementById('krika-tyc-template');
+
+    function isLocked() {
+      return !accepted;
+    }
+
+    function save() {
+      var attributes = {};
+      attributes[KEY] = accepted;
+      return fetch(window.Shopify.routes.root + 'cart/update.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ attributes: attributes })
+      });
+    }
+
+    function stamp() {
+      var d = new Date();
+      function pad(n) { return (n < 10 ? '0' : '') + n; }
+      return 'Aceptados el ' + d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) +
+        ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+    }
+
+    // Input oculto dentro del formulario del botón: viaja con el POST /cart que lleva al checkout.
+    function syncHidden(button) {
+      var form = button.form;
+      if (!form) return;
+      var name = 'attributes[' + KEY + ']';
+      var hidden = form.querySelector('input[type="hidden"][data-krika-tyc]');
+      if (!hidden) {
+        hidden = document.createElement('input');
+        hidden.type = 'hidden';
+        hidden.name = name;
+        hidden.setAttribute('data-krika-tyc', '');
+        form.appendChild(hidden);
+      }
+      hidden.value = accepted;
+    }
+
+    function render() {
+      document.querySelectorAll(CHECKOUT).forEach(function (button) {
+        var anchor = button.closest('.m-cart__checkout-button') || button;
+        var prev = anchor.previousElementSibling;
+        if (!prev || !prev.classList.contains('krika-tyc')) {
+          anchor.parentNode.insertBefore(template.content.firstElementChild.cloneNode(true), anchor);
+        }
+        syncHidden(button);
+      });
+
+      document.querySelectorAll('.krika-tyc__input').forEach(function (input) {
+        input.checked = !isLocked();
+        if (!isLocked()) input.closest('.krika-tyc').classList.remove('krika-tyc--error');
+      });
+
+      document.querySelectorAll(LOCKABLE).forEach(function (el) {
+        if (isLocked()) {
+          el.setAttribute('data-krika-tyc-locked', '');
+          el.setAttribute('aria-disabled', 'true');
+        } else if (el.hasAttribute('data-krika-tyc-locked')) {
+          el.removeAttribute('data-krika-tyc-locked');
+          el.removeAttribute('aria-disabled');
+        }
+      });
+    }
+
+    function showError(target) {
+      var scope = target.closest('.m-cart-drawer__footer, .m-cart__checkout, form') || document;
+      var box = scope.querySelector('.krika-tyc') || document.querySelector('.krika-tyc');
+      if (!box) return;
+      box.classList.add('krika-tyc--error');
+      box.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+
+    document.addEventListener('change', function (event) {
+      if (!event.target.classList || !event.target.classList.contains('krika-tyc__input')) return;
+      accepted = event.target.checked ? stamp() : '';
+      render();
+      save();
+    });
+
+    document.addEventListener('click', function (event) {
+      if (!isLocked()) return;
+      var target = event.target.closest && event.target.closest(LOCKABLE);
+      if (!target) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      showError(target);
+    }, true);
+
+    document.addEventListener('submit', function (event) {
+      if (!isLocked()) return;
+      var submitter = event.submitter;
+      if (!submitter || submitter.name !== 'checkout') return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      showError(submitter);
+    }, true);
+
+    var pending = false;
+    new MutationObserver(function () {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(function () {
+        pending = false;
+        render();
+      });
+    }).observe(document.body, { childList: true, subtree: true });
+
+    render();
+  })();
+</script>

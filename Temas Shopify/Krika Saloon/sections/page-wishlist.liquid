@@ -1,0 +1,183 @@
+{% render 'page-title', title: page.title, container: 'container' %}
+
+<div class="container">
+  
+  <div id="custom-wishlist-container" style="padding-bottom: 50px; min-height: 200px;">
+     <div id="custom-loader" style="text-align: center; padding: 60px;">
+        <div class="m-spinner" style="border: 2px solid #000; border-top: 2px solid transparent; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 0 auto 15px;"></div>
+        <span>Cargando tus favoritos...</span>
+     </div>
+     
+     <div id="custom-grid" class="m:grid m:grid-2-cols md:m:grid-3-cols xl:m:grid-4-cols" style="gap: 30px;"></div>
+  </div>
+
+  <div id="custom-empty-msg" style="display: none; text-align: center; padding: 80px 0;">
+      <h3>{{ 'layout.wishlist.no_products' | t }}</h3>
+      <a class="m-button m-button--primary" href="{{ routes.all_products_collection_url }}" style="margin-top: 20px;">
+        {{ 'layout.back_to_shopping' | t }}
+      </a>
+  </div>
+
+</div>
+
+<style>
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  
+  /* --- ESTILOS EXACTOS DE MINIMOG COMPARE + EFECTO DE ENTRADA --- */
+  
+  /* Wrapper del botón (el contenedor que se mueve) */
+  .cw-remove-btn-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* Estado inicial: Oculto, desplazado a la derecha y no clickeable */
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Transición suave */
+    pointer-events: none;
+  }
+
+  /* REGLA NUEVA: Cuando el mouse entra en la TARJETA COMPLETA (.custom-wishlist-item), mostramos el botón */
+  .custom-wishlist-item:hover .cw-remove-btn-wrapper {
+    opacity: 1;
+    transform: translateX(0); /* Se desliza a su posición original */
+    pointer-events: auto; /* Reactiva clicks */
+  }
+
+  /* 1. El Botón Circular */
+  .cw-btn-icon {
+    width: 45px;
+    height: 45px;
+    background-color: #ffffff; /* Fondo Blanco por defecto */
+    color: #000000; /* Icono Negro por defecto */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08); /* Sombra suave */
+    transition: all 0.3s ease;
+  }
+
+  /* 2. El Tooltip (Texto) */
+  .cw-tooltip-text {
+    background-color: #000;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    margin-right: 10px; /* Separación del botón */
+    
+    /* Estado inicial del tooltip: Oculto */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px); 
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+  
+  /* flechita del tooltip */
+  .cw-tooltip-text::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -4px;
+    transform: translateY(-50%);
+    border-width: 4px;
+    border-style: solid;
+    border-color: transparent transparent transparent #000;
+  }
+
+  /* --- EFECTO HOVER SOBRE EL BOTÓN MISMO --- */
+  
+  /* Cuando el mouse se posa sobre el botón negro... */
+  .cw-remove-btn-wrapper:hover .cw-btn-icon {
+    background-color: #000000; /* Fondo Negro */
+    color: #ffffff; /* Icono Blanco */
+    transform: scale(1.02);
+  }
+
+  /* ...aparece el tooltip */
+  .cw-remove-btn-wrapper:hover .cw-tooltip-text {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", async function() {
+    const STORAGE_KEY = 'm-wishlist-products';
+    const grid = document.getElementById('custom-grid');
+    const loader = document.getElementById('custom-loader');
+    const emptyMsg = document.getElementById('custom-empty-msg');
+    const container = document.getElementById('custom-wishlist-container');
+    const rootUrl = "{{ routes.root_url }}".replace(/\/$/, '');
+
+    // 1. LEER DATOS
+    let storedHandles = [];
+    try { storedHandles = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch(e) {}
+
+    if (storedHandles.length === 0) { showEmpty(); return; }
+
+    // 2. CARGAR HTML
+    const promises = storedHandles.map(handle => 
+        fetch(`${rootUrl}/products/${handle}?view=wishlist-card`)
+        .then(res => {
+            if(!res.ok) throw new Error('Error');
+            return res.text();
+        })
+        .catch(() => null)
+    );
+
+    try {
+        const htmlResponses = await Promise.all(promises);
+        const validHtml = htmlResponses.filter(html => html && html.length > 50);
+
+        loader.style.display = 'none';
+
+        if (validHtml.length > 0) {
+            grid.innerHTML = validHtml.join('');
+            
+            // 3. REINICIALIZAR MINIMOG
+            if (window.MinimogTheme) {
+                if (window.MinimogTheme.ProductCard) window.MinimogTheme.ProductCard.init();
+                if (window.MinimogTheme.Tooltip) window.MinimogTheme.Tooltip.init();
+                if (window.MinimogTheme.ProductForm) window.MinimogTheme.ProductForm.init(); 
+            }
+        } else {
+            showEmpty();
+        }
+
+    } catch (e) {
+        console.error(e);
+        grid.innerHTML = '<p>Error cargando favoritos.</p>';
+    }
+
+    // --- FUNCIONES ---
+    function showEmpty() {
+        loader.style.display = 'none';
+        container.style.display = 'none';
+        emptyMsg.style.display = 'block';
+    }
+
+    window.removeFromWishlist = function(handle, btnWrapper) {
+        const card = btnWrapper.closest('.custom-wishlist-item');
+        if(card) card.style.opacity = '0.5';
+
+        let list = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+        list = list.filter(h => h !== handle);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+
+        setTimeout(() => { if(card) card.remove(); }, 300);
+
+        document.querySelectorAll('.m-wishlist-count').forEach(el => {
+            el.textContent = list.length;
+            if(list.length === 0) el.classList.add('m:hidden');
+        });
+
+        if (list.length === 0) setTimeout(showEmpty, 300);
+    };
+});
+</script>

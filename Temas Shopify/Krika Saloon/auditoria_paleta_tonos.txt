@@ -1,0 +1,75 @@
+AUDITORÍA DE paleta_tonos_aproximada.txt
+
+Conclusión: el TXT anterior NO debe tratarse como paleta validada. Sus hex fueron estimados con heurísticas a partir de nombres/categorías; no se extrajeron de hex oficiales del CSV ni se cotejaron con cartas de color.
+
+Cobertura verificada contra products_export_1.csv:
+- 525 valores únicos de la opción Tono (se preservaron ceros iniciales y se normalizaron apóstrofos de exportación).
+- 525 entradas en el TXT; coincidencia de claves: 525/525.
+- 290 valores tienen alguna imagen de producto asociada a su ficha.
+- Solo 146 valores tienen un campo Variant Image explícito en su propia fila de variante.
+- 235 valores no tienen imagen de producto asociada en la exportación.
+- El metafield color-pattern está vacío en 22341 de 22341 filas.
+- El CSV no tiene columnas hex/swatch (0 columnas encontradas).
+- 48 valores aparecen en varios productos; la paleta global asigna un solo hex por texto.
+- Por contexto de producto, los 525 valores se distribuyen aprox. en: 174 tintes/cabello, 122 esmaltes/uñas, 90 bases/polvos/correctores, 85 labios, 30 ojos/cejas, 10 rubores/contornos, y 14 otros.
+
+Ejemplos concretos de estimaciones que requieren corrección:
+- Fucsia Neón: #D45D80 (no representa un fucsia neón saturado).
+- Amarillo Neón: #E4C437 (es amarillo mostaza, no neón).
+- 002 aparece en Lápiz de Labios Pupa True Lips y Máscara de Cejas Pupa Eyebrow Plump: una clave global no demuestra que ambos tonos sean iguales.
+- 06 aparece en Polvo Compacto Pupa Luminys y Base Clarins Milky Boost: el valor se reutiliza entre productos distintos.
+
+Valores Tono reutilizados en varios productos:
+- 002 [#4B342B] → Máscara de Cejas Pupa Eyebrow Plump; Lápiz de Labios Pupa True Lips
+- 003 [#D8B99B] → Máscara de Cejas Pupa Eyebrow Plump; Polvo Compacto Pupa Like a Doll; Lápiz de Labios Pupa True Lips
+- 004 [#E7CEB4] → Polvo Compacto Pupa Like a Doll; Lápiz de Labios Pupa True Lips; Delineador Pupa Vamp 2N1
+- 005 [#A261BA] → Rubor Pupa Extreme Blush Matt; Delineador Pupa Vamp 2N1
+- 006 [#B86F7A] → Rubor Pupa Extreme Blush Matt; Corrector Pupa Cream
+- 007 [#D1A17D] → Lápiz de Labios Pupa True Lips; Corrector Pupa Cream
+- 01 Beige [#D8B89D] → Base de Maquillaje Sensilis Pure Age Perfection; Base de Maquillaje Sensilis Upgrade
+- 010 [#222222] → Delineador Pupa Vamp 2N1; Base de Maquillaje Pupa Made To Last
+- 020 [#D6B9A0] → Polvo Pupa Wonder Me; Base de Maquillaje Pupa Made To Last
+- 040 [#C9A184] → Polvo Pupa Wonder Me; Base de Maquillaje Pupa Made To Last
+- 04N Medium [#C69A78] → Base Guerlain Lingerie de Peau Aqua Nude; Base Guerlain Lingerie de Peau
+- 06 [#E5CCB2] → Base Clarins Milky Boost; Polvo Compacto Pupa Luminys
+- 060 Golden Beige [#C5A052] → Polvo Compacto Pupa Extreme Matt; Base de Maquillaje Pupa Light Cream
+- 1 [#17120F] → Tinte Tec Italy; Tinte L'Oréal Professionnel Inoa
+- 104 [#6068D1] → Delineador Pupa Vamp Eye; Labial Pupa Volume
+- 3 [#39251B] → Tinte Tec Italy; Tinte L'Oréal Professionnel Inoa
+- 303 [#A4495E] → Delineador Pupa Vamp Eye; Gloss Labial Pupa Miss Pupa Gloss
+- 4 [#503522] → Tinte L'Oréal Professionnel Majirel Cool Cover; Tinte Tec Italy; Tinte L'Oréal Professionnel Inoa
+- 5 [#68462F] → Tinte L'Oréal Professionnel Majirel; Tinte L'Oréal Professionnel Inoa
+- 5.3 Castaño Claro Dorado [#8C6944] → Tinte Tec Italy; Tinte L'Oréal Professionnel Inoa
+- 6 [#8B6748] → Tinte L'Oréal Professionnel Majirel Cool Cover; Tinte L'Oréal Professionnel Majirel; Tinte L'Oréal Professionnel Inoa
+- 6.1 [#8C775E] → Tinte L'Oréal Professionnel Majirel Cool Cover; Tinte L'Oréal Professionnel Majirel; Tinte L'Oréal Professionnel Inoa
+- 6.34 [#9B764C] → Tinte Tec Italy; Tinte L'Oréal Professionnel Inoa
+- 6.7 Rubio Oscuro Marrón [#77573F] → Tinte Wella Professionals Color Touch; Tinte Wella Professionals Color Perfect
+- 7 Rubio [#96714C] → Tinte L'Oréal Professionnel Majirel Cool Cover; Tinte Tec Italy
+- 7.0 [#96714C] → Tinte L'Oréal Professionnel Majirel; Tinte L'Oréal Professionnel Inoa
+- 7.31 [#AA8657] → Tinte L'Oréal Professionnel Majirel; Tinte L'Oréal Professionnel Inoa
+- 7.35 [#AA8657] → Tinte L'Oréal Professionnel Majirel; Tinte Tec Italy; Tinte L'Oréal Professionnel Inoa
+- 8.1 [#9E8566] → Tinte L'Oréal Professionnel Majirel Cool Cover; Tinte L'Oréal Professionnel Inoa
+- 8.21 [#A48372] → Tinte L'Oréal Professionnel Majirel; Tinte L'Oréal Professionnel Inoa
+- 8.31 [#BD9966] → Tinte L'Oréal Professionnel Majirel; Tinte Tec Italy; Tinte L'Oréal Professionnel Inoa
+- 8.34 [#BD9966] → Tinte L'Oréal Professionnel Majirel; Tinte L'Oréal Professionnel Inoa
+- 9 [#CFAD7D] → Tinte L'Oréal Professionnel Majirel Cool Cover; Tinte L'Oréal Professionnel Majirel; Tinte L'Oréal Professionnel Inoa
+- 9.1 [#B19A78] → Tinte Tec Italy; Tinte L'Oréal Professionnel Inoa
+- Almendra Francés [#B78D70] → Esmalte Belier Bio Gel; Esmalte Belier
+- Blanco Tiza [#E7D9C9] → Esmalte Belier Bio Gel; Esmalte Belier
+- Lila Boreal [#90639E] → Esmalte Belier Bio Gel; Esmalte Belier
+- Lila Hielo [#B08BAC] → Esmalte Belier Bio Gel; Esmalte Belier
+- Nude Estelar [#C5A052] → Esmalte Belier Bio Gel; Esmalte Belier
+- Nude Puro [#B78D70] → Esmalte Belier Bio Gel; Esmalte Belier
+- Oro Rosa [#D45D80] → Esmalte Belier Bio Gel; Esmalte Belier
+- Palo De Rosa [#D45D80] → Esmalte Belier Bio Gel; Esmalte Belier
+- Piel Clara [#E2C7AE] → Polvo Compacto Sunaid; Polvo Suelto Sunaid; Bloqueador Facial Novaderma Sunaid Gel Color; Base Compacta Novaderma Sunaid
+- Piel Oscura [#87583F] → Polvo Compacto Sunaid; Polvo Suelto Sunaid; Bloqueador Facial Novaderma Sunaid Gel Color; Base Compacta Novaderma Sunaid
+- Rojo Carmín [#B93645] → Esmalte Belier Bio Gel; Esmalte Belier
+- Rojo Clandestino [#B93645] → Esmalte Belier Bio Gel; Esmalte Belier
+- Rose [#D45D80] → Brillo Labial Raia; Esmalte Belier Base Vital
+- Sangre Toro [#B93645] → Esmalte Belier Bio Gel; Esmalte Belier
+
+Recomendación de validación:
+- No ampliar el TXT con nuevas estimaciones automáticas.
+- Validar por producto con muestras/fotos oficiales de tonos.
+- Para valores repetidos entre productos, usar swatches por producto/variante o un metafield, no un único hex global por texto.

@@ -1,0 +1,20 @@
+{%- assign kd_b = product.id | modulo: 17 -%}
+{%- case kd_b -%}
+{%- when 0 -%}{%- render 'krika-desc-0', product: product -%}
+{%- when 1 -%}{%- render 'krika-desc-1', product: product -%}
+{%- when 2 -%}{%- render 'krika-desc-2', product: product -%}
+{%- when 3 -%}{%- render 'krika-desc-3', product: product -%}
+{%- when 4 -%}{%- render 'krika-desc-4', product: product -%}
+{%- when 5 -%}{%- render 'krika-desc-5', product: product -%}
+{%- when 6 -%}{%- render 'krika-desc-6', product: product -%}
+{%- when 7 -%}{%- render 'krika-desc-7', product: product -%}
+{%- when 8 -%}{%- render 'krika-desc-8', product: product -%}
+{%- when 9 -%}{%- render 'krika-desc-9', product: product -%}
+{%- when 10 -%}{%- render 'krika-desc-10', product: product -%}
+{%- when 11 -%}{%- render 'krika-desc-11', product: product -%}
+{%- when 12 -%}{%- render 'krika-desc-12', product: product -%}
+{%- when 13 -%}{%- render 'krika-desc-13', product: product -%}
+{%- when 14 -%}{%- render 'krika-desc-14', product: product -%}
+{%- when 15 -%}{%- render 'krika-desc-15', product: product -%}
+{%- when 16 -%}{%- render 'krika-desc-16', product: product -%}
+{%- endcase -%}

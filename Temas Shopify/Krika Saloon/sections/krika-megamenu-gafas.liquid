@@ -1,0 +1,416 @@
+<!-- CONTENEDOR GENERAL DEL MEGAMENÚ (MONOCROMÁTICO & DINÁMICO) -->
+<div class="krika-megamenu-marcas-container">
+
+  <!-- 1. SECCIÓN SUPERIOR: ENLACES Y 4 COLUMNAS DE PRODUCTOS -->
+  <div class="krika-megamenu-top-row">
+
+    <!-- SECCIÓN IZQUIERDA: ENLACES (2 COLUMNAS) -->
+    <div class="krika-megamenu-links-group">
+      <!-- Columna 1 de Enlaces -->
+      <div class="krika-megamenu-column">
+        <h3 class="krika-column-title">MARCAS</h3>
+        <ul>
+          <li><a href="/collections/gafas?filter.p.vendor=PRADA">Prada</a></li>
+          <li><a href="/collections/gafas?filter.p.vendor=VERSACE">Versace</a></li>
+          <li><a href="/collections/gafas?filter.p.vendor=DOLCE%26GABBANA">Dolce &amp; Gabbana</a></li>
+          <li><a href="/collections/gafas?filter.p.vendor=MIU+MIU">Miu Miu</a></li>
+          <li><a href="/collections/gafas">Ver Todo Gafas</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 2 de Enlaces -->
+      <div class="krika-megamenu-column">
+        <h3 class="krika-column-title">&nbsp;</h3>
+        <ul>
+          <li><a href="/collections/gafas?filter.p.vendor=BURBERRY">Burberry</a></li>
+          <li><a href="/collections/gafas?filter.p.vendor=RAY+BAN">Ray-Ban</a></li>
+          <li><a href="/collections/gafas?filter.p.vendor=TIFFANY">Tiffany &amp; Co.</a></li>
+          <li><a href="/collections/gafas?filter.p.vendor=VOGUE">Vogue</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- SECCIÓN DERECHA: 4 PRODUCTOS DINÁMICOS DESDE SHOPIFY (SLIDE EN MÓVIL) -->
+    <div class="krika-megamenu-products-grid">
+      
+      {%- assign megamenu_collection = collections['Gafas'] -%}
+      
+      {%- if megamenu_collection != blank and megamenu_collection.products_count > 0 -%}
+        {%- for product in megamenu_collection.products limit: 4 -%}
+          
+          <div class="krika-product-card">
+            <a href="{{ product.url }}" class="krika-product-link">
+              <div class="krika-product-image-wrapper">
+                {%- if product.featured_image -%}
+                  <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.featured_image.alt | escape }}" loading="lazy" width="400" height="400">
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+              <div class="krika-product-info">
+                {%- if product.vendor -%}
+                  <span class="krika-product-brand">{{ product.vendor | upcase }}</span>
+                {%- endif -%}
+                <h4 class="krika-product-name">{{ product.title | upcase }}</h4>
+                <span class="krika-product-price">
+                  {%- if product.price_varies -%}
+                    Desde {{ product.price_min | money }}
+                  {%- else -%}
+                    {{ product.price | money }}
+                  {%- endif -%}
+                </span>
+              </div>
+            </a>
+          </div>
+
+        {%- endfor -%}
+      {%- else -%}
+        <div style="grid-column: span 4; font-size: 12px; color: #888; text-align: center; padding: 40px 20px; font-family: inherit; background: #ffffff; border: 1px dashed #ccc; border-radius: 4px;">
+          <p style="margin: 0 0 8px 0; font-weight: bold; color: #1a1a1a;">Colección no detectada o vacía</p>
+          <p style="margin: 0; font-size: 11px;">Verifica que el handle de la colección de gafas en Shopify sea exactamente <strong>"gafas"</strong>.</p>
+        </div>
+      {%- endif -%}
+
+    </div>
+
+  </div>
+
+  <!-- 2. SECCIÓN INFERIOR: CARRUSEL INFINITO DE LOGOS (MARQUEE ORIGINAL) -->
+  <div class="krika-megamenu-marquee-section">
+    <p class="krika-marquee-title">Nuestras Marcas Destacadas</p>
+
+    <div class="krika-marquee-wrapper">
+      <div class="krika-marquee-track">
+
+        <!-- Grupo 1 (Original) -->
+        <div class="krika-marquee-group">
+          <a href="/collections/gafas?filter.p.vendor=MIU+MIU" class="krika-brand-link">
+            <img src="https://cdn.shopify.com/s/files/1/0719/4027/6375/files/Miu-miu.png?v=1779854759&amp;width=200" alt="Miu Miu" loading="lazy">
+          </a>
+          <a href="/collections/gafas?filter.p.vendor=VERSACE" class="krika-brand-link">
+            <img src="https://cdn.shopify.com/s/files/1/0719/4027/6375/files/Versace.png?v=1779854759&amp;width=200" alt="Versace" loading="lazy">
+          </a>
+          <a href="/collections/gafas?filter.p.vendor=DOLCE%26GABBANA" class="krika-brand-link">
+            <img src="https://cdn.shopify.com/s/files/1/0719/4027/6375/files/Dolce-Gabbana.png?v=1779854759&amp;width=200" alt="Dolce &amp; Gabbana" loading="lazy">
+          </a>
+          <a href="/collections/gafas?filter.p.vendor=PRADA" class="krika-brand-link">
+            <img src="https://cdn.shopify.com/s/files/1/0719/4027/6375/files/Prada.png?v=1779854759&amp;width=200" alt="Prada" loading="lazy">
+          </a>
+          <a href="/collections/gafas?filter.p.vendor=BURBERRY" class="krika-brand-link">
+            <img src="https://cdn.shopify.com/s/files/1/0719/4027/6375/files/Burberry.png?v=1779854759&amp;width=200" alt="Burberry" loading="lazy">
+          </a>
+          <a href="/collections/gafas?filter.p.vendor=RAY+BAN" class="krika-brand-link">
+            <img src="https://cdn.shopify.com/s/files/1/0719/4027/6375/files/Ray-ban.png?v=1779854759&amp;width=200" alt="Ray Ban" loading="lazy">
+          </a>
+          <a href="/collections/gafas?filter.p.vendor=TIFFANY" class="krika-brand-link">
+            <img src="https://cdn.shopify.com/s/files/1/0719/4027/6375/files/Tiffany-co.png?v=1779854759&amp;width=200" alt="Tiffany &amp; Co" loading="lazy">
+          </a>
+          <a href="/collections/gafas?filter.p.vendor=VOGUE" class="krika-brand-link">
+            <img src="https://cdn.shopify.com/s/files/1/0719/4027/6375/files/vogue.png?v=1779979103&amp;width=200" alt="Vogue" loading="lazy">
+          </a>
+        </div>
+
+        <!-- Grupo 2 (Duplicado para loop infinito) -->
+        <div class="krika-marquee-group" aria-hidden="true">
+          <a href="/collections/gafas?filter.p.vendor=MIU+MIU" class="krika-brand-link">
+            <img src="https://cdn.shopify.com/s/files/1/0719/4027/6375/files/Miu-miu.png?v=1779854759&amp;width=200" alt="Miu Miu" loading="lazy">
+          </a>
+          <a href="/collections/gafas?filter.p.vendor=VERSACE" class="krika-brand-link">
+            <img src="https://cdn.shopify.com/s/files/1/0719/4027/6375/files/Versace.png?v=1779854759&amp;width=200" alt="Versace" loading="lazy">
+          </a>
+          <a href="/collections/gafas?filter.p.vendor=DOLCE%26GABBANA" class="krika-brand-link">
+            <img src="https://cdn.shopify.com/s/files/1/0719/4027/6375/files/Dolce-Gabbana.png?v=1779854759&amp;width=200" alt="Dolce &amp; Gabbana" loading="lazy">
+          </a>
+          <a href="/collections/gafas?filter.p.vendor=PRADA" class="krika-brand-link">
+            <img src="https://cdn.shopify.com/s/files/1/0719/4027/6375/files/Prada.png?v=1779854759&amp;width=200" alt="Prada" loading="lazy">
+          </a>
+          <a href="/collections/gafas?filter.p.vendor=BURBERRY" class="krika-brand-link">
+            <img src="https://cdn.shopify.com/s/files/1/0719/4027/6375/files/Burberry.png?v=1779854759&amp;width=200" alt="Burberry" loading="lazy">
+          </a>
+          <a href="/collections/gafas?filter.p.vendor=RAY+BAN" class="krika-brand-link">
+            <img src="https://cdn.shopify.com/s/files/1/0719/4027/6375/files/Ray-ban.png?v=1779854759&amp;width=200" alt="Ray Ban" loading="lazy">
+          </a>
+          <a href="/collections/gafas?filter.p.vendor=TIFFANY" class="krika-brand-link">
+            <img src="https://cdn.shopify.com/s/files/1/0719/4027/6375/files/Tiffany-co.png?v=1779854759&amp;width=200" alt="Tiffany &amp; Co" loading="lazy">
+          </a>
+          <a href="/collections/gafas?filter.p.vendor=VOGUE" class="krika-brand-link">
+            <img src="https://cdn.shopify.com/s/files/1/0719/4027/6375/files/vogue.png?v=1779979103&amp;width=200" alt="Vogue" loading="lazy">
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ESTILOS (MONOCROMÁTICOS) -->
+<style>
+  .krika-megamenu-marcas-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+    box-sizing: border-box;
+    background-color: #f7f7f7;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .krika-megamenu-top-row {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+
+  .krika-megamenu-links-group {
+    display: flex;
+    gap: 24px;
+  }
+
+  .krika-megamenu-column {
+    flex: 1;
+    min-width: 120px;
+  }
+
+  .krika-column-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    margin: 0 0 20px 0;
+    letter-spacing: 0.12em;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 6px;
+  }
+
+  .krika-megamenu-column ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .krika-megamenu-column li {
+    margin-bottom: 12px;
+  }
+
+  .krika-megamenu-column li a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    color: #555555 !important;
+    transition: color 0.2s ease;
+  }
+
+  .krika-megamenu-column li a:hover {
+    color: #000000 !important;
+  }
+
+  .krika-megamenu-products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+  }
+
+  .krika-product-card {
+    background-color: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .krika-product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .krika-product-link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    height: 100%;
+  }
+
+  .krika-product-image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: #fafafa;
+  }
+
+  .krika-product-image-wrapper img,
+  .krika-product-image-wrapper .placeholder-svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .krika-product-info {
+    padding: 12px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    background-color: #ffffff;
+  }
+
+  .krika-product-brand {
+    font-size: 9px;
+    font-weight: 700;
+    color: #888888;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .krika-product-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+  }
+
+  .krika-product-price {
+    font-size: 11px;
+    color: #000000;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  .krika-megamenu-marquee-section {
+    border-top: 1px solid #e5e5e5;
+    padding-top: 20px;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .krika-marquee-title {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #888888;
+    letter-spacing: 0.15em;
+    margin: 0 0 15px 0;
+  }
+
+  .krika-marquee-wrapper {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .krika-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: krikaScroll 12s linear infinite;
+  }
+
+  .krika-marquee-track:hover {
+    animation-play-state: paused;
+  }
+
+  .krika-marquee-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap: 50px;
+    padding-right: 50px;
+    flex-shrink: 0;
+  }
+
+  .krika-brand-link {
+    flex-shrink: 0;
+    display: block;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    filter: grayscale(100%);
+  }
+
+  .krika-brand-link:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
+  .krika-brand-link img {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  @keyframes krikaScroll {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+  }
+
+  @media (max-width: 991px) {
+    .krika-megamenu-top-row {
+      grid-template-columns: 1fr;
+      gap: 25px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .krika-megamenu-marcas-container {
+      padding: 16px;
+    }
+
+    .krika-megamenu-links-group {
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .krika-column-title {
+      margin: 0 0 10px 0;
+    }
+
+    .krika-megamenu-products-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 12px;
+      padding-bottom: 12px;
+    }
+
+    .krika-megamenu-products-grid::-webkit-scrollbar {
+      display: none;
+    }
+    .krika-megamenu-products-grid {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .krika-product-card {
+      width: calc(50% - 6px);
+      flex-shrink: 0;
+      scroll-snap-align: start;
+    }
+
+    .krika-product-info {
+      padding: 10px 8px;
+    }
+
+    .krika-brand-link img {
+      height: 38px;
+    }
+
+    .krika-marquee-group {
+      gap: 35px;
+      padding-right: 35px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Krika Megamenu Gafas",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Krika Megamenu Gafas"
+    }
+  ]
+}
+{% endschema %}

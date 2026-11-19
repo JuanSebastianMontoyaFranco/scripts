@@ -1,0 +1,1088 @@
+{% comment %}
+  Krika Mega Menu - Header + Buscador + Navegación (v9 - oculta sin stock y sin foto)
+{% endcomment %}
+
+<!-- === HEADER === -->
+<div class="krika-header-full">
+  <div class="kh-left">
+    <button type="button" class="kh-burger" id="krikaBurger" aria-label="Menú">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M3 6h18M3 12h18M3 18h18"/>
+      </svg>
+    </button>
+    <a href="/collections/all" class="kh-link">Productos</a>
+    <a href="/pages/services" class="kh-link">Servicios</a>
+  </div>
+  <div class="kh-logo">
+    <a href="/" title="Krika Salon">
+      <img
+        src="//cdn.shopify.com/s/files/1/0719/4027/6375/files/logo-krika-salon.png?v=1775796192"
+        alt="Krika Salon"
+        width="150"
+      >
+    </a>
+  </div>
+  <div class="kh-right">
+    <button type="button" id="krikaSearchTrigger" aria-label="Buscar">
+      <svg width="19" height="19" fill="currentColor" viewBox="0 0 512 512">
+        <path d="M508.5 468.9L387.1 347.5c-2.3-2.3-5.3-3.5-8.5-3.5h-13.2c31.5-36.5 50.6-84 50.6-136C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c52 0 99.5-19.1 136-50.6v13.2c0 3.2 1.3 6.2 3.5 8.5l121.4 121.4c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17zM208 368c-88.4 0-160-71.6-160-160S119.6 48 208 48s160 71.6 160 160-71.6 160-160 160z"/>
+      </svg>
+    </button>
+    <a href="/pages/sedes" aria-label="Sedes">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
+      </svg>
+    </a>
+    <a href="/cart" aria-label="Carrito">
+      <svg width="19" height="19" fill="currentColor" viewBox="0 0 448 512">
+        <path d="M352 128C352 57.42 294.579 0 224 0 153.42 0 96 57.42 96 128H0v304c0 44.183 35.817 80 80 80h288c44.183 0 80-35.817 80-80V128h-96zM224 48c44.112 0 80 35.888 80 80H144c0-44.112 35.888-80 80-80zm176 384c0 17.645-14.355 32-32 32H80c-17.645 0-32-14.355-32-32V176h48v40c0 13.255 10.745 24 24 24s24-10.745 24-24v-40h160v40c0 13.255 10.745 24 24 24s24-10.745 24-24v-40h48v256z"/>
+      </svg>
+      <span class="kh-cart-n" id="khCartCount"></span>
+    </a>
+  </div>
+</div>
+
+<!-- === NAVBAR WEB === -->
+<nav class="krika-mega-nav">
+  <div class="krika-mega-nav-inner">
+    <div class="krika-mega-item" data-menu="gafas">
+      <a href="/collections/gafas" class="krika-mega-link">Gafas
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">GAFAS</h4>
+              <div class="krika-mega-cats">
+                <div class="krika-mega-col">
+                  <ul>
+                    <li><a href="/collections/gafas?filter.p.vendor=Prada">Prada</a></li>
+                    <li><a href="/collections/gafas?filter.p.vendor=Versace">Versace</a></li>
+                    <li><a href="/collections/gafas?filter.p.vendor=Dolce%20%26%20Gabbana">Dolce &amp; Gabbana</a></li>
+                    <li><a href="/collections/gafas?filter.p.vendor=Miu%20Miu">Miu Miu</a></li>
+                  </ul>
+                  <b><a href="/collections/gafas" class="krika-mega-vermas">Ver Todo Gafas</a></b>
+                </div>
+                <div class="krika-mega-col">
+                  <ul>
+                    <li><a href="/collections/gafas?filter.p.vendor=Burberry">Burberry</a></li>
+                    <li><a href="/collections/gafas?filter.p.vendor=Ray-Ban">Ray-Ban</a></li>
+                    <li><a href="/collections/gafas?filter.p.vendor=Tiffany">Tiffany &amp; Co.</a></li>
+                    <li><a href="/collections/gafas?filter.p.vendor=Vogue">Vogue</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="gafas"><p class="krika-mega-loading">Cargando...</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="krika-mega-item" data-menu="perfumes">
+      <a href="/collections/perfumes" class="krika-mega-link">Perfumes
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">PERFUMES</h4>
+              <div class="krika-mega-cats">
+                <div class="krika-mega-col">
+                  <ul>
+                    <li><a href="/collections/perfumes?filter.p.vendor=Acqua%20di%20Parma">Acqua di Parma</a></li>
+                    <li><a href="/collections/perfumes?filter.p.vendor=Carolina%20Herrera">Carolina Herrera</a></li>
+                    <li><a href="/collections/perfumes?filter.p.vendor=Paco%20Rabanne">Paco Rabanne</a></li>
+                  </ul>
+                  <b><a href="/collections/perfumes" class="krika-mega-vermas">Ver Todo Perfumes</a></b>
+                </div>
+                <div class="krika-mega-col">
+                  <ul>
+                    <li><a href="/collections/perfumes?filter.p.vendor=Giorgio%20Armani">Giorgio Armani</a></li>
+                    <li><a href="/collections/perfumes?filter.p.vendor=Versace">Versace</a></li>
+                    <li><a href="/collections/perfumes?filter.p.vendor=Dolce%20%26%20Gabbana">Dolce &amp; Gabbana</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="perfumes"><p class="krika-mega-loading">Cargando...</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="krika-mega-item" data-menu="capilar">
+      <a href="/collections/capilar" class="krika-mega-link">Capilar
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">CAPILAR</h4>
+              <div class="krika-mega-cats">
+                <div class="krika-mega-col">
+                  <h5>SHAMPOO / ACONDICIONADORES</h5>
+                  <ul>
+                    <li><a href="/collections/capilar?filter.p.product_type=Nutricion%20e%20hidratacion">Nutricion e hidratacion</a></li>
+                    <li><a href="/collections/capilar?filter.p.product_type=Disciplina%20y%20control">Disciplina y control</a></li>
+                    <li><a href="/collections/capilar?filter.p.product_type=Limpieza%20profunda">Limpieza profunda</a></li>
+                    <li><a href="/collections/capilar?filter.p.product_type=Smooth">Smooth</a></li>
+                  </ul>
+                  <b><a href="/collections/capilar" class="krika-mega-vermas">Ver Todo Capilar</a></b>
+                </div>
+                <div class="krika-mega-col">
+                  <h5>TRATAMIENTOS</h5>
+                  <ul>
+                    <li><a href="/collections/capilar?filter.p.product_type=Linea%20Detox">Linea Detox</a></li>
+                    <li><a href="/collections/capilar?filter.p.product_type=Reparacion%20intensiva">Reparacion intensiva</a></li>
+                    <li><a href="/collections/capilar?filter.p.product_type=Brillo%20saludable">Brillo saludable</a></li>
+                    <li><a href="/collections/capilar?filter.p.product_type=Control%20frizz">Control frizz</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="capilar"><p class="krika-mega-loading">Cargando...</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="krika-mega-item" data-menu="skincare">
+      <a href="/collections/skincare" class="krika-mega-link">Skincare
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">SKINCARE</h4>
+              <div class="krika-mega-cats">
+                <div class="krika-mega-col">
+                  <h5>LIMPIADORES</h5>
+                  <ul>
+                    <li><a href="/collections/skincare?filter.p.product_type=Gel%20limpiador">Gel limpiador</a></li>
+                    <li><a href="/collections/skincare?filter.p.product_type=Agua%20micelar">Agua micelar</a></li>
+                    <li><a href="/collections/skincare?filter.p.product_type=Espumas%20limpiadoras">Espumas limpiadoras</a></li>
+                    <li><a href="/collections/skincare?filter.p.product_type=Exfoliantes">Exfoliantes</a></li>
+                  </ul>
+                  <b><a href="/collections/skincare" class="krika-mega-vermas">Ver Todo Skincare</a></b>
+                </div>
+                <div class="krika-mega-col">
+                  <h5>HIDRATACION</h5>
+                  <ul>
+                    <li><a href="/collections/skincare?filter.p.product_type=Cremas%20hidratantes">Cremas hidratantes</a></li>
+                    <li><a href="/collections/skincare?filter.p.product_type=Cremas%20de%20noche">Cremas de noche</a></li>
+                    <li><a href="/collections/skincare?filter.p.product_type=Gel%20hidratante">Gel hidratante</a></li>
+                    <li><a href="/collections/skincare?filter.p.product_type=Mascarillas%20hidratantes">Mascarillas hidratantes</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="skincare"><p class="krika-mega-loading">Cargando...</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="krika-mega-item" data-menu="maquillaje">
+      <a href="/collections/maquillaje" class="krika-mega-link">Maquillaje
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">MAQUILLAJE</h4>
+              <div class="krika-mega-cats">
+                <div class="krika-mega-col">
+                  <h5>ROSTRO</h5>
+                  <ul>
+                    <li><a href="/collections/maquillaje?filter.p.product_type=Bases">Bases</a></li>
+                    <li><a href="/collections/maquillaje?filter.p.product_type=Correctores">Correctores</a></li>
+                    <li><a href="/collections/maquillaje?filter.p.product_type=Polvos">Polvos</a></li>
+                    <li><a href="/collections/maquillaje?filter.p.product_type=Rubores">Rubores</a></li>
+                  </ul>
+                  <b><a href="/collections/maquillaje" class="krika-mega-vermas">Ver Todo Maquillaje</a></b>
+                </div>
+                <div class="krika-mega-col">
+                  <h5>OJOS</h5>
+                  <ul>
+                    <li><a href="/collections/maquillaje?filter.p.product_type=Sombras">Sombras</a></li>
+                    <li><a href="/collections/maquillaje?filter.p.product_type=Delineadores">Delineadores</a></li>
+                    <li><a href="/collections/maquillaje?filter.p.product_type=Mascaras%20de%20pestanas">Mascaras de pestanas</a></li>
+                    <li><a href="/collections/maquillaje?filter.p.product_type=Labiales">Labiales</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="maquillaje"><p class="krika-mega-loading">Cargando...</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="krika-mega-item" data-menu="corporal">
+      <a href="/collections/corporal" class="krika-mega-link">Corporal
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">CORPORAL</h4>
+              <div class="krika-mega-cats">
+                <div class="krika-mega-col">
+                  <h5>BANO</h5>
+                  <ul>
+                    <li><a href="/collections/corporal?filter.p.product_type=Jabones">Jabones</a></li>
+                    <li><a href="/collections/corporal?filter.p.product_type=Exfoliantes">Exfoliantes</a></li>
+                  </ul>
+                  <b><a href="/collections/corporal" class="krika-mega-vermas">Ver Todo Corporal</a></b>
+                </div>
+                <div class="krika-mega-col">
+                  <h5>HIDRATACION</h5>
+                  <ul>
+                    <li><a href="/collections/corporal?filter.p.product_type=Cremas%20corporales">Cremas corporales</a></li>
+                    <li><a href="/collections/corporal?filter.p.product_type=Aceites%20corporales">Aceites corporales</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="corporal"><p class="krika-mega-loading">Cargando...</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="krika-mega-item" data-menu="unas">
+      <a href="/collections/unas" class="krika-mega-link">Uñas
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">UÑAS</h4>
+              <div class="krika-mega-cats">
+                <div class="krika-mega-col">
+                  <h5>ESMALTES</h5>
+                  <ul>
+                    <li><a href="/collections/unas?filter.p.product_type=Tradicionales">Tradicionales</a></li>
+                    <li><a href="/collections/unas?filter.p.product_type=Semipermanentes">Semipermanentes</a></li>
+                  </ul>
+                  <b><a href="/collections/unas" class="krika-mega-vermas">Ver Todo Uñas</a></b>
+                </div>
+                <div class="krika-mega-col">
+                  <h5>TRATAMIENTOS</h5>
+                  <ul>
+                    <li><a href="/collections/unas?filter.p.product_type=Fortalecedores">Fortalecedores</a></li>
+                    <li><a href="/collections/unas?filter.p.product_type=Aceites%20para%20cuticula">Aceites para cuticula</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="unas"><p class="krika-mega-loading">Cargando...</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="krika-mega-item">
+      <a href="/collections/kits" class="krika-mega-link">Kits</a>
+    </div>
+  </div>
+</nav>
+
+<!-- === DRAWER MÓVIL === -->
+<div class="kr-drawer" id="krikaDrawer">
+  <div class="kr-overlay" id="krOverlay"></div>
+  <div class="kr-panel">
+    <div class="kr-dv-main">
+      <div class="kr-mhead">
+        <span>Menú</span>
+        <button class="kr-x" id="krCloseDrawer" aria-label="Cerrar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="kr-dv-cats">
+        <a class="kr-cat" href="/pages/services">Servicios
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <button class="kr-cat" data-sub="gafas">Gafas<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="kr-cat" data-sub="perfumes">Perfumes<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="kr-cat" data-sub="capilar">Capilar<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="kr-cat" data-sub="skincare">Skincare<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="kr-cat" data-sub="maquillaje">Maquillaje<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="kr-cat" data-sub="corporal">Corporal<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="kr-cat" data-sub="unas">Uñas<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <a class="kr-cat" href="/collections/kits">Kits<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></a>
+      </div>
+      <div class="kr-dv-foot">
+        <p>Mi cuenta</p>
+        <a class="kr-btn kr-btn--dark" href="/account/login">Inicia sesión</a>
+        <a class="kr-btn" href="/account#register">Crea una cuenta</a>
+      </div>
+    </div>
+    <div class="kr-dv-sub">
+      <button class="kr-sub-head" id="krSubBack">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 6l-6 6 6 6"/></svg>
+        <span id="krSubTitle"></span>
+      </button>
+      <div class="kr-sub-body" id="krSubBody"></div>
+    </div>
+  </div>
+</div>
+
+<!-- === BUSCADOR === -->
+<div class="krika-search-overlay" id="searchOverlay">
+  <div class="krika-search-inner" id="searchInner">
+    <div class="ks-mhead">
+      <span>Buscar</span>
+      <button class="kr-x" id="btnCloseM" aria-label="Cerrar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="krika-search-top-bar">
+      <input type="text" class="krika-search-input" id="searchInput" placeholder="Buscar aquí" autocomplete="off">
+      <button class="krika-btn-clear" id="btnClear">Eliminar</button>
+      <button class="kr-x kr-close-desk" id="btnCloseSearch" aria-label="Cerrar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="krika-search-meta-bar" id="searchMeta"></div>
+    <div class="krika-search-toolbar" id="searchToolbar">
+      <div class="krika-sort-wrap">
+        <button type="button" class="krika-toolbar-btn" id="btnSort">Ordenar por</button>
+        <div class="krika-sort-menu" id="sortMenu">
+          <button type="button" data-sort="relevance" class="is-selected">Relevancia</button>
+          <button type="button" data-sort="price-asc">Precio: menor a mayor</button>
+          <button type="button" data-sort="price-desc">Precio: mayor a menor</button>
+          <button type="button" data-sort="title-asc">Nombre: A-Z</button>
+        </div>
+      </div>
+      <a href="/search" class="krika-toolbar-btn" id="btnFilters">Filtros</a>
+    </div>
+    <div class="krika-search-content-body">
+      <div class="krika-suggestions-col">
+        <div id="recentBox"></div>
+        <div id="querySugs"></div>
+        <h4>Sugerencias</h4>
+        <ul class="krika-suggestions-list">
+          <li><a href="/collections/all">Nuevos Productos</a></li>
+          <li><a href="/collections/gafas">Gafas</a></li>
+          <li><a href="/collections/perfumes">Perfumes</a></li>
+          <li><a href="/collections/skincare">Skincare</a></li>
+          <li><a href="/collections/maquillaje">Maquillaje</a></li>
+          <li><a href="/collections/capilar">Capilar</a></li>
+        </ul>
+      </div>
+      <div class="kr-slider">
+        <button type="button" class="kr-s-arrow kr-s-prev" id="krSlidePrev" aria-label="Anterior">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <div class="krika-products-grid" id="productsGrid"></div>
+        <button type="button" class="kr-s-arrow kr-s-next" id="krSlideNext" aria-label="Siguiente">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+    <button type="button" class="krika-more-btn" id="btnMore">Cargar más (+8)</button>
+  </div>
+</div>
+
+<style>
+  :root {
+    --krika-bg: #fff;
+    --krika-text: #000;
+    --krika-muted: #707070;
+    --krika-border: #000;
+    --krika-divider: #eaeaea;
+    --krika-sale: #c0392b;
+    --krika-wish: #c0392b;
+    --krika-cardline: #e5e5e5;
+    --krika-card-w: 190px;
+    --krika-card-h: 265px;
+  }
+  body.krika-lock { overflow: hidden; }
+
+  /* HEADER */
+  .krika-header-full {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 12px 100px;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
+  .kh-left { display: flex; align-items: center; gap: 18px; }
+  .kh-link {
+    font-size: 13px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.05em; color: #000; text-decoration: none;
+  }
+  .kh-logo a { display: block; line-height: 0; }
+  .kh-logo img { width: 95px; height: auto; display: block; margin: 1rem 0; }
+  .kh-right { display: flex; justify-content: flex-end; align-items: center; gap: 4px; padding-left: 24px; }
+  .kh-right a, .kh-right button {
+    color: #000; display: inline-flex; align-items: center; justify-content: center;
+    background: none; border: none; cursor: pointer; padding: 9px 10px;
+    text-decoration: none; position: relative; outline: none;
+  }
+  .kh-cart-n {
+    position: absolute; top: 3px; right: 3px; background: #000; color: #fff;
+    font-size: 9px; min-width: 14px; height: 14px; border-radius: 999px;
+    display: none; align-items: center; justify-content: center; padding: 0 3px;
+  }
+  .kh-burger { background: none; border: none; cursor: pointer; padding: 6px; color: #000; }
+
+  /* NAVBAR + MEGA */
+  .krika-mega-nav { background: #fff; border-bottom: 1px solid #eee; padding: 8px 30px; position: relative; }
+  .krika-mega-nav-inner { display: flex; justify-content: center; align-items: center; gap: 28px; }
+  .krika-mega-item { position: static; }
+  .krika-mega-link {
+    display: flex; align-items: center; gap: 6px; text-decoration: none; color: #000;
+    font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 8px 2px; cursor: pointer; background: none; border: none;
+  }
+  .krika-mega-link:hover { opacity: 0.6; }
+  .krika-mega-link svg { transition: transform 0.3s; }
+  .krika-mega-item:hover .krika-mega-link svg { transform: rotate(180deg); }
+  .krika-mega-dropdown {
+    position: absolute; top: 100%; left: 0; right: 0; background: #f2f2f2;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); opacity: 0; visibility: hidden;
+    transition: opacity 0.25s, visibility 0.25s; z-index: 998;
+  }
+  .krika-mega-item:hover .krika-mega-dropdown { opacity: 1; visibility: visible; }
+  .krika-mega-container { padding: 10px 300px; background: #fff; }
+  .krika-mega-row {
+    display: grid; grid-template-columns: 405px 1fr; gap: 50px;
+    align-items: start; background: #f2f2f2; padding: 2rem;
+  }
+  .krika-mega-col-title {
+    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    color: #1a1a1a; margin: 0; padding-bottom: 12px; border-bottom: 1px solid #cfcfcf;
+  }
+  .krika-mega-cats { display: flex; gap: 26px; margin-top: 14px; }
+  .krika-mega-col { flex: 1; min-width: 0; }
+  .krika-mega-col h5 {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: #1a1a1a; margin: 0 0 10px;
+  }
+  .krika-mega-col ul { list-style: none; padding: 0; margin: 0; }
+  .krika-mega-col li { margin-bottom: 10px; }
+  .krika-mega-col li a { font-size: 13px; color: #666; text-decoration: none; line-height: 1.3; }
+  .krika-mega-col li a:hover { color: #000; }
+  .krika-mega-vermas {
+    display: inline-block; margin-top: 6px; font-size: 13px; font-weight: 900 !important;
+    color: #666; text-decoration: underline; text-underline-offset: 4px;
+  }
+  .krika-mega-vermas:hover { color: #000; }
+
+  /* TARJETAS */
+  .krika-mega-products { display: grid; grid-template-columns: repeat(4, var(--krika-card-w)); gap: 14px; }
+  .krika-mega-card, .krika-product-card, .kr-sub-card {
+    position: relative; display: flex; flex-direction: column;
+    height: var(--krika-card-h); background: #fff;
+    border: 1px solid var(--krika-cardline); overflow: hidden;
+  }
+  .krika-mega-card { width: var(--krika-card-w); }
+  .krika-mega-card::after, .krika-product-card::after, .kr-sub-card::after {
+    content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px;
+    background: #000; transform: scaleX(0); transform-origin: left center; transition: transform 0.25s ease;
+  }
+  .krika-mega-card:hover::after, .krika-mega-card:active::after,
+  .krika-product-card:hover::after, .krika-product-card:active::after,
+  .kr-sub-card:hover::after, .kr-sub-card:active::after { transform: scaleX(1); }
+  .krika-mega-card a { display: flex; flex-direction: column; height: 100%; text-decoration: none; color: inherit; }
+  .krika-mega-img, .krika-product-thumb, .kr-sub-card .im {
+    flex: 1; min-height: 0; background: #fff;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .krika-mega-img img, .krika-product-thumb img, .kr-sub-card .im img {
+    max-width: 80%; max-height: 80%; object-fit: contain;
+  }
+  .krika-mega-info, .krika-product-info, .kr-sub-card .in {
+    padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px;
+  }
+  .krika-mega-brand, .krika-product-brand, .kr-sub-card .b {
+    font-size: 9px; font-weight: 600; color: #999; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .krika-mega-name, .krika-product-title, .kr-sub-card .n {
+    font-size: 11px; font-weight: 700; color: #000; margin: 0;
+    text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.35;
+  }
+  .krika-product-title {
+    text-decoration: none; display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .krika-mega-price, .krika-product-prices, .kr-sub-card .p { font-size: 11px; color: #000; font-weight: 500; }
+  .krika-mega-loading { grid-column: 1/-1; font-size: 11px; color: #888; text-align: center; padding: 40px 20px; }
+  @media (max-width: 1200px) {
+    .krika-mega-products { grid-template-columns: repeat(4, 1fr); }
+    .krika-mega-card { width: auto; }
+  }
+
+  /* DRAWER */
+  .kr-drawer { position: fixed; inset: 0; z-index: 99999; pointer-events: none; }
+  .kr-drawer.is-open { pointer-events: auto; }
+  .kr-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.35); opacity: 0; transition: 0.25s; }
+  .kr-drawer.is-open .kr-overlay { opacity: 1; }
+  .kr-panel {
+    position: absolute; top: 0; bottom: 0; left: 0; width: min(85vw, 340px);
+    background: #fff; transform: translateX(-100%); transition: 0.28s; overflow: hidden;
+  }
+  .kr-drawer.is-open .kr-panel { transform: none; }
+  .kr-dv-main { display: flex; flex-direction: column; height: 100%; }
+  .kr-mhead { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; font-size: 14px; }
+  .kr-x { background: none; border: none; cursor: pointer; color: #000; padding: 4px; display: inline-flex; }
+  .kr-dv-cats { flex: 1; overflow: auto; padding: 4px 0; }
+  .kr-cat {
+    display: flex; justify-content: space-between; align-items: center; width: 100%;
+    padding: 15px 20px; font-size: 15px; color: #333; background: none; border: 0;
+    cursor: pointer; text-decoration: none; text-align: left;
+  }
+  .kr-dv-foot { padding: 18px 20px; border-top: 1px solid #eee; }
+  .kr-dv-foot p { margin: 0 0 12px; font-size: 15px; }
+  .kr-btn {
+    display: block; width: 100%; padding: 12px; text-align: center; font-size: 14px;
+    text-decoration: none; margin-bottom: 10px; border: 1px solid #000; color: #000;
+  }
+  .kr-btn--dark { background: #222; color: #fff; }
+  .kr-dv-sub {
+    position: absolute; inset: 0; background: #fff; transform: translateX(100%);
+    transition: 0.28s; display: flex; flex-direction: column;
+  }
+  .kr-drawer.sub-open .kr-dv-sub { transform: none; }
+  .kr-sub-head {
+    display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+    border-bottom: 1px solid #eee; background: none; border-left: 0; border-right: 0;
+    border-top: 0; font-size: 15px; cursor: pointer;
+  }
+  .kr-sub-body { flex: 1; overflow: auto; padding: 16px; }
+
+  /* SUB MÓVIL (panel como captura) */
+  .kr-sub-panel { background: #f7f7f7; margin: 0 -16px; padding: 14px 16px 12px; }
+  .kr-sub-panel-t {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #1a1a1a; margin: 0; padding-bottom: 10px; border-bottom: 1px solid #dcdcdc;
+  }
+  .kr-sub-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 18px; margin-top: 6px; }
+  .kr-sub-cats .krika-mega-col { flex: none; min-width: 0; }
+  .kr-sub-cats ul { list-style: none; margin: 0; padding: 0; }
+  .kr-sub-cats li { margin: 0; }
+  .kr-sub-cats li a { display: block; padding: 9px 0; font-size: 13px; color: #7a7a7a; text-decoration: none; }
+  .kr-sub-cats li a::after { content: none; }
+  .kr-sub-cats li a:hover { color: #000; }
+  .kr-sub-cats h5 {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; margin: 10px 0 4px; color: #1a1a1a;
+  }
+  .kr-sub-vermas {
+    display: block; text-align: center; margin: 10px 0 0; font-size: 13px; font-weight: 700;
+    color: #666; text-decoration: underline; text-underline-offset: 4px;
+  }
+  .kr-sub-prods { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .kr-sub-card { height: 235px; text-decoration: none; color: inherit; }
+  .kr-sub-card .im img { max-width: 85%; max-height: 85%; }
+  .kr-sub-card .in { padding: 8px 10px 10px; }
+  .kr-sub-card .n {
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+
+  /* BUSCADOR */
+  .krika-search-overlay {
+    position: fixed; inset: 0; z-index: 999999; display: none; overflow: hidden;
+    background: rgba(250,250,250,0.6);
+  }
+  .krika-search-overlay.is-open { display: block; }
+  .krika-search-inner {
+    background: #fff; padding: 18px 40px 30px; max-height: 82vh; overflow-y: auto;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+  }
+  .ks-mhead { display: none; }
+  .krika-search-top-bar { display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--krika-border); padding-bottom: 14px; }
+  .krika-search-input {
+    flex: 1; max-width: 700px; border: 1px solid #9a9a9a; outline: none; font-size: 13px;
+    background: transparent; color: var(--krika-text); padding: 10px 12px; font-family: inherit;
+  }
+  .krika-btn-clear { background: none; border: none; font-size: 12px; text-decoration: underline; cursor: pointer; display: none; }
+  .krika-search-overlay.has-q .krika-btn-clear { display: block; }
+  .kr-close-desk { margin-left: auto; }
+  .krika-search-meta-bar { display: none; }
+  .krika-search-toolbar { display: none; }
+  .kr-recent-t { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--krika-muted); margin: 0 0 10px; }
+  .kr-recent-t button { background: none; border: none; font-size: 11px; text-decoration: underline; cursor: pointer; color: var(--krika-muted); }
+  .kr-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .kr-chip {
+    display: inline-flex; align-items: center; gap: 6px; border: 1px solid #d9d9d9;
+    border-radius: 999px; background: #fff; padding: 7px 12px; font-size: 12px; cursor: pointer; color: #000;
+  }
+  .kr-chip:hover { border-color: #000; }
+  .kr-chip-x { border: none; background: none; cursor: pointer; color: #999; font-size: 14px; line-height: 1; padding: 0; margin-left: 2px; }
+  .kr-chip-x:hover { color: var(--krika-sale); }
+  #querySugs { margin-bottom: 6px; }
+  .krika-search-content-body { margin-top: 24px; display: grid; grid-template-columns: 250px 1fr; gap: 44px; }
+  .krika-suggestions-col h4 { font-size: 12px; font-weight: 500; color: var(--krika-muted); margin: 0 0 16px; }
+  .krika-suggestions-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
+  .krika-suggestions-list a { text-decoration: none; color: var(--krika-text); font-size: 13px; }
+  .krika-suggestions-list a:hover { opacity: 0.5; }
+  .kr-slider { position: relative; }
+  .krika-products-grid {
+    display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 70px) / 6);
+    gap: 14px; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .krika-products-grid::-webkit-scrollbar { display: none; }
+  .kr-s-arrow {
+    position: absolute; top: 110px; transform: translateY(-50%); width: 34px; height: 34px;
+    border-radius: 50%; border: 1px solid #e2e2e2; background: #fff; color: #000; cursor: pointer;
+    display: none; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    transition: border-color 0.2s, opacity 0.2s; z-index: 2;
+  }
+  .kr-s-arrow:hover { border-color: #000; }
+  .kr-s-prev { left: -14px; }
+  .kr-s-next { right: -14px; }
+  .krika-product-card { min-width: 0; color: var(--krika-text); }
+  .krika-product-title-row { display: flex; justify-content: space-between; gap: 6px; }
+  .krika-wishlist-btn { background: none; border: none; cursor: pointer; padding: 0; color: #000; line-height: 0; flex-shrink: 0; }
+  .krika-wishlist-btn svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.5px; }
+  .krika-wishlist-btn.is-active svg { fill: var(--krika-wish); stroke: var(--krika-wish); }
+  .krika-compare-price { text-decoration: line-through; color: var(--krika-muted); font-weight: 400; margin-right: 5px; }
+  .krika-current-price.is-sale { color: var(--krika-sale); }
+  .krika-product-tag { font-size: 8px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--krika-muted); }
+  .krika-more-btn { display: none; margin: 22px auto 0; background: #fff; border: 1px solid var(--krika-border); padding: 11px 28px; font-size: 12px; cursor: pointer; }
+  .krika-more-btn.is-visible { display: block; }
+  @media (min-width: 769px) {
+    .kh-burger { display: none; }
+    .ks-mhead { display: none !important; }
+    .kr-s-arrow { display: flex; }
+  }
+  @media (max-width: 1100px) and (min-width: 769px) {
+    .krika-products-grid { grid-auto-columns: calc((100% - 42px) / 4); }
+  }
+  /* MÓVIL */
+  @media (max-width: 768px) {
+    .kh-link { display: none; }
+    .kh-burger { display: inline-flex; }
+    .kh-logo img { width: 100px; }
+    .kh-right { padding-left: 10px; }
+    .kh-right a[aria-label="Sedes"] { display: none; }
+    .krika-header-full { padding: 10px 16px; }
+    .krika-mega-nav { display: none; }
+    .krika-search-overlay { background: #fff; }
+    .krika-search-inner { height: 100dvh; max-height: none; padding: 14px 16px 24px; box-shadow: none; }
+    .ks-mhead { display: flex; justify-content: space-between; align-items: center; padding: 2px 0 12px; font-size: 14px; }
+    .kr-close-desk { display: none; }
+    .krika-search-top-bar { border-bottom: none; padding-bottom: 0; gap: 12px; }
+    .krika-search-input { border: none; border-bottom: 1px solid var(--krika-border); padding: 8px 0; font-size: 15px; max-width: none; }
+    .krika-search-meta-bar { display: flex; margin-top: 12px; font-size: 12px; color: #444; min-height: 18px; }
+    .krika-search-toolbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; margin-top: 8px; border-top: 1px solid var(--krika-divider); font-size: 13px;
+    }
+    .krika-toolbar-btn { background: none; border: none; cursor: pointer; font-size: 13px; color: #000; text-decoration: none; }
+    .krika-sort-wrap { position: relative; }
+    .krika-sort-menu {
+      position: absolute; top: calc(100% + 10px); left: 0; background: #fff;
+      border: 1px solid #000; min-width: 210px; display: none; flex-direction: column; z-index: 30;
+    }
+    .krika-sort-menu.is-open { display: flex; }
+    .krika-sort-menu button { background: none; border: none; text-align: left; padding: 10px 14px; font-size: 13px; cursor: pointer; }
+    .krika-sort-menu button.is-selected { background: #f5f5f5; font-weight: 700; }
+    .krika-search-content-body { grid-template-columns: 1fr; gap: 14px; margin-top: 6px; }
+    .krika-suggestions-col h4 { margin-bottom: 10px; }
+    .krika-suggestions-list { grid-template-columns: 1fr 1fr; gap: 10px 16px; }
+    .krika-suggestions-list a { font-size: 12px; }
+    .krika-products-grid { display: grid; grid-template-columns: 1fr 1fr; grid-auto-flow: row; gap: 12px 10px; overflow: visible; }
+    .kr-s-arrow { display: none; }
+  }
+</style>
+
+<script>
+  {% raw %}
+  /* ===== HELPERS COMPARTIDOS v9 ===== */
+  window.KRIKA = (function(){
+    function norm(s){return ((s||'')+'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+    function norm2(s){return norm(s).replace(/[^a-z0-9]/g,'')}
+    function shuffle(a){var r=a.slice();for(var i=r.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=r[i];r[i]=r[j];r[j]=t}return r}
+    function pimg(p){
+      if(!p)return '';
+      var cand=[p.featured_image,p.image,(p.images&&p.images[0]),(p.media&&p.media[0]&&(p.media[0].preview_image||p.media[0].src))];
+      for(var i=0;i<cand.length;i++){
+        var v=cand[i];
+        if(!v)continue;
+        if(typeof v==='string')return v;
+        if(typeof v==='object'){if(v.src)return v.src;if(v.url)return v.url;}
+      }
+      return '';
+    }
+    /* v9: solo productos CON STOCK y CON FOTO */
+    function ok(p){
+      if(!p)return false;
+      if(!pimg(p))return false;
+      var av=(typeof p.available==='boolean')?p.available:true;
+      if(!av&&p.variants&&p.variants.length){
+        for(var i=0;i<p.variants.length;i++){if(p.variants[i].available){av=true;break}}
+      }
+      return !!av;
+    }
+    function wurl(u){return u?(u.indexOf('?')!==-1?u+'&width=400':u+'?width=400'):u}
+    function fmtCOP(v){return new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:0,maximumFractionDigits:0}).format(v||0)}
+    var VMAP={},TMAP={};
+    function addMaps(list){
+      (list||[]).forEach(function(p){
+        if(p&&p.vendor)VMAP[norm2(p.vendor)]=p.vendor;
+        var t=p.type||p.product_type;
+        if(t)TMAP[norm2(t)]=t;
+      });
+    }
+    function fixParam(a,param,map){
+      var href=a.getAttribute('href')||'';
+      var idx=href.indexOf(param+'=');
+      if(idx===-1)return;
+      var val=href.slice(idx+param.length+1),rest='';
+      var amp=val.indexOf('&');
+      if(amp>-1){rest=val.slice(amp);val=val.slice(0,amp);}
+      try{val=decodeURIComponent(val.replace(/\+/g,' '))}catch(e){}
+      var real=map[norm2(val)];
+      if(real){a.setAttribute('href',href.slice(0,idx)+param+'='+encodeURIComponent(real)+rest);}
+    }
+    function fixLinks(scope){
+      if(!scope)return;
+      scope.querySelectorAll('a[href*="filter.p.vendor"]').forEach(function(a){fixParam(a,'filter.p.vendor',VMAP)});
+      scope.querySelectorAll('a[href*="filter.p.product_type"]').forEach(function(a){fixParam(a,'filter.p.product_type',TMAP)});
+    }
+    return {norm:norm,norm2:norm2,shuffle:shuffle,pimg:pimg,ok:ok,wurl:wurl,fmtCOP:fmtCOP,addMaps:addMaps,fixLinks:fixLinks,VMAP:VMAP,TMAP:TMAP,CK:'krika9_c_',AK:'krika9_all'};
+  })();
+
+  /* ===== MEGA MENÚS WEB ===== */
+  (function(){
+    var K=window.KRIKA;
+    var MENUS=['gafas','perfumes','capilar','skincare','maquillaje','corporal','unas'];
+    function priceOf(p){try{return parseFloat(p.variants[0].price)||0}catch(e){return 0}}
+    function renderProducts(products,container){
+      container.innerHTML='';
+      var vis=(products||[]).filter(K.ok); /* v9: sin stock / sin foto fuera */
+      if(!vis.length){container.style.display='none';return}
+      container.style.display='';
+      K.shuffle(vis).slice(0,4).forEach(function(p){
+        var img=K.wurl(K.pimg(p));
+        var priceF=K.fmtCOP(priceOf(p));
+        container.insertAdjacentHTML('beforeend','<div class="krika-mega-card"><a href="/products/'+p.handle+'"><div class="krika-mega-img">'+(img?'<img src="'+img+'" alt="" loading="lazy">':'')+'</div><div class="krika-mega-info"><span class="krika-mega-brand">'+(p.vendor||'').toUpperCase()+'</span><h4 class="krika-mega-name">'+p.title+'</h4><span class="krika-mega-price">'+priceF+'</span></div></a></div>');
+      });
+    }
+    function cacheOf(key){var c=sessionStorage.getItem(K.CK+key);if(c){try{return JSON.parse(c)}catch(e){}}return null}
+    function loadMenu(key){
+      var container=document.querySelector('[data-menu="'+key+'"] .krika-mega-products');
+      if(!container)return;
+      var cached=cacheOf(key);
+      if(cached){K.addMaps(cached);K.fixLinks(document.querySelector('[data-menu="'+key+'"]'));renderProducts(cached,container);return}
+      fetch('/collections/'+key+'/products.json?limit=50').then(function(r){return r.json()}).then(function(data){
+        var prods=(data&&data.products)||[];
+        try{sessionStorage.setItem(K.CK+key,JSON.stringify(prods))}catch(e){}
+        K.addMaps(prods);
+        K.fixLinks(document.querySelector('[data-menu="'+key+'"]'));
+        renderProducts(prods,container);
+      }).catch(function(){container.innerHTML=''});
+    }
+    function init(){
+      MENUS.forEach(function(k){
+        loadMenu(k);
+        var item=document.querySelector('[data-menu="'+k+'"]');
+        if(item)item.addEventListener('mouseenter',function(){
+          var c=cacheOf(k);
+          if(c)renderProducts(c,document.querySelector('[data-menu="'+k+'"] .krika-mega-products'));
+        });
+      });
+    }
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else setTimeout(init,50);
+  })();
+
+  /* ===== BUSCADOR + DRAWER MÓVIL ===== */
+  (function(){
+    var K=window.KRIKA;
+    var INIT=12, ADD=8, LS='krika_recent_searches', WK='krika_wishlist';
+    var CATS=['gafas','perfumes','capilar','skincare','maquillaje','corporal','unas'];
+    var ov=document.getElementById('searchOverlay');
+    var sInput=document.getElementById('searchInput');
+    var btnClear=document.getElementById('btnClear');
+    var sMeta=document.getElementById('searchMeta');
+    var pGrid=document.getElementById('productsGrid');
+    var btnMore=document.getElementById('btnMore');
+    var btnSort=document.getElementById('btnSort');
+    var sortMenu=document.getElementById('sortMenu');
+    var btnFilters=document.getElementById('btnFilters');
+    var drawer=document.getElementById('krikaDrawer');
+    var aPrev=document.getElementById('krSlidePrev');
+    var aNext=document.getElementById('krSlideNext');
+
+    var allProds=[],allLoaded=false,shuffled=[];
+    var state={q:'',sort:'relevance',visible:INIT,loading:false,suggestProds:[],suggestQueries:[]};
+
+    function priceOf(p){
+      if(p._sug)return p._price||0;
+      try{return parseFloat(p.variants[0].price)||0}catch(e){return 0}
+    }
+    function cmpOf(p){
+      if(p._sug)return p._cmp||0;
+      try{var c=parseFloat(p.variants[0].compare_at_price);return isNaN(c)?0:c}catch(e){return 0}
+    }
+    function getWL(){try{return JSON.parse(localStorage.getItem(WK))||[]}catch(e){return[]}}
+    function toggleWL(id){var l=getWL();var i=l.indexOf(id);if(i>-1)l.splice(i,1);else l.push(id);localStorage.setItem(WK,JSON.stringify(l));return l.indexOf(id)>-1}
+
+    function loadAll(cb){
+      if(allLoaded){cb&&cb();return}
+      var c=sessionStorage.getItem(K.AK);
+      if(c){try{allProds=JSON.parse(c);allLoaded=true;K.addMaps(allProds);cb&&cb();return}catch(e){}}
+      fetch('/collections/all/products.json?limit=250').then(function(r){return r.json()}).then(function(d){
+        allProds=(d&&d.products)||[];allLoaded=true;
+        try{sessionStorage.setItem(K.AK,JSON.stringify(allProds))}catch(e){}
+        K.addMaps(allProds);
+        K.fixLinks(document);
+        cb&&cb();
+      }).catch(function(){allLoaded=true;cb&&cb()});
+    }
+
+    function fromSuggest(p){
+      var url=p.url||'';
+      var handle=(url.split('/products/')[1]||'').split('?')[0];
+      return {
+        _sug:true, id:p.id, title:p.title||'', handle:handle,
+        vendor:p.vendor||'', type:p.type||'', tags:p.tags||[],
+        available:p.available!==false,
+        image:p.image||p.featured_image||'',
+        _price:parseFloat(p.price_min!=null?p.price_min:(p.price!=null?p.price:0))||0,
+        _cmp:parseFloat(p.compare_at_price_min!=null?p.compare_at_price_min:(p.compare_at_price!=null?p.compare_at_price:0))||0
+      };
+    }
+
+    var seq=0;
+    function fetchSuggest(q,cb){
+      var my=++seq;
+      state.loading=true;
+      fetch('/search/suggest.json?q='+encodeURIComponent(q)+'&resources[type]=product,query&resources[limit]=24')
+        .then(function(r){return r.json()})
+        .then(function(d){
+          if(my!==seq)return;
+          var res=((d&&d.resources)||{}).results||{};
+          state.suggestProds=(res.products||[]).map(fromSuggest);
+          state.suggestQueries=(res.queries||[]).map(function(x){return x.text});
+          state.loading=false;cb&&cb();
+        })
+        .catch(function(){
+          if(my!==seq)return;
+          state.suggestProds=[];state.suggestQueries=[];state.loading=false;cb&&cb();
+        });
+    }
+
+    function getRecent(){try{return JSON.parse(localStorage.getItem(LS))||[]}catch(e){return[]}}
+    function saveRecent(q){q=(q||'').trim();if(!q)return;
+      var r=getRecent().filter(function(x){return K.norm(x)!==K.norm(q)});r.unshift(q);
+      try{localStorage.setItem(LS,JSON.stringify(r.slice(0,8)))}catch(e){}
+      renderRecent();}
+    function removeRecent(q){
+      var r=getRecent().filter(function(x){return K.norm(x)!==K.norm(q)});
+      try{localStorage.setItem(LS,JSON.stringify(r))}catch(e){}
+      renderRecent();}
+    function clearRecent(){try{localStorage.removeItem(LS)}catch(e){}renderRecent()}
+    function renderRecent(){
+      var el=document.getElementById('recentBox');if(!el)return;
+      var r=getRecent();
+      if(!r.length){el.innerHTML='';return}
+      el.innerHTML='<p class="kr-recent-t">Búsquedas recientes <button type="button" class="kr-rec-clear">Borrar todo</button></p>'+
+        '<div class="kr-chips">'+r.map(function(x){
+          return '<span class="kr-chip" data-q="'+x.replace(/"/g,'&quot;')+'">'+x+'<button type="button" class="kr-chip-x" data-delq="'+x.replace(/"/g,'&quot;')+'" aria-label="Eliminar búsqueda">&times;</button></span>';
+        }).join('')+'</div>';
+    }
+    function renderQuerySugs(){
+      var el=document.getElementById('querySugs');if(!el)return;
+      if(!state.suggestQueries.length||!K.norm(state.q)){el.innerHTML='';return}
+      el.innerHTML='<p class="kr-recent-t">Quizás busques</p><div class="kr-chips">'+
+        state.suggestQueries.slice(0,6).map(function(x){
+          return '<span class="kr-chip kr-chip--sug" data-q="'+x.replace(/"/g,'&quot;')+'">'+x+'</span>';
+        }).join('')+'</div>';
+    }
+
+    function results(){
+      var q=K.norm2(state.q);
+      if(!q)return shuffled.filter(K.ok); /* v9 */
+      var list=[],ids={};
+      state.suggestProds.forEach(function(p){ids[String(p.id)]=1;list.push(p)});
+      allProds.forEach(function(p){
+        if(ids[String(p.id)])return;
+        var hit=K.norm(p.title).indexOf(K.norm(state.q))>-1||
+                K.norm2(p.vendor).indexOf(q)>-1||
+                K.norm2(p.type||p.product_type||'').indexOf(q)>-1||
+                (p.tags||[]).some(function(t){return K.norm(t).indexOf(K.norm(state.q))>-1});
+        if(hit){ids[String(p.id)]=1;list.push(p)}
+      });
+      CATS.forEach(function(k){
+        var nk=K.norm2(k);
+        if(nk.indexOf(q)===-1&&q.indexOf(nk)===-1)return;
+        var c=sessionStorage.getItem(K.CK+k);
+        if(!c)return;
+        try{JSON.parse(c).forEach(function(p){if(!ids[String(p.id)]){ids[String(p.id)]=1;list.push(p)}})}catch(e){}
+      });
+      list=list.filter(K.ok); /* v9: sin stock / sin foto fuera */
+      if(state.sort==='price-asc')list.sort(function(a,b){return priceOf(a)-priceOf(b)});
+      else if(state.sort==='price-desc')list.sort(function(a,b){return priceOf(b)-priceOf(a)});
+      else if(state.sort==='title-asc')list.sort(function(a,b){return (a.title||'').localeCompare(b.title||'')});
+      return list;
+    }
+    function card(p){
+      var id=String(p.id),fav=getWL().indexOf(id)>-1;
+      var pr=priceOf(p),cp=cmpOf(p),hs=cp>pr&&cp>0;
+      var img=K.wurl(K.pimg(p));
+      var ft=null,ta=p.tags||[];
+      for(var t=0;t<ta.length;t++){if(/personalizable|custom|nuevo|new/i.test(ta[t])){ft=ta[t];break}}
+      var href=p.handle?('/products/'+p.handle):(p.url||'#');
+      return '<div class="krika-product-card"><a href="'+href+'" style="display:contents;color:inherit;text-decoration:none"><div class="krika-product-thumb">'+(img?'<img src="'+img+'" alt="" loading="lazy">':'')+'</div></a>'+
+        '<div class="krika-product-info"><span class="krika-product-brand">'+(p.vendor||'').toUpperCase()+'</span>'+
+        '<div class="krika-product-title-row"><a href="'+href+'" class="krika-product-title">'+p.title+'</a>'+
+        '<button type="button" class="krika-wishlist-btn'+(fav?' is-active':'')+'" data-wishlist-btn data-product-id="'+id+'" aria-label="Favoritos"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.1C.5 8.8 2 5 5.5 5c2 0 3.4 1.1 4.2 2.4C10.5 6.1 11.9 5 13.9 5 17.4 5 18.9 8.8 17.4 11.9 15 16.4 12 21 12 21z"/></svg></button></div>'+
+        '<div class="krika-product-prices">'+(hs?'<span class="krika-compare-price">'+K.fmtCOP(cp)+'</span>':'')+'<span class="krika-current-price'+(hs?' is-sale':'')+'">'+K.fmtCOP(pr)+'</span></div>'+
+        (ft?'<div class="krika-product-tag">'+ft+'</div>':'')+'</div></div>';
+    }
+    function updateArrows(){
+      var max=pGrid.scrollWidth-pGrid.clientWidth-4;
+      aPrev.style.opacity=pGrid.scrollLeft<=4?'.35':'1';
+      aNext.style.opacity=pGrid.scrollLeft>=max?'.35':'1';
+    }
+    function render(){
+      var hasQ=!!K.norm(state.q);
+      ov.classList.toggle('has-q',hasQ);
+      if(state.loading){sMeta.innerHTML='Buscando...';}
+      else{
+        var list=results();
+        sMeta.textContent=list.length+' resultado(s)';
+        btnFilters.href='/search'+(hasQ?'?q='+encodeURIComponent(state.q):'');
+        pGrid.innerHTML=list.slice(0,state.visible).map(card).join('')||'<div style="color:#707070;padding:10px 0;grid-column:1/-1">No se encontraron productos.</div>';
+        btnMore.classList.toggle('is-visible',list.length>state.visible);
+        pGrid.scrollLeft=0;
+        requestAnimationFrame(updateArrows);
+      }
+      renderQuerySugs();
+      if(!hasQ)renderRecent();
+    }
+
+    function openSearch(){
+      ov.classList.add('is-open');document.body.classList.add('krika-lock');
+      state.q='';sInput.value='';state.visible=INIT;state.suggestProds=[];state.suggestQueries=[];
+      loadAll(function(){shuffled=K.shuffle(allProds.filter(K.ok));render()}); /* v9 */
+      renderRecent();
+      setTimeout(function(){sInput.focus()},80);
+    }
+    function closeSearch(){ov.classList.remove('is-open');document.body.classList.remove('krika-lock')}
+
+    var trigger=document.getElementById('krikaSearchTrigger');
+    if(trigger){var cl=trigger.cloneNode(true);trigger.parentNode.replaceChild(cl,trigger);
+      cl.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();openSearch()},true);}
+    document.getElementById('btnCloseSearch').addEventListener('click',closeSearch);
+    document.getElementById('btnCloseM').addEventListener('click',closeSearch);
+    ov.addEventListener('click',function(e){if(e.target===ov)closeSearch()});
+    btnClear.addEventListener('click',function(){state.q='';sInput.value='';state.visible=INIT;shuffled=K.shuffle(allProds.filter(K.ok));state.suggestProds=[];state.suggestQueries=[];render();sInput.focus()});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeSearch();drawer.classList.remove('is-open','sub-open');document.body.classList.remove('krika-lock')}});
+
+    var deb;
+    sInput.addEventListener('input',function(){
+      state.q=sInput.value;state.visible=INIT;
+      clearTimeout(deb);
+      deb=setTimeout(function(){
+        if(K.norm(state.q)){fetchSuggest(state.q,render);render();}
+        else{state.suggestProds=[];state.suggestQueries=[];render();}
+      },220);
+    });
+    sInput.addEventListener('keydown',function(e){if(e.key==='Enter')saveRecent(sInput.value)});
+    btnMore.addEventListener('click',function(){state.visible+=ADD;render()});
+
+    aPrev.addEventListener('click',function(){pGrid.scrollBy({left:-pGrid.clientWidth*0.9,behavior:'smooth'})});
+    aNext.addEventListener('click',function(){pGrid.scrollBy({left:pGrid.clientWidth*0.9,behavior:'smooth'})});
+    pGrid.addEventListener('scroll',function(){requestAnimationFrame(updateArrows)},{passive:true});
+    window.addEventListener('resize',updateArrows);
+
+    btnSort.addEventListener('click',function(e){e.stopPropagation();sortMenu.classList.toggle('is-open')});
+    document.addEventListener('click',function(e){
+      if(!sortMenu.contains(e.target)&&e.target!==btnSort)sortMenu.classList.remove('is-open');
+      var del=e.target.closest('.kr-chip-x');
+      if(del){removeRecent(del.getAttribute('data-delq'));return}
+      var chip=e.target.closest('.kr-chip');
+      if(chip){state.q=chip.getAttribute('data-q');sInput.value=state.q;state.visible=INIT;
+        if(K.norm(state.q)){fetchSuggest(state.q,render);render();}else render();
+        return}
+      if(e.target.closest('.kr-rec-clear')){clearRecent();return}
+    });
+    sortMenu.querySelectorAll('button[data-sort]').forEach(function(b){
+      b.addEventListener('click',function(){
+        sortMenu.querySelectorAll('button').forEach(function(x){x.classList.remove('is-selected')});
+        b.classList.add('is-selected');state.sort=b.getAttribute('data-sort');
+        sortMenu.classList.remove('is-open');state.visible=INIT;render();
+      });
+    });
+
+    pGrid.addEventListener('click',function(e){var b=e.target.closest('[data-wishlist-btn]');if(!b)return;e.preventDefault();e.stopPropagation();b.classList.toggle('is-active',toggleWL(b.getAttribute('data-product-id')))});
+
+    /* ===== DRAWER MÓVIL ===== */
+    document.getElementById('krikaBurger').addEventListener('click',function(){drawer.classList.add('is-open');document.body.classList.add('krika-lock')});
+    document.getElementById('krCloseDrawer').addEventListener('click',function(){drawer.classList.remove('is-open','sub-open');document.body.classList.remove('krika-lock')});
+    document.getElementById('krOverlay').addEventListener('click',function(){drawer.classList.remove('is-open','sub-open');document.body.classList.remove('krika-lock')});
+    document.getElementById('krSubBack').addEventListener('click',function(){drawer.classList.remove('sub-open')});
+    document.querySelectorAll('[data-sub]').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var key=btn.getAttribute('data-sub');
+        var title=btn.textContent.trim();
+        var src=document.querySelector('[data-menu="'+key+'"] .krika-mega-left');
+        var cats=src?src.querySelector('.krika-mega-cats'):null;
+        var vermas=src?src.querySelector('.krika-mega-vermas'):null;
+        var hasGroups=cats&&cats.querySelector('h5');
+        document.getElementById('krSubTitle').textContent=title;
+        var body=document.getElementById('krSubBody');
+        var html='<div class="kr-sub-panel"><h4 class="kr-sub-panel-t">'+(hasGroups?'CATEGORÍAS':'MARCAS')+'</h4>';
+        html+=cats?'<div class="kr-sub-cats">'+cats.innerHTML+'</div>':'';
+        html+='<a class="kr-sub-vermas" href="'+((vermas&&vermas.getAttribute('href'))||('/collections/'+key))+'">Ver Todo '+title+'</a></div>';
+        html+='<div class="kr-sub-prods" id="krSubProds"><p class="krika-mega-loading">Cargando...</p></div>';
+        body.innerHTML=html;
+        body.querySelectorAll('.kr-sub-cats .krika-mega-vermas').forEach(function(el){el.remove()});
+        body.querySelectorAll('.kr-sub-cats b').forEach(function(el){if(!el.textContent.trim())el.remove()});
+        K.fixLinks(body);
+        drawer.classList.add('sub-open');
+        var pc=document.getElementById('krSubProds');
+        var done=function(prods){
+          var vis=(prods||[]).filter(K.ok); /* v9 */
+          pc.innerHTML=vis.slice(0,4).map(function(p){
+            var img=K.wurl(K.pimg(p));
+            return '<a class="kr-sub-card" href="/products/'+p.handle+'"><div class="im">'+(img?'<img src="'+img+'" alt="" loading="lazy">':'')+'</div><div class="in"><span class="b">'+(p.vendor||'').toUpperCase()+'</span><div class="n">'+p.title+'</div><div class="p">'+K.fmtCOP(priceOf(p))+'</div></div></a>';
+          }).join('')||'';
+        };
+        var c=sessionStorage.getItem(K.CK+key);
+        if(c){try{done(JSON.parse(c));return}catch(e){}}
+        fetch('/collections/'+key+'/products.json?limit=8').then(function(r){return r.json()}).then(function(d){
+          var prods=(d&&d.products)||[];
+          K.addMaps(prods);K.fixLinks(body);
+          done(prods);
+        }).catch(function(){pc.innerHTML=''});
+      });
+    });
+
+    fetch('/cart.js').then(function(r){return r.json()}).then(function(c){
+      var n=c.item_count||0,el=document.getElementById('khCartCount');
+      if(n>0){el.textContent=n;el.style.display='flex'}
+    }).catch(function(){});
+
+    renderRecent();
+  })();
+  {% endraw %}
+</script>
+
+{% schema %}
+{
+  "name": "Krika Mega Menu",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Krika Mega Menu"
+    }
+  ]
+}
+{% endschema %}

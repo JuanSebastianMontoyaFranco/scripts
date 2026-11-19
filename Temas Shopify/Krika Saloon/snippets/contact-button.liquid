@@ -1,0 +1,307 @@
+<style>
+  /* =========================================
+     1. CONTENEDOR Y BOTÓN FLOTANTE
+     ========================================= */
+  .float-container {
+      position: fixed;
+      right: 20px;
+      z-index: 80; 
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+  }
+  @media screen and (min-width: 706px) {
+      .float-container { bottom: 20px; }
+  }
+  @media screen and (max-width: 705px) {
+      .float-container { bottom: 77px; }
+  }
+  
+  .float {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 60px;
+      height: 60px;
+      background-color: #25d366;
+      color: white !important;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: none; 
+      cursor: pointer;
+      outline: none;
+  }
+  .float:hover {
+      transform: scale(1.1);
+  }
+  .my-float {
+      margin-top: 0;
+  }
+
+  /* =========================================
+     2. TOOLTIP ANIMADO
+     ========================================= */
+  .whatsapp-tooltip {
+      background-color: #4a4a4a;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      margin-right: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(10px);
+      animation: showAndHide 6s forwards; 
+      animation-delay: 3s;
+  }
+  
+  @keyframes showAndHide {
+      0% { opacity: 0; visibility: hidden; transform: translateX(10px); }
+      10% { opacity: 1; visibility: visible; transform: translateX(0); }
+      90% { opacity: 1; visibility: visible; transform: translateX(0); }
+      100% { opacity: 0; visibility: hidden; transform: translateX(0); }
+  }
+
+  /* =========================================
+     3. MENÚ DESPLEGABLE INTERACTIVO (NUEVO)
+     ========================================= */
+  .wa-popup-menu {
+      position: absolute;
+      bottom: 80px; 
+      right: 0;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+      width: 260px;
+      overflow: hidden;
+      border: 1px solid #eaeaea;
+      
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px) scale(0.95);
+      transform-origin: bottom right;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .wa-popup-menu.is-active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+  }
+
+  /* Estilos de Paneles */
+  .wa-panel {
+      display: none; /* Ocultos por defecto */
+      animation: fadeIn 0.3s ease;
+  }
+  .wa-panel.is-active {
+      display: block; /* Solo se muestra el activo */
+  }
+
+  @keyframes fadeIn {
+      from { opacity: 0; transform: translateX(10px); }
+      to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* Cabeceras */
+  .wa-popup-header {
+      background: #50c878; /* Mismo verde esmeralda de tu captura */
+      color: #ffffff;
+      padding: 14px 16px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+  }
+
+  .wa-back-btn {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 16px;
+      padding: 5px;
+      color: #ffffff;
+  }
+
+  /* Botones de Opciones */
+  .wa-option {
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      text-decoration: none;
+      color: #333333;
+      font-family: inherit;
+      border-bottom: 1px solid #f0f0f0;
+      transition: background 0.2s ease;
+      cursor: pointer;
+      background: transparent;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      width: 100%;
+      text-align: left;
+  }
+  
+  .wa-option:last-child {
+      border-bottom: none;
+  }
+  
+  .wa-option:hover {
+      background: #f9f9f9;
+  }
+
+  .wa-option-title {
+      font-size: 15px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+  }
+  
+  .wa-option-title i {
+      color: #50c878;
+      font-size: 18px;
+      width: 20px;
+      text-align: center;
+  }
+
+  .wa-option-subtitle {
+      font-size: 13px;
+      color: #777777;
+      margin-top: 4px;
+      padding-left: 30px; 
+  }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div class="float-container">
+    
+    <div class="whatsapp-tooltip" id="waTooltip">
+        Compra por WhatsApp
+    </div>
+    
+    <div class="wa-popup-menu" id="waPopupMenu">
+        
+        <div class="wa-panel is-active" id="wa-panel-main">
+            <div class="wa-popup-header">¿Con qué sede quieres hablar?</div>
+            
+            <button type="button" class="wa-option" onclick="waShowPanel('wa-panel-oeste')">
+                <span class="wa-option-title"><i class="fa-solid fa-location-dot"></i> Sede Oeste</span>
+                <span class="wa-option-subtitle">Ver áreas de atención</span>
+            </button>
+            
+            <button type="button" class="wa-option" onclick="waShowPanel('wa-panel-sur')">
+                <span class="wa-option-title"><i class="fa-solid fa-location-dot"></i> Sede Sur</span>
+                <span class="wa-option-subtitle">Ver áreas de atención</span>
+            </button>
+        </div>
+
+        <div class="wa-panel" id="wa-panel-oeste">
+            <div class="wa-popup-header">
+                <i class="fa-solid fa-chevron-left wa-back-btn" onclick="waShowPanel('wa-panel-main')"></i>
+                Sede Oeste
+            </div>
+            
+            <a href="https://wa.me/573173673878" target="_blank" class="wa-option">
+                <span class="wa-option-title"><i class="fa-solid fa-scissors"></i> Peluquería / Tienda</span>
+            </a>
+            
+            <a href="https://wa.me/573183724354" target="_blank" class="wa-option">
+                <span class="wa-option-title"><i class="fa-solid fa-spa"></i> Spa</span>
+            </a>
+        </div>
+
+        <div class="wa-panel" id="wa-panel-sur">
+            <div class="wa-popup-header">
+                <i class="fa-solid fa-chevron-left wa-back-btn" onclick="waShowPanel('wa-panel-main')"></i>
+                Sede Sur
+            </div>
+            
+            <a href="https://wa.me/573164891693" target="_blank" class="wa-option">
+                <span class="wa-option-title"><i class="fa-solid fa-scissors"></i> Peluquería / Tienda</span>
+            </a>
+            
+            <a href="https://wa.me/573163667037" target="_blank" class="wa-option">
+                <span class="wa-option-title"><i class="fa-solid fa-spa"></i> Spa</span>
+            </a>
+        </div>
+
+    </div>
+    
+    <button class="float" id="waButtonToggle" aria-label="Abrir menú de WhatsApp">
+        <i class="fa-brands fa-whatsapp my-float"></i>
+    </button>
+</div>
+
+<script>
+  // Función para cambiar entre paneles internos
+  function waShowPanel(panelId) {
+      document.querySelectorAll('.wa-panel').forEach(function(panel) {
+          panel.classList.remove('is-active');
+      });
+      document.getElementById(panelId).classList.add('is-active');
+  }
+
+  // Función principal para abrir el menú
+  function openWaMenu(e) {
+      if(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      const waMenu = document.getElementById('waPopupMenu');
+      const waTooltip = document.getElementById('waTooltip');
+      
+      waMenu.classList.add('is-active'); // Fuerza a abrirlo
+      if (waTooltip) waTooltip.style.display = 'none';
+      waShowPanel('wa-panel-main'); // Asegura que empiece en el paso 1
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    const waButton = document.getElementById('waButtonToggle');
+    const waMenu = document.getElementById('waPopupMenu');
+    
+    if(waButton && waMenu) {
+      
+      // 1. Abrir al darle clic al botón flotante normal
+      waButton.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (waMenu.classList.contains('is-active')) {
+            waMenu.classList.remove('is-active');
+        } else {
+            openWaMenu(e);
+        }
+      });
+
+      // 2. NUEVO: Abrir desde cualquier banner o botón que tenga el enlace "#contacto"
+      document.querySelectorAll('a[href="#contacto"]').forEach(function(enlaceMagico) {
+        enlaceMagico.addEventListener('click', openWaMenu);
+      });
+
+      // 3. Cerrar el menú al hacer clic afuera
+      document.addEventListener('click', function(e) {
+        if (!waMenu.contains(e.target) && !waButton.contains(e.target)) {
+          waMenu.classList.remove('is-active');
+          setTimeout(() => { waShowPanel('wa-panel-main'); }, 300);
+        }
+      });
+      
+    }
+  });
+</script>

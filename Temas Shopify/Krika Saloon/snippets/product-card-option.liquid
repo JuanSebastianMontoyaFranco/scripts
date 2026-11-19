@@ -1,0 +1,161 @@
+{%- liquid
+  assign pcard_picker_type = settings.pcard_option_design | default: 'color'
+  assign image_size = 80
+  assign product_handle = product.handle
+  case pcard_alignment
+    when 'left'
+      assign alignment = 'start'
+    when 'right'
+      assign alignment = 'end'
+    else
+      assign alignment = 'center'
+  endcase
+
+  assign pcard_names = settings.pcard_option_name | append: ',tono,color' | downcase | split: ','
+  assign match = false
+  assign match_name = ''
+  for option in product.options_with_values
+    assign option_name = option.name | downcase | strip
+    if match == false and pcard_names contains option_name
+      assign match = true
+      assign match_name = option_name
+    endif
+  endfor
+
+  assign has_filters_value = false
+  for filter in context.filters
+    if filter.active_values.size > 0
+      assign has_filters_value = true
+    endif
+  endfor
+
+  assign pcard_keep_featured_image = settings.pcard_keep_featured_image
+  if has_filters_value
+    assign pcard_keep_featured_image = false
+  endif
+-%}
+
+{% if match %}
+  <div
+    data-limit="{{ values_limit }}"
+    data-pcard-variant-picker
+    data-product-handle="{{ product.handle }}"
+  >
+    <pcard-swatch
+      data-keep-featured-image="{{ pcard_keep_featured_image }}"
+      class="m-product-option m-product-option--{{ pcard_picker_type }} m:flex-wrap m:items-center m:justify-{{ alignment }}"
+    >
+      {%- for option in product.options_with_values -%}
+        {%- liquid
+          assign option_name = option.name | downcase | strip
+
+          assign values_limit = settings.pcard_limit_values_number
+          assign rest_values = 0
+
+          if values_limit == 0
+            assign values_limit = 99
+          elsif option.values.size > values_limit
+            assign rest_values = option.values.size | minus: values_limit
+          endif
+        -%}
+        {% if option_name == match_name %}
+          <div class="m-product-option--content m:inline-flex m:flex-wrap">
+                {% for value in option.values %}
+                  {% liquid
+                    assign selected_variant = value.variant
+                    for variant in product.variants
+                      if variant.available and variant.options contains value
+                        assign selected_variant = variant
+                      endif
+                    endfor
+
+                    assign label_class = 'm-product-option--node__label'
+                    assign style = ''
+                    assign var_img = selected_variant.image | default: selected_variant.featured_image
+                    assign value_downcase = value | downcase | strip
+
+                    if pcard_picker_type == 'image' and var_img != blank
+                      assign image_url = var_img | image_url: width: image_size
+                      assign style = 'background-image: url(' | append: image_url | append: ');'
+                      assign label_class = label_class | append: ' has-bg-img'
+                    elsif value.swatch.image
+                      assign image_url = value.swatch.image | image_url: width: image_size
+                      assign style = 'background-image: url(' | append: image_url | append: ');'
+                      assign label_class = label_class | append: ' has-bg-img'
+                    elsif value.swatch.color
+                      assign style = 'background-color: rgb(' | append: value.swatch.color.rgb | append: ');'
+                    else
+                      assign selected_color = ''
+                      assign product_colors = settings.product_colors | split: ','
+                      for product_color in product_colors
+                        assign color_parts = product_color | strip | split: ':'
+                        assign color_name = color_parts.first | downcase | strip
+                        if color_name == value_downcase
+                          assign selected_color = color_parts.last | strip
+                        endif
+                      endfor
+
+                      if selected_color == blank
+                        assign selected_color = value_downcase | split: ' ' | last | handle
+                      endif
+                      assign style = 'background-color: ' | append: selected_color | append: ';'
+                    endif
+                  %}
+                  {%- if forloop.index0 < values_limit -%}
+                    <div class="m-product-option--node m-tooltip m-tooltip--top">
+                      <div class="m-product-option__option m:display-flex m:items-center m:justify-center">
+                        <label
+                          {% if option.selected_value == value and pcard_keep_featured_image == false %}
+                            data-selected="true"
+                          {% endif %}
+                          class="{{ label_class }} kf-pcard-swatch"
+                          data-option-position="{{ option.position }}"
+                          data-option-type="{{ pcard_picker_type }}"
+                          data-value="{{- value | escape -}}"
+                          style="{{ style }}"
+                        >
+                          <span class="m:visually-hidden">{{- value -}}</span>
+                        </label>
+                      </div>
+                      <span class="m-tooltip__content">{{- value -}}</span>
+                    </div>
+                  {%- endif -%}
+                {% endfor %}
+
+                {% if rest_values > 0 %}
+                  <div
+                    class="m-product-option--node__label m-product-option--more-option m-product-quickview-button m-spinner-button"
+                    data-product-handle="{{ product_handle }}"
+                  >
+                    <span class="m-spinner-icon">
+                      <svg
+                        class="animate-spin m-svg-icon--medium"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                      >
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                    </span>
+                    <div class="m-tooltip m-tooltip--style-2 m-tooltip--top">
+                      <span class="text-base">+{{ rest_values }}</span>
+                      <span class="m-tooltip__content">
+                        {% render 'new-locale',
+                          key: 'products.product.see_more_options',
+                          param: '{{ count }}',
+                          value: rest_values
+                        %}
+                      </span>
+                    </div>
+                  </div>
+                {% endif %}
+          </div>
+        {% endif %}
+      {%- endfor -%}
+    </pcard-swatch>
+    <script type="application/json">
+      {{ product.variants | json }}
+    </script>
+  </div>
+{% endif %}

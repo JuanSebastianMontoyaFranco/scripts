@@ -1,0 +1,133 @@
+{% for block in header.blocks %}
+  {% liquid
+    assign show_phone_numb = block.settings.show_phone_numb
+    assign show_email = block.settings.show_email
+    assign show_social_links = block.settings.show_social_links
+    assign show_stores_page = block.settings.show_stores_page
+    assign show_language_switcher = block.settings.show_language_switcher
+    assign show_currency_switcher = block.settings.show_currency_switcher
+    assign show_country_selector = block.settings.show_country_selector
+    assign show_divider = block.settings.show_divider
+    assign message = block.settings.alert_message
+    assign container = section.settings.container
+    assign transparent_on_top = block.settings.transparent_on_top
+
+    if container == 'w-full'
+      assign container = 'container-full'
+    endif
+  %}
+  {% if block.type == 'topbar' %}
+    <div class="m-topbar{% if show_divider %} m-topbar--show-divider{% endif %}{% unless transparent_on_top %} m-gradient m-color-{{ block.settings.color_scheme }}{% else %} transparent-on-top{% endunless %}">
+      <div class="{{ container }}">
+        <div class="m-topbar__inner m:flex m:justify-between m:items-center">
+          <div class="m-topbar__left m:w-4/12 m:flex m:items-center">
+            {% if message != blank %}
+            <div class="m-topbar__center m:flex m:items-center m:justify-center">{{ message }}</div>
+            {% endif %}
+            {% if show_social_links %}
+              {% render 'social-media-links', show_label: true %}
+            {% endif %}
+            {% if show_phone_numb %}
+              <a href="tel:{{ settings.contact_phone_number }}" class="m-topbar__link m-topbar__phone">
+                <svg
+                  class="m-svg-icon"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                >
+                  <path fill="currentColor" d="M493.09 351.3L384.7 304.8a31.36 31.36 0 0 0-36.5 8.9l-44.1 53.9A350 350 0 0 1 144.5 208l53.9-44.1a31.35 31.35 0 0 0 8.9-36.49l-46.5-108.5A31.33 31.33 0 0 0 125 .81L24.2 24.11A31.05 31.05 0 0 0 0 54.51C0 307.8 205.3 512 457.49 512A31.23 31.23 0 0 0 488 487.7L511.19 387a31.21 31.21 0 0 0-18.1-35.7zM456.89 480C222.4 479.7 32.3 289.7 32.1 55.21l99.6-23 46 107.39-72.8 59.5C153.3 302.3 209.4 358.6 313 407.2l59.5-72.8 107.39 46z" class=""></path>
+                </svg>
+                <span>{{ settings.contact_phone_number }}</span>
+              </a>
+            {% endif %}
+            {% if show_email %}
+              <a href="mailto:{{ settings.contact_email }}" class="m-topbar__link m-topbar__mail">
+                <svg
+                  class="m-svg-icon"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                >
+                  <path d="M464 64H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V112c0-26.51-21.49-48-48-48zm0 48v40.805c-22.422 18.259-58.168 46.651-134.587 106.49-16.841 13.247-50.201 45.072-73.413 44.701-23.208.375-56.579-31.459-73.413-44.701C106.18 199.465 70.425 171.067 48 152.805V112h416zM48 400V214.398c22.914 18.251 55.409 43.862 104.938 82.646 21.857 17.205 60.134 55.186 103.062 54.955 42.717.231 80.509-37.199 103.053-54.947 49.528-38.783 82.032-64.401 104.947-82.653V400H48z"/>
+                </svg>
+                <span>{{ settings.contact_email }}</span>
+              </a>
+            {% endif %}
+          </div>
+          {% comment %}
+          {% if message != blank %}
+            <div class="m-topbar__center m:w-4/12 m:flex m:items-center m:justify-center">{{ message }}</div>
+          {% endif %}
+          {%  endcomment %}
+          <div class="m-topbar__right m:w-4/12 m:flex m:items-center m:justify-end">
+            {% if show_stores_page %}
+              <a
+                href="{{ pages[settings.find_store].url | default: '#' }}"
+                class="m-topbar__link m-topbar__store"
+              >
+                <svg
+                  class="m-svg-icon"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 384 512"
+                >
+                  <path d="M192 96c-52.935 0-96 43.065-96 96s43.065 96 96 96 96-43.065 96-96-43.065-96-96-96zm0 160c-35.29 0-64-28.71-64-64s28.71-64 64-64 64 28.71 64 64-28.71 64-64 64zm0-256C85.961 0 0 85.961 0 192c0 77.413 26.97 99.031 172.268 309.67 9.534 13.772 29.929 13.774 39.465 0C357.03 291.031 384 269.413 384 192 384 85.961 298.039 0 192 0zm0 473.931C52.705 272.488 32 256.494 32 192c0-42.738 16.643-82.917 46.863-113.137S149.262 32 192 32s82.917 16.643 113.137 46.863S352 149.262 352 192c0 64.49-20.692 80.47-160 281.931z"/>
+                </svg>
+                <span>{{ 'pages.find_a_store' | t }}</span>
+              </a>
+            {% endif %}
+
+            {% comment %} CATALOG {% endcomment %}
+              <a
+                  href="/collections/all"
+                  class="m-topbar__link m-topbar__store noTablet"
+              >
+                  <svg class="m-svg-icon" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 12c.263 0 .524-.06.767-.175a2 2 0 0 0 .65-.491c.186-.21.333-.46.433-.734.1-.274.15-.568.15-.864a2.4 2.4 0 0 0 .586 1.591c.375.422.884.659 1.414.659.53 0 1.04-.237 1.414-.659A2.4 2.4 0 0 0 12 9.736a2.4 2.4 0 0 0 .586 1.591c.375.422.884.659 1.414.659.53 0 1.04-.237 1.414-.659A2.4 2.4 0 0 0 16 9.736c0 .295.052.588.152.861s.248.521.434.73a2 2 0 0 0 .649.488 1.809 1.809 0 0 0 1.53 0 2.03 2.03 0 0 0 .65-.488c.185-.209.332-.457.433-.73.1-.273.152-.566.152-.861 0-.974-1.108-3.85-1.618-5.121A.983.983 0 0 0 17.466 4H6.456a.986.986 0 0 0-.93.645C5.045 5.962 4 8.905 4 9.736c.023.59.241 1.148.611 1.567.37.418.865.667 1.389.697Zm0 0c.328 0 .651-.091.94-.266A2.1 2.1 0 0 0 7.66 11h.681a2.1 2.1 0 0 0 .718.734c.29.175.613.266.942.266.328 0 .651-.091.94-.266.29-.174.537-.427.719-.734h.681a2.1 2.1 0 0 0 .719.734c.289.175.612.266.94.266.329 0 .652-.091.942-.266.29-.174.536-.427.718-.734h.681c.183.307.43.56.719.734.29.174.613.266.941.266a1.819 1.819 0 0 0 1.06-.351M6 12a1.766 1.766 0 0 1-1.163-.476M5 12v7a1 1 0 0 0 1 1h2v-5h3v5h7a1 1 0 0 0 1-1v-7m-5 3v2h2v-2h-2Z"></path>
+                  </svg>
+                  <span>{{ 'pages.shop_all' | t }}</span>
+              </a>
+              {% comment %} TRACK ORDER {% endcomment %}         
+              <a
+                  href="/pages/track-order"
+                  class="m-topbar__link m-topbar__store"
+              >
+                  <svg class="m-svg-icon" width="20" height="20" style="width:17px;height:30px" fill="currentColor" stroke="currentColor" stroke-width="0.015" viewBox="0 0 0.75 0.75" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.388 0.3a0.012 0.012 0 0 0 -0.009 0.003l-0.067 0.067L0.271 0.33C0.26 0.319 0.241 0.337 0.253 0.348l0.05 0.05a0.012 0.012 0 0 0 0.018 0L0.397 0.322A0.012 0.012 0 0 0 0.388 0.301zM0.013 0.4H0.089a0.012 0.012 0 1 1 0 0.024H0.012a0.012 0.012 0 1 1 0 -0.024zm0 -0.1H0.089a0.012 0.012 0 1 1 0 0.024H0.012a0.012 0.012 0 1 1 0 -0.024zm0 -0.1H0.089a0.012 0.012 0 1 1 0 0.024H0.012a0.012 0.012 0 1 1 0 -0.024zm0.6 0.274C0.578 0.474 0.55 0.502 0.55 0.538S0.578 0.6 0.612 0.6 0.676 0.572 0.676 0.538 0.648 0.474 0.612 0.474zm0 0.024C0.633 0.5 0.65 0.517 0.65 0.538S0.633 0.576 0.612 0.576 0.576 0.559 0.576 0.538 0.591 0.5 0.612 0.5zM0.288 0.474C0.253 0.474 0.224 0.503 0.224 0.538S0.252 0.6 0.287 0.6 0.35 0.572 0.35 0.538 0.322 0.474 0.288 0.474zm0 0.024C0.309 0.5 0.324 0.517 0.324 0.538S0.309 0.576 0.288 0.576 0.25 0.559 0.25 0.538 0.267 0.5 0.288 0.5zM0.162 0.15a0.038 0.038 0 0 0 -0.037 0.038v0.274c0 0.02 0.017 0.038 0.037 0.038h0.05c0.018 0 0.018 -0.026 0 -0.026H0.162A0.012 0.012 0 0 1 0.15 0.462V0.188C0.15 0.18 0.156 0.176 0.162 0.176h0.324C0.496 0.176 0.5 0.18 0.5 0.188v0.288H0.362C0.347 0.474 0.347 0.5 0.362 0.5h0.176c0.016 0 0.016 -0.026 0 -0.026H0.524V0.25h0.107l0.093 0.148v0.064c0 0.008 -0.004 0.012 -0.012 0.012H0.688C0.671 0.474 0.671 0.5 0.688 0.5h0.024A0.038 0.038 0 0 0 0.75 0.462V0.393A0.012 0.012 0 0 0 0.748 0.388L0.648 0.231A0.012 0.012 0 0 0 0.638 0.224H0.524V0.188A0.038 0.038 0 0 0 0.488 0.15z"></path>
+                  </svg>
+                  <span>{{ 'pages.track_order' | t }}</span>
+              </a>
+              {% comment %} PQRSF
+              <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSc4tFraIM4dXL2i_8Zqk3nBufW7k3K-AP2S1l-EEXn_HqQHOw/viewform"
+                  class="m-topbar__link m-topbar__store"
+                  target="_blank"
+              >
+                  <svg class="w-[20px] h-[20px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M18 5V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5M9 3v4a1 1 0 0 1-1 1H4m11.383.772 2.745 2.746m1.215-3.906a2.089 2.089 0 0 1 0 2.953l-6.65 6.646L9 17.95l.739-3.692 6.646-6.646a2.087 2.087 0 0 1 2.958 0Z"/>
+                  </svg>
+                  <span>PQRSF</span>
+              </a>
+             comment END-CUSTOM {% endcomment %}
+
+            {% liquid
+              if show_country_selector
+                render 'country-selector'
+              endif
+              if show_language_switcher
+                render 'language-switcher'
+              endif
+
+              if show_currency_switcher
+                render 'currency-switcher'
+              endif
+            %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% break %}
+  {% endif %}
+{% endfor %}

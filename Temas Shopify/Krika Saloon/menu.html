@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Cabecera y Buscador Shopify — Grid/Lista + Paginación</title>
+    <style>
+        :root {
+            --font-main: inherit;
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --text-muted: #707070;
+            --border-color: #000000;
+            --card-bg: #f5f5f5;
+            --shimmer-base: #ececec;
+            --shimmer-shine: #f9f9f9;
+            --accent: #000000;
+            --sale-color: #c0392b;
+            --wishlist-active: #c0392b;
+            --divider-color: #eaeaea;
+        }
+
+        .krika-search-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh; height: 100dvh;
+            background: var(--bg-color);
+            z-index: 999999;
+            display: none;
+            flex-direction: column;
+            overflow-y: auto;
+            font-family: var(--font-main);
+        }
+        .krika-search-overlay.is-open { display: flex; }
+
+        .krika-search-inner {
+            width: 100%; min-height: 100%;
+            padding: 30px 40px;
+            display: flex; flex-direction: column;
+        }
+
+        .krika-search-top-bar {
+            width: 100%;
+            display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+            position: relative;
+        }
+        .krika-search-input {
+            width: 100%; border: none; outline: none;
+            font-size: 24px; font-family: inherit;
+            background: transparent; color: var(--text-color);
+            padding-right: 90px; font-weight: 300;
+        }
+        .krika-search-input::placeholder { color: #b0b0b0; }
+
+        .krika-btn-clear {
+            position: absolute; right: 45px;
+            background: none; border: none;
+            font-size: 13px; text-decoration: underline;
+            color: var(--text-color); cursor: pointer; display: none;
+        }
+        .krika-btn-close {
+            background: none; border: none;
+            font-size: 28px; cursor: pointer;
+            color: var(--text-color); line-height: 1;
+        }
+
+        .krika-search-meta-bar {
+            margin-top: 12px;
+            font-size: 13px; color: var(--text-muted);
+            min-height: 20px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .krika-spinner {
+            width: 14px; height: 14px;
+            border: 2px solid #dcdcdc;
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            display: inline-block;
+            animation: krika-spin 0.6s linear infinite;
+        }
+        @keyframes krika-spin { to { transform: rotate(360deg); } }
+
+        /* === BARRA ORDENAR / VISTA / FILTROS === */
+        .krika-search-toolbar {
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            margin-top: 14px;
+            border-bottom: 1px solid var(--divider-color);
+            font-size: 13px;
+        }
+        .krika-search-toolbar.is-visible { display: flex; }
+
+        .krika-toolbar-btn {
+            background: none; border: none; cursor: pointer;
+            font-size: 13px; color: var(--text-color);
+            text-decoration: none; padding: 0; font-family: inherit;
+        }
+        .krika-toolbar-btn:hover { opacity: 0.6; }
+
+        .krika-toolbar-right { display: flex; align-items: center; gap: 16px; }
+
+        /* --- Botón doble GRID / LISTA --- */
+        .krika-view-toggle {
+            display: flex;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .krika-view-btn {
+            background: none; border: none;
+            padding: 6px 9px; cursor: pointer;
+            color: var(--text-color);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .krika-view-btn + .krika-view-btn { border-left: 1px solid var(--border-color); }
+        .krika-view-btn svg { width: 14px; height: 14px; fill: currentColor; display: block; }
+        .krika-view-btn.is-active { background: var(--text-color); color: var(--bg-color); }
+
+        .krika-sort-wrap { position: relative; }
+        .krika-sort-menu {
+            position: absolute; top: calc(100% + 12px); left: 0;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            min-width: 210px;
+            display: none; flex-direction: column;
+            z-index: 20;
+        }
+        .krika-sort-menu.is-open { display: flex; }
+        .krika-sort-menu button {
+            background: none; border: none; text-align: left;
+            padding: 11px 16px; font-size: 13px;
+            cursor: pointer; font-family: inherit; color: var(--text-color);
+        }
+        .krika-sort-menu button:hover,
+        .krika-sort-menu button.is-selected { background: var(--card-bg); }
+
+        .krika-search-content-body {
+            width: 100%; margin-top: 25px;
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 40px;
+            flex-grow: 1;
+        }
+
+        .krika-suggestions-col h4 {
+            font-size: 13px; font-weight: 500;
+            color: var(--text-muted); margin-bottom: 20px;
+        }
+        .krika-suggestions-list {
+            list-style: none; padding: 0; margin: 0;
+            display: flex; flex-direction: column; gap: 14px;
+        }
+        .krika-suggestions-list a {
+            text-decoration: none; color: var(--text-color);
+            font-size: 14px; transition: opacity 0.2s;
+        }
+        .krika-suggestions-list a:hover { opacity: 0.5; }
+
+        /* === GRID DE PRODUCTOS (sin scroll: paginado con botones) === */
+        .krika-products-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .krika-product-card {
+            text-decoration: none; color: var(--text-color);
+            display: flex; flex-direction: column;
+            animation: krika-fade-in 0.35s ease both;
+        }
+        @keyframes krika-fade-in {
+            from { opacity: 0; transform: translateY(6px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .krika-product-thumb {
+            width: 100%; aspect-ratio: 1 / 1;
+            background: var(--card-bg);
+            margin-bottom: 10px;
+            overflow: hidden; position: relative;
+        }
+        .krika-product-thumb img {
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: center;
+            display: block; transition: transform 0.3s ease;
+        }
+        .krika-product-card:hover .krika-product-thumb img { transform: scale(1.04); }
+
+        .krika-product-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+        .krika-product-title-row {
+            display: flex; justify-content: space-between;
+            align-items: flex-start; gap: 8px;
+        }
+        .krika-product-title { font-size: 13px; font-weight: 400; line-height: 1.3; }
+
+        .krika-wishlist-btn {
+            background: none; border: none; cursor: pointer;
+            padding: 0; flex-shrink: 0; color: var(--text-color); line-height: 0;
+        }
+        .krika-wishlist-btn svg {
+            width: 16px; height: 16px;
+            fill: none; stroke: currentColor; stroke-width: 1.5px;
+            transition: fill 0.2s, stroke 0.2s, transform 0.2s;
+        }
+        .krika-wishlist-btn:hover svg { transform: scale(1.12); }
+        .krika-wishlist-btn.is-active svg { fill: var(--wishlist-active); stroke: var(--wishlist-active); }
+
+        .krika-product-prices { font-size: 13px; font-weight: 600; }
+        .krika-compare-price {
+            text-decoration: line-through;
+            color: var(--text-muted); font-weight: 400; margin-right: 6px;
+        }
+        .krika-current-price.is-sale { color: var(--sale-color); }
+        .krika-product-tag {
+            font-size: 10.5px; letter-spacing: 0.04em;
+            text-transform: uppercase; color: var(--text-muted); margin-top: 2px;
+        }
+
+        /* === VISTA LISTA (se activa con el botón) === */
+        .krika-products-grid.view-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .view-list .krika-product-card {
+            flex-direction: row;
+            align-items: center;
+            gap: 16px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--divider-color);
+        }
+        .view-list .krika-product-thumb {
+            width: 96px; height: 96px;
+            margin-bottom: 0; flex-shrink: 0;
+        }
+        .view-list .krika-product-info { flex: 1; }
+        .view-list .krika-product-title { font-size: 14px; }
+        .view-list .krika-product-prices { font-size: 14px; }
+
+        /* === PAGINACIÓN CON BOTONES === */
+        .krika-pagination {
+            display: none;
+            justify-content: center; align-items: center;
+            gap: 14px; margin-top: 24px;
+        }
+        .krika-pagination.is-visible { display: flex; }
+        .krika-page-btn {
+            width: 38px; height: 38px; border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color); color: var(--text-color);
+            cursor: pointer; font-size: 17px; line-height: 1;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s, color 0.2s, opacity 0.2s;
+        }
+        .krika-page-btn:not(:disabled):hover { background: var(--text-color); color: var(--bg-color); }
+        .krika-page-btn:disabled { opacity: 0.25; cursor: default; }
+        .krika-page-info { font-size: 12px; color: var(--text-muted); min-width: 44px; text-align: center; }
+
+        /* === SKELETON / SHIMMER === */
+        .krika-skeleton-card { display: flex; flex-direction: column; }
+        .krika-skeleton-body { display: flex; flex-direction: column; }
+        .krika-skeleton-thumb,
+        .krika-skeleton-line {
+            border-radius: 4px;
+            background: linear-gradient(100deg, var(--shimmer-base) 30%, var(--shimmer-shine) 50%, var(--shimmer-base) 70%);
+            background-size: 200% 100%;
+            animation: krika-shimmer 1.2s ease-in-out infinite;
+        }
+        .krika-skeleton-thumb { width: 100%; aspect-ratio: 1 / 1; margin-bottom: 10px; }
+        .krika-skeleton-line { height: 11px; margin-bottom: 6px; }
+        .krika-skeleton-line.short { width: 55%; }
+        @keyframes krika-shimmer {
+            0%   { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        .krika-skeleton-suggestion {
+            height: 12px; width: 80%; border-radius: 3px;
+            background: linear-gradient(100deg, var(--shimmer-base) 30%, var(--shimmer-shine) 50%, var(--shimmer-base) 70%);
+            background-size: 200% 100%;
+            animation: krika-shimmer 1.2s ease-in-out infinite;
+            margin-bottom: 14px;
+        }
+        .krika-skeleton-suggestion:nth-child(2) { width: 60%; animation-delay: 0.05s; }
+        .krika-skeleton-suggestion:nth-child(3) { width: 70%; animation-delay: 0.1s; }
+        .krika-skeleton-suggestion:nth-child(4) { width: 50%; animation-delay: 0.15s; }
+
+        /* Skeleton en vista lista */
+        .view-list .krika-skeleton-card {
+            flex-direction: row; align-items: center; gap: 16px;
+            padding: 14px 0; border-bottom: 1px solid var(--divider-color);
+        }
+        .view-list .krika-skeleton-thumb { width: 96px; height: 96px; margin-bottom: 0; flex-shrink: 0; }
+        .view-list .krika-skeleton-body { flex: 1; }
+
+        @media (max-width: 1024px) {
+            .krika-products-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .krika-search-inner { padding: 20px 16px; }
+            .krika-search-input { font-size: 18px; }
+            .krika-search-content-body { grid-template-columns: 1fr; gap: 24px; margin-top: 20px; }
+            .krika-suggestions-col { display: none; }
+            .krika-products-grid { grid-template-columns: repeat(2, 1fr); gap: 16px 10px; }
+
+            /* Cards móviles limpias */
+            .krika-product-thumb { background: #fff; }
+            .krika-product-thumb img { object-fit: contain; padding: 6px; box-sizing: border-box; }
+            .krika-product-title {
+                font-size: 11px; text-transform: uppercase; line-height: 1.3;
+                display: -webkit-box; -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical; overflow: hidden; min-height: 2.6em;
+            }
+            .krika-product-prices { font-size: 11px; font-weight: 700; }
+
+            .view-list .krika-product-thumb { width: 84px; height: 84px; }
+            .view-list .krika-skeleton-thumb { width: 84px; height: 84px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- === CABECERA === -->
+    <div class="m-header__inner" style="display:flex; justify-content:space-between; align-items:center; padding: 15px; border-bottom: 1px solid #eee;">
+        <div class="m-header__left m:w-2/5">
+          <span>
+            <a href="/pages/services" class="m-header__icon-location" aria-label="Servicios" style="font-size: calc(var(--font-base-size, 16) * 1px);font-weight:bold; padding: 14px 18px; text-transform: uppercase;">
+              Servicios
+            </a>
+          </span>
+          <span>
+            <a href="/collections/all" class="m-header__icon-location" aria-label="Productos" style="font-size: calc(var(--font-base-size, 16) * 1px);font-weight:bold; padding: 14px 18px; text-transform: uppercase;">
+              Productos
+            </a>
+          </span>
+        </div>
+        <div class="m-header__center m:w-1/5" style="text-align: center;">
+            <h1 class="m-header__logo m-logo m-logo--has-image">
+              <a href="/" class="m-logo__image m:block" title="Krika Salon">
+                  <div class="m-logo__image-default m-image">
+                      <img src="//cdn.shopify.com/s/files/1/0719/4027/6375/files/logo-krika-salon.png?v=1775796192" alt="Krika Salon" width="150" class="m:inline-block">
+                  </div>
+              </a>
+            </h1>
+        </div>
+        <div class="m-header__right m:w-2/5" style="display:flex; justify-content:flex-end; gap: 15px; align-items: center;">
+          <div class="krika-search-trigger-wrap m:flex m:items-center">
+              <button type="button" id="krikaSearchTrigger" aria-label="¿Qué estás buscando?" style="background:none;border:none;cursor:pointer;">
+                <span class="m-tooltip m:block m-tooltip--bottom m-tooltip--style-2">
+                  <svg width="20" height="20" fill="currentColor" stroke="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path d="M508.5 468.9L387.1 347.5c-2.3-2.3-5.3-3.5-8.5-3.5h-13.2c31.5-36.5 50.6-84 50.6-136C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c52 0 99.5-19.1 136-50.6v13.2c0 3.2 1.3 6.2 3.5 8.5l121.4 121.4c4.7 4.7 12.3 4.7 17 0l22.6-22.6c4.7-4.7 4.7-12.3 0-17zM208 368c-88.4 0-160-71.6-160-160S119.6 48 208 48s160 71.6 160 160-71.6 160-160 160z"></path>
+                  </svg>
+                </span>
+              </button>
+          </div>
+
+          <a href="/pages/sedes" class="m-header__icon-location" aria-label="Nuestras sedes" style="position: relative;">
+            <svg class="m-svg-icon--medium" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </a>
+
+          <a href="/cart" class="m-cart-icon-bubble" aria-label="0" role="button">
+            <svg class="m-svg-icon--medium" width="20" height="20" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+              <path d="M352 128C352 57.42 294.579 0 224 0 153.42 0 96 57.42 96 128H0v304c0 44.183 35.817 80 80 80h288c44.183 0 80-35.817 80-80V128h-96zM224 48c44.112 0 80 35.888 80 80H144c0-44.112 35.888-80 80-80zm176 384c0 17.645-14.355 32-32 32H80c-17.645 0-32-14.355-32-32V176h48v40c0 13.255 10.745 24 24 24s24-10.745 24-24v-40h160v40c0 13.255 10.745 24 24 24s24-10.745 24-24v-40h48v256z"></path>
+            </svg>
+          </a>
+        </div>
+    </div>
+
+    <!-- === OVERLAY BUSCADOR === -->
+    <div class="krika-search-overlay" id="searchOverlay">
+        <div class="krika-search-inner">
+            <div class="krika-search-top-bar">
+                <input type="text" class="krika-search-input" id="searchInput" placeholder="Buscar productos..." autocomplete="off" spellcheck="false">
+                <button class="krika-btn-clear" id="btnClear">Eliminar</button>
+                <button class="krika-btn-close" id="btnCloseSearch">&times;</button>
+            </div>
+
+            <div class="krika-search-meta-bar" id="searchMeta"></div>
+
+            <div class="krika-search-toolbar" id="searchToolbar">
+                <div class="krika-sort-wrap">
+                    <button type="button" class="krika-toolbar-btn" id="btnSort">Ordenar por</button>
+                    <div class="krika-sort-menu" id="sortMenu">
+                        <button type="button" data-sort="relevance" class="is-selected">Relevancia</button>
+                        <button type="button" data-sort="price-asc">Precio: menor a mayor</button>
+                        <button type="button" data-sort="price-desc">Precio: mayor a menor</button>
+                        <button type="button" data-sort="title-asc">Nombre: A-Z</button>
+                    </div>
+                </div>
+
+                <div class="krika-toolbar-right">
+                    <!-- BOTÓN GRID / LISTA -->
+                    <div class="krika-view-toggle" role="group" aria-label="Cambiar vista">
+                        <button type="button" class="krika-view-btn" id="viewGridBtn" aria-label="Vista en cuadrícula" title="Cuadrícula">
+                            <svg viewBox="0 0 16 16"><path d="M1 1h6v6H1zM9 1h6v6H9zM1 9h6v6H1zM9 9h6v6H9z"/></svg>
+                        </button>
+                        <button type="button" class="krika-view-btn" id="viewListBtn" aria-label="Vista en lista" title="Lista">
+                            <svg viewBox="0 0 16 16"><path d="M1 2h2v2H1zM4 2h11v2H4zM1 7h2v2H1zM4 7h11v2H4zM1 12h2v2H1zM4 12h11v2H4z"/></svg>
+                        </button>
+                    </div>
+                    <a href="/search" class="krika-toolbar-btn" id="btnFilters">Filtros</a>
+                </div>
+            </div>
+
+            <div class="krika-search-content-body" id="searchContentBody" style="display: none;">
+                <div class="krika-suggestions-col">
+                    <h4>Sugerencias</h4>
+                    <ul class="krika-suggestions-list" id="suggestionsList"></ul>
+                </div>
+                <div>
+                    <div class="krika-products-grid view-grid" id="productsGrid"></div>
+
+                    <!-- PAGINACIÓN CON BOTONES (reemplaza el scroll) -->
+                    <div class="krika-pagination" id="pagination">
+                        <button type="button" class="krika-page-btn" id="pagePrev" aria-label="Página anterior" disabled>&#10094;</button>
+                        <span class="krika-page-info" id="pageInfo">1 / 1</span>
+                        <button type="button" class="krika-page-btn" id="pageNext" aria-label="Página siguiente" disabled>&#10095;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === JAVASCRIPT === -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchOverlay     = document.getElementById('searchOverlay');
+            const btnCloseSearch    = document.getElementById('btnCloseSearch');
+            const btnClear          = document.getElementById('btnClear');
+            const searchInput       = document.getElementById('searchInput');
+            const searchContentBody = document.getElementById('searchContentBody');
+            const searchMeta        = document.getElementById('searchMeta');
+            const searchToolbar     = document.getElementById('searchToolbar');
+            const suggestionsList   = document.getElementById('suggestionsList');
+            const productsGrid      = document.getElementById('productsGrid');
+            const btnSort           = document.getElementById('btnSort');
+            const sortMenu          = document.getElementById('sortMenu');
+            const btnFilters        = document.getElementById('btnFilters');
+            const viewGridBtn       = document.getElementById('viewGridBtn');
+            const viewListBtn       = document.getElementById('viewListBtn');
+            const pagination        = document.getElementById('pagination');
+            const pagePrev          = document.getElementById('pagePrev');
+            const pageNext          = document.getElementById('pageNext');
+            const pageInfo          = document.getElementById('pageInfo');
+
+            const WISHLIST_KEY = 'krika_wishlist';
+            const VIEW_KEY     = 'krika_view_mode';
+            const IMAGE_WIDTH  = 400;
+
+            let currentSorted = [];   // productos en el orden actual
+            let state = {
+                view: localStorage.getItem(VIEW_KEY) === 'list' ? 'list' : 'grid',
+                page: 0
+            };
+
+            /* ============ BOTÓN DE BÚSQUEDA AISLADO DEL TEMA ============ */
+            const originalTrigger = document.getElementById('krikaSearchTrigger');
+            let btnOpenSearch = originalTrigger;
+
+            if (originalTrigger) {
+                const cleanTrigger = originalTrigger.cloneNode(true);
+                originalTrigger.parentNode.replaceChild(cleanTrigger, originalTrigger);
+                btnOpenSearch = cleanTrigger;
+
+                btnOpenSearch.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+                    searchOverlay.classList.add('is-open');
+                    document.body.style.overflow = 'hidden';
+                    setTimeout(() => searchInput.focus(), 100);
+                }, true);
+            }
+
+            btnCloseSearch.addEventListener('click', () => {
+                searchOverlay.classList.remove('is-open');
+                document.body.style.overflow = '';
+                resetSearch();
+            });
+
+            btnClear.addEventListener('click', () => {
+                resetSearch();
+                searchInput.focus();
+            });
+
+            function debounce(func, delay) {
+                let timeoutId;
+                return function (...args) {
+                    clearTimeout(timeoutId);
+                    timeoutId = setTimeout(() => func.apply(this, args), delay);
+                };
+            }
+
+            function standardizeImage(url) {
+                if (!url) return url;
+                try {
+                    const u = new URL(url, window.location.origin);
+                    u.searchParams.set('width', IMAGE_WIDTH);
+                    return u.toString();
+                } catch {
+                    return url;
+                }
+            }
+
+            function formatCOP(v) {
+                return new Intl.NumberFormat('es-CO', {
+                    style: 'currency', currency: 'COP',
+                    minimumFractionDigits: 0, maximumFractionDigits: 0
+                }).format(v || 0);
+            }
+
+            /* ============ WISHLIST ============ */
+            function getWishlist() {
+                try { return JSON.parse(localStorage.getItem(WISHLIST_KEY)) || []; }
+                catch { return []; }
+            }
+            function toggleWishlist(id) {
+                let list = getWishlist();
+                if (list.includes(id)) list = list.filter(i => i !== id);
+                else list.push(id);
+                localStorage.setItem(WISHLIST_KEY, JSON.stringify(list));
+                return list.includes(id);
+            }
+            productsGrid.addEventListener('click', (e) => {
+                const btn = e.target.closest('[data-wishlist-btn]');
+                if (!btn) return;
+                e.preventDefault();
+                e.stopPropagation();
+                const id = btn.getAttribute('data-product-id');
+                btn.classList.toggle('is-active', toggleWishlist(id));
+            });
+
+            /* ============ VISTA GRID / LISTA ============ */
+            function applyViewClasses() {
+                viewGridBtn.classList.toggle('is-active', state.view === 'grid');
+                viewListBtn.classList.toggle('is-active', state.view === 'list');
+                productsGrid.classList.toggle('view-grid', state.view === 'grid');
+                productsGrid.classList.toggle('view-list', state.view === 'list');
+            }
+            function setView(v) {
+                state.view = v;
+                state.page = 0;
+                localStorage.setItem(VIEW_KEY, v);
+                applyViewClasses();
+                renderPage(false);
+            }
+            viewGridBtn.addEventListener('click', () => setView('grid'));
+            viewListBtn.addEventListener('click', () => setView('list'));
+
+            /* ============ PAGINACIÓN (reemplaza el scroll) ============ */
+            function getPageSize() {
+                const w = window.innerWidth;
+                if (state.view === 'list') return w <= 768 ? 4 : 6;
+                if (w <= 768)  return 4;   // móvil: 2x2
+                if (w <= 1024) return 6;   // tablet: 3x2
+                return 8;                  // desktop: 4x2
+            }
+
+            function renderPage(animate = true) {
+                const size       = getPageSize();
+                const totalPages = Math.max(1, Math.ceil(currentSorted.length / size));
+
+                if (state.page > totalPages - 1) state.page = totalPages - 1;
+                if (state.page < 0) state.page = 0;
+
+                const slice = currentSorted.slice(state.page * size, state.page * size + size);
+                renderProducts(slice, animate);
+
+                pageInfo.textContent = (state.page + 1) + ' / ' + totalPages;
+                pagePrev.disabled = state.page === 0;
+                pageNext.disabled = state.page >= totalPages - 1;
+                pagination.classList.toggle('is-visible', currentSorted.length > 0);
+            }
+
+            pagePrev.addEventListener('click', () => { state.page--; renderPage(true); });
+            pageNext.addEventListener('click', () => { state.page++; renderPage(true); });
+            window.addEventListener('resize', debounce(() => renderPage(false), 150));
+
+            /* ============ ORDENAR POR ============ */
+            btnSort.addEventListener('click', (e) => {
+                e.stopPropagation();
+                sortMenu.classList.toggle('is-open');
+            });
+            document.addEventListener('click', (e) => {
+                if (!sortMenu.contains(e.target) && e.target !== btnSort) {
+                    sortMenu.classList.remove('is-open');
+                }
+            });
+
+            function parsePriceValue(p) {
+                if (typeof p.price_min === 'number') return p.price_min;
+                const digits = String(p.price || '0').replace(/[^\d.,]/g, '').replace(',', '.');
+                return parseFloat(digits) || 0;
+            }
+
+            sortMenu.querySelectorAll('button[data-sort]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    sortMenu.querySelectorAll('button').forEach(b => b.classList.remove('is-selected'));
+                    btn.classList.add('is-selected');
+                    btnSort.textContent = 'Ordenar por: ' + btn.textContent;
+                    sortMenu.classList.remove('is-open');
+
+                    const type = btn.getAttribute('data-sort');
+                    let sorted = [...currentSorted];
+
+                    if (type === 'price-asc')       sorted.sort((a, b) => parsePriceValue(a) - parsePriceValue(b));
+                    else if (type === 'price-desc') sorted.sort((a, b) => parsePriceValue(b) - parsePriceValue(a));
+                    else if (type === 'title-asc')  sorted.sort((a, b) => (a.title || '').localeCompare(b.title || ''));
+
+                    state.page = 0;
+                    currentSorted = sorted;
+                    renderPage(true);
+                });
+            });
+
+            /* ============ SKELETON ============ */
+            function renderSkeleton() {
+                suggestionsList.innerHTML = Array.from({ length: 4 })
+                    .map(() => `<li><div class="krika-skeleton-suggestion"></div></li>`)
+                    .join('');
+
+                productsGrid.innerHTML = Array.from({ length: getPageSize() })
+                    .map(() => `
+                        <div class="krika-skeleton-card">
+                            <div class="krika-skeleton-thumb"></div>
+                            <div class="krika-skeleton-body">
+                                <div class="krika-skeleton-line"></div>
+                                <div class="krika-skeleton-line short"></div>
+                            </div>
+                        </div>
+                    `)
+                    .join('');
+            }
+
+            /* ============ RENDER DE PRODUCTOS ============ */
+            function renderProducts(products, animate = true) {
+                const wishlist = getWishlist();
+
+                if (products.length > 0) {
+                    productsGrid.innerHTML = products.map((p, i) => {
+                        const id    = p.id || p.url || String(i);
+                        const isFav = wishlist.includes(String(id));
+
+                        const compareRaw   = p.compare_at_price_min || p.compare_at_price || null;
+                        const currentValue = parsePriceValue(p);
+                        const compareValue = compareRaw ? parseFloat(String(compareRaw).replace(/[^\d.,]/g, '').replace(',', '.')) : 0;
+                        const hasSale      = compareValue > currentValue;
+
+                        const tagsArr     = Array.isArray(p.tags) ? p.tags : [];
+                        const featuredTag = tagsArr.find(t => /personalizable|custom|nuevo|new/i.test(t));
+                        const imgSrc      = standardizeImage(p.image);
+
+                        return `
+                            <div class="krika-product-card" style="${animate ? `animation-delay: ${i * 0.04}s` : ''}">
+                                <a href="${p.url}" style="display:contents; color:inherit; text-decoration:none;">
+                                    <div class="krika-product-thumb">
+                                        <img src="${imgSrc}" alt="${p.title}" loading="lazy" width="${IMAGE_WIDTH}" height="${IMAGE_WIDTH}">
+                                    </div>
+                                </a>
+                                <div class="krika-product-info">
+                                    <div class="krika-product-title-row">
+                                        <a href="${p.url}" class="krika-product-title" style="color:inherit; text-decoration:none;">${p.title}</a>
+                                        <button type="button" class="krika-wishlist-btn ${isFav ? 'is-active' : ''}" data-wishlist-btn data-product-id="${id}" aria-label="Añadir a favoritos">
+                                            <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.1C.5 8.8 2 5 5.5 5c2 0 3.4 1.1 4.2 2.4C10.5 6.1 11.9 5 13.9 5 17.4 5 18.9 8.8 17.4 11.9 15 16.4 12 21 12 21z"/></svg>
+                                        </button>
+                                    </div>
+                                    <div class="krika-product-prices">
+                                        ${hasSale ? `<span class="krika-compare-price">${formatCOP(compareValue)}</span>` : ''}
+                                        <span class="krika-current-price ${hasSale ? 'is-sale' : ''}">${formatCOP(currentValue)}</span>
+                                    </div>
+                                    ${featuredTag ? `<div class="krika-product-tag">${featuredTag}</div>` : ''}
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                } else {
+                    productsGrid.innerHTML = '<div style="color: var(--text-muted); padding: 10px 0;">No se encontraron productos en tu tienda.</div>';
+                }
+            }
+
+            /* ============ AL ESCRIBIR: SKELETON INMEDIATO ============ */
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.trim();
+                if (!query) { resetSearch(); return; }
+
+                btnClear.style.display = 'block';
+                searchContentBody.style.display = 'grid';
+                searchToolbar.classList.add('is-visible');
+                searchMeta.innerHTML = '<span class="krika-spinner"></span> Buscando...';
+                btnFilters.href = '/search?q=' + encodeURIComponent(query);
+                renderSkeleton();
+            });
+
+            /* ============ PETICIÓN A SHOPIFY ============ */
+            const handleSearch = async (e) => {
+                const query = e.target.value.trim();
+                if (!query) { resetSearch(); return; }
+
+                try {
+                    const url = new URL(window.location.origin + '/search/suggest.json');
+                    url.searchParams.append('q', query);
+                    url.searchParams.append('resources[type]', 'product,query');
+                    url.searchParams.append('resources[limit]', '24');
+
+                    const response = await fetch(url.toString());
+                    const data     = await response.json();
+
+                    if (searchInput.value.trim() !== query) return;
+
+                    const products = data.resources.results.products || [];
+                    const queries  = data.resources.results.queries  || [];
+
+                    if (queries.length > 0) {
+                        suggestionsList.innerHTML = queries.map(q => `<li><a href="${q.url}">${q.text}</a></li>`).join('');
+                    } else {
+                        suggestionsList.innerHTML = '<li><span style="color:var(--text-muted)">Sin sugerencias</span></li>';
+                    }
+
+                    searchMeta.innerHTML = `${products.length} resultado(s)`;
+
+                    sortMenu.querySelectorAll('button').forEach(b => b.classList.remove('is-selected'));
+                    sortMenu.querySelector('[data-sort="relevance"]').classList.add('is-selected');
+                    btnSort.textContent = 'Ordenar por';
+
+                    currentSorted = products;
+                    state.page = 0;
+                    renderPage(true);
+
+                } catch (error) {
+                    console.error("Error al buscar en Shopify:", error);
+                    searchMeta.innerHTML = 'Error al cargar los resultados.';
+                }
+            };
+            searchInput.addEventListener('input', debounce(handleSearch, 300));
+
+            function resetSearch() {
+                searchInput.value = '';
+                btnClear.style.display = 'none';
+                searchContentBody.style.display = 'none';
+                searchToolbar.classList.remove('is-visible');
+                sortMenu.classList.remove('is-open');
+                searchMeta.innerHTML = '';
+                productsGrid.innerHTML = '';
+                suggestionsList.innerHTML = '';
+                currentSorted = [];
+                state.page = 0;
+                pagination.classList.remove('is-visible');
+                pagePrev.disabled = true;
+                pageNext.disabled = true;
+            }
+
+            /* Vista guardada al abrir */
+            applyViewClasses();
+        });
+    </script>
+</body>
+</html>

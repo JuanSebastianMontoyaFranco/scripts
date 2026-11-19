@@ -1,0 +1,103 @@
+{%- comment -%}
+  Custom code before </body>
+  All custom code in this file will be kept when updating the theme
+{%- endcomment -%}
+
+{%- comment -%}
+  KRIKA · Buscador (2026-09-22)
+
+  El buscador visible es el overlay a medida de `sections/new-menu.liquid` (#searchOverlay),
+  no el buscador de Minimog. Su input #searchInput NO está dentro de ningún <form> y su
+  único handler de Enter (línea ~996) solo guarda la búsqueda reciente: por eso al apretar
+  Enter no pasaba nada.
+
+  Ese overlay además busca sobre un catálogo parcial: /search/suggest.json más
+  /collections/all/products.json?limit=250, o sea 250 de 7.788 productos. La búsqueda
+  completa de verdad está en /search, que consulta el catálogo entero y trae filtros.
+
+  A) Enter en el buscador -> página de resultados completa.
+  B) Botón "Ver todos los resultados" en la barra del overlay, para quien no usa Enter.
+  C) Iguala options[fields] en los formularios de búsqueda del tema.
+  D) Si lo buscado coincide con un proveedor, enlace "Ver todos los productos de X".
+{%- endcomment -%}
+<script>
+  (function () {
+    var FIELDS = 'title,vendor,product_type,tag,body,variants.title,variants.sku';
+
+    function searchUrl(q) {
+      return '/search?q=' + encodeURIComponent(q) +
+        '&options[prefix]=last&options[unavailable_products]=last&options[fields]=' + FIELDS;
+    }
+
+    /* C */
+    function syncSearchFields() {
+      var inputs = document.querySelectorAll('input[name="options[fields]"]');
+      for (var i = 0; i < inputs.length; i++) inputs[i].value = FIELDS;
+    }
+    syncSearchFields();
+    document.addEventListener('submit', syncSearchFields, true);
+
+    /* A */
+    function goToSearch() {
+      var input = document.getElementById('searchInput');
+      var q = input && input.value ? input.value.trim() : '';
+      window.location.href = q ? searchUrl(q) : '/search';
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter') return;
+      if (!e.target || e.target.id !== 'searchInput') return;
+      var q = (e.target.value || '').trim();
+      if (!q) return;
+      e.preventDefault();
+      window.location.href = searchUrl(q);
+    }, true);
+
+    /* B */
+    function addSeeAllButton() {
+      var toolbar = document.getElementById('searchToolbar');
+      if (!toolbar || document.getElementById('krikaSeeAll')) return;
+      var link = document.createElement('a');
+      link.id = 'krikaSeeAll';
+      link.className = 'krika-toolbar-btn krika-see-all';
+      link.href = '/search';
+      link.textContent = 'Ver todos los resultados';
+      link.addEventListener('click', function (ev) { ev.preventDefault(); goToSearch(); });
+      toolbar.appendChild(link);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', addSeeAllButton);
+    } else {
+      addSeeAllButton();
+    }
+  })();
+</script>
+
+{%- comment -%} D {%- endcomment -%}
+{%- if template.name == 'search' and search.performed -%}
+  {%- liquid
+    assign terms_normalized = search.terms | strip | downcase
+    assign matched_vendor = ''
+    for item in search.results limit: 10
+      assign item_vendor = item.vendor | downcase | strip
+      if item_vendor == terms_normalized
+        assign matched_vendor = item.vendor
+        break
+      endif
+    endfor
+  -%}
+  {%- if matched_vendor != blank -%}
+    <script>
+      (function () {
+        var header = document.querySelector('.m-page-header');
+        if (!header) return;
+        var link = document.createElement('a');
+        link.className = 'krika-search-vendor-link';
+        link.href = {{ matched_vendor | url_for_vendor | json }};
+        link.textContent = {{ 'Ver todos los productos de ' | append: matched_vendor | json }};
+        header.appendChild(link);
+      })();
+    </script>
+  {%- endif -%}
+{%- endif -%}

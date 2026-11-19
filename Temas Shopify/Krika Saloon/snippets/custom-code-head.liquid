@@ -1,0 +1,88 @@
+{%- comment -%}
+  Custom code before </head>
+  For example: tracking code, custom css, custom javascript
+  All custom code in this file will be kept when updating the theme
+{%- endcomment -%}
+
+{%- comment -%}
+  KRIKA · Ajustes propios (2026-09-22)
+  1) Oculta el badge "ENVÍO GRATIS" (sale de la etiqueta de producto tag__hot_ENVÍO GRATIS).
+  2) Deja siempre visible la flecha del botón "Resultados para ..." del buscador predictivo.
+  3) Estilo del enlace "Ver todos los productos de <marca>" en la página de resultados.
+  4) Si una búsqueda devuelve un solo producto, lleva directo a su ficha.
+  KRIKA · Ajustes propios (2026-09-28)
+  5) Estrellas de reseñas (Judge.me) en negro en toda la tienda (2026-09-30: antes amarillo).
+  6) Botón "Comprar ahora" debajo de "Agregar al carrito" en la ficha de producto: agrega el producto y va directo al checkout.
+  Para revertir cualquiera de los seis, borra su bloque.
+{%- endcomment -%}
+<style>
+  /* 1 */
+  .m-product-tag--hot { display: none !important; }
+  .product-block-group--tags:not(:has(.m-product-tag:not(.m-product-tag--hot))) { display: none !important; }
+  /* 2 */
+  .m-search-count-result [data-more-result-icon] { display: inline-flex !important; }
+  /* 3 */
+  .krika-search-vendor-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 14px; padding: 10px 20px; border: 1px solid rgb(var(--color-border)); border-radius: 40px; font-weight: 600; text-decoration: none; }
+  .krika-search-vendor-link:hover { background: #222222; color: #ffffff; }
+  /* 5 — html:not(#krika) sube la especificidad por encima de los CSS de sección y del color de Judge.me */
+  html:not(#krika) .jdgm-star,
+  html:not(#krika) .jdgm-star::before,
+  html:not(#krika) .jm-star-rating__font-icon { color: #000000 !important; }
+  html:not(#krika) .jm-star-rating svg { color: #000000 !important; fill: #000000 !important; }
+  /* 6 */
+  .krika-buy-now { flex-basis: 100%; width: 100%; margin-top: 12px; }
+</style>
+
+{%- comment -%} 4 {%- endcomment -%}
+{%- if template.name == 'search' and search.performed and search.results_count == 1 -%}
+  {%- for only_result in search.results limit: 1 -%}
+    {%- if only_result.object_type == 'product' -%}
+      <script>window.location.replace({{ only_result.url | json }});</script>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+{%- comment -%} 6 {%- endcomment -%}
+{%- if template.name == 'product' -%}
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var atc = document.querySelector('.main-product__block-buy_buttons button[name="add"][id^="ProductSubmitButton-"]');
+      if (!atc || document.querySelector('.krika-buy-now')) return;
+      var form = atc.closest('form');
+
+      var buyNow = document.createElement('button');
+      buyNow.type = 'button';
+      buyNow.className = 'krika-buy-now m-button m-button--primary';
+      buyNow.textContent = 'Comprar ahora';
+      atc.insertAdjacentElement('afterend', buyNow);
+
+      // Mismo estado (habilitado / agotado) que "Agregar al carrito"
+      var sync = function () { buyNow.disabled = atc.disabled; };
+      sync();
+      new MutationObserver(sync).observe(atc, { attributes: true, attributeFilter: ['disabled'] });
+
+      buyNow.addEventListener('click', function () {
+        var idInput = form && form.querySelector('[name="id"]');
+        if (!idInput || !idInput.value) return;
+        var qtyInput = document.querySelector('input[name="quantity"][form="' + form.id + '"]') || form.querySelector('input[name="quantity"]');
+        var quantity = Math.max(parseInt(qtyInput && qtyInput.value, 10) || 1, 1);
+        var root = (window.Shopify && Shopify.routes && Shopify.routes.root) || '/';
+
+        buyNow.disabled = true;
+        fetch(root + 'cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({ items: [{ id: Number(idInput.value), quantity: quantity }] })
+        })
+          .then(function (res) {
+            if (!res.ok) throw res;
+            window.location.href = root + 'checkout';
+          })
+          .catch(function () {
+            sync();
+            alert('No pudimos agregar el producto. Intenta de nuevo.');
+          });
+      });
+    });
+  </script>
+{%- endif -%}

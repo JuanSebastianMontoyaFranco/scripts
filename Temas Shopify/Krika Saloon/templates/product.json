@@ -1,0 +1,685 @@
+{
+  "sections": {
+    "custom_code_JkTCkP": {
+      "type": "custom-code",
+      "name": "Botones flotantes",
+      "settings": {
+        "custom_css": ".m-button--scroll-top {\nbottom: 165px !important;\n}\n.float-container {\nbottom: 90px;\n}\n.jdgm-star{\ncolor: black !important;\n}"
+      }
+    },
+    "breadcrumb": {
+      "type": "breadcrumb",
+      "name": "Ruta",
+      "settings": {
+        "container": "container",
+        "text_alignment": "left",
+        "hide_current": true,
+        "hide_on_mb": true,
+        "animations": "inherit"
+      }
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "judge_me_reviews_preview_badge_9ctPAm": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "custom_liquid_cmWPgk": {
+          "type": "custom_liquid",
+          "name": "Product Name Custom",
+          "settings": {
+            "custom_liquid": "<div class=\"product-premium-header\">\n  \n  <!-- 1. PROVEEDOR -->\n  {%- if product.vendor != blank -%}\n    <div class=\"product-vendor-wrapper\">\n      <a href=\"{{ product.vendor | url_for_vendor }}\" class=\"product-vendor-brand\">\n        {{ product.vendor }}\n      </a>\n    </div>\n  {%- endif -%}\n\n  <!-- 2. FILA DE TÍTULO + LISTA DE DESEOS -->\n  <div class=\"product-title-row\">\n    <h1 class=\"product-title-brand\">\n      {{ product.title }}\n    </h1>\n\n    <!-- Botón de Favoritos -->\n    <div class=\"product-wishlist-action\">\n      <button \n        type=\"button\" \n        class=\"wishlist-btn-trigger\" \n        data-product-handle=\"{{ product.handle }}\" \n        aria-label=\"Agregar a lista de deseos\" \n        onclick=\"toggleWishlist(this)\"\n      >\n        <svg class=\"wishlist-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\">\n          <path d=\"M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z\"/>\n        </svg>\n      </button>\n    </div>\n  </div>\n\n  <!-- 3. PRECIO Y DESCUENTO -->\n  {%- assign current_variant = product.selected_or_first_available_variant -%}\n\n\n</div>\n\n<!-- SCRIPT DE INTERACCIÓN ACTUAlIZADO -->\n<script>\n  document.addEventListener(\"DOMContentLoaded\", function() {\n    const wishlistBtn = document.querySelector('.wishlist-btn-trigger');\n    if (!wishlistBtn) return;\n\n    const productHandle = wishlistBtn.getAttribute('data-product-handle');\n    let wishlist = JSON.parse(localStorage.getItem('shopify_wishlist_handles')) || [];\n\n    if (wishlist.includes(productHandle)) {\n      wishlistBtn.classList.add('is-active');\n    }\n  });\n\n  function toggleWishlist(button) {\n    const productHandle = button.getAttribute('data-product-handle');\n    let wishlist = JSON.parse(localStorage.getItem('shopify_wishlist_handles')) || [];\n\n    if (wishlist.includes(productHandle)) {\n      wishlist = wishlist.filter(handle => handle !== productHandle);\n      button.classList.remove('is-active');\n    } else {\n      wishlist.push(productHandle);\n      button.classList.add('is-active');\n    }\n\n    localStorage.setItem('shopify_wishlist_handles', JSON.stringify(wishlist));\n  }\n</script>"
+          }
+        },
+        "badge_ChqgGj": {
+          "type": "badge",
+          "settings": {}
+        },
+        "custom_liquid_PPxVGa": {
+          "type": "custom_liquid",
+          "name": "Código + 3 beneficios (Krika)",
+          "settings": {
+            "custom_liquid": "{% render 'krika-ficha-top', product: product %}"
+          }
+        },
+        "custom_liquid_zGy8dm": {
+          "type": "custom_liquid",
+          "name": "Prices & Disc. Custom",
+          "settings": {
+            "custom_liquid": "{%- assign current_variant = product.selected_or_first_available_variant -%}\n\n<div class=\"product-price-container\">\n  <!-- Precio actual / Oferta -->\n  <span class=\"price-current\">\n    {{ current_variant.price | money }}\n  </span>\n\n  <!-- Si el producto tiene un descuento activo (Precio de comparación) -->\n  {%- if current_variant.compare_at_price > current_variant.price -%}\n    <span class=\"price-compare\">\n      {{ current_variant.compare_at_price | money }}\n    </span>\n\n    <!-- Cálculo matemático del porcentaje de descuento -->\n    {%- assign savings = current_variant.compare_at_price | minus: current_variant.price -%}\n    {%- assign percent = savings | times: 100.0 | divided_by: current_variant.compare_at_price | round -%}\n    \n    <span class=\"price-discount-tag\">\n      -{{ percent }}%\n    </span>\n  {%- endif -%}\n</div>"
+          }
+        },
+        "price": {
+          "type": "price",
+          "name": "Precio y descuento",
+          "disabled": true,
+          "settings": {
+            "show_saving": true,
+            "sale_badge_type": "percentage"
+          }
+        },
+        "custom_liquid_iCh8t6": {
+          "type": "custom_liquid",
+          "name": "Alerta",
+          "settings": {
+            "custom_liquid": "{% if product.metafields.custom.alerta != blank %}\n<div  class=\"notification show mb-3 text-base\" style=\"background-color:#f5f5f5;color:black; border-radius: 10px; font-size:13px; line-height: 19px;\">\n<svg xmlns=\"http://www.w3.org/2000/svg\" x=\"0px\" y=\"0px\" width=\"24\" height=\"24\" viewBox=\"0 0 50 50\">\n<path d=\"M 25 2 C 12.309295 2 2 12.309295 2 25 C 2 37.690705 12.309295 48 25 48 C 37.690705 48 48 37.690705 48 25 C 48 12.309295 37.690705 2 25 2 z M 25 4 C 36.609824 4 46 13.390176 46 25 C 46 36.609824 36.609824 46 25 46 C 13.390176 46 4 36.609824 4 25 C 4 13.390176 13.390176 4 25 4 z M 25 11 A 3 3 0 0 0 22 14 A 3 3 0 0 0 25 17 A 3 3 0 0 0 28 14 A 3 3 0 0 0 25 11 z M 21 21 L 21 23 L 22 23 L 23 23 L 23 36 L 22 36 L 21 36 L 21 38 L 22 38 L 23 38 L 27 38 L 28 38 L 29 38 L 29 36 L 28 36 L 27 36 L 27 21 L 26 21 L 22 21 L 21 21 z\"></path>\n</svg>\n\n<div class=\"ml-3 text-sm md:text-base\" style=\"margin-left: 10px\">\n{{ product.metafields.custom.alerta }}</div></div>\n{% endif %}"
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "size_title": "Size"
+          }
+        },
+        "subscription_widget_GLKGQP": {
+          "type": "subscription_widget",
+          "disabled": true,
+          "settings": {
+            "discount_percentage": 10,
+            "text_once": "Compra única",
+            "text_sub": "Suscríbete y ahorra",
+            "text_details": "Recibe uno cada mes",
+            "text_badge": "AHORRA [%]"
+          }
+        },
+        "subscriptions_app_block_RCbtyW": {
+          "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
+          "disabled": true,
+          "settings": {
+            "widget_style": "card",
+            "widget_style_card_selector": "radio_button",
+            "subscription_policy_url": "",
+            "color_text_body": "#222222",
+            "dividers_color": "#c10061",
+            "background_color": "#ffffff",
+            "border_thickness": 1,
+            "border_radius": 0,
+            "product": "{{product}}"
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "name": "Botón de compra",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_atc_button": true,
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false
+          }
+        },
+        "addons": {
+          "type": "addons",
+          "name": "Compara y comparte",
+          "disabled": true,
+          "settings": {
+            "show_atcp": false,
+            "show_ask_a_question": false,
+            "show_social": true
+          }
+        },
+        "custom_liquid_wjDpiz": {
+          "type": "custom_liquid",
+          "name": "Opciones de pago",
+          "settings": {
+            "custom_liquid": "<img class=\"noMobile\" src=\"https://cdn.shopify.com/s/files/1/0719/4027/6375/files/METODOS_DE_PAGO-01.png?v=1784125855\" width=\"\" alt=\"Payment Methods\" style=\"width: 100%;\">\n<img class=\"noDesk\" src=\"https://cdn.shopify.com/s/files/1/0719/4027/6375/files/METODOS_DE_PAGO-01.png?v=1784125855\" width=\"\" alt=\"Payment Methods\"  style=\"width: 100%;>"
+          }
+        },
+        "custom_liquid_J6NYTd": {
+          "type": "custom_liquid",
+          "name": "Recogida New",
+          "settings": {
+            "custom_liquid": "<div class=\"delivery-options-section\">\n  <p class=\"delivery-options-title\">Opciones de entrega:</p>\n  \n  <div class=\"delivery-options-grid\">\n    <!-- Opción 1: Recogida en tienda -->\n    <div class=\"delivery-card\">\n      <div class=\"delivery-icon-wrapper\">\n        <svg class=\"delivery-svg-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n          <rect x=\"1\" y=\"3\" width=\"15\" height=\"13\"></rect>\n          <polygon points=\"16 8 20 8 23 11 23 16 16 16 16 8\"></polygon>\n          <circle cx=\"5.5\" cy=\"18.5\" r=\"2.5\"></circle>\n          <circle cx=\"18.5\" cy=\"18.5\" r=\"2.5\"></circle>\n        </svg>\n      </div>\n      <div class=\"delivery-info\">\n        <span class=\"delivery-label-main\">Recogida en tienda</span>\n        <span class=\"delivery-label-sub\">Cali</span>\n      </div>\n    </div>\n\n    <!-- Opción 2: Envío Nacional y Local -->\n    <div class=\"delivery-card\">\n      <div class=\"delivery-icon-wrapper\">\n        <svg class=\"delivery-svg-icon\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n          <rect x=\"2\" y=\"5\" width=\"20\" height=\"14\" rx=\"2\" ry=\"2\"></rect>\n          <line x1=\"2\" y1=\"10\" x2=\"22\" y2=\"10\"></line>\n        </svg>\n      </div>\n      <div class=\"delivery-info\">\n        <span class=\"delivery-label-main\">Envío Nacional</span>\n        <span class=\"delivery-label-sub\">Colombia</span>\n      </div>\n    </div>\n  </div>\n</div>"
+          }
+        },
+        "custom_liquid_KfAcc1": {
+          "type": "custom_liquid",
+          "name": "Acordeón descripción (Krika)",
+          "settings": {
+            "custom_liquid": "{% render 'krika-ficha-acordeon', product: product %}"
+          }
+        },
+        "meta_FawDkr": {
+          "type": "meta",
+          "disabled": true,
+          "settings": {
+            "show_collections": false,
+            "show_vendor": false,
+            "show_type": false,
+            "show_availability": false,
+            "show_sku": true
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_preview_badge_9ctPAm",
+        "custom_liquid_cmWPgk",
+        "badge_ChqgGj",
+        "custom_liquid_PPxVGa",
+        "variant_picker",
+        "custom_liquid_zGy8dm",
+        "price",
+        "custom_liquid_iCh8t6",
+        "subscription_widget_GLKGQP",
+        "subscriptions_app_block_RCbtyW",
+        "buy_buttons",
+        "addons",
+        "custom_liquid_wjDpiz",
+        "custom_liquid_J6NYTd",
+        "custom_liquid_KfAcc1",
+        "meta_FawDkr"
+      ],
+      "custom_css": [
+        ".m-product-shipping--content {color: rgb(var(--color-foreground));}",
+        ".m-color- {color: white;}",
+        ".m-product-tax {display: none;}",
+        ".jdgm-widget {padding-top: 20px;}",
+        ".shopify_subscriptions_app_container input[type=\"radio\"] {accent-color: #e91c7a !important;}",
+        ".shopify_subscriptions_app_container input[type=\"radio\"]:focus {outline-color: #e91c7a !important;}",
+        ".shopify_subscriptions_in_widget_price {color: #c10061;}",
+        ".shopify_subscriptions_app_container {display: none !important;}",
+        ".m-product-title {text-transform: uppercase;}"
+      ],
+      "name": "Información de producto",
+      "settings": {
+        "container": "container",
+        "layout": "layout-6",
+        "show_atwl": true,
+        "enable_history_state": true,
+        "enable_variant_group_images": true,
+        "disable_selected_variant_default": false,
+        "show_featured_media": false,
+        "show_zoom_button": true,
+        "enable_video_autoplay": true,
+        "show_nav_media_mobile": true,
+        "show_pagination_mobile": true,
+        "use_sticky_atc": false,
+        "use_sticky_atc_on_mobile": false,
+        "enable_dynamic_checkout": false,
+        "sticky_atc_wishtlist": false,
+        "sticky_atc_compare": false
+      }
+    },
+    "product-details-tabs": {
+      "type": "product-details-tabs",
+      "disabled": true,
+      "blocks": {
+        "description": {
+          "type": "description",
+          "settings": {
+            "header": "Acerca de este producto"
+          }
+        }
+      },
+      "block_order": [
+        "description"
+      ],
+      "custom_css": [
+        ".m-tabs__header {justify-content: flex-start;}"
+      ],
+      "name": "Descripción de producto",
+      "settings": {
+        "container": "container",
+        "color_scheme": "",
+        "default_open": true,
+        "padding_top": 0,
+        "padding_bottom": 50,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "custom_css": [
+        ".m-product-card__info {min-height: 130px;}",
+        ".m-product-card__main-image img {object-fit: contain !important; background-color: white;}"
+      ],
+      "name": "Productos recomendados",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "remove_params": false,
+        "heading": "UN FAVORITO MÁS",
+        "heading_size": "h3",
+        "text_align": "center",
+        "limit": 20,
+        "columns": 4,
+        "column_gap": 2,
+        "enable_slider": true,
+        "show_pagination": true,
+        "show_navigation": true,
+        "use_scroll_mobile": false,
+        "padding_top": 100,
+        "padding_bottom": 100,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "recent-viewed-products": {
+      "type": "recent-viewed-products",
+      "custom_css": [
+        ".m-product-card__info {min-height: 130px;}"
+      ],
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "heading": "VISTOS HACE POCO",
+        "heading_size": "h3",
+        "text_align": "center",
+        "limit": 20,
+        "columns": 5,
+        "column_gap": 30,
+        "pcard_layout": "",
+        "pcard_image_ratio": "",
+        "show_vendor": true,
+        "hide_title": false,
+        "enable_slider": true,
+        "show_pagination": false,
+        "show_navigation": false,
+        "mobile_disable_slider": false,
+        "use_scroll_mobile": true,
+        "item_gap_mobile": 16,
+        "padding_top": 0,
+        "padding_bottom": 100,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "scrolling_promotion_MVNN6Q": {
+      "type": "scrolling-promotion",
+      "blocks": {
+        "announcement_MiXT8c": {
+          "type": "announcement",
+          "settings": {
+            "custom_svg": "",
+            "icon_size": "medium",
+            "text": "<b>LA BELLEZA DE SER TÚ</b>",
+            "text_size": 16,
+            "text_link": ""
+          }
+        },
+        "image_88JkQc": {
+          "type": "image",
+          "settings": {
+            "image_height": 8,
+            "image_link": ""
+          }
+        },
+        "announcement_wewTPP": {
+          "type": "announcement",
+          "settings": {
+            "custom_svg": "",
+            "icon_size": "medium",
+            "text": "<b>ENVÍO GRATIS</b> POR COMPRAS SUPERIORES A $250.000",
+            "text_size": 16,
+            "text_link": ""
+          }
+        },
+        "image_T6f3z4": {
+          "type": "image",
+          "settings": {
+            "image_height": 8,
+            "image_link": ""
+          }
+        },
+        "announcement_pPW8nc": {
+          "type": "announcement",
+          "settings": {
+            "custom_svg": "",
+            "icon_size": "medium",
+            "text": "<b>LA BELLEZA DE SER TÚ</b>",
+            "text_size": 16,
+            "text_link": ""
+          }
+        },
+        "image_LJgeYf": {
+          "type": "image",
+          "settings": {
+            "image_height": 8,
+            "image_link": ""
+          }
+        },
+        "image_83fwGn": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image_height": 8,
+            "image_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement_MiXT8c",
+        "image_88JkQc",
+        "announcement_wewTPP",
+        "image_T6f3z4",
+        "announcement_pPW8nc",
+        "image_LJgeYf",
+        "image_83fwGn"
+      ],
+      "custom_css": [
+        ".m-promotion__text {font-weight: 500;}",
+        ".container-full {margin-bottom: 50px;}"
+      ],
+      "settings": {
+        "container": "w-full",
+        "direction": "left",
+        "speed": 20,
+        "item_gap": 50,
+        "item_gap_mobile": 30,
+        "color_scheme": "badge-new",
+        "padding_top": 24,
+        "padding_bottom": 24,
+        "custom_class": ""
+      }
+    },
+    "17731154276f4d1316": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_WHk6ap": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "review_data": "sample_data",
+            "max_width": 1200,
+            "show_shop_reviews": true,
+            "empty_state": "other_products_reviews"
+          }
+        },
+        "judge_me_reviews_videos_carousel_C8Jedb": {
+          "type": "shopify://apps/judge-me-reviews/blocks/videos_carousel/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "show_sample_reviews": true,
+            "reviews_selection": "all",
+            "products": [],
+            "star_rating": "all",
+            "review_type": "photo_and_video",
+            "max_reviews": 20,
+            "show_reviewer_name": true,
+            "stars_size": "medium",
+            "text_size": "medium",
+            "arrows_position": "bottom",
+            "max_width": 1100,
+            "corner_styling": "soft",
+            "header_text_color": "#000000",
+            "card_color": "#7d7d7d",
+            "stars_color": "",
+            "text_color": "#ffffff",
+            "arrows_color": "#000000",
+            "show_drop_shadow": false,
+            "show_border": false,
+            "border_color": "#108474",
+            "autoplay_media": true,
+            "transition_speed": 5,
+            "carousel_style": "highlight",
+            "header_text": "¿Dudas? Ellas YA lo tienen",
+            "show_average_rating": true,
+            "rating_display": "default"
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_WHk6ap",
+        "judge_me_reviews_videos_carousel_C8Jedb"
+      ],
+      "custom_css": [
+        ".jm-star-rating__font-icon {color: #000000 !important;}",
+        ".jm-button--primary {background-color: black; border-color: black;}",
+        ".jm-pagination-controls__button--page {color: white;}"
+      ],
+      "name": "Reseñas",
+      "settings": {
+        "heading": "¿QUÉ DICEN NUESTRAS KRIKA INSIDERS?",
+        "heading_size": "h3",
+        "subheading": "",
+        "header_alignment": "center",
+        "container": "container",
+        "background_color": "",
+        "padding_top": 4,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
+    },
+    "icon_box_9UtNky": {
+      "type": "icon-box",
+      "blocks": {
+        "iconbox_pJbJGA": {
+          "type": "iconbox",
+          "disabled": true,
+          "settings": {
+            "card_color_scheme": "",
+            "image": "shopify://shop_images/0pt-int.webp",
+            "image_by_url": "",
+            "title": "Pide ahora y paga después",
+            "description": "<p>Paga a cuotas con Addi</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--plain",
+            "button_size": ""
+          }
+        },
+        "iconbox_EiwgTg": {
+          "type": "iconbox",
+          "settings": {
+            "card_color_scheme": "",
+            "image": "shopify://shop_images/free-ship.webp",
+            "image_by_url": "",
+            "title": "Envío a todo el país",
+            "description": "<p>Recibe en la puerta de tu casa</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--plain",
+            "button_size": ""
+          }
+        },
+        "iconbox_RW46nE": {
+          "type": "iconbox",
+          "settings": {
+            "card_color_scheme": "",
+            "image": "shopify://shop_images/cashod.webp",
+            "image_by_url": "",
+            "title": "Compra 100% segura",
+            "description": "<p>Recibimos todos los medios de pago</p>",
+            "link": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "m-button--plain",
+            "button_size": ""
+          }
+        }
+      },
+      "block_order": [
+        "iconbox_pJbJGA",
+        "iconbox_EiwgTg",
+        "iconbox_RW46nE"
+      ],
+      "custom_css": [
+        ".m-icon-box__heading {font-weight: 400;}"
+      ],
+      "name": "Por qué comprar en Krika",
+      "settings": {
+        "container": "container",
+        "color_scheme": "",
+        "heading": "¿Por qué comprar en Krika?",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "item_per_row": 3,
+        "item_gap": 30,
+        "item_gap_mobile": 10,
+        "card_style": "horizontal",
+        "image_max_width": "40px",
+        "content_alignment": "start",
+        "hover_effect": "scaling-down",
+        "enable_slider": false,
+        "show_pagination": false,
+        "show_navigation": false,
+        "use_scroll_mobile": false,
+        "use_grid_column_mb": false,
+        "padding_top": 100,
+        "padding_bottom": 0,
+        "custom_class": "",
+        "animations": "inherit"
+      }
+    },
+    "collapsible_tabs_JndiBV": {
+      "type": "collapsible-tabs",
+      "blocks": {
+        "item_bHzngY": {
+          "type": "item",
+          "settings": {
+            "header": "¿Qué valor tienen los envíos y cuánto tiempo demoran en llegar?",
+            "text_size": "h5",
+            "content": "<p>Nuestros envíos en Cali tienen un costo de $4.500, el tiempo de entrega comenzará a contarse a partir de la confirmación del pago y será de 24 horas</p>",
+            "content_page": "",
+            "open": true
+          }
+        },
+        "item_RGMrHr": {
+          "type": "item",
+          "settings": {
+            "header": "¿Qué pasa si van a entregar mi pedido y no hay nadie para recibirlo?",
+            "text_size": "h5",
+            "content": "<p>El pedido puede ser recibido por cualquier persona mayor de edad presente en el lugar de entrega.</p><p>Se requerirá firma de recibido.</p><p>Si el Usuario lo solicita, la entrega podrá ser exclusiva al comprador.</p><p>En caso de ausencia:</p><p>El pedido será reprogramado. El Usuario deberá comunicarse para coordinar una nueva entrega.</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_nceVP8": {
+          "type": "item",
+          "disabled": true,
+          "settings": {
+            "header": "¿Los productos que venden son 100% originales?",
+            "text_size": "h5",
+            "content": "<p>¡Totalmente! En Krika Cosmetics somos distribuidores autorizados de todas las marcas que encuentras en nuestra tienda. Todos nuestros productos son 100% originales y cuentan con registro INVIMA.</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_NQRQAp": {
+          "type": "item",
+          "name": "¿Cómo puedo cambiar un producto?",
+          "settings": {
+            "header": "¿Cómo puedo cambiar un producto?",
+            "text_size": "h5",
+            "content": "<p>Al solicitar tu cambio de producto o devolución de dinero, tenga en cuenta, que el producto debe estar nuevo, sin abrir, sin uso, con todos sus empaques originales, piezas, accesorios, manuales completos y etiquetas adheridas al mismo.</p><p>Si una vez recibido el producto desea cambiarlo, puede hacerlo siempre y cuando cumpla con lo siguiente:</p><p><strong>VIGENCIA:</strong> Este trámite se podrá realizar únicamente durante el (1) primer día hábil siguiente al recibo del paquete.</p><p><strong>CONDICIÓN: </strong>Es indispensable que se garantice la integridad del producto; solo se podrá iniciar el trámite de cambio, cuando:</p><p>El producto no presenta rastros de haber sido usado, cuente con las etiquetas intactas, esté en un estado de limpieza impecable y la caja y los accesorios se encuentran en perfecto estado.</p><p>Es obligatorio presentar la factura de compra por medio del cual adquirió el producto</p><p>El producto debe tener el sello de garantía sin rastro de haber sido manipulado.</p><p>(Revisar términos en derecho de retracto y reversión de pagos aquí explicados)</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_qLUxnz": {
+          "type": "item",
+          "settings": {
+            "header": "¿Tienen tiendas físicas donde pueda ver los productos?",
+            "text_size": "h5",
+            "content": "<p>¡Sí! Nos encantaría verte. Tenemos varias sedes físicas para brindarte la mejor asesoría. </p><p>Visita nuestra sección de 'Tiendas' en el menú principal para conocer nuestras ubicaciones.</p>",
+            "content_page": "",
+            "open": false
+          }
+        },
+        "item_NHKLpH": {
+          "type": "item",
+          "settings": {
+            "header": "¿Qué métodos de pago reciben?",
+            "text_size": "h5",
+            "content": "<p>Contamos con diferentes medios de pago para mayor comodidad y seguridad en tu compra:</p><p>• Tarjetas débito y crédito<br/>• Nequi<br/>• Pago contraentrega (Según disponibilidad)<br/>• Pagos por PSE<br/>• Efectivo en tiendas físicas</p>",
+            "content_page": "",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "item_bHzngY",
+        "item_RGMrHr",
+        "item_nceVP8",
+        "item_NQRQAp",
+        "item_qLUxnz",
+        "item_NHKLpH"
+      ],
+      "custom_css": [
+        ".m-collapsible--button {font-weight: 400;}",
+        ".m-collapsible + .m-collapsible {margin-top: 20px; display: block;}",
+        ".m-collapsible--content__inner {padding-bottom: 0; color: rgb(var(--color-foreground-secondary));}"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "container": "container",
+        "color_scheme": "",
+        "image_position": "left",
+        "column_gap": 100,
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "padding_top": 80,
+        "padding_bottom": 0,
+        "enable_preload_image": false,
+        "animations": "inherit",
+        "custom_class": ""
+      }
+    },
+    "custom_content_bMjKpG": {
+      "type": "custom-content",
+      "blocks": {
+        "text_GJNTAk": {
+          "type": "text",
+          "settings": {
+            "title": "",
+            "subheading": "",
+            "text": "",
+            "width": "100%",
+            "alignment": "center",
+            "align_text": "center",
+            "text_size": "medium",
+            "text_color": "inherit",
+            "button_label": "Consulta más Preguntas Frecuentes",
+            "button_link": "shopify://pages/faqs",
+            "button_style": "m-button--primary",
+            "button_size": "",
+            "block_custom_class": "",
+            "animations": "inherit"
+          }
+        }
+      },
+      "block_order": [
+        "text_GJNTAk"
+      ],
+      "name": "Botón a FAQ",
+      "settings": {
+        "heading": "",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "container": "container-fluid",
+        "color_scheme": "",
+        "content_color_scheme": "",
+        "enable_parallax": false,
+        "parallax_direction": "vertical",
+        "gap": 30,
+        "gap_mobile": 16,
+        "use_scroll_mobile": false,
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "enable_preload_image": false,
+        "custom_class": ""
+      }
+    }
+  },
+  "order": [
+    "custom_code_JkTCkP",
+    "breadcrumb",
+    "main",
+    "product-details-tabs",
+    "product-recommendations",
+    "recent-viewed-products",
+    "scrolling_promotion_MVNN6Q",
+    "17731154276f4d1316",
+    "icon_box_9UtNky",
+    "collapsible_tabs_JndiBV",
+    "custom_content_bMjKpG"
+  ]
+}

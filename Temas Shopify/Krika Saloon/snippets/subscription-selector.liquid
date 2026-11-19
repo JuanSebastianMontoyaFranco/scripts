@@ -1,0 +1,97 @@
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign base_price = current_variant.price | default: 0
+  assign percentage = block.settings.discount_percentage | default: 10
+  
+  assign discount_amount = base_price | times: percentage | divided_by: 100
+  assign subscription_price = base_price | minus: discount_amount
+-%}
+
+<div class="sub-container-custom" style="display: block !important; visibility: visible !important;">
+  <label class="sub-option-row" for="once_{{ block.id }}">
+    <input type="radio" id="once_{{ block.id }}" name="purchase_option" value="once" class="sub-radio-input" checked>
+    <div class="sub-label-content">
+      <span class="sub-title">{{ block.settings.text_once | default: 'Compra única' }}</span>
+      <span class="sub-price-display">{{ base_price | money }}</span>
+    </div>
+  </label>
+
+  <hr class="sub-divider">
+
+  <label class="sub-option-row" for="sub_{{ block.id }}">
+    <input type="radio" id="sub_{{ block.id }}" name="purchase_option" value="subscription" class="sub-radio-input">
+    <div class="sub-label-content">
+      <div style="display:flex; flex-direction:column;">
+        <span class="sub-title">{{ block.settings.text_sub | default: 'Suscríbete' }}</span>
+        <div class="sub-details">
+            {{ block.settings.text_details | default: 'Recibe uno cada mes' }}
+            <span class="m-product-tag m-product-tag--sale m-gradient m-color-dark" style="display: inline-flex; align-items: center; font-weight: 400 !important; text-transform: uppercase; font-style: normal;">
+                {%- if block.settings.text_badge contains '[%]' -%}
+                    {%- assign parts = block.settings.text_badge | split: '[%]' -%}
+                    
+                    {%- if parts[0] != blank -%}
+                        <b>{{ parts[0] }}</b>&nbsp;
+                    {%- endif -%}
+                    
+                    <span>{{ percentage }}%</span>
+                    
+                    {%- if parts[1] != blank -%}
+                        &nbsp;<b>{{ parts[1] }}</b>
+                    {%- endif -%}
+
+                {%- else -%}
+                    <b>{{ block.settings.text_badge }}</b>
+                {%- endif -%}
+            </span>
+        </div>
+      </div>
+      <span class="sub-price-display">{{ subscription_price | money }}</span>
+    </div>
+  </label>
+</div>
+
+<style>
+  .sub-container-custom { border: 1px solid #000000; border-radius: 0px; margin: 15px 0; overflow: hidden; background: #fff; }
+  .sub-option-row { display: flex; align-items: center; padding: 15px; cursor: pointer; margin: 0; }
+  .sub-radio-input { accent-color: #000000; width: 20px; height: 20px; margin-right: 12px; }
+  .sub-label-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+  .sub-title { font-weight: 600; font-size: 16px; color: #333; }
+  .sub-price-display { font-size: 17px; color: #000000; }
+  .sub-details { font-size: 13px; color: #000000; font-style: italic; display: flex; align-items: center; gap: 8px; }
+  .sub-divider { border: 0; border-top: 1px solid #000000; margin: 0; opacity: 0.3; }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const myOnceRadio = document.getElementById('once_{{ block.id }}');
+  const mySubRadio = document.getElementById('sub_{{ block.id }}');
+
+  // Buscamos los inputs reales de la aplicación
+  // Nota: La app usa selectores complejos, así que buscamos por data-attributes
+  const realOnceInput = document.querySelector('input[data-radio-type="one_time_purchase"]');
+  const realSubInput = document.querySelector('input[data-radio-type="selling_plan"]');
+  const hiddenSellingPlanInput = document.querySelector('input[name="selling_plan"]');
+
+  function updateSubscriptionChoice(isSubscription) {
+    if (isSubscription) {
+      if (realSubInput) {
+        realSubInput.click(); // Simulamos clic en el plan de la app
+        if (hiddenSellingPlanInput) hiddenSellingPlanInput.value = realSubInput.dataset.sellingPlanId;
+      }
+    } else {
+      if (realOnceInput) {
+        realOnceInput.click(); // Simulamos clic en compra única de la app
+        if (hiddenSellingPlanInput) hiddenSellingPlanInput.value = "";
+      }
+    }
+    
+    // Opcional: Disparar evento de cambio para que Minimog actualice precios si tiene lógica nativa
+    document.dispatchEvent(new CustomEvent('variant:change', {
+      detail: { variant: null } 
+    }));
+  }
+
+  myOnceRadio.addEventListener('change', () => updateSubscriptionChoice(false));
+  mySubRadio.addEventListener('change', () => updateSubscriptionChoice(true));
+});
+</script>
