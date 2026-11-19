@@ -289,8 +289,29 @@
         </div>
       </div>
     </div>
-    <div class="krika-mega-item">
-      <a href="/collections/kits" class="krika-mega-link">Kits</a>
+    <div class="krika-mega-item" data-menu="kits">
+      <a href="/collections/kits" class="krika-mega-link">Kits
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">KITS</h4>
+              <div class="krika-mega-cats krika-mega-cats--kits">
+                <div class="krika-mega-col">
+                  <h5>MARCAS</h5>
+                  <ul data-kits-brand-list>
+                    <li><span class="krika-kits-loading">Cargando marcas...</span></li>
+                  </ul>
+                  <b><a href="/collections/kits" class="krika-mega-vermas">Ver Todos los Kits</a></b>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="kits"><p class="krika-mega-loading">Cargando...</p></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </nav>
@@ -317,7 +338,7 @@
         <button class="kr-cat" data-sub="maquillaje">Maquillaje<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
         <button class="kr-cat" data-sub="corporal">Corporal<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
         <button class="kr-cat" data-sub="unas">Uñas<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
-        <a class="kr-cat" href="/collections/kits">Kits<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></a>
+        <button class="kr-cat" data-sub="kits">Kits<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
       </div>
       <div class="kr-dv-foot">
         <p>Mi cuenta</p>
@@ -475,6 +496,9 @@
   .krika-mega-col li { margin-bottom: 10px; }
   .krika-mega-col li a { font-size: 13px; color: #666; text-decoration: none; line-height: 1.3; }
   .krika-mega-col li a:hover { color: #000; }
+  .krika-mega-cats--kits .krika-mega-col { width: 100%; }
+  .krika-mega-cats--kits [data-kits-brand-list] { columns: 2; column-gap: 24px; }
+  .krika-mega-cats--kits [data-kits-brand-list] li { break-inside: avoid; }
   .krika-mega-vermas {
     display: inline-block; margin-top: 6px; font-size: 13px; font-weight: 900 !important;
     color: #666; text-decoration: underline; text-underline-offset: 4px;
@@ -525,6 +549,80 @@
     .krika-mega-card { width: auto; }
   }
 
+  /* Keep every desktop dropdown and its cards within the available viewport. */
+  .krika-mega-nav .krika-mega-container {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px 24px;
+  }
+  .krika-mega-nav .krika-mega-row {
+    grid-template-columns: minmax(260px, 1fr) minmax(0, 2fr);
+    gap: 28px;
+    padding: 24px;
+  }
+  .krika-mega-nav .krika-mega-left,
+  .krika-mega-nav .krika-mega-products {
+    min-width: 0;
+  }
+  [data-menu="kits"] [data-kits-brand-list] {
+    columns: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 18px;
+  }
+  [data-menu="kits"] [data-kits-brand-list] li {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  [data-menu="kits"] [data-kits-brand-list] a {
+    display: block;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .krika-mega-nav .krika-mega-vermas {
+    margin-top: 20px;
+  }
+  .krika-mega-nav .krika-mega-products {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .krika-mega-nav .krika-mega-card {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    height: 265px;
+  }
+  .krika-mega-nav .krika-mega-info {
+    min-height: 100px;
+    box-sizing: border-box;
+  }
+  .krika-mega-nav .krika-mega-name {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    line-height: 1.35;
+  }
+  .krika-mega-nav .krika-mega-price {
+    margin-top: auto;
+  }
+  @media (min-width: 769px) and (max-width: 1100px) {
+    .krika-mega-nav .krika-mega-row {
+      grid-template-columns: minmax(240px, 1fr) minmax(0, 1.4fr);
+      gap: 20px;
+      padding: 20px;
+    }
+    .krika-mega-nav .krika-mega-products {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .krika-mega-nav .krika-mega-dropdown {
+      max-height: 75vh;
+      overflow-y: auto;
+    }
+  }
+
   /* DRAWER */
   .kr-drawer { position: fixed; inset: 0; z-index: 99999; pointer-events: none; }
   .kr-drawer.is-open { pointer-events: auto; }
@@ -572,6 +670,7 @@
   .kr-sub-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 18px; margin-top: 6px; }
   .kr-sub-cats .krika-mega-col { flex: none; min-width: 0; }
   .kr-sub-cats ul { list-style: none; margin: 0; padding: 0; }
+  .kr-sub-cats [data-kits-brand-list] { columns: 1; }
   .kr-sub-cats li { margin: 0; }
   .kr-sub-cats li a { display: block; padding: 9px 0; font-size: 13px; color: #7a7a7a; text-decoration: none; }
   .kr-sub-cats li a::after { content: none; }
@@ -754,14 +853,56 @@
       scope.querySelectorAll('a[href*="filter.p.vendor"]').forEach(function(a){fixParam(a,'filter.p.vendor',VMAP)});
       scope.querySelectorAll('a[href*="filter.p.product_type"]').forEach(function(a){fixParam(a,'filter.p.product_type',TMAP)});
     }
-    return {norm:norm,norm2:norm2,shuffle:shuffle,pimg:pimg,ok:ok,wurl:wurl,fmtCOP:fmtCOP,addMaps:addMaps,fixLinks:fixLinks,VMAP:VMAP,TMAP:TMAP,CK:'krika9_c_',AK:'krika9_all'};
+    return {norm:norm,norm2:norm2,shuffle:shuffle,pimg:pimg,ok:ok,wurl:wurl,fmtCOP:fmtCOP,addMaps:addMaps,fixLinks:fixLinks,VMAP:VMAP,TMAP:TMAP,CK:'krika10_c_',AK:'krika9_all'};
   })();
 
   /* ===== MEGA MENÚS WEB ===== */
   (function(){
     var K=window.KRIKA;
-    var MENUS=['gafas','perfumes','capilar','skincare','maquillaje','corporal','unas'];
+    var MENUS=['gafas','perfumes','capilar','skincare','maquillaje','corporal','unas','kits'];
     function priceOf(p){try{return parseFloat(p.variants[0].price)||0}catch(e){return 0}}
+    function renderKitsBrands(products){
+      var lists=document.querySelectorAll('[data-kits-brand-list]');
+      if(!lists.length)return;
+      var brands={};
+      (products||[]).forEach(function(p){
+        var vendor=(p&&p.vendor||'').toString().trim();
+        var vendorKey=K.norm2(vendor);
+        if(vendorKey&&vendorKey!=='krikasalon')brands[vendorKey]=vendor;
+      });
+      var names=Object.keys(brands).map(function(key){return brands[key]}).sort(function(a,b){return a.localeCompare(b,'es')});
+      lists.forEach(function(list){
+        list.innerHTML='';
+        if(!names.length){
+          var empty=document.createElement('li');
+          empty.textContent='No hay proveedores disponibles en la colección.';
+          list.appendChild(empty);
+          return;
+        }
+        names.forEach(function(name){
+          var li=document.createElement('li');
+          var a=document.createElement('a');
+          a.href='/collections/kits?filter.p.vendor='+encodeURIComponent(name);
+          a.textContent=name;
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+      });
+    }
+    K.renderKitsBrands=renderKitsBrands;
+    function fetchKitsProducts(){
+      var page=1,all=[];
+      function next(){
+        return fetch('/collections/kits/products.json?limit=250&page='+page).then(function(r){return r.json()}).then(function(data){
+          var batch=(data&&data.products)||[];
+          all=all.concat(batch);
+          if(batch.length===250&&page<20){page++;return next()}
+          return all;
+        });
+      }
+      return next();
+    }
+    K.fetchKitsProducts=fetchKitsProducts;
     function renderProducts(products,container){
       container.innerHTML='';
       var vis=(products||[]).filter(K.ok); /* v9: sin stock / sin foto fuera */
@@ -778,11 +919,12 @@
       var container=document.querySelector('[data-menu="'+key+'"] .krika-mega-products');
       if(!container)return;
       var cached=cacheOf(key);
-      if(cached){K.addMaps(cached);K.fixLinks(document.querySelector('[data-menu="'+key+'"]'));renderProducts(cached,container);return}
-      fetch('/collections/'+key+'/products.json?limit=50').then(function(r){return r.json()}).then(function(data){
-        var prods=(data&&data.products)||[];
+      if(cached){K.addMaps(cached);if(key==='kits')renderKitsBrands(cached);K.fixLinks(document.querySelector('[data-menu="'+key+'"]'));renderProducts(cached,container);return}
+      var request=key==='kits'?fetchKitsProducts():fetch('/collections/'+key+'/products.json?limit=50').then(function(r){return r.json()}).then(function(data){return (data&&data.products)||[]});
+      request.then(function(prods){
         try{sessionStorage.setItem(K.CK+key,JSON.stringify(prods))}catch(e){}
         K.addMaps(prods);
+        if(key==='kits')renderKitsBrands(prods);
         K.fixLinks(document.querySelector('[data-menu="'+key+'"]'));
         renderProducts(prods,container);
       }).catch(function(){container.innerHTML=''});
@@ -804,7 +946,7 @@
   (function(){
     var K=window.KRIKA;
     var INIT=12, ADD=8, LS='krika_recent_searches', WK='krika_wishlist';
-    var CATS=['gafas','perfumes','capilar','skincare','maquillaje','corporal','unas'];
+    var CATS=['gafas','perfumes','capilar','skincare','maquillaje','corporal','unas','kits'];
     var ov=document.getElementById('searchOverlay');
     var sInput=document.getElementById('searchInput');
     var btnClear=document.getElementById('btnClear');
@@ -1056,9 +1198,13 @@
           }).join('')||'';
         };
         var c=sessionStorage.getItem(K.CK+key);
-        if(c){try{done(JSON.parse(c));return}catch(e){}}
-        fetch('/collections/'+key+'/products.json?limit=8').then(function(r){return r.json()}).then(function(d){
-          var prods=(d&&d.products)||[];
+        if(c){try{var cached=JSON.parse(c);if(key==='kits')K.renderKitsBrands(cached);done(cached);return}catch(e){}}
+        var kitRequest=key==='kits'?K.fetchKitsProducts():fetch('/collections/'+key+'/products.json?limit=8').then(function(r){return r.json()}).then(function(d){return (d&&d.products)||[]});
+        kitRequest.then(function(prods){
+          if(key==='kits'){
+            try{sessionStorage.setItem(K.CK+key,JSON.stringify(prods))}catch(e){}
+            K.renderKitsBrands(prods);
+          }
           K.addMaps(prods);K.fixLinks(body);
           done(prods);
         }).catch(function(){pc.innerHTML=''});
