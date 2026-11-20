@@ -566,17 +566,17 @@
   .krika-mega-nav .krika-mega-products {
     min-width: 0;
   }
-  [data-menu="kits"] [data-kits-brand-list] {
+  .krika-mega-nav [data-menu="kits"] [data-kits-brand-list] {
     columns: auto;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px 18px;
   }
-  [data-menu="kits"] [data-kits-brand-list] li {
+  .krika-mega-nav [data-menu="kits"] [data-kits-brand-list] li {
     margin: 0;
     overflow-wrap: anywhere;
   }
-  [data-menu="kits"] [data-kits-brand-list] a {
+  .krika-mega-nav [data-menu="kits"] [data-kits-brand-list] a {
     display: block;
     font-size: 12px;
     line-height: 1.5;
@@ -660,6 +660,16 @@
     border-top: 0; font-size: 15px; cursor: pointer;
   }
   .kr-sub-body { flex: 1; overflow: auto; padding: 16px; }
+  .kr-sub-body,
+  .kr-sub-body .kr-sub-panel,
+  .kr-sub-body .kr-sub-card,
+  .kr-sub-body .kr-sub-card .im,
+  .kr-sub-body .kr-sub-card .in {
+    background: #f7f7f7;
+  }
+  .kr-sub-body .kr-sub-card .im img {
+    mix-blend-mode: multiply;
+  }
 
   /* SUB MÓVIL (panel como captura) */
   .kr-sub-panel { background: #f7f7f7; margin: 0 -16px; padding: 14px 16px 12px; }
@@ -670,9 +680,29 @@
   .kr-sub-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 18px; margin-top: 6px; }
   .kr-sub-cats .krika-mega-col { flex: none; min-width: 0; }
   .kr-sub-cats ul { list-style: none; margin: 0; padding: 0; }
-  .kr-sub-cats [data-kits-brand-list] { columns: 1; }
+  .kr-sub-cats:has([data-kits-brand-list]) { display: block; }
+  .kr-sub-cats [data-kits-brand-list] {
+    display: block;
+    columns: 2;
+    column-gap: 18px;
+  }
+  .kr-sub-cats [data-kits-brand-list] li {
+    min-width: 0;
+    break-inside: avoid;
+  }
+  .kr-sub-cats [data-kits-brand-list] a { overflow-wrap: anywhere; }
   .kr-sub-cats li { margin: 0; }
-  .kr-sub-cats li a { display: block; padding: 9px 0; font-size: 13px; color: #7a7a7a; text-decoration: none; }
+  .kr-sub-cats li a {
+    display: block;
+    padding: 9px 0;
+    font-family: var(--font-stack-body);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: normal;
+    color: #7a7a7a;
+    text-decoration: none;
+  }
   .kr-sub-cats li a::after { content: none; }
   .kr-sub-cats li a:hover { color: #000; }
   .kr-sub-cats h5 {
@@ -1180,11 +1210,12 @@
         var hasGroups=cats&&cats.querySelector('h5');
         document.getElementById('krSubTitle').textContent=title;
         var body=document.getElementById('krSubBody');
-        var html='<div class="kr-sub-panel"><h4 class="kr-sub-panel-t">'+(hasGroups?'CATEGORÍAS':'MARCAS')+'</h4>';
+        var html='<div class="kr-sub-panel"><h4 class="kr-sub-panel-t">'+(key==='kits'?'MARCAS':(hasGroups?'CATEGORÍAS':'MARCAS'))+'</h4>';
         html+=cats?'<div class="kr-sub-cats">'+cats.innerHTML+'</div>':'';
         html+='<a class="kr-sub-vermas" href="'+((vermas&&vermas.getAttribute('href'))||('/collections/'+key))+'">Ver Todo '+title+'</a></div>';
         html+='<div class="kr-sub-prods" id="krSubProds"><p class="krika-mega-loading">Cargando...</p></div>';
         body.innerHTML=html;
+        if(key==='kits')body.querySelectorAll('.kr-sub-cats h5').forEach(function(el){el.remove()});
         body.querySelectorAll('.kr-sub-cats .krika-mega-vermas').forEach(function(el){el.remove()});
         body.querySelectorAll('.kr-sub-cats b').forEach(function(el){if(!el.textContent.trim())el.remove()});
         K.fixLinks(body);

@@ -351,6 +351,30 @@ pickup-availability-drawer address,
   font-size: 75% !important;
 }
 
+/* Align review stars with the card text on every screen size. */
+  .m-product-card .m-product-card__reviews,
+  .m-product-card .jdgm-widget.jdgm-preview-badge {
+    width: 100%;
+    text-align: left !important;
+    justify-content: flex-start !important;
+    float: none !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .m-product-card .jdgm-prev-badge,
+  .m-product-card .jdgm-prev-badge__stars {
+    float: none !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
+  }
+
+@media screen and (min-width: 768px) {
+  .m-product-card .m-product-card__reviews {
+    margin-top: 8px;
+  }
+}
+
 @media screen and (max-width: 767px) {
   /* Keep card content rows equal when brands or prices wrap. */
   .m-product-card__vendor {
