@@ -1,0 +1,181 @@
+{% comment %}theme-check-disable UndefinedObject{% endcomment %}
+{%- assign pick_up_availabilities = product_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+
+{%- if pick_up_availabilities.size > 0 -%}
+  <pickup-availability-preview class="pickup-availability-preview">
+    {%- assign closest_location = pick_up_availabilities.first -%}
+
+    {% if closest_location.available %}
+      <div class="icon-wrapper box-icon">
+        {% render 'icon-location-arrow' %}
+      </div>
+    {% endif %}
+
+    <div class="pickup-availability-info">
+      {%- if closest_location.available -%}
+        <p class="caption-large">
+          {{
+            'products.product.pickup_availability.pick_up_available_at_html'
+            | t: location_name: closest_location.location.name
+          }}
+        </p>
+        {% comment %}<p class="caption">{{ closest_location.pick_up_time }}.</p>{% endcomment %}
+        <button
+          id="ShowPickupAvailabilityDrawer"
+          class="pickup-availability-button button"
+          aria-haspopup="dialog"
+        >
+          {%- if pick_up_availabilities.size == 1 -%}
+            <span class="animated-link__underline--reverse">
+              {{- 'products.product.pickup_availability.check_location' | t -}}
+            </span>
+          {%- else -%}
+            <span class="animated-link__underline">
+              {{- 'products.product.pickup_availability.check_other_stores' | t -}}
+            </span>
+          {%- endif -%}
+        </button>
+      {%- else -%}
+        <p class="caption-large">
+          {{
+            'products.product.pickup_availability.pick_up_unavailable_at_html'
+            | t: location_name: closest_location.location.name
+          }}
+        </p>
+        {%- if pick_up_availabilities.size > 1 -%}
+          <button
+            id="ShowPickupAvailabilityDrawer"
+            class="pickup-availability-button button"
+            aria-haspopup="dialog"
+          >
+            <span class="animated-link__underline--reverse">
+              {{- 'products.product.pickup_availability.check_other_stores' | t -}}
+            </span>
+          </button>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </pickup-availability-preview>
+
+  <pickup-availability-drawer
+    tabindex="-1"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="PickupAvailabilityHeading"
+  >
+    <div class="pickup-availability-overlay color-background-3"></div>
+
+    <div class="pickup-availability-drawer-inner">
+      <button
+        class="pickup-availability-drawer-button modal-close-button focus-inset"
+        type="button"
+        aria-label="{{ 'accessibility.close' | t }}"
+        tabindex="0"
+      >
+        {%- render 'icon-close-new' -%}
+      </button>
+      <div class="pickup-availability-drawer-header">
+        <h3
+          class="h3 pickup-availability-drawer-title"
+          id="PickupAvailabilityHeading"
+        >
+          {{ 'products.product.pickup_availability.view_store_drwawer_title' | t }}
+        </h3>
+        {%- for availability in pick_up_availabilities -%}
+          {%- if availability.available -%}
+            <span>
+              {{ 'products.product.pickup_availability.pick_up_available' | t -}}
+              .
+            </span>
+            <span> {{ availability.pick_up_time | escape }}. </span>
+          {%- endif -%}
+        {% endfor %}
+      </div>
+
+      <div class="pickup-availability-drawer-product">
+        <div class="pickup-availability-drawer-product__media">
+          {% if product_variant.product.featured_media %}
+            {{
+              product_variant.product.featured_media
+              | image_url: width: 240
+              | image_tag: loading: 'lazy', widths: '120, 240', sizes: '120px, 240px'
+            }}
+          {%- else -%}
+            {{ 'product-apparel-2' | placeholder_svg_tag }}
+          {%- endif -%}
+        </div>
+
+        <div class="pickup-availability-drawer-product__details">
+          {% if product_variant.product.vendor != blank %}
+            <div class="pickup-availability-drawer-product__vendor card__subtitle">
+              {{ product_variant.product.vendor }}
+            </div>
+          {% endif %}
+          <div class="pickup-availability-drawer-product__name font-weight-medium">
+            {{ product_variant.product.title | escape }}
+          </div>
+
+          <div class="pickup-availability-drawer-product__variants">
+            {%- unless product_variant.product.has_only_default_variant -%}
+              {%- for product_option in product_variant.product.options_with_values -%}
+                <div class="pickup-availability-drawer-product__variant">
+                  {{ product_option.name | escape }}:
+                  {%- for value in product_option.values -%}
+                    {%- if product_option.selected_value == value -%}
+                      <span class="pickup-availability-drawer-product__variant-value">
+                        {{ value | escape }}
+                      </span>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              {%- endfor -%}
+            {%- endunless -%}
+          </div>
+          {% render 'price',
+            product: product_variant.product,
+            price_class: 'card-mini__content--price',
+            show_badges: true
+          %}
+        </div>
+      </div>
+
+      <div class="pickup-availability-drawer-list--title">Stores</div>
+
+      <ul
+        class="pickup-availability-drawer-list list-unstyled"
+        role="list"
+        data-store-availability-drawer-content
+      >
+        {%- for availability in pick_up_availabilities -%}
+          <li class="pickup-availability-drawer-list__item">
+            {% render 'icon-location-arrow' %}
+            {% comment %}
+              <div class="pickup-availability-drawer-list__item-icon">
+              	{% render 'icon-location' %}
+              </div>
+            {% endcomment %}
+            {% comment %}
+              <div
+              	class="pickup-availability-drawer-list__item-details"
+              	style="border: 1px solid"
+              >
+              	<p class="font-weight-medium">
+              		{{ availability.location.name | escape }}
+              	</p>
+              </div>
+            {% endcomment %}
+
+            {%- assign address = availability.location.address -%}
+            <address class="pickup-availability-drawer-list__item-address">
+              {{ address | format_address }}
+
+              {%- if address.phone.size > 0 -%}
+                {{ address.phone }}
+              {%- endif -%}
+            </address>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </pickup-availability-drawer>
+{%- endif -%}

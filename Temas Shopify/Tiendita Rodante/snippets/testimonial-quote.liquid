@@ -1,0 +1,41 @@
+<div class="testimonial__quote swiper-slide">
+  <div>
+    {% render 'testimonials-stars', enable_stars: enable_stars, rating: rating %}
+    <div class="block__text-title h5">
+      {{ text_title }}
+    </div>
+    <p class="block__text">
+      {{ text }}
+    </p>
+  </div>
+  <div class="block__customer-info">
+    {% if author_image != blank %}
+      <div
+        class="customer-info__avatar"
+      >
+        {% capture style %}
+						object-fit: {{ image_fit }};
+				{% endcapture %}
+        {{
+          author_image
+          | image_url: width: author_image.width
+          | image_tag: loading: 'lazy', widths: '275, 550, 750', style: style
+        }}
+      </div>
+    {% endif %}
+    <div
+      class="customer-info__author "
+    >
+      <a
+        href="{{ author_social_link }}"
+        aria-label="link to {{ author_name }}'s profile"
+        class="customer-info__author--name animated-link__underline--reverse"
+      >
+        {{ author_name }}
+      </a>
+      <p class="customer-info__author--position">
+        {{ author_position }}
+      </p>
+    </div>
+  </div>
+</div>

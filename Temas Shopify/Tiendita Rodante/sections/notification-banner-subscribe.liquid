@@ -1,0 +1,616 @@
+{% liquid
+  assign color_scheme = 'background-1'
+  assign section_image = section.settings.image
+  assign heading = section.settings.heading
+  assign heading_size = section.settings.heading_size
+  assign image_fit = section.settings.image_fit
+  assign position = section.settings.position
+  assign width = section.settings.width | append: 'px'
+  assign description = section.settings.description
+  assign button_label = section.settings.button_label
+  assign button_style = section.settings.button_style
+  assign text = section.settings.text
+  assign image_position = 'top'
+  assign backlight_animation = section.settings.backlight_animation
+%}
+
+<div
+  class="
+    notification-banner
+    notification-subscribe
+    notification-banner-image--{{ image_position }}
+    popup popup--{{ position }}
+    {% if section_image == blank %} notification-banner--no-image {% endif %}
+    color-{{ color_scheme }} background
+    {% if backlight_animation %} notify__backlight-led-animation--bg{% endif %}
+  "
+  {% if section.settings['popup-id'] != blank %}
+    id="{{ section.settings.popup-id }}"
+  {% endif %}
+  data-limit-display="{{ section.settings.limit-display }}"
+  data-limit-lifetime="{{ section.settings.limit-cache }}"
+  data-open-trigger="{{ section.settings.trigger-open }}"
+  data-open-delay-number="{{ section.settings.trigger-open-delay }}"
+  data-open-scroll-position="{{ section.settings.open-scroll-position }}"
+  data-open-scroll-type="{{ section.settings.open-scroll-type }}"
+  {% if section.settings['manual-selector'] != blank %}
+    data-open-manual-selector="{{ section.settings.manual-selector }}"
+  {% endif %}
+  data-close-trigger="{{ section.settings.trigger-close }}"
+  data-close-delay-number="{{ section.settings.trigger-close-delay }}"
+  data-close-scroll-position="{{ section.settings.close-scroll-position }}"
+  data-close-scroll-type="{{ section.settings.close-scroll-type }}"
+  data-open-animation="popupOpen{{ section.settings.open-animation }}"
+  data-exit-animation="popupExit{{ section.settings.exit-animation }}"
+  data-overlay="{{ section.settings.show-overlay }}"
+  data-mobile-disable="{{ section.settings.mobile }}"
+  data-body-scroll-disable="{{ section.settings.scrolling }}"
+  data-overlay-close="{{ section.settings.overlay-close }}"
+  data-esc-close="{{ section.settings.esc-close }}"
+  data-f4-close="{{ section.settings.f4-close }}"
+  data-id="{{ section.id }}"
+  style="width: {{ width }}"
+>
+  <div class="notification__overflow">
+    <div class="popup-wrap">
+      <div class="popup-container">
+        <div class="popup-outer popup-outer-image--{{ image_position }}">
+          <button
+            type="button"
+            class="link modal-close-button popup-close focus-inset"
+            aria-label="{{ 'accessibility.close' | t }}"
+            tabindex="0"
+          >
+            {% render 'icon-close' %}
+          </button>
+          {% if section_image != blank %}
+            <div
+              class="notification-banner__image"
+              {% if image_position == 'top' or image_position == 'bottom' %}
+                style="padding-bottom: 55%;"
+              {% endif %}
+            >
+              {% capture style %}
+           		 object-fit: {{ image_fit }};
+           		{% endcapture %}
+              {{
+                section_image
+                | image_url: width: section_image.width
+                | image_tag: loading: 'lazy', widths: '275, 550, 750', style: style
+              }}
+            </div>
+          {% endif %}
+
+          <div class="base-content--wrapper">
+            <div class="popup-heading--wrapper">
+              {% render 'subtitle',
+                text: section.settings.subheading,
+                pulse: false,
+                className: 'image-banner__subheading subheading'
+              %}
+              {% if heading != blank %}
+                <h2 class="popup-heading {{ heading_size }}">
+                  {{ heading }}
+                </h2>
+              {% endif %}
+              {%- if text != blank -%}
+                <div class="popup-heading__text richtext__content richtext_custom">
+                  {{ text }}
+                </div>
+              {%- endif -%}
+            </div>
+
+            {% form 'customer', class: 'newsletter-form' %}
+              <div
+                class="newsletter-form__inner {% if section.settings.width <= 500 %} newsletter-form__inner_column {% endif %}"
+                {{ settings.shopify_attributes }}
+              >
+                <input
+                  type="hidden"
+                  name="contact[tags]"
+                  value="newsletter"
+                >
+                <div class="newsletter-form__field-wrapper">
+                  <div class="field">
+                    <input
+                      dir="ltr"
+                      id="NewsletterForm--{{ section.id }}"
+                      type="email"
+                      name="contact[email]"
+                      class="field__input field focus-inset"
+                      value="{{ form.email }}"
+                      aria-required="true"
+                      autocorrect="off"
+                      autocapitalize="off"
+                      autocomplete="email"
+                      pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+                      {% if form.errors %}
+                        autofocus
+                        aria-invalid="true"
+                        aria-describedby="Newsletter-error--{{ section.id }}"
+                      {% elsif form.posted_successfully? %}
+                        aria-describedby="Newsletter-success--{{ section.id }}"
+                      {% endif %}
+                      placeholder="{{ section.settings.placeholder_input }}"
+                      required
+                      tabindex="0"
+                    >
+                    <label
+                      class="visually-hidden"
+                      for="NewsletterForm--{{ section.id }}"
+                    >
+                      {{ 'newsletter.label' | t }}
+                    </label>
+                  </div>
+                </div>
+                <div class="button_wrapper {% if section.settings.button_style == 'primary' %}custom-hover{% endif %}">
+                  <button
+                    type="submit"
+                    class="button button--{{ button_style }} focus-inset"
+                    name="commit"
+                    data-button-text="{{ button_label }}"
+                    tabindex="0"
+                  >
+                    <div class="button__content">
+                      <span
+                        class="button__label"
+                        data-label="{{- 'newsletter.button_label' | t | escape -}}"
+                      >
+                        {{ button_label }}
+                      </span>
+                    </div>
+                    <span class="button_circle"> </span>
+                  </button>
+                </div>
+              </div>
+              {%- if form.errors -%}
+                <small
+                  class="newsletter-form__message form__message"
+                  id="Newsletter-error--{{ section.id }}"
+                >
+                  {%- render 'icon-error' -%}
+                  {{- form.errors.translated_fields.email | capitalize }}
+                  {{ form.errors.messages.email -}}
+                </small>
+              {%- endif -%}
+              {%- if form.posted_successfully? -%}
+                <h3
+                  class="newsletter-form__message newsletter-form__message--success form__message"
+                  id="Newsletter-success--{{ section.id }}"
+                  tabindex="-1"
+                  autofocus
+                >
+                  {% render 'icon-success' -%}
+                  {{- 'newsletter.success' | t }}
+                </h3>
+              {%- endif -%}
+            {% endform %}
+            {% if description %}
+              <div
+                class="popup-text richtext__content richtext_custom"
+                {{ section.shopify_attributes }}
+              >
+                {{ description }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% if section.settings['show-overlay'] %}
+  <div class="popup-overlay"></div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.overlay-group.popup.name",
+  "limit": 1,
+  "enabled_on": {
+    "groups": ["custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.image.header.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.overlay-group.notification-banner.settings.image.label"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "t:sections.all.card.image_fit.label",
+      "options": [
+        {
+          "value": "contain",
+          "label": "t:sections.all.card.image_fit.options__1.label"
+        },
+        {
+          "value": "cover",
+          "label": "t:sections.all.card.image_fit.options__2.label"
+        }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.content_options.header.content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:sections.all.subheading.label",
+      "default": "Section Summary"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Here can be your main title",
+      "label": "t:sections.all.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h3",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "default": "Details Go Here",
+      "label": "t:sections.overlay-group.popup.blocks.subscribe_form.settings.description.label"
+    },
+    {
+      "type": "text",
+      "id": "placeholder_input",
+      "default": "Your Email",
+      "label": "t:sections.overlay-group.popup.blocks.subscribe_form.settings.placeholder_input.label"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Subscribe",
+      "label": "t:sections.overlay-group.popup.blocks.subscribe_form.settings.button_label.label"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:sections.all.button.button_style.options__1.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:sections.all.button.button_style.options__2.label"
+        }
+      ],
+      "default": "primary",
+      "label": "t:sections.all.button_style.label_2"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "description",
+      "default": "Additional text for subscribe form.",
+      "label": "t:sections.overlay-group.popup.blocks.subscribe_form.settings.description.label"
+    },
+    {
+      "type": "range",
+      "id": "limit-display",
+      "min": 0,
+      "max": 100,
+      "default": 0,
+      "label": "t:sections.overlay-group.all.settings.limit-display.label",
+      "info": "t:sections.overlay-group.all.settings.limit-display.info"
+    },
+    {
+      "type": "number",
+      "id": "limit-cache",
+      "default": 30,
+      "label": "t:sections.overlay-group.all.settings.limit-cache.label"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "t:sections.overlay-group.all.settings.position.options__1.label"
+        },
+        {
+          "value": "top",
+          "label": "t:sections.overlay-group.all.settings.position.options__2.label"
+        },
+        {
+          "value": "top-right",
+          "label": "t:sections.overlay-group.all.settings.position.options__3.label"
+        },
+        {
+          "value": "left",
+          "label": "t:sections.overlay-group.all.settings.position.options__4.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.overlay-group.all.settings.position.options__5.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.overlay-group.all.settings.position.options__6.label"
+        },
+        {
+          "value": "bottom-left",
+          "label": "t:sections.overlay-group.all.settings.position.options__7.label"
+        },
+        {
+          "value": "bottom",
+          "label": "t:sections.overlay-group.all.settings.position.options__8.label"
+        },
+        {
+          "value": "bottom-right",
+          "label": "t:sections.overlay-group.all.settings.position.options__9.label"
+        }
+      ],
+      "default": "bottom-left",
+      "label": "t:sections.overlay-group.all.settings.position.label"
+    },
+    {
+      "type": "text",
+      "id": "popup-id",
+      "label": "t:sections.overlay-group.all.settings.popup-id.label"
+    },
+    {
+      "type": "select",
+      "id": "trigger-open",
+      "label": "t:sections.overlay-group.all.settings.trigger-open.label",
+      "options": [
+        {
+          "value": "delay",
+          "label": "t:sections.overlay-group.all.settings.trigger.options__1.label"
+        },
+        {
+          "value": "scroll",
+          "label": "t:sections.overlay-group.all.settings.trigger.options__2.label"
+        },
+        {
+          "value": "exit",
+          "label": "t:sections.overlay-group.all.settings.trigger.options__3.label"
+        },
+        {
+          "value": "manual",
+          "label": "t:sections.overlay-group.all.settings.trigger.options__4.label"
+        }
+      ],
+      "default": "delay"
+    },
+    {
+      "type": "range",
+      "id": "trigger-open-delay",
+      "label": "t:sections.overlay-group.all.settings.trigger-open-delay.label",
+      "min": 0,
+      "max": 100,
+      "unit": "sec",
+      "default": 1
+    },
+    {
+      "type": "select",
+      "id": "open-scroll-type",
+      "options": [
+        {
+          "value": "px",
+          "label": "t:sections.overlay-group.all.settings.scroll-type.options__1.label"
+        },
+        {
+          "value": "%",
+          "label": "t:sections.overlay-group.all.settings.scroll-type.options__2.label"
+        }
+      ],
+      "default": "%",
+      "label": "t:sections.overlay-group.all.settings.open-scroll-type.label"
+    },
+    {
+      "type": "number",
+      "id": "open-scroll-position",
+      "default": 50,
+      "label": "t:sections.overlay-group.all.settings.open-scroll-position.label"
+    },
+    {
+      "type": "text",
+      "id": "manual-selector",
+      "label": "t:sections.overlay-group.all.settings.manual-selector.label",
+      "info": "t:sections.overlay-group.all.settings.manual-selector.info"
+    },
+    {
+      "type": "select",
+      "id": "trigger-close",
+      "label": "t:sections.overlay-group.all.settings.trigger-close.label",
+      "options": [
+        {
+          "value": "delay",
+          "label": "t:sections.overlay-group.all.settings.trigger.options__1.label"
+        },
+        {
+          "value": "scroll",
+          "label": "t:sections.overlay-group.all.settings.trigger.options__2.label"
+        },
+        {
+          "value": "none",
+          "label": "t:sections.overlay-group.all.settings.trigger.options__5.label"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "trigger-close-delay",
+      "label": "t:sections.overlay-group.all.settings.trigger-close-delay.label",
+      "min": 1,
+      "max": 100,
+      "unit": "sec",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "close-scroll-type",
+      "options": [
+        {
+          "value": "px",
+          "label": "t:sections.overlay-group.all.settings.scroll-type.options__1.label"
+        },
+        {
+          "value": "%",
+          "label": "t:sections.overlay-group.all.settings.scroll-type.options__2.label"
+        }
+      ],
+      "default": "%",
+      "label": "t:sections.overlay-group.all.settings.close-scroll-type.label"
+    },
+    {
+      "type": "number",
+      "id": "close-scroll-position",
+      "default": 50,
+      "label": "t:sections.overlay-group.all.settings.close-scroll-position.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.overlay-group.all.settings.animation.header.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "backlight_animation",
+      "default": true,
+      "label": "t:sections.all.backlight_animation.label"
+    },
+    {
+      "type": "range",
+      "id": "width",
+      "min": 200,
+      "max": 1920,
+      "unit": "px",
+      "step": 20,
+      "default": 460,
+      "label": "t:sections.overlay-group.all.settings.width.label"
+    },
+    {
+      "type": "select",
+      "id": "open-animation",
+      "label": "t:sections.overlay-group.all.settings.open-animation.label",
+      "options": [
+        {
+          "value": "Fade",
+          "label": "t:sections.overlay-group.all.settings.animation.options__1.label"
+        },
+        {
+          "value": "Slide",
+          "label": "t:sections.overlay-group.all.settings.animation.options__2.label"
+        },
+        {
+          "value": "Zoom",
+          "label": "t:sections.overlay-group.all.settings.animation.options__3.label"
+        },
+        {
+          "value": "SlideFade",
+          "label": "t:sections.overlay-group.all.settings.animation.options__4.label"
+        }
+      ],
+      "default": "Fade"
+    },
+    {
+      "type": "select",
+      "id": "exit-animation",
+      "label": "t:sections.overlay-group.all.settings.exit-animation.label",
+      "options": [
+        {
+          "value": "Fade",
+          "label": "t:sections.overlay-group.all.settings.animation.options__1.label"
+        },
+        {
+          "value": "Slide",
+          "label": "t:sections.overlay-group.all.settings.animation.options__2.label"
+        },
+        {
+          "value": "Zoom",
+          "label": "t:sections.overlay-group.all.settings.animation.options__3.label"
+        },
+        {
+          "value": "SlideFade",
+          "label": "t:sections.overlay-group.all.settings.animation.options__4.label"
+        }
+      ],
+      "default": "Fade"
+    },
+    {
+      "type": "checkbox",
+      "id": "show-overlay",
+      "label": "t:sections.overlay-group.all.settings.show-overlay.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.overlay-group.all.settings.advanced.header.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile",
+      "label": "t:sections.overlay-group.all.settings.advanced.mobile.label",
+      "info": "t:sections.overlay-group.all.settings.advanced.mobile.info",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "scrolling",
+      "label": "t:sections.overlay-group.all.settings.advanced.scrolling.label",
+      "info": "t:sections.overlay-group.all.settings.advanced.scrolling.info",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "overlay-close",
+      "label": "t:sections.overlay-group.all.settings.advanced.overlay-close.label",
+      "info": "t:sections.overlay-group.all.settings.advanced.overlay-close.info",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "esc-close",
+      "label": "t:sections.overlay-group.all.settings.advanced.esc-close.label",
+      "info": "t:sections.overlay-group.all.settings.advanced.esc-close.info",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "f4-close",
+      "label": "t:sections.overlay-group.all.settings.advanced.f4-close.label",
+      "info": "t:sections.overlay-group.all.settings.advanced.f4-close.info",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.overlay-group.popup.name"
+    }
+  ]
+}
+{% endschema %}

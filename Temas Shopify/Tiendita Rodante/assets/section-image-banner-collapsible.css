@@ -1,0 +1,231 @@
+.image-banner-collapsible {
+  position: relative;
+  display: flex;
+}
+.image-banner-collapsible::before {
+  content: "";
+  display: block;
+  padding-bottom: var(--slide-height);
+}
+.image-banner-collapsible .section-header {
+  margin-bottom: 4rem;
+  max-width: 28rem;
+}
+@media screen and (min-width: 576px) {
+  .image-banner-collapsible .section-header {
+    max-width: 40rem;
+  }
+}
+@media screen and (min-width: 990px) {
+  .image-banner-collapsible .section-header {
+    max-width: 57.6rem;
+  }
+}
+.image-banner-collapsible .section-header .description {
+  font-size: 1.6rem;
+}
+@media screen and (min-width: 990px) {
+  .image-banner-collapsible .section-header .description {
+    font-size: 2.2rem;
+  }
+}
+.image-banner-collapsible .section-header .section-header__wrapper {
+  gap: 0.8rem;
+}
+.image-banner-collapsible .image-banner-collapsible-header-content-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3.2rem 0;
+}
+@media screen and (min-width: 990px) {
+  .image-banner-collapsible .image-banner-collapsible-header-content-wrapper {
+    padding: 6.4rem 0;
+  }
+}
+.image-banner-collapsible .container {
+  position: relative;
+  z-index: 3;
+}
+.image-banner-collapsible__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  display: flex;
+}
+.image-banner-collapsible__bg img,
+.image-banner-collapsible__bg svg {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.image-banner-collapsible.collapsible-content * {
+  box-sizing: border-box;
+}
+.image-banner-collapsible.collapsible-content .collapsible-content__wrapper .section-header__title {
+  word-wrap: break-word;
+}
+.image-banner-collapsible.collapsible-content .section-header__title {
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
+}
+.image-banner-collapsible .faq-button-container {
+  margin-top: 2.4rem;
+}
+.image-banner-collapsible .collapsible-content__item {
+  border: 0.1rem solid rgba(var(--color-border));
+  transition: opacity var(--duration-default);
+  border-radius: var(--border-radius-main);
+  overflow: hidden;
+}
+@media screen and (min-width: 1100px) {
+  .image-banner-collapsible .collapsible-content__item--opacity {
+    opacity: 0.5;
+  }
+}
+.image-banner-collapsible .collapsible-content__content {
+  max-width: 100%;
+}
+@media (min-width: 750px) {
+  .image-banner-collapsible .collapsible-content__content {
+    max-width: 50%;
+  }
+}
+@media (min-width: 990px) {
+  .image-banner-collapsible .collapsible-content__content {
+    max-width: 37.14%;
+  }
+}
+.image-banner-collapsible .collapsible-content__toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: 1.6rem;
+  width: 100%;
+  padding: 1.6rem 2.4rem;
+  cursor: pointer;
+  background-color: rgb(var(--color-background));
+}
+.image-banner-collapsible .collapsible-content__toggle-group {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  max-width: calc(100% - 4.6rem);
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+.image-banner-collapsible .collapsible-content__toggle:focus, .image-banner-collapsible .collapsible-content__toggle:focus-visible {
+  outline-offset: 0.1rem;
+}
+.image-banner-collapsible .collapsible-content__item .collapsible-content__answer {
+  margin-top: -0.8rem;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.image-banner-collapsible .collapsible-content__item.active .collapsible-content__answer {
+  margin-top: -0.8rem;
+  opacity: 1;
+}
+.image-banner-collapsible .collapsible-content__question {
+  margin: 0;
+  transition: var(--duration-default);
+  color: rgb(var(--color-foreground-title));
+  text-transform: var(--font-heading-text-transform);
+  word-wrap: break-word;
+  width: 100%;
+}
+@media screen and (max-width: 576px) {
+  .image-banner-collapsible .collapsible-content__question {
+    font-size: 1.6rem !important;
+  }
+}
+.image-banner-collapsible .collapsible-content__answer {
+  display: none;
+  padding: 0 2.4rem 1.5rem 2.4rem;
+  letter-spacing: -0.16px;
+  background-color: rgb(var(--color-background));
+}
+.image-banner-collapsible .collapsible-content__answer-inner {
+  word-wrap: break-word;
+  font-size: calc(var(--font-body-scale) * 1rem);
+  margin: 0;
+  overflow-wrap: anywhere;
+  max-width: min(90%, 54.8rem);
+}
+.image-banner-collapsible .collapsible-content__answer-inner p {
+  margin: 0;
+  color: rgb(var(--color-foreground-secondary));
+}
+.no-js .image-banner-collapsible .collapsible-content__answer {
+  display: block;
+}
+.image-banner-collapsible .collapsible-content__icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  color: rgb(var(--color-foreground-tertiary));
+}
+.image-banner-collapsible .collapsible-content__icon .icon-close {
+  display: none;
+}
+.no-js .image-banner-collapsible .collapsible-content__icon .icon-close {
+  display: block;
+}
+.image-banner-collapsible .collapsible-content__icon .icon-plus {
+  display: block;
+}
+.no-js .image-banner-collapsible .collapsible-content__icon .icon-plus {
+  display: none;
+}
+.active .image-banner-collapsible .collapsible-content__icon .icon-close {
+  display: block;
+}
+.active .image-banner-collapsible .collapsible-content__icon .icon-plus {
+  display: none;
+}
+.image-banner-collapsible .collapsible-content__icon svg {
+  transition: transform var(--duration-default);
+}
+.image-banner-collapsible .faq-button-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1.6rem;
+  max-width: 100%;
+}
+@media (min-width: 750px) {
+  .image-banner-collapsible .faq-button-container {
+    max-width: 50%;
+  }
+}
+@media (min-width: 990px) {
+  .image-banner-collapsible .faq-button-container {
+    max-width: 37.14%;
+  }
+}
+.image-banner-collapsible .faq-button-container.center {
+  justify-content: center;
+}
+.image-banner-collapsible .faq-button-container__link {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+  font-size: 1.6rem;
+}
+.image-banner-collapsible .faq-button-container__link:hover {
+  color: rgb(var(--color-accent));
+}
+.image-banner-collapsible .image-banner__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background-color: rgb(var(--color-overlay));
+  transition: opacity var(--duration-default);
+}

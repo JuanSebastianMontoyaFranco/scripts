@@ -1,0 +1,19 @@
+.main-page .page-title {
+  margin-top: 0;
+}
+.main-page .main-page-title {
+  margin: 0;
+}
+.main-page .page-header + .rte {
+  margin-top: 2.4rem;
+}
+
+.page-placeholder-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.page-placeholder {
+  width: 52.5rem;
+  height: 52.5rem;
+}

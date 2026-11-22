@@ -1,0 +1,98 @@
+.pagination-wrapper {
+  margin-top: 6.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pagination__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.pagination__item {
+  position: relative;
+  padding: 0;
+  font-size: 1.8rem;
+  color: rgb(var(--color-foreground-secondary));
+  text-decoration: none;
+  border: none;
+  transition: color var(--duration-default);
+  min-height: 4.4rem;
+  min-width: 4.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (max-width: 576px) {
+  .pagination__item {
+    min-height: 3.4rem;
+    min-width: 3.4rem;
+    font-size: 1.6rem;
+  }
+}
+.pagination__item:not(.pagination__item--current):hover, .pagination__item:focus {
+  color: rgb(var(--color-foreground));
+}
+.pagination__item--current {
+  color: rgb(var(--color-button-text));
+  background: rgba(var(--color-accent));
+  border-radius: 100%;
+}
+.pagination__item:not(.pagination__item--current):hover {
+  color: rgb(var(--color-foreground));
+}
+.pagination__item-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.4rem;
+  height: 4.4rem;
+  color: rgb(var(--color-accent));
+  transition: opacity var(--duration-default);
+  background-color: rgb(var(--color-background-input));
+  border-radius: 50%;
+  border: 0.1rem solid rgb(var(--color-border-input));
+}
+.pagination__item-arrow svg {
+  fill: rgb(var(--color-accent));
+}
+.pagination__item-arrow:hover {
+  cursor: pointer;
+}
+@media screen and (max-width: 576px) {
+  .pagination__item-arrow {
+    width: 3.4rem;
+    height: 3.4rem;
+  }
+}
+.pagination__item--prev {
+  margin-right: 2.4rem;
+}
+.pagination__item--prev svg {
+  transform: rotate(180deg);
+}
+.pagination__item--prev:hover {
+  border-color: rgb(var(--color-border-on-hover));
+  opacity: 0.8;
+}
+@media screen and (max-width: 576px) {
+  .pagination__item--prev {
+    margin-right: 0.4rem;
+  }
+}
+.pagination__item--next {
+  margin-left: 2.4rem;
+}
+.pagination__item--next svg {
+  transform: rotate(0deg);
+}
+.pagination__item--next:hover {
+  border-color: rgb(var(--color-border-on-hover));
+  opacity: 0.8;
+}
+@media screen and (max-width: 576px) {
+  .pagination__item--next {
+    margin-left: 0.4rem;
+  }
+}

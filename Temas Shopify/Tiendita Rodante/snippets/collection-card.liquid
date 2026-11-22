@@ -1,0 +1,169 @@
+{{ 'component-collection-card.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  case media_size
+    when 'landscape'
+      assign section_size = '48.84%'
+    when 'portrait'
+      assign section_size = '125%'
+    when 'square'
+      assign section_size = '100%'
+    else
+      assign section_size = '100%'
+  endcase
+
+  if media_size_mobile != blank and media_size != media_size_mobile
+    case media_size_mobile
+      when 'landscape'
+        assign section_size_mobile = '48.84%'
+      when 'portrait'
+        assign section_size_mobile = '125%'
+      when 'square'
+        assign section_size_mobile = '100%'
+      else
+        assign section_size_mobile = '100%'
+    endcase
+  endif
+
+  if media_fit == blank
+    assign image_fit = 'cover'
+  else
+    assign image_fit = media_fit
+  endif
+%}
+
+<div
+  class="collection-card color-{{ block_color_scheme }}"
+  style="--image-size: {{ section_size }}; {% if block_image != blank or collection_image != blank %}background-color: transparent;{% endif %}"
+  data-id="{{ section.id }}-{{ index }}"
+>
+  {% style %}
+    {% if media_size_mobile != blank and media_size != media_size_mobile %}
+    	@media screen and (max-width: 749px) {
+    		[data-id="{{ section.id }}-{{ index }}"].collection-card::after {
+    			padding-bottom: {{ section_size_mobile }};
+    		}
+    	}
+    {% endif %}
+    [data-id="{{ section.id }}-{{ index }}"] .collection-card__img {
+    	--opacity-overlay: {{ overlay_opacity_mobile | default: overlay_opacity }};
+    	@media screen and (min-width: 990px) {
+    		--opacity-overlay: {{ overlay_opacity }};
+    	}
+    }
+  {% endstyle %}
+
+  <div class="collection-card__img-wrapper ">
+    <div class="collection-card__img-type">
+      <a
+        class="collection-card__img have-overlay"
+        {% if block_collection != blank %}
+          href="{{ url }}"
+          aria-label=""
+          {{ block_collection.title | escape }}
+        {% endif %}
+      >
+        {% if additional_image != blank %}
+          {% liquid
+            if block_image != blank
+              assign collection_image = block_image
+            elsif collection_image != blank
+              assign collection_image = additional_image
+            elsif block_collection.featured_image != blank
+              assign collection_image = block_collection.featured_image
+            endif
+            assign image_height = additional_image.width | divided_by: additional_image.aspect_ratio
+            assign image_width = additional_image.width
+            assign sizes = '(min-width: 750px) 50vw, 100vw'
+          %}
+          {%- capture style -%}
+						object-fit : {{ image_fit }};
+					{%- endcapture -%}
+          {{
+            additional_image
+            | image_url: width: 3840
+            | image_tag:
+              loading: 'lazy',
+              width: image_width,
+              height: image_height,
+              sizes: sizes,
+              widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+              style: style
+          }}
+        {% else %}
+          {% if block_image != blank or collection_image != blank or block_collection.featured_image %}
+            {% liquid
+              if block_image != blank
+                assign collection_image = block_image
+              elsif collection_image != blank
+                assign collection_image = collection_image
+              elsif block_collection.featured_image != blank
+                assign collection_image = block_collection.featured_image
+              endif
+              assign image_height = collection_image.width | divided_by: collection_image.aspect_ratio
+              assign image_width = collection_image.width
+              assign sizes = '(min-width: 750px) 50vw, 100vw'
+            %}
+            {%- capture style -%}
+							object-fit : {{ image_fit }};
+						{%- endcapture -%}
+            {{
+              collection_image
+              | image_url: width: 3840
+              | image_tag:
+                loading: 'lazy',
+                width: image_width,
+                height: image_height,
+                sizes: sizes,
+                widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+                style: style
+            }}
+          {%- else -%}
+            {% assign collection_index = index | modulo: 3 | plus: 1 %}
+            {{ 'collection-apparel-' | append: collection_index | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+        {% endif %}
+      </a>
+    </div>
+  </div>
+  <div class="collection-card__content {{ content_alignment }}">
+    <{{ heading_tag | default: 'h3' }} class="collection-card__title {% if text_center == "center" %} collection-card__title-position{% endif %} {{ heading_size }}">
+      <a
+        class="full-unstyled-link"
+        {% if block_collection != blank %}
+          href="{{ url }}"
+          aria-label="{{ block_collection.title | escape }}"
+        {% endif %}
+      >
+        {% if block_collection != blank %}
+          {{ collection_title }}
+        {% else %}
+          {{- 'general.card.collection_name' | t -}}
+        {% endif %}
+      </a>
+    </{{ heading_tag | default: 'h3' }}>
+    {% if show_collection_desc %}
+      <a
+        class="collection-card__overlay-link"
+        {% if block_collection != blank %}
+          href="{{ url }}"
+          aria-label=""
+          {{ block_collection.title | escape }}
+        {% endif %}
+      >
+      </a>
+      <div class="collection-card__desc richtext__content medium-font">
+        {%- if custom_desc != blank -%}
+          {{ custom_desc }}
+        {%- elsif collection_desc != blank -%}
+          {{ collection_desc }}
+        {%- endif -%}
+      </div>
+    {% endif %}
+    {% if btn_label != blank %}
+      <div class="collection-card__btn">
+        {% render 'button', btn_label: btn_label, btn_link: btn_link, btn_style: btn_style %}
+      </div>
+    {% endif %}
+  </div>
+</div>

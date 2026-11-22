@@ -1,0 +1,351 @@
+{{ 'auth-user.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  {% render 'section-margin' %}
+{%- endstyle -%}
+
+<script src="{{ 'input.js' | asset_url }}" defer="defer"></script>
+
+{% liquid
+  assign text = section.settings.text
+  assign heading = section.settings.heading
+  assign heading_size = section.settings.heading_size
+  assign register_terms = section.settings.register_terms
+%}
+
+<div
+  class="customer login register"
+>
+  <div class="login__wrapper">
+    <div class="container login__container">
+      <div class="login__col color-background-1">
+        <div class="login__form">
+          <div class="page-header">
+            <div class="page-header__inner">
+              {%- if heading != blank -%}
+                <h1 class="title--page login__title {{ heading_size }}">
+                  {{ heading }}
+                </h1>
+              {%- endif -%}
+
+              <div class="login__tabs">
+                <a
+                  href="{{ routes.account_login_url }}"
+                  class="login-tab__link"
+                  aria-label="login link"
+                >
+                  {{ 'customer.login_page.title' | t }}
+                </a>
+                <div class="button_wrapper custom-hover">
+                  <a
+                    class="button button--primary focus-inset"
+                    data-button-text="{{ 'customer.register.submit' | t }}"
+                    tabindex="0"
+                  >
+                    <div class="button__content">
+                      <span
+                        class="button__label"
+                        data-label="{{- 'customer.register.submit' | t | escape -}}"
+                      >
+                        {{- 'customer.register.submit' | t -}}
+                      </span>
+                    </div>
+                    <span class="button_circle"> </span>
+                  </a>
+                </div>
+              </div>
+              {% if text != blank %}
+                <div class="page-header__text richtext__content">
+                  {{ text }}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+          {%- form 'create_customer', autocomplete: 'off' -%}
+            <div class="login__form-row">
+              <div class="field field__first-name">
+                <input
+                  dir="ltr"
+                  type="text"
+                  name="customer[first_name]"
+                  id="RegisterForm-FirstName"
+                  {% if form.first_name %}
+                    value="{{ form.first_name }}"
+                  {% endif %}
+                  autocomplete="given-name"
+                  aria-required="true"
+                  placeholder=""
+                  required
+                  tabindex="0"
+                  class="focus-inset"
+                  oninput="this.classList.toggle('has-content', this.value.length > 0)"
+                  {% if form.errors contains 'first_name' %}
+                    aria-invalid="true"
+                    aria-describedby="RegisterForm-first-name-error"
+                  {% endif %}
+                >
+                <label for="RegisterForm-FirstName" class="required-field">
+                  {{- 'customer.register.first_name_placeholder' | t -}}
+                </label>
+              </div>
+
+              <div class="field field__last-name">
+                <input
+                  dir="ltr"
+                  type="text"
+                  name="customer[last_name]"
+                  id="RegisterForm-LastName"
+                  {% if form.last_name %}
+                    value="{{ form.last_name }}"
+                  {% endif %}
+                  autocomplete="family-name"
+                  aria-required="true"
+                  required
+                  placeholder=""
+                  tabindex="0"
+                  class="focus-inset"
+                  oninput="this.classList.toggle('has-content', this.value.length > 0)"
+                  {% if form.errors contains 'last_name' %}
+                    aria-invalid="true"
+                    aria-describedby="RegisterForm-last-name-error"
+                  {% endif %}
+                >
+                <label for="RegisterForm-LastName" class="required-field">
+                  {{- 'customer.register.last_name_placeholder' | t -}}
+                </label>
+              </div>
+            </div>
+            <div class="field required_field">
+              <input
+                dir="ltr"
+                type="email"
+                name="customer[email]"
+                id="RegisterForm-email"
+                {% if form.email %}
+                  value="{{ form.email }}"
+                {% endif %}
+                spellcheck="false"
+                autocapitalize="off"
+                autocomplete="off"
+                aria-required="true"
+                {% if form.errors contains 'email' %}
+                  aria-invalid="true"
+                  aria-describedby="RegisterForm-email-error"
+                {% endif %}
+                placeholder=""
+                required
+                class="required_field focus-inset"
+                tabindex="0"
+                oninput="this.classList.toggle('has-content', this.value.length > 0)"
+              >
+              <label for="RegisterForm-email" class="required-field"> example@email.com </label>
+            </div>
+            {%- if form.errors contains 'email' -%}
+              <span id="RegisterForm-email-error" class="form__message">
+                {{ form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email }}.
+              </span>
+            {%- endif -%}
+            <div class="field field--pass required_field">
+              <div class="button-pass-visibility">
+                {% render 'icon-eye' %}
+                {% render 'icon-eye-close' %}
+              </div>
+              <input
+                type="password"
+                name="customer[password]"
+                id="RegisterForm-password"
+                aria-required="true"
+                {% if form.errors contains 'password' %}
+                  aria-invalid="true"
+                  aria-describedby="RegisterForm-password-error"
+                {% endif %}
+                required
+                placeholder=""
+                oninput="this.classList.toggle('has-content', this.value.length > 0)"
+                autocomplete="new-password"
+                class="focus-inset"
+                tabindex="0"
+              >
+              <label for="RegisterForm-password" class="required-field">
+                {{ 'customer.login_page.password_placeholder' | t }}
+              </label>
+            </div>
+            {%- if form.errors contains 'password' -%}
+              <span id="RegisterForm-password-error" class="form__message">
+                {{ form.errors.translated_fields.password | capitalize }}
+                {{ form.errors.messages.password }}.
+              </span>
+            {%- endif -%}
+
+            {%- if form.errors contains 'form' -%}
+              <span id="RegisterForm-email-error" class="form__message">
+                {{ 'customer.login_page.customer_exist' | t }}
+              </span>
+            {%- endif -%}
+
+            <span
+              id="RegisterForm-terms-error"
+              class="form__message register__message-terms"
+            >
+              {{ 'customer.register.terms_error' | t }}
+            </span>
+
+            <div class="button_wrapper custom-hover login__buttons login__buttons--space-between">
+              <button
+                id="RegisterSubmit"
+                class="button button--primary register__create-acc focus-inset"
+                data-button-text="{{ 'customer.register.submit' | t }}"
+                tabindex="0"
+              >
+                <div class="button__content">
+                  <span
+                    class="button__label"
+                    data-label="{{- 'customer.register.submit' | t | escape -}}"
+                  >
+                    {{- 'customer.register.submit' | t -}}
+                  </span>
+                </div>
+                <span class="button_circle"> </span>
+              </button>
+            </div>
+
+            <p class="register--terms">
+              {{- register_terms -}}
+            </p>
+          {%- endform -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  window.onload = () => {
+    typeof PasswordViewer !== 'undefined' && new PasswordViewer();
+  };
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-register.name",
+  "tag": "section",
+  "class": "spaced-section login-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.content_options.header.content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.all.heading.label",
+      "default": "Here can be your main title"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "default": "Details Go Here",
+      "label": "t:sections.all.text.label"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "register_terms",
+      "default": "Details Go Here",
+      "label": "t:sections.all.register_terms.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-margin.header.content"
+    },
+    {
+      "type": "select",
+      "id": "margin_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_top.label"
+    },
+    {
+      "type": "select",
+      "id": "margin_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_bottom.label"
+    }
+  ]
+}
+{% endschema %}

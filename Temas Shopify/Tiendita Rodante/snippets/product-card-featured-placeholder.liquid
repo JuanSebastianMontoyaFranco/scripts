@@ -1,0 +1,38 @@
+{% comment %}
+  Renders a featured product card placeholder
+  Usage:
+  {% render 'product-card-featured-placeholder' %}
+{% endcomment %}
+
+<div class="card-wrapper color-background-1" aria-hidden="true">
+  <div class="card card--product card--product-placeholder" tabindex="-1">
+    <div class="card__inner">
+      <div
+        class="media media--transparent media--hover-effect"
+        style="aspect-ratio: {{ media_size }};"
+      >
+        {% assign collection_index = product_index | modulo: 3 | plus: 1 %}
+        {{ 'product-apparel-' | append: collection_index | placeholder_svg_tag }}
+      </div>
+      <div class="card__information-top"></div>
+    </div>
+  </div>
+
+  <div class="card-information">
+    <div class="card-information__wrapper card-information__wrapper--{{ content_alignment }}">
+      <div class="card-information__group card-information__group--{{ content_alignment }}">
+        <span class="visually-hidden">{{ 'accessibility.vendor' | t }}</span>
+        <div class="caption-with-letter-spacing card__subtitle card__vendor">
+          {{ 'products.product.vendor' | t }}
+        </div>
+        <{{ heading_tag | default: 'h3' }}
+          class="card__title animated-link__underline--multirow"
+          id="placeholder-title-{{ product_index }}"
+        >
+          {{ 'products.product.product_heading' | t }}
+        </{{ heading_tag | default: 'h3' }}>
+        {% render 'price' %}
+      </div>
+    </div>
+  </div>
+</div>

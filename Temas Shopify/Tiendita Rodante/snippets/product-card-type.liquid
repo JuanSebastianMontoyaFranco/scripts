@@ -1,0 +1,30 @@
+{% if product_card_type == 'simple' %}
+  {% render 'product-card',
+    product_card_product: product,
+    media_size: image_ratio,
+    media_fit: image_fit,
+    show_secondary_image: show_secondary_image,
+    show_vendor: show_vendor,
+    show_collection: show_collection,
+    show_desc: show_desc,
+    section_id: section_id,
+    add_id: forloop_index,
+    show_count: show_product_count,
+    columns: 4,
+    content_alignment: 'left'
+  %}
+{% else %}
+  {% render 'product-card-featured',
+    product_card_product: product,
+    media_size: image_ratio,
+    media_fit: image_fit,
+    show_secondary_image: show_secondary_image,
+    show_vendor: show_vendor,
+    show_collection: show_collection,
+    show_desc: show_desc,
+    section_id: section_id,
+    add_id: forloop_index,
+    columns: 4,
+    content_alignment: 'left'
+  %}
+{% endif %}

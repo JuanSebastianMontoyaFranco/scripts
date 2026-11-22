@@ -1,0 +1,217 @@
+{{- 'marquee-ticker.css' | asset_url | stylesheet_tag -}}
+
+{% liquid
+  assign color_scheme = 'background-1'
+  assign ticker_speed = section.settings.ticker_speed
+  assign enable_border_top = section.settings.enable_border_top
+  assign enable_border_bottom = section.settings.enable_border_bottom
+  assign marquee = section.settings.marquee
+  assign promo_link = section.settings.promo_link
+  assign text = section.settings.text
+  assign section_image = section.settings.image
+  assign marquee = section.settings.marquee
+  assign countdown_heading = section.settings.countdown_heading
+  assign promo_link_label = section.settings.promo_link_label
+
+  assign border_top_class = ''
+  if enable_border_top
+    assign border_top_class = 'section_border_top'
+  endif
+
+  assign border_bottom_class = ''
+  if enable_border_bottom
+    assign border_bottom_class = 'section_border_bottom'
+  endif
+
+  assign marquee_class = ''
+  if marquee
+    assign marquee_class = 'marquee-container'
+  endif
+%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+  	--marquee-ticker-speed: {{ ticker_speed }}s;
+  }
+</style>
+
+<div
+  class="announcement-bar background {{ border_top_class }} {{ border_bottom_class }} {{ marquee_class }} color-{{ color_scheme }}"
+  role="region"
+  aria-label="{{ 'sections.header.announcement' | t }}"
+>
+  {% if marquee %}
+    <div class="marquee-content">
+      {% for i in (1..3) %}
+        <div class="marquee-tag marquee-animate">
+          {% for i in (1..5) %}
+            <div class="marquee-item">
+              {% render 'announcement-bar-content',
+                section_settings: section.settings,
+                text: text,
+                section_image: section_image,
+                promo_link: promo_link,
+                countdown_heading: countdown_heading,
+                promo_link_label: promo_link_label
+              %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="announcement-bar">
+      {% render 'announcement-bar-content',
+        section_settings: section.settings,
+        section: section,
+        text: text,
+        section_image: section_image,
+        promo_link: promo_link,
+        countdown_heading: countdown_heading,
+        promo_link_label: promo_link_label
+      %}
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.announcement-bar.name",
+  "class": "section-announcement",
+  "limit": 1,
+  "enabled_on": {
+    "groups": ["header"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enable_mock_timer",
+      "default": false,
+      "label": "t:sections.countdown.settings.enable_mock_timer.label",
+      "info": "t:sections.countdown.settings.enable_mock_timer.info"
+    },
+    {
+      "type": "range",
+      "id": "mock_date_picker_day",
+      "min": 1,
+      "max": 31,
+      "step": 1,
+      "default": 2,
+      "label": "t:sections.countdown.settings.mock_date_picker_day.label",
+      "visible_if": "{{ section.settings.enable_mock_timer }}"
+    },
+    {
+      "type": "range",
+      "id": "mock_date_picker_hours",
+      "min": 0,
+      "max": 23,
+      "step": 1,
+      "default": 3,
+      "label": "t:sections.countdown.settings.mock_date_picker_hours.label",
+      "visible_if": "{{ section.settings.enable_mock_timer }}"
+    },
+    {
+      "type": "text",
+      "id": "date_picker",
+      "default": "2025-10-01",
+      "info": "YYYY-MM-DD",
+      "label": "t:sections.countdown.settings.date_picker.label",
+      "visible_if": "{{ section.settings.enable_mock_timer == false }}"
+    },
+    {
+      "type": "text",
+      "id": "time_picker",
+      "default": "00:00",
+      "info": "hh:mm",
+      "label": "t:sections.countdown.settings.time_picker.label",
+      "visible_if": "{{ section.settings.enable_mock_timer == false }}"
+    },
+    {
+      "type": "select",
+      "id": "completed_countdown",
+      "options": [
+        {
+          "value": "hide_section",
+          "label": "t:sections.countdown.settings.completed_countdown.options_1.label"
+        },
+        {
+          "value": "show_text",
+          "label": "t:sections.countdown.settings.completed_countdown.options_2.label"
+        }
+      ],
+      "default": "show_text",
+      "label": "t:sections.countdown.settings.completed_countdown.label"
+    },
+    {
+      "type": "text",
+      "id": "countdown_heading",
+      "default": "Header after countdown",
+      "info": "t:sections.countdown.settings.show_text",
+      "label": "t:sections.countdown.settings.countdown_heading.label"
+    },
+    {
+      "type": "range",
+      "id": "ticker_speed",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 20,
+      "unit": "s",
+      "label": "t:sections.all.ticker.settings.ticker_speed.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "marquee",
+      "default": false,
+      "label": "t:sections.announcement-bar.settings.ticker_enable.label"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "default": "Free shipping and delivery on all orders",
+      "label": "Promo text"
+    },
+    {
+      "type": "text",
+      "id": "promo_link_label",
+      "default": "Shop now",
+      "label": "Label link"
+    },
+    {
+      "type": "url",
+      "id": "promo_link",
+      "label": "Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.announcement-bar.settings.image.label",
+      "info": "t:sections.announcement-bar.settings.image.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.border.header.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_top",
+      "default": false,
+      "label": "t:sections.all.border.border_enable_top.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_border_bottom",
+      "default": false,
+      "label": "t:sections.all.border.border_enable_bottom.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.announcement-bar.name",
+      "settings": {
+        "text": "For example, a test of the announcement of some news"
+      }
+    }
+  ]
+}
+{% endschema %}

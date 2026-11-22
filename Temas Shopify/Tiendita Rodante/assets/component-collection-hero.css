@@ -1,0 +1,93 @@
+.collection-hero__inner {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.collection-hero .collection-hero__text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8rem;
+  justify-content: center;
+  padding: 6.4rem;
+  z-index: 3;
+  position: relative;
+}
+@media screen and (max-width: 750px) {
+  .collection-hero .collection-hero__text-wrapper {
+    padding: 2rem;
+  }
+}
+.collection-hero__title {
+  margin: 0;
+}
+.collection-hero__description {
+  max-width: 21.1rem;
+  color: rgb(var(--color-foreground)) !important;
+  font-size: 1.6rem;
+  line-height: var(--font-body-line-height);
+}
+@media screen and (min-width: 750px) {
+  .collection-hero__description {
+    max-width: 39.1rem;
+    font-size: 1.8rem;
+  }
+}
+.collection-hero__description p {
+  max-width: 21.1rem;
+}
+@media screen and (min-width: 750px) {
+  .collection-hero__description p {
+    max-width: 39.1rem;
+  }
+}
+.collection-hero__image-wrapper {
+  position: relative;
+  border-radius: var(--border-radius-main);
+  overflow: visible;
+}
+.collection-hero__image-wrapper.backlight-led-animation__bg--new::before {
+  content: "";
+  height: 14%;
+  top: 100px;
+}
+@media screen and (min-width: 990px) {
+  .collection-hero__image-wrapper.backlight-led-animation__bg--new::before {
+    top: 94px;
+  }
+}
+.collection-hero__image-wrapper.backlight-led-animation__bg--new::after {
+  content: "";
+  height: 10%;
+  bottom: 68px;
+}
+@media screen and (min-width: 990px) {
+  .collection-hero__image-wrapper.backlight-led-animation__bg--new::after {
+    bottom: 94px;
+  }
+}
+.collection-hero__image-container {
+  display: flex;
+  background-color: transparent;
+  z-index: 1;
+  border: 0.1rem solid rgb(var(--color-border));
+}
+.collection-hero__image-container::after {
+  content: "";
+  display: block;
+  width: 0;
+  padding-bottom: 12.1875%;
+}
+.collection-hero__image-container::before {
+  content: "";
+  background-color: rgb(var(--color-overlay));
+  opacity: var(--opacity-overlay-banner);
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+@media screen and (max-width: 990px) {
+  .collection-hero__image-container::before {
+    opacity: 50%;
+  }
+}

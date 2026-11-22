@@ -1,0 +1,87 @@
+{% liquid
+  assign current_stock = product.selected_or_first_available_variant.inventory_quantity
+  assign max_stock = product.metafields.custom.stock_maximum | default: 100
+  assign percent = current_stock | times: 100 | divided_by: max_stock
+  assign color_class = 'red'
+  if percent > 66
+    assign color_class = 'green'
+  elsif percent > 33
+    assign color_class = 'yellow'
+  endif
+
+  assign is_pre_order = false
+  if settings.enable_pre_order and product.selected_or_first_available_variant.available and product.selected_or_first_available_variant.inventory_management == 'shopify' and product.selected_or_first_available_variant.inventory_policy == 'continue' and product.selected_or_first_available_variant.inventory_quantity <= 0
+    assign is_pre_order = true
+  endif
+
+  assign show_inventory_block = true
+  if is_pre_order and settings.pre_order_show_inventory == false
+    assign show_inventory_block = false
+  endif
+%}
+
+{% if product != blank %}
+  {% if product.selected_or_first_available_variant.inventory_management == 'shopify' and show_inventory_block %}
+    {% unless is_pre_order %}
+      <div
+        id="StockBar-{{ section.id }}"
+        class="stock-bar-wrapper {{ color_class }}"
+        data-max-stock="{{ max_stock }}"
+      >
+        {% if product.selected_or_first_available_variant.inventory_quantity > 0 %}
+          {% render 'icon-availability' %}
+          <div class="stock-bar">
+            <div
+              class="stock-bar-fill"
+              style="width: {{ percent }}%;"
+            ></div>
+          </div>
+        {% else %}
+          {% render 'icon-out-of-stock' %}
+          <span class="message__out-of-stock">
+            {{- 'products.product.quantity.out_of_stock' | t -}}
+          </span>
+        {% endif %}
+      </div>
+    {% endunless %}
+    <div
+      id="Inventory-{{ section.id }}"
+      class="product__inventory"
+      {{ block.shopify_attributes }}
+    >
+      <span class="product__inventory-inner">
+        {% if product.selected_or_first_available_variant.inventory_quantity > 0 %}
+          {{
+            'products.product.quantity.in_stock'
+            | t: quantity: product.selected_or_first_available_variant.inventory_quantity
+          }}
+        {% elsif is_pre_order and settings.pre_order_show_inventory %}
+          {{
+            'products.product.quantity.in_stock'
+            | t: quantity: product.selected_or_first_available_variant.inventory_quantity
+          }}
+        {% endif %}
+      </span>
+
+      {% comment %}
+        {% if block.settings.show_shipping
+        	and block.settings.min_spend > 0
+        	and product.selected_or_first_available_variant.inventory_quantity > 0
+        %}
+        	{% liquid
+        		assign amount = block.settings.min_spend | plus: 0.5 | floor | times: 100 | money_without_trailing_zeros
+        	%}
+        	<span class="product__inventory-inner product__inventory-inner--shipping js-free-shipping">
+        		{{ 'products.product.free_shipping_info' | t }}&nbsp;
+        		<span
+        			class="free-shipping-total"
+        			data-min-spend="{{block.settings.min_spend | plus: 0.5 | floor}}"
+        		>
+        			{{ amount }}
+        		</span>
+        	</span>
+        {% endif %}
+      {% endcomment %}
+    </div>
+  {% endif %}
+{% endif %}

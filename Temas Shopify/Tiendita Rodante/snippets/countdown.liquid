@@ -1,0 +1,105 @@
+<script src="{{ 'countdown.js' | asset_url }}" defer="defer"></script>
+
+{% liquid
+  assign countdown_block_font = section_settings.countdown_block_font
+  assign date_picker = section_settings.date_picker
+  assign time_picker = section_settings.time_picker
+  assign completed_countdown = section_settings.completed_countdown
+
+  # Fallback for blank time_picker
+  if time_picker == blank
+    assign time_picker = '00:00'
+  endif
+
+  # Normalize date format (ISO YYYY-MM-DD)
+  assign date_parts = date_picker | split: '.'
+  if date_parts.size == 3
+    assign iso_date = date_parts[2] | append: '-' | append: date_parts[1] | append: '-' | append: date_parts[0]
+  else
+    assign date_parts = date_picker | split: '/'
+    if date_parts.size == 3
+      assign iso_date = date_parts[2] | append: '-' | append: date_parts[1] | append: '-' | append: date_parts[0]
+    else
+      assign iso_date = date_picker
+    endif
+  endif
+
+  assign date_merge = iso_date | append: 'T' | append: time_picker | append: ':00'
+  assign date_now = 'now' | date: '%s'
+  assign date_settings = date_merge | date: '%s'
+
+  assign iso_date = iso_date
+  assign time_picker = time_picker
+
+  if date_settings == blank or date_settings == 0
+    assign date_settings = date_now | plus: 86400
+  endif
+
+  assign distance = date_settings | minus: date_now
+
+  if distance > 0
+    assign days = distance | divided_by: 86400 | floor
+    assign hours = distance | modulo: 86400 | divided_by: 3600 | floor
+    assign minutes = distance | modulo: 3600 | divided_by: 60 | floor
+    assign seconds = distance | modulo: 60 | floor
+  else
+    assign days = 0
+    assign hours = 0
+    assign minutes = 0
+    assign seconds = 0
+  endif
+
+  assign days = days | prepend: '0' | slice: -2, 2
+  assign hours = hours | prepend: '0' | slice: -2, 2
+  assign minutes = minutes | prepend: '0' | slice: -2, 2
+  assign seconds = seconds | prepend: '0' | slice: -2, 2
+%}
+
+{% assign time_units = 'days,hours,minutes,seconds' | split: ',' %}
+{% assign time_values = days
+  | append: ','
+  | append: hours
+  | append: ','
+  | append: minutes
+  | append: ','
+  | append: seconds
+  | split: ','
+%}
+
+{%- if date_picker != blank -%}
+  <countdown-timer
+    class="countdown js-countdown js-countdown-{{ id }}"
+    data-date="{{ iso_date }}"
+    data-time="{{ time_picker }}"
+    data-completed="{{ completed_countdown }}"
+    data-completed-text="{{ countdown_heading }}"
+    data-enable-mock-timer="{{ enable_mock_timer | default: false }}"
+    data-enable-mock-picker-day="{{ mock_date_picker_day | default: 2 }}"
+    data-enable-mock-picker-hours="{{ mock_date_picker_hours | default: 3 }}"
+  >
+    <div
+      class="
+        countdown__main {{ class_name }}
+        {% if with_bg %} countdown__section--with-bg {% endif %}
+        {% if transparent_background_with_bg %} transparent_background_with_bg {% endif %}
+        countdown__main--font-{{ countdown_block_font }}
+      "
+    >
+      {% render 'icon-timer' %}
+
+      {% for i in (0..3) %}
+        <div>
+          <p class="countdown__block countdown-block-font {{ countdown_block_font }}">
+            <span class="countdown_block_{{ time_units[i] }}">
+              {{ time_values[i] }}
+            </span>
+            <span class="countdown__block-word">
+              {{ 'general.countdown' | append: '.' | append: time_units[i] | t | slice: 0, 1 | capitalize }}
+            </span>
+            <span class="countdown_block_{{ time_units[i] }}--separator">:</span>
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  </countdown-timer>
+{%- endif -%}

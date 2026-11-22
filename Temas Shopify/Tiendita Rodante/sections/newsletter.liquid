@@ -1,0 +1,445 @@
+{{ 'section-newsletter.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  {% render 'section-margin' %}
+  {% render 'section-padding' %}
+{%- endstyle -%}
+
+{% liquid
+  assign backlight_animation = section.settings.backlight_animation
+%}
+
+<div
+  class="newsletter  section-{{ section.id }}-padding {% if section.settings.show_border_top %} newsletter--border-top{% endif %} {% if section.settings.show_border_bottom %} newsletter--border-bottom {% endif %}"
+>
+  <div class="container">
+    <div class="newsletter__wrapper  has-image background color-background-1 {% if backlight_animation %} backlight-led-animation__bg--new {% endif %} newsletter__wrapper--{{ section.settings.align_content }}">
+      {%- if section.settings.image != blank -%}
+        <div class="newsletter__image">
+          {{
+            section.settings.image
+            | image_url: width: section.settings.image.width
+            | image_tag: loading: 'lazy', sizes: '100vw', widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+          }}
+        </div>
+      {% else %}
+        <div class="newsletter__image ">
+          {{ 'hero-apparel-2' | placeholder_svg_tag }}
+        </div>
+      {%- endif -%}
+      {% render 'section-header',
+        section_heading: section.settings.heading,
+        section_subheading: section.settings.section_subheading,
+        section_heading_size: section.settings.heading_size,
+        section_heading_tag: section.settings.heading_tag,
+        pulse: section.settings.pulse_animation_text
+      %}
+
+      {% if section.settings.image == blank %}
+        {% assign only_form = true %}
+      {% elsif section.settings.image != blank %}
+        {% if section.settings.heading == blank and section.settings.section_subheading == blank %}
+          {% assign only_form = true %}
+        {% endif %}
+      {% endif %}
+
+      <div class="newsletter-form__wrapper {% if only_form %}only-form{% endif %}">
+        {% form 'customer', class: 'newsletter-form' %}
+          <div class="newsletter-form__inner">
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <div class="newsletter-form__field-wrapper">
+              <div class="field">
+                <input
+                  dir="ltr"
+                  id="NewsletterForm--{{ section.id }}"
+                  type="email"
+                  name="contact[email]"
+                  class="field__input field focus-inset"
+                  value="{{ form.email }}"
+                  aria-required="true"
+                  autocorrect="off"
+                  autocapitalize="off"
+                  autocomplete="email"
+                  pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+                  {% if form.errors %}
+                    autofocus
+                    aria-invalid="true"
+                    aria-describedby="Newsletter-error--{{ section.id }}"
+                  {% elsif form.posted_successfully? %}
+                    aria-describedby="Newsletter-success--{{ section.id }}"
+                  {% endif %}
+                  placeholder="{{ 'newsletter.placeholder' | t }}"
+                  required
+                  tabindex="0"
+                >
+                <label
+                  class="visually-hidden"
+                  for="NewsletterForm--{{ section.id }}"
+                >
+                  {{ 'newsletter.label' | t }}
+                </label>
+              </div>
+            </div>
+
+            <div class="button_wrapper custom-hover">
+              <button
+                type="submit"
+                class="newsletter-form__button button button--{{ section.settings.button_style }}  focus-inset"
+                name="commit"
+                data-button-text="{{ 'newsletter.button_label' | t }}"
+                tabindex="0"
+              >
+                <div class="button__content">
+                  <span
+                    class="button__label"
+                    data-label="{{- 'newsletter.button_label' | t | escape -}}"
+                  >
+                    {{ 'newsletter.button_label' | t }}
+                  </span>
+                </div>
+                <span class="button_circle"> </span>
+              </button>
+            </div>
+          </div>
+          {%- if form.errors -%}
+            <small
+              class="newsletter-form__message form__message"
+              id="Newsletter-error--{{ section.id }}"
+            >
+              {%- render 'icon-error' -%}
+              {{- form.errors.translated_fields.email | capitalize }}
+              {{ form.errors.messages.email -}}
+            </small>
+          {%- endif -%}
+          {%- if form.posted_successfully? -%}
+            <h3
+              class="newsletter-form__message newsletter-form__message--success form__message"
+              id="Newsletter-success--{{ section.id }}"
+              tabindex="-1"
+              autofocus
+            >
+              {% render 'icon-success' -%}
+              {{- 'newsletter.success' | t }}
+            </h3>
+          {%- endif -%}
+        {% endform %}
+        <div class="newsletter-form__text extra-small-font richtext">
+          {{ section.settings.newsletter_text }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.newsletter.name",
+  "tag": "section",
+  "class": "spaced-section",
+  "enabled_on": {
+    "templates": ["*"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.newsletter.settings.paragraph.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.all.image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "backlight_animation",
+      "default": true,
+      "label": "t:sections.all.backlight_animation.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.content_options.header.content"
+    },
+    {
+      "type": "select",
+      "id": "align_content",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.newsletter.settings.align_content.options__1.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.newsletter.settings.align_content.options__2.label"
+        }
+      ],
+      "default": "right",
+      "label": "t:sections.newsletter.settings.align_content.label",
+      "info": "t:sections.newsletter.settings.align_content.info"
+    },
+    {
+      "type": "text",
+      "id": "section_subheading",
+      "default": "t:sections.newsletter.settings.subheading.default",
+      "label": "t:sections.all.section-header.subheading.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "pulse_animation_text",
+      "label": "t:sections.all.pulse_animation_text.label",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "t:sections.newsletter.settings.heading.default",
+      "label": "t:sections.newsletter.settings.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h3",
+      "label": "t:sections.all.heading_size.label",
+      "visible_if": "{{ section.settings.heading != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "default": "h3",
+      "label": "t:sections.all.heading_tag.label",
+      "info": "t:sections.all.heading_tag.info",
+      "visible_if": "{{ section.settings.heading != blank }}",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.all.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.all.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.all.heading_tag.options__7.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.all.heading_tag.options__8.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.all.heading_tag.options__9.label"
+        }
+      ]
+    },
+    {
+      "type": "inline_richtext",
+      "id": "newsletter_text",
+      "default": "t:sections.newsletter.settings.newsletter_text.default",
+      "label": "t:sections.newsletter.settings.newsletter_text.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.button.header_button.content"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:sections.all.button.button_style.options__1.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:sections.all.button.button_style.options__2.label"
+        },
+        {
+          "value": "link",
+          "label": "t:sections.all.button.button_style.options__3.label"
+        },
+        {
+          "value": "link-second",
+          "label": "t:sections.all.button.button_style.options__4.label"
+        }
+      ],
+      "default": "secondary",
+      "label": "t:sections.all.button.button_style.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-margin.header.content"
+    },
+    {
+      "type": "select",
+      "id": "margin_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_top.label"
+    },
+    {
+      "type": "select",
+      "id": "margin_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_bottom.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-padding.header.content"
+    },
+    {
+      "type": "select",
+      "id": "padding_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-padding.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-padding.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-padding.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-padding.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-padding.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-padding.options__6.label"
+        }
+      ],
+      "default": "l",
+      "label": "t:sections.all.section-padding.padding_top.label"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-padding.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-padding.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-padding.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-padding.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-padding.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-padding.options__6.label"
+        }
+      ],
+      "default": "l",
+      "label": "t:sections.all.section-padding.padding_bottom.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.newsletter.name"
+    }
+  ]
+}
+{% endschema %}

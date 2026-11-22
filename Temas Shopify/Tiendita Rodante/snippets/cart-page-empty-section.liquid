@@ -1,0 +1,73 @@
+<div class="cart__warnings">
+  {% render 'icon-order' %}
+
+  {% render 'section-header',
+    section_heading: 'Your Cart is Empty',
+    section_heading_size: 'h3',
+    section_subheading: 'Cart',
+    description: "Don't miss out on the best deals! Your cart may be empty now, but let us help you fill it up with amazing products.",
+    content_alignment: 'center',
+    pulse: false
+  %}
+
+  <div class="categories-list">
+    {%- for collection in section.settings.collection_list -%}
+      <div class="categories-list__item">
+        <a
+          href="{{ collection.url }}"
+          class="categorie__overlay-link"
+          aria-label="{{ collection.title | escape }}"
+        ></a>
+        <div class="categories-list__image">
+          {% if collection.featured_image != blank %}
+            {{
+              collection.featured_image
+              | image_url: width: collection.featured_image.width
+              | image_tag:
+                loading: 'lazy',
+                widths: '360, 535, 720, 940, 1070, 1200, 1500, 1780, 2000, 2400, 2800, 3200',
+                style: ''
+            }}
+          {% else %}
+            {% comment %}
+              {{
+              	'detailed-apparel-1'
+              	| placeholder_svg_tag: 'placeholder-svg'
+              }}
+            {% endcomment %}
+          {% endif %}
+
+          <span class="categories-list__overlay"></span>
+        </div>
+
+        <div class="item-inner--info">
+          <div>
+            <h4 class="categories-list__item-title--inner">
+              {% if collection != blank %}
+                <div>
+                  <span>
+                    {{- collection.title -}}
+                  </span>
+                </div>
+              {% else %}
+                <div>
+                  <span>
+                    {{- 'general.card.collection_name' | t -}}
+                  </span>
+                </div>
+              {% endif %}
+            </h4>
+          </div>
+
+          {% assign collection_url = collection.url %}
+
+          {% render 'button', btn_label: 'Shop Now', btn_link: collection_url, btn_style: 'link' %}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {% assign collections_url = routes.collections_url | sort_by: 'best-selling' %}
+
+  {% render 'button', btn_label: 'Shop All', btn_link: collections_url, btn_style: 'primary' %}
+</div>

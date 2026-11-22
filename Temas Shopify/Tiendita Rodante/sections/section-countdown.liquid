@@ -1,0 +1,290 @@
+{{ 'section-countdown.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  {% render 'section-margin' %}
+{%- endstyle -%}
+
+{% liquid
+  assign button_label = section.settings.button_label
+  assign button_link = section.settings.button_link
+  assign button_style = section.settings.button_style
+  assign section_image = section.settings.image
+  assign mobile_image = section.settings.mobile_image
+  assign countdown_heading = section.settings.countdown_heading
+  assign overlay_opacity = section.settings.overlay_opacity
+  assign enable_mock_timer = section.settings.enable_mock_timer
+  assign mock_date_picker_day = section.settings.mock_date_picker_day
+  assign mock_date_picker_hours = section.settings.mock_date_picker_hours
+%}
+
+{%- style -%}
+   	#shopify-section-{{ section.id }} .countdown__section--wrapper {
+
+  	{%- if section_image != blank -%}
+  		background-image: url('{{ section_image | image_url }}');
+  		--overlay-opacity: {{ overlay_opacity}};
+  		{% if mobile_image != blank %}
+  			@media screen and (max-width: 990px){
+  				background-image: url('{{ mobile_image | image_url }}');
+  			}
+  		{% endif %}
+  	{% else %}
+  		background: rgb(var(--color-background-secondary));
+  	{%- endif -%}
+  }
+{%- endstyle -%}
+
+<div class="container desktop-section-countdown">
+  <div class="countdown__section--wrapper">
+    {% render 'countdown',
+      id: section.id,
+      section_settings: section.settings,
+      with_bg: true,
+      countdown_heading: countdown_heading,
+      enable_mock_timer: enable_mock_timer,
+      mock_date_picker_day: mock_date_picker_day,
+      mock_date_picker_hours: mock_date_picker_hours
+    %}
+    {% render 'button', btn_label: button_label, btn_link: button_link, btn_style: button_style %}
+
+    {% if button_link != blank and section.settings.full_link %}
+      <a
+        href="{{ button_link }}"
+        class="countdown__link-overlay"
+        aria-label="{{ countdown_heading }}"
+      ></a>
+    {% endif %}
+  </div>
+</div>
+
+<div class="container mobile-section-countdown">
+  <div class="wrapper">
+    <div class="countdown__section--wrapper">
+      {% if button_link != blank and section.settings.full_link %}
+        <a
+          href="{{ button_link }}"
+          class="countdown__link-overlay"
+          aria-label="{{ countdown_heading }}"
+        ></a>
+      {% endif %}
+    </div>
+    <div class="info-wrapper">
+      {% render 'countdown',
+        id: section.id,
+        section_settings: section.settings,
+        with_bg: true,
+        countdown_heading: countdown_heading,
+        enable_mock_timer: enable_mock_timer,
+        mock_date_picker_day: mock_date_picker_day,
+        mock_date_picker_hours: mock_date_picker_hours
+      %}
+      {% render 'button', btn_label: button_label, btn_link: button_link, btn_style: button_style %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.countdown.name",
+  "tag": "section",
+  "class": "countdown-section spaced-section",
+  "enabled_on": {
+    "templates": ["*"]
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.countdown.settings.image.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "t:sections.countdown.settings.mobile_image.label"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.2,
+      "label": "t:sections.all.overlay.overlay_opacity.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mock_timer",
+      "default": true,
+      "label": "t:sections.countdown.settings.enable_mock_timer.label",
+      "info": "t:sections.countdown.settings.enable_mock_timer.info"
+    },
+    {
+      "type": "range",
+      "id": "mock_date_picker_day",
+      "min": 1,
+      "max": 31,
+      "step": 1,
+      "default": 2,
+      "label": "t:sections.countdown.settings.mock_date_picker_day.label",
+      "visible_if": "{{ section.settings.enable_mock_timer }}"
+    },
+    {
+      "type": "range",
+      "id": "mock_date_picker_hours",
+      "min": 0,
+      "max": 23,
+      "step": 1,
+      "default": 3,
+      "label": "t:sections.countdown.settings.mock_date_picker_hours.label",
+      "visible_if": "{{ section.settings.enable_mock_timer }}"
+    },
+    {
+      "type": "text",
+      "id": "date_picker",
+      "default": "2025-10-01",
+      "info": "YYYY-MM-DD",
+      "label": "t:sections.countdown.settings.date_picker.label",
+      "visible_if": "{{ section.settings.enable_mock_timer == false }}"
+    },
+    {
+      "type": "text",
+      "id": "time_picker",
+      "default": "00:00",
+      "info": "hh:mm",
+      "label": "t:sections.countdown.settings.time_picker.label",
+      "visible_if": "{{ section.settings.enable_mock_timer == false }}"
+    },
+    {
+      "type": "select",
+      "id": "completed_countdown",
+      "options": [
+        {
+          "value": "hide_section",
+          "label": "t:sections.countdown.settings.completed_countdown.options_1.label"
+        },
+        {
+          "value": "show_text",
+          "label": "t:sections.countdown.settings.completed_countdown.options_2.label"
+        }
+      ],
+      "default": "show_text",
+      "label": "t:sections.countdown.settings.completed_countdown.label"
+    },
+    {
+      "type": "text",
+      "id": "countdown_heading",
+      "default": "Header after countdown",
+      "info": "t:sections.countdown.settings.show_text",
+      "label": "t:sections.countdown.settings.countdown_heading.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.button.header_button.content"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Shop Now",
+      "label": "t:sections.all.button.button_label.label",
+      "info": "t:sections.all.button.button_label.info"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.all.button.button_link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_link",
+      "default": true,
+      "label": "t:sections.all.overlay_link.label",
+      "info": "t:sections.all.overlay_link.info"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:sections.all.button.button_style.options__1.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:sections.all.button.button_style.options__2.label"
+        },
+        {
+          "value": "link",
+          "label": "t:sections.all.button.button_style.options__3.label"
+        }
+      ],
+      "default": "primary",
+      "label": "t:sections.all.button.button_style.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-margin.header.content"
+    },
+    {
+      "type": "select",
+      "id": "margin_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "s",
+      "label": "t:sections.all.section-margin.margin_top.label"
+    },
+    {
+      "type": "select",
+      "id": "margin_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "s",
+      "label": "t:sections.all.section-margin.margin_bottom.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.countdown.presets.name"
+    }
+  ]
+}
+{% endschema %}

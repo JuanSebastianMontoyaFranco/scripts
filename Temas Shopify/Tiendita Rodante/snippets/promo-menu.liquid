@@ -1,0 +1,24 @@
+<div class="promo-menu">
+  {% if heading != blank %}
+    <span class="promo-menu__heading">
+      {{- heading -}}
+    </span>
+  {% endif %}
+  <ul class="promo-menu__list list-unstyled" role="list">
+    {%- for link in menu.links limit: 5 -%}
+      <li class="promo-menu__item">
+        <a
+          href="{{ link.url }}"
+          {% if link.type == 'http_link' and settings.open_new_tab %}
+            target="_blank"
+          {% endif %}
+          class="promo-menu__link small-font"
+          aria-label="{{ link.title }}"
+        >
+          <span>{{ link.title }}</span>
+        </a>
+      </li>
+    {%- endfor -%}
+  </ul>
+  {% render 'button', btn_label: button_label, btn_link: button_link, btn_style: button_style %}
+</div>

@@ -1,0 +1,260 @@
+{{ 'component-main-product-media.css' | asset_url | stylesheet_tag }}
+
+{% liquid
+  assign aspect_ratio = section.settings.image_ratio | split: '/'
+  assign temp = aspect_ratio[0] | append: '.0'
+  assign padding_bottom = aspect_ratio[1] | divided_by: temp | times: 100 | round: 2
+  assign enable_video_looping = section.settings.enable_video_looping
+
+  assign image_fit_class = ''
+  if section.settings.image_fit == 'contain'
+    assign image_fit_class = 'product__media-item--contain'
+  endif
+
+  assign media_item_class = ''
+  if variant_images contains media.src
+    assign media_item_class = media_item_class | append: ' product__media-item--variant'
+  endif
+
+  assign media_type_class = ''
+  if media.media_type != 'image'
+    assign media_type_class = 'product__media-item--full'
+  endif
+
+  assign gallery_list_class = 'js-media-list swiper no-js-hidden'
+  assign gallery_slide_class = 'swiper-slide'
+  assign gallery_wrapper_class = 'swiper-wrapper'
+  assign image_fit = section.settings.image_fit
+  assign enable_desktop_gallery_arrows = section.settings.enable_desktop_gallery_arrows
+%}
+
+<div
+  class="
+    product__main
+    {% if section.settings.desktop_column_count == '2' %}
+      product__main--two-columns
+    {% endif %}
+  "
+  data-product-main="{{ section.id }}"
+  style="--aspect-ratio: {{ padding_bottom }}%; --image-fit: {{ image_fit }};"
+>
+  {% if product.media.size > 0 %}
+    <div class="product__media-wrapper" data-section="product-media-{{ section.id }}">
+      <div class="product__media-list-wrapper">
+        <div
+          class="product__media-sublist-outer no-js-hidden {% if product.media.size < 5 %} swipper-arrows--hidden {% endif %}"
+        >
+          {% liquid
+            assign height_lg = 383 | times: aspect_ratio[1] | divided_by: aspect_ratio[0]
+            assign height_xl = 520 | times: aspect_ratio[1] | divided_by: aspect_ratio[0]
+            assign height_quick_view_lg = 370 | times: aspect_ratio[1] | divided_by: aspect_ratio[0]
+            assign height_quick_view_xl = 438 | times: aspect_ratio[1] | divided_by: aspect_ratio[0]
+          %}
+          <style>
+            .product__media-sublist.js-media-sublist {
+              --height-lg: {{ height_lg }}px;
+              --height-xl: {{ height_xl }}px;
+              --height-qv-lg: {{ height_quick_view_lg }}px;
+              --height-qv-xl: {{ height_quick_view_xl }}px;
+            }
+          </style>
+          <div class="product__media-sublist--wrapper">
+            <div
+              class="product__media-sublist js-media-sublist swiper {% if section.settings.desktop_column_count == '2' %}product__media-sublist--two-columns{% endif %}"
+              data-js-media-list-id="slider-{{ product.id }}"
+            >
+              <div class="swiper-wrapper">
+                {%- if product.selected_or_first_available_variant.featured_media != null -%}
+                  {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
+                  <div
+                    class="product__media-subitem swiper-slide {{ image_fit_class }} focus-inset"
+                    data-media-sub-id="{{ section.id }}-{{ featured_media.id }}"
+                    tabindex="0"
+                  >
+                    <div class="product__media">
+                      {% liquid
+                        assign img_alt = product.title | append: '-' | append: featured_media.position
+                        if featured_media.preview_image.alt != blank
+                          assign img_alt = featured_media.preview_image.alt
+                        endif
+                      %}
+                      {{
+                        featured_media.preview_image
+                        | image_url: width: 800
+                        | image_tag:
+                          loading: 'lazy',
+                          height: '82',
+                          widths: '150, 200, 250, 300, 400, 500, 600, 700, 800, 1100, 1500, 1780, 2000, 3000, 3840',
+                          alt: img_alt
+                      }}
+                    </div>
+                  </div>
+                {%- endif -%}
+
+                {%- for media in product.media -%}
+                  {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+                    <div
+                      class="product__media-subitem swiper-slide {{ media_item_class }} {{ image_fit_class }} focus-inset"
+                      data-media-sub-id="{{ section.id }}-{{ media.id }}"
+                      tabindex="0"
+                    >
+                      <div class="product__media">
+                        {% liquid
+                          assign img_alt = product.title | append: '-' | append: media.position
+                          if media.preview_image.alt != blank
+                            assign img_alt = media.preview_image.alt
+                          endif
+                        %}
+                        {{
+                          media.preview_image
+                          | image_url: width: 800
+                          | image_tag:
+                            loading: 'lazy',
+                            height: '187',
+                            widths: '150, 200, 250, 300, 400, 500, 600, 700, 800, 1100, 1500, 1780, 2000, 3000, 3840',
+                            alt: img_alt
+                        }}
+                      </div>
+                    </div>
+                  {%- endunless -%}
+                {%- endfor -%}
+              </div>
+            </div>
+            {% render 'swiper-arrows', classNameWrapper: 'product__slider-nav container no-js-hidden' %}
+          </div>
+        </div>
+
+        <ul
+          class="product__media-sublist no-js-flex"
+        >
+          {%- if product.selected_or_first_available_variant.featured_media != null -%}
+            {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
+            <div
+              class="product__media-subitem {{ image_fit_class }} focus-inset"
+              data-media-sub-id="{{ section.id }}-{{ featured_media.id }}"
+              tabindex="0"
+            >
+              <div class="product__media">
+                {% liquid
+                  assign img_alt = product.title | append: '-' | append: featured_media.position
+                  if featured_media.preview_image.alt != blank
+                    assign img_alt = featured_media.preview_image.alt
+                  endif
+                %}
+                {{
+                  featured_media.preview_image
+                  | image_url: width: 240
+                  | image_tag: loading: 'lazy', widths: '120, 240', alt: img_alt
+                }}
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- for media in product.media -%}
+            {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+              <div
+                class="product__media-subitem {{ media_item_class }} {{ image_fit_class }} focus-inset"
+                data-media-sub-id="{{ section.id }}-{{ media.id }}"
+                tabindex="0"
+              >
+                <div class="product__media">
+                  {% liquid
+                    assign img_alt = product.title | append: '-' | append: media.position
+                    if media.preview_image.alt != blank
+                      assign img_alt = media.preview_image.alt
+                    endif
+                  %}
+                  {{
+                    media.preview_image
+                    | image_url: width: 240
+                    | image_tag: loading: 'lazy', widths: '120, 240', alt: img_alt
+                  }}
+                </div>
+              </div>
+            {%- endunless -%}
+          {%- endfor -%}
+        </ul>
+
+        <div
+          class="
+            product__media-list
+            {% if section.settings.desktop_column_count == '2' %}product__media--two-columns{% endif %}
+            {{ gallery_list_class }}
+          "
+          data-js-media-list-id="slider-{{ product.id }}"
+        >
+          <div class="{{ gallery_wrapper_class }}">
+            {%- liquid
+              assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src'
+            -%}
+            {%- if product.selected_or_first_available_variant.featured_media != null -%}
+              {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
+              <div
+                class="product__media-item {{ gallery_slide_class }} {{  image_fit_class }} "
+                data-media-id="{{ section.id }}-{{ featured_media.id }}"
+                {% if image_fit == 'contain' %}
+                  style="--aspect-ratio-contain: {{featured_media.preview_image.aspect_ratio}};"
+                {% endif %}
+              >
+                {% render 'product-thumbnail',
+                  product_card_product: product,
+                  media: featured_media,
+                  position: 'featured',
+                  modal_id: section.id,
+                  lazy_load: false,
+                  loop: enable_video_looping
+                %}
+              </div>
+            {%- endif -%}
+
+            {%- for media in product.media -%}
+              {%- unless media.id == product.selected_or_first_available_variant.featured_media.id -%}
+                <div
+                  class="product__media-item {{ gallery_slide_class }} {{ media_type_class }} {{ media_item_class }} {{ image_fit_class }}"
+                  data-media-id="{{ section.id }}-{{ media.id }}"
+                  {% if image_fit == 'contain' %}
+                    style="--aspect-ratio-contain: {{media.preview_image.aspect_ratio}};"
+                  {% endif %}
+                >
+                  {% render 'product-thumbnail',
+                    product_card_product: product,
+                    media: media,
+                    position: forloop.index,
+                    modal_id: section.id,
+                    lazy_load: false,
+                    loop: enable_video_looping
+                  %}
+                </div>
+              {%- endunless -%}
+            {%- endfor -%}
+          </div>
+
+          {% if enable_desktop_gallery_arrows and product.media.size > 1 %}
+            {% render 'swiper-arrows', classNameWrapper: 'product__gallery-arrows no-js-hidden' %}
+          {% endif %}
+
+          {% if product.media.size > 1 %}
+            <div class="container product__pagination-wrapper">
+              <div class="product__pagination swiper-pagination"></div>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <div
+      class="product__media-wrapper {% if section.settings.desktop_column_count == '2' %}product__media--two-columns{% endif %}"
+      data-section="product-media-{{ section.id }}"
+    >
+      <div class="product__media-list-wrapper">
+        <div class="product__media-list no-js-hidden">
+          <div class="product__media-item">
+            <div class="product__media media {% if section.settings.desktop_column_count == '2' %}product__media--two-columns{% endif %}">
+              {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</div>

@@ -1,0 +1,95 @@
+{% liquid
+  assign manual = product.metafields.custom.user_manual
+  assign file_url_parts_manual = manual | file_url | split: '?' | first
+  assign file_extension_manual = file_url_parts_manual | split: '.' | last | upcase
+
+  assign warranty = product.metafields.custom.warranty
+  assign file_url_parts_warranty = warranty | file_url | split: '?' | first
+  assign file_extension_warranty = file_url_parts_warranty | split: '.' | last | upcase
+
+  assign safety = product.metafields.custom.safety_information
+  assign file_url_parts_safety = safety | file_url | split: '?' | first
+  assign file_extension_safety = file_url_parts_safety | split: '.' | last | upcase
+%}
+
+{% if manual or warranty or safety %}
+  <div
+    id="instructions"
+    class="main-product__instructions"
+    role="tabpanel"
+    aria-labelledby="3"
+  >
+    {% render 'section-header',
+      section_heading: block.settings.title,
+      section_heading_size: block.settings.heading_size,
+      section_subheading: block.settings.subtitle,
+      description: '',
+      content_alignment: 'left',
+      pulse: block.settings.pulse_animation_text
+    %}
+    <ul>
+      {% if manual %}
+        <li>
+          <span class="h5">
+            {{ 'products.product.instructions.user_manual' | t -}}
+          </span>
+          <div class="download-link-wrapper">
+            {% render 'icon-download' %}
+            <a
+              href="{{ manual | file_url }}"
+              download="{{ manual.original_filename | default: 'user-manual' }}"
+              class="animated-link__underline--reverse"
+              aria-label="file link"
+            >
+              {{ 'products.product.instructions.download' | t }} (
+              {{ file_extension_manual }}
+              )
+            </a>
+          </div>
+        </li>
+      {% endif %}
+
+      {% if warranty %}
+        <li>
+          <span class="h5">
+            {{- 'products.product.instructions.warranty' | t -}}
+          </span>
+          <div class="download-link-wrapper">
+            {% render 'icon-download' %}
+            <a
+              href="{{ warranty | file_url }}"
+              download="{{ warranty.original_filename | default: 'warranty' }}"
+              class="animated-link__underline--reverse"
+              aria-label="warranty"
+            >
+              {{ 'products.product.instructions.download' | t }} (
+              {{ file_extension_warranty }}
+              )
+            </a>
+          </div>
+        </li>
+      {% endif %}
+
+      {% if safety %}
+        <li>
+          <span class="h5">
+            {{- 'products.product.instructions.safety' | t }}
+          </span>
+          <div class="download-link-wrapper">
+            {% render 'icon-download' %}
+            <a
+              href="{{ safety | file_url }}"
+              download="{{ safety.original_filename | default: 'safety-info' }}"
+              class="animated-link__underline--reverse"
+              aria-label="safety info"
+            >
+              {{ 'products.product.instructions.download' | t }} (
+              {{ file_extension_safety }}
+              )
+            </a>
+          </div>
+        </li>
+      {% endif %}
+    </ul>
+  </div>
+{% endif %}

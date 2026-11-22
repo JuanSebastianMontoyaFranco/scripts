@@ -1,0 +1,73 @@
+<div class="product__info-navigations--wrapper sticky-tabs">
+  <div class="product__info-navigations--container">
+    <ul class="tabs-lava-lamp" role="tablist">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'product_description' -%}
+            <li
+              class="active"
+              role="tab"
+              aria-selected="true"
+              tabindex="0"
+              id="description-tab"
+              aria-controls="description"
+            >
+              <a class="product__info-navigation--item" href="#description">
+                {{ 'main_product_tabs.about_product' | t }}
+              </a>
+            </li>
+          {% when 'specs_long' %}
+            <li
+              role="tab"
+              aria-selected="false"
+              tabindex="-1"
+              id="specs-tab"
+              aria-controls="specs_long"
+            >
+              <a class="product__info-navigation--item" href="#specs_long">
+                {{ 'main_product_tabs.specs' | t }}
+              </a>
+            </li>
+          {% when 'instructions' %}
+            <li
+              id="instructions-tab"
+              role="tab"
+              aria-selected="false"
+              tabindex="-1"
+              aria-controls="instructions"
+            >
+              <a class="product__info-navigation--item" href="#instructions">
+                {{ 'main_product_tabs.instructions' | t }}
+              </a>
+            </li>
+        {% endcase %}
+      {% endfor %}
+
+      <li
+        id="all-features-tab"
+        role="tab"
+        aria-selected="false"
+        tabindex="-1"
+        aria-controls="all-features"
+      >
+        <a class="product__info-navigation--item" href="#all-features">
+          {{ 'main_product_tabs.all_features' | t }}
+        </a>
+      </li>
+
+      <li
+        role="tab"
+        aria-selected="false"
+        tabindex="-1"
+        id="testimonials-tab"
+        aria-controls="testimonials-quote"
+      >
+        <a class="product__info-navigation--item" href="#testimonials-quote">
+          {{ 'main_product_tabs.reviews' | t }}
+        </a>
+      </li>
+
+      <li id="tabs-lava-lamp-blob" role="presentation" aria-hidden="true"></li>
+    </ul>
+  </div>
+</div>

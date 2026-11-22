@@ -1,0 +1,72 @@
+{% comment %}
+  Renders a simple info card with image, heading and link
+  Accepts:
+  - image: {Object} Image object
+  - heading: {String} Card heading text
+  - button_label: {String} Link text (e.g. "Shop Now")
+  - button_link: {String} URL for the link
+  - image_ratio: {String} Image ratio (landscape, portrait, square)
+  - image_fit: {String} Image fit (contain, cover)
+
+  Usage:
+  {% render 'info-card',
+    image: block.settings.image,
+    heading: block.settings.heading,
+    button_label: block.settings.button_label,
+    button_link: block.settings.button_link,
+    image_ratio: section.settings.image_ratio,
+    image_fit: section.settings.image_fit
+  %}
+{% endcomment %}
+
+{% liquid
+  case image_ratio
+    when 'landscape'
+      assign aspect_ratio = '1.33'
+    when 'portrait'
+      assign aspect_ratio = '0.75'
+    when 'square'
+      assign aspect_ratio = '1'
+    else
+      assign aspect_ratio = '1'
+  endcase
+%}
+
+{% assign collection_index = forloop.index | modulo: 3 | plus: 1 %}
+<div class="info-card">
+  <div
+    class="info-card__image-container"
+    style="--aspect-ratio: {{ aspect_ratio }};"
+  >
+    {% if image != blank %}
+      {% assign style_attr = 'object-fit: ' | append: image_fit | append: ';' %}
+
+      {{
+        image
+        | image_url: width: 600
+        | image_tag:
+          loading: 'lazy',
+          class: 'info-card__image',
+          widths: '375, 550, 750, 1100',
+          sizes: '(max-width: 750px) calc(100vw - 30px), 33vw',
+          style: style_attr
+      }}
+    {% else %}
+      {{ 'collection-apparel-' | append: collection_index | placeholder_svg_tag: 'info-card__image placeholder' }}
+    {% endif %}
+    <div class="info-card__content">
+      {% if heading != blank %}
+        <{{ heading_tag | default: 'h3' }} class="info-card__heading {{ heading_size }}">
+          {{ heading }}
+        </{{ heading_tag | default: 'h3' }}>
+      {% endif %}
+
+      {% render 'button', btn_label: button_label, btn_link: button_link, btn_style: button_style %}
+      <a
+        href="{{ button_link }}"
+        class="info-card__link-overlay"
+        aria-label="{{ button_label }}"
+      ></a>
+    </div>
+  </div>
+</div>

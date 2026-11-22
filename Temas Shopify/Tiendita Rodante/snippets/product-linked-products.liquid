@@ -1,0 +1,33 @@
+{% doc %}
+  Linked products is a custom feature similar to Combined listings. It allows displaying linked products as separate options, each leading to its own product page.
+
+  @param {object} product_resource - Product Liquid object
+  @param {object} block_obj - Liquid Block object
+
+  @example
+  {% render 'product-linked-products', product_resource: product %}
+{% enddoc %}
+
+{% liquid
+  assign linked_products = product_resource.metafields.custom.linked_products.value
+%}
+
+{%- if linked_products != blank and linked_products.size > 0 -%}
+  <div class="linked-products">
+    {%- if block_obj.settings.linked_products_label != blank -%}
+      <div class="product-form__group-name body-small">
+        {{- block_obj.settings.linked_products_label -}}
+      </div>
+    {%- endif -%}
+
+    <div class="linked-products__options" style="--swatch-border-radius: {{ settings.swatch_border_radius }}px;">
+      {% comment %} Render current linked product {% endcomment %}
+      {% render 'product-linked-product-value', linked_product: product_resource, is_active_product: true %}
+
+      {% comment %} Render other linked products {% endcomment %}
+      {%- for linked_product in linked_products -%}
+        {% render 'product-linked-product-value', linked_product: linked_product, is_active_product: false %}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}

@@ -1,0 +1,181 @@
+{% style %}
+  {% for scheme in settings.color_schemes -%}
+  {% assign scheme_classes = scheme_classes | append: ', .color-' | append: scheme.id %}
+  [data-scheme=dark] .color-{{ scheme.id }} {
+  	--color-background: 31, 31, 31;
+  	--color-overlay: 0, 0, 0;
+  	--gradient-background: rgb(31, 31, 31);
+  	--color-foreground: 229, 229, 229;
+  	--color-foreground-secondary: 169, 169, 169;
+  	--color-foreground-tertiary: 169, 169, 169;
+  	--color-foreground-title: 229, 229, 229;
+  	--color-border-input: 53, 53, 53;
+  	--color-border-input-hover: 63, 63, 63;
+  	--color-background-input: 31, 31, 31;
+  	--color-background-input-hover: 10, 10, 10;
+  	--color-border: 53, 53, 53;
+  	--color-announcement-bar: 0, 0, 0;
+  	--color-announcement-bar-background-1: 0, 0, 0;
+  	--alpha-link: 0.5;
+  	--color-button: 53, 53, 53;
+  	--color-button-hover: 33, 33, 33;
+  	--color-button-text: 229, 229, 229;
+  	--color-button-text-hover: 229, 229, 229;
+  	--color-button-secondary-border: 53, 53, 53;
+  	--color-button-secondary-border-hover: 63, 63, 63;
+  	--color-button-secondary-text: 229, 229, 229;
+  	--color-button-secondary-text-hover: 229, 229, 229;
+  	--color-button-tertiary: 229, 229, 229;
+  	--color-button-tertiary-hover: 53, 53, 53;
+  	--color-button-link: 229, 229, 229;
+  	--color-button-link-hover: 229, 229, 229;
+  	--alpha-button-background: 1;
+  	--alpha-button-border: 1;
+  	--color-placeholder-input: 229, 229, 229;
+  	--color-card-price-new: 229, 229, 229;
+  	--color-card-price-old: 169, 169, 169;
+  	--color-error-background: 0, 0, 0;
+  	--color-title-text: 229, 229, 229;
+  }
+  @media (prefers-color-scheme: dark) {
+  	[data-scheme=auto] .color-{{ scheme.id }} {
+  		--color-background: 31, 31, 31;
+  		--gradient-background: rgb(31, 31, 31);
+  		--color-overlay: 0, 0, 0;
+  		--color-foreground: 229, 229, 229;
+  		--color-foreground-secondary: 169, 169, 169;
+  		--color-foreground-tertiary: 169, 169, 169;
+  		--color-foreground-title: 229, 229, 229;
+  		--color-border-input: 53, 53, 53;
+  		--color-border-input-hover: 63, 63, 63;
+  		--color-background-input: 31, 31, 31;
+  		--color-background-input-hover: 10, 10, 10;
+  		--color-border: 53, 53, 53;
+  		--color-announcement-bar: 0, 0, 0;
+  		--color-announcement-bar-background-1: 0, 0, 0;
+  		--alpha-link: 0.5;
+  		--color-button: 53, 53, 53;
+  		--color-button-hover: 33, 33, 33;
+  		--color-button-text: 229, 229, 229;
+  		--color-button-text-hover: 229, 229, 229;
+  		--color-button-secondary-border: 53, 53, 53;
+  		--color-button-secondary-border-hover: 63, 63, 63;
+  		--color-button-secondary-text: 229, 229, 229;
+  		--color-button-secondary-text-hover: 229, 229, 229;
+  		--color-button-tertiary: 229, 229, 229;
+  		--color-button-tertiary-hover: 53, 53, 53;
+  		--color-button-link: 229, 229, 229;
+  		--color-button-link-hover: 229, 229, 229;
+  		--alpha-button-background: 1;
+  		--alpha-button-border: 1;
+  		--color-placeholder-input: 229, 229, 229;
+  		--color-card-price-new: 229, 229, 229;
+  		--color-card-price-old: 169, 169, 169;
+  		--color-error-background: 0, 0, 0;
+  		--color-title-text: 229, 229, 229;
+  	}
+  }
+  {% endfor %}
+  [data-scheme=dark] {
+  	--color-background: 31, 31, 31;
+  	--color-background-secondary: 40, 40, 40;
+  	--color-background-tertiary: 51, 51, 51;
+  	--gradient-background: rgb(31, 31, 31);
+  	--color-overlay: 0, 0, 0;
+  	--color-foreground: 229, 229, 229;
+  	--color-foreground-secondary: 169, 169, 169;
+  	--color-foreground-tertiary: 169, 169, 169;
+  	--color-foreground-title: 229, 229, 229;
+  	--color-border-input: 53, 53, 53;
+  --color-border-input-hover: 63, 63, 63;
+  --color-background-input: 31, 31, 31;
+  --color-background-input-hover: 10, 10, 10;
+  	--color-border: 53, 53, 53;
+  	--color-announcement-bar: 0, 0, 0;
+  	--color-announcement-bar-background-1: 0, 0, 0;
+  	--alpha-link: 0.5;
+  	--color-button: 53, 53, 53;
+  	--color-button-hover: 33, 33, 33;
+  	--color-button-text: 229, 229, 229;
+  	--color-button-text-hover: 229, 229, 229;
+  	--color-button-secondary-border: 53, 53, 53;
+  	--color-button-secondary-border-hover: 63, 63, 63;
+  	--color-button-secondary-text: 229, 229, 229;
+  	--color-button-secondary-text-hover: 229, 229, 229;
+  	--color-button-tertiary: 229, 229, 229;
+  	--color-button-tertiary-hover: 53, 53, 53;
+  	--color-button-link: 229, 229, 229;
+  	--color-button-link-hover: 229, 229, 229;
+  	--alpha-button-background: 1;
+  	--alpha-button-border: 1;
+  	--color-placeholder-input: 229, 229, 229;
+  	--color-card-price-new: 229, 229, 229;
+  	--color-card-price-old: 169, 169, 169;
+  	--color-error-background: 0, 0, 0;
+  	--color-title-text: 229, 229, 229;
+
+  	.color-background-1 {
+  		--color-background: 31, 31, 31;
+   	}
+  	.color-background-2 {
+  		--color-background: 40, 40, 40;
+  		--gradient-background: rgb(40, 40, 40);
+  	}
+  	.color-background-3 {
+  		--color-background: 40, 40, 40;
+  		--gradient-background: rgb(40, 40, 40);
+  	}
+  }
+  @media (prefers-color-scheme: dark) {
+  	[data-scheme=auto] {
+  		--color-background: 31, 31, 31;
+  		--color-background-secondary: 40, 40, 40;
+  	--color-background-tertiary: 51, 51, 51;
+  		--gradient-background: rgb(31, 31, 31);
+  		--color-overlay: 0, 0, 0;
+  		--color-foreground: 229, 229, 229;
+  		--color-foreground-secondary: 169, 169, 169;
+  		--color-foreground-tertiary: 169, 169, 169;
+  		--color-foreground-title: 229, 229, 229;
+  		--color-border-input: 53, 53, 53;
+  		--color-border-input-hover: 63, 63, 63;
+  		--color-background-input: 31, 31, 31;
+  		--color-background-input-hover: 10, 10, 10;
+  		--color-border: 53, 53, 53;
+  		--color-announcement-bar: 0, 0, 0;
+  		--color-announcement-bar-background-1: 0, 0, 0;
+  		--alpha-link: 0.5;
+  		--color-button: 53, 53, 53;
+  		--color-button-hover: 33, 33, 33;
+  		--color-button-text: 229, 229, 229;
+  		--color-button-text-hover: 229, 229, 229;
+  		--color-button-secondary-border: 53, 53, 53;
+  		--color-button-secondary-border-hover: 63, 63, 63;
+  		--color-button-secondary-text: 229, 229, 229;
+  		--color-button-secondary-text-hover: 229, 229, 229;
+  		--color-button-tertiary: 229, 229, 229;
+  		--color-button-tertiary-hover: 53, 53, 53;
+  		--color-button-link: 229, 229, 229;
+  		--color-button-link-hover: 229, 229, 229;
+  		--alpha-button-background: 1;
+  		--alpha-button-border: 1;
+  		--color-placeholder-input: 229, 229, 229;
+  		--color-card-price-new: 229, 229, 229;
+  		--color-card-price-old: 169, 169, 169;
+  		--color-error-background: 0, 0, 0;
+  		--color-title-text: 229, 229, 229;
+
+  		.color-background-1 {
+  			--color-background: 31, 31, 31;
+  		}
+  		.color-background-2 {
+  			--color-background: 40, 40, 40;
+  			--gradient-background: rgb(40, 40, 40);
+  		}
+  		.color-background-3 {
+  			--color-background: 40, 40, 40;
+  			--gradient-background: rgb(40, 40, 40);
+  		}
+  	}
+  }
+{% endstyle %}

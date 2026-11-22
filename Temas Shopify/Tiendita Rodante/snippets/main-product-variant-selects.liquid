@@ -1,0 +1,47 @@
+<variant-selects
+  id="variant-selects-{{ section.id }}"
+  class="no-js-hidden"
+  data-section="{{ section.id }}"
+  data-url="{{ product.url }}"
+  {{ block.shopify_attributes }}
+>
+  {%- for option in product.options_with_values -%}
+    {% comment %}
+      !!! Color swatches are no longer supported in Dropdown type, as there was an error when selecting options in some situations
+    {% endcomment %}
+    {%- unless option.name == 'Color' or option.name == 'Colour' or option.name == 'color' -%}
+      <fieldset class="product-form__controls">
+        <div class="product-form__group-wrapper">
+          <label
+            for="Option-{{ section.id }}-{{ forloop.index0 }}"
+            class="product-form__group-name"
+          >
+            {{ option.name }}
+          </label>
+          <div class="product-form__controls-group">
+            <div class="select">
+              <select
+                name="options[{{ option.name | escape }}]"
+                id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                class="select__select"
+                form="{{ product_form_id }}"
+                tabindex="0"
+              >
+                {% render 'product-variant-options',
+                  product: product,
+                  option: option,
+                  block: block,
+                  show_color_swatch: false
+                %}
+              </select>
+              {% render 'icon-caret' %}
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    {% endunless %}
+  {% endfor %}
+  <script type="application/json">
+    {{ product.variants | json }}
+  </script>
+</variant-selects>

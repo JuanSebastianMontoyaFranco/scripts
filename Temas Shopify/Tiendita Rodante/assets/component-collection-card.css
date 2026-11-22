@@ -1,0 +1,116 @@
+.collection-card {
+  display: flex;
+  gap: 1.4rem;
+  border-radius: var(--border-radius-main);
+  position: relative;
+  gap: 0;
+  overflow: hidden;
+  z-index: 1;
+  height: 100%;
+  border: 0.1rem solid rgb(var(--color-border));
+}
+@media screen and (pointer: fine) {
+  .collection-card:hover {
+    border: 0.1rem solid rgb(var(--color-border-on-hover));
+  }
+}
+.collection-card:after {
+  content: "";
+  display: block;
+  padding-bottom: var(--image-size);
+}
+.collection-card .collection-card__overlay-link {
+  display: block !important;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 4;
+}
+.collection-card .collection-card__btn {
+  display: flex;
+  z-index: 999;
+}
+.collection-card .collection-card__btn .button {
+  z-index: 999;
+}
+.collection-card .collection-card__title-position {
+  text-align: center;
+}
+.collection-card__content {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  margin-top: auto;
+}
+.collection-card .collection-card__title {
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  transition: 0.3s all;
+  pointer-events: none;
+}
+.collection-card .collection-card__title:not(:last-child) {
+  margin-bottom: 0.7rem;
+}
+.collection-card .collection-card__desc {
+  position: relative;
+  z-index: 1;
+}
+.collection-card .collection-card__img-type {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius-main);
+}
+.collection-card .collection-card__img {
+  display: flex;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-decoration: none;
+  border-radius: var(--border-radius-main);
+}
+.collection-card .collection-card__img.have-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+.collection-card .collection-card__img.have-overlay::before {
+  background: rgba(var(--color-overlay));
+  opacity: var(--opacity-overlay);
+}
+.collection-card .collection-card__img img,
+.collection-card .collection-card__img svg,
+.collection-card .collection-card__img .placeholder {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+  border-radius: var(--border-radius-main);
+  transition: all var(--duration-default) ease;
+}
+.collection-card .collection-card__title:last-child {
+  margin: 0;
+}
+
+.collection-none-standart:hover .have-overlay::before {
+  background: rgba(var(--color-overlay), var(--overlay-alpha));
+}

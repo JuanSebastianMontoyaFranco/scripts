@@ -1,0 +1,156 @@
+<div
+  class="card-wrapper js-color-swatches-wrapper color-background-1"
+  data-product="{{ product_card_product.handle }}"
+  tabindex="-1"
+>
+  <span class="visually-hidden">{{ product_card_product.title | escape }}</span>
+
+  <div class="card-flex" tabindex="-1">
+    <div
+      class="card card--product {% if media_fit == "contain" %}card--background{% endif %}"
+      tabindex="-1"
+    >
+      <div class="card__inner full-unstyled-link">
+        <div
+          class="media {% if media_fit == "cover" %}media--transparent{% endif %} media--hover-effect"
+          style="aspect-ratio: {{ media_size }};"
+        >
+          {%- if product_card_product.featured_media -%}
+            {% liquid
+              assign aspect_ratio = media_size | split: '/'
+              assign temp = aspect_ratio[0] | append: '.0'
+
+              assign aspect_ratio_settings = aspect_ratio[1] | divided_by: temp
+              assign aspect_ratio_img_width = product_card_product.featured_media.height | plus: 0.0 | divided_by: product_card_product.featured_media.width | round: 2
+              assign aspect_ratio_img_height = product_card_product.featured_media.width | plus: 0.0 | divided_by: product_card_product.featured_media.height | round: 2
+
+              assign width_ratio = 1
+              if aspect_ratio_settings < 1
+                if aspect_ratio_settings < aspect_ratio_img_width and aspect_ratio_img_width > 1
+                  assign width_ratio = aspect_ratio_img_width
+                elsif aspect_ratio_settings < aspect_ratio_img_width and aspect_ratio_img_width < 1
+                  assign width_ratio = aspect_ratio_img_height
+                elsif aspect_ratio_settings > aspect_ratio_img_width and aspect_ratio_img_width < 1
+                  assign width_ratio = aspect_ratio_img_height
+                else
+
+                endif
+              else
+                if aspect_ratio_settings < aspect_ratio_img_width and aspect_ratio_img_width > 1
+                  assign width_ratio = aspect_ratio_img_width
+                elsif aspect_ratio_settings > aspect_ratio_img_width and aspect_ratio_img_width > 1
+                  assign width_ratio = aspect_ratio_settings
+                elsif aspect_ratio_settings > aspect_ratio_img_width and aspect_ratio_img_width < 1
+                  assign width_ratio = aspect_ratio_img_height | times: aspect_ratio_settings | round: 2 | plus: aspect_ratio_img_width
+                else
+                  assign width_ratio = aspect_ratio_settings | plus: 0.25
+                endif
+              endif
+            %}
+
+            {% if columns %}
+              {% capture sizes %}
+								{% if columns == 4 %}
+									(min-width: 1100px) calc(((100vw - 64px) / 4) * {{ width_ratio }}),
+								{% endif %}
+								{% if columns >= 3 %}
+									(min-width: 990px) calc(((100vw - 40px) / 3) * {{ width_ratio }}),
+								{% endif %}
+								(min-width: 750px) calc(((100vw - 40px) / 2) * {{ width_ratio }}),
+								calc((100vw - 40px))
+							{% endcapture %}
+            {% else %}
+              {% capture sizes %}
+								(min-width: 1100px) calc(535px * {{ width_ratio }}), (min-width: 750px) calc(((100vw - 128px) / 2) * {{ width_ratio }}), calc((100vw - 40px))
+							{% endcapture %}
+            {% endif %}
+
+            {% capture style %}
+							{%- if media_fit == 'contain' -%}
+								object-fit: contain;
+							{%- endif -%}
+							{%- if media_fit == 'cover' -%}
+								object-fit: cover;
+							{%- endif -%}
+						{% endcapture %}
+
+            {{
+              product_card_product.featured_media
+              | image_url: width: product_card_product.featured_media.width
+              | image_tag:
+                loading: 'lazy',
+                class: 'motion-reduce media--first',
+                widths: '360, 533, 720, 940, 1066, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600',
+                sizes: sizes,
+                style: style
+            }}
+
+            {%- if product_card_product.media[1] != null and show_secondary_image -%}
+              {{
+                product_card_product.media[1]
+                | image_url: width: product_card_product.media[1].width
+                | image_tag:
+                  loading: 'lazy',
+                  class: 'motion-reduce media--second',
+                  widths: '360, 533, 720, 940, 1066, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600',
+                  sizes: sizes,
+                  style: style
+              }}
+            {%- endif -%}
+          {%- else -%}
+            {{ 'product-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    <div class="card-information">
+      <div class="card-information__wrapper card-information__wrapper--{{ content_alignment }}">
+        <div class="card-information__group card-information__group--{{ content_alignment }}">
+          {%- if show_vendor or show_collection -%}
+            <div class="card__subtitles">
+              {%- if show_vendor and product_card_product.vendor -%}
+                <span class="visually-hidden">
+                  {{- 'accessibility.vendor' | t -}}
+                </span>
+                <div class="card__subtitle card__vendor">
+                  {% if settings.enable_vendor_link %}
+                    {{ product_card_product.vendor | link_to_vendor: class: 'focus-inset' }}
+                  {% else %}
+                    {{ product_card_product.vendor }}
+                  {% endif %}
+                </div>
+              {%- endif -%}
+              {%- if show_collection and product_card_product.collections[0].title != blank -%}
+                <div class="card__subtitle card__collection {% if show_vendor == false %}no-vendor{% endif %}">
+                  {{ product_card_product.collections[0].title }}
+                </div>
+              {%- endif -%}
+            </div>
+          {% endif %}
+
+          <div class="card__middle">
+            <h3 class="card__title h5 animated-link__underline--multirow">
+              <a
+                class="full-unstyled-link"
+                href="{{ product_card_product.url | default: '#' }}"
+                title="{{ product_card_product.title | escape }}"
+                aria-label="{{ product_card_product.title | escape }}"
+              >
+                {{- product_card_product.title | escape -}}
+              </a>
+            </h3>
+          </div>
+
+          {% render 'price', product: product_card_product, price_class: '' %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a
+    href="{{ product_card_product.url | default: '#' }}"
+    class="link link--overlay card-wrapper__link--overlay js-color-swatches-link"
+    aria-label="{{ 'accessibility.product_link' | t }}"
+  ></a>
+</div>

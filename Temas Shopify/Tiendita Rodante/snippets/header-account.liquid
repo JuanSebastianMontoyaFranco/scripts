@@ -1,0 +1,195 @@
+{% liquid
+  assign is_mobile = is_mobile | default: false
+%}
+
+{%- if shop.customer_accounts_enabled and section.settings.enable_account_btn -%}
+  <div class="header__account{% if is_mobile == true %} header__account--mobile{% endif %}">
+    {% if section.settings.enable_account_modal_component %}
+      <shopify-account
+        menu="{{ section.settings.customer_account_menu | default: "customer-account-main-menu" }}"
+        style="display: flex; align-items: center;"
+      >
+        <div slot="signed-out-avatar">
+          {% if is_mobile != true %}
+            <div class="header__icon header__icon--account header__icon--summary focus-inset modal__toggle">
+              {% render 'icon-account' %}
+            </div>
+          {% else %}
+            <div
+              class="button button--primary menu-drawer__account link focus-inset"
+              {% if customer %}
+                aria-label="{{ 'customer.account_fallback' | t }}"
+              {% else %}
+                aria-label="{{ 'customer.log_in' | t }}"
+              {% endif %}
+            >
+              {%- liquid
+                if customer
+                  echo 'customer.account_fallback' | t
+                else
+                  echo 'customer.log_in' | t
+                endif
+              -%}
+            </div>
+          {% endif %}
+        </div>
+      </shopify-account>
+    {%- else -%}
+      {% liquid
+        if customer
+          assign btn_link = routes.account_profile_url
+          assign btn_aria = 'customer.account_fallback' | t
+        else
+          assign btn_link = routes.account_login_url
+          assign btn_aria = 'customer.log_in' | t
+        endif
+      %}
+
+      {% if is_mobile != true %}
+        <details-disclosure>
+          <details>
+            <summary
+              class="header__icon header__icon--account header__icon--summary focus-inset modal__toggle"
+              aria-haspopup="dialog"
+              role="button"
+            >
+              {% render 'icon-account' %}
+            </summary>
+            <div
+              class="header__account-modal modal__toggle color-background-1 {% if customer %}header__account-modal-login{% endif %}"
+              role="dialog"
+              aria-modal="true"
+            >
+              {%- if customer -%}
+                <div class="header__account__account">
+                  <span class="header__account__subtitle extra-small-font">
+                    {{- 'customer.account_fallback' | t -}}
+                  </span>
+                  <div class="header__account__name large-font">
+                    {{ 'customer.account_welcome' | t -}}
+                    <br>
+                    {{ customer.name }}
+                  </div>
+                  <ul class="header__account__body">
+                    <li class="header__account__link">
+                      <a
+                        class="small-font"
+                        href="{{ routes.account_profile_url }}"
+                        aria-label="{{ 'customer.account_fallback' | t }}"
+                      >
+                        {{ 'customer.account_fallback' | t }}
+                      </a>
+                    </li>
+                  </ul>
+
+                  <div class="button_wrapper header__account__logout">
+                    <a
+                      href="{{ routes.account_logout_url }}"
+                      data-button-text="{{ 'customer.log_out' | t | escape }}"
+                      aria-label="{{ 'customer.log_out' | t | escape }}"
+                      class="link button button--link"
+                    >
+                      <span class="small-font">
+                        {{ 'customer.log_out' | t }}
+                      </span>
+                    </a>
+                  </div>
+                </div>
+              {%- else -%}
+                <a
+                  href="{{ btn_link }}"
+                  aria-label="{{ btn_aria }}"
+                  class="button button--link button header__account__login link focus-inset small-font"
+                  {%- if customer -%}
+                    data-button-text="{{ 'customer.account_fallback' | t }}"
+                  {%- else -%}
+                    data-button-text="{{ 'customer.log_in' | t }}"
+                  {%- endif -%}
+                >
+                  <span>
+                    {% if customer %}
+                      {{ 'customer.account_fallback' | t }}
+                    {% else %}
+                      {{ 'customer.log_in' | t }}
+                    {% endif %}
+                  </span>
+                </a>
+              {%- endif -%}
+            </div>
+            <div
+              class="header__account__overlay color-background-3"
+            ></div>
+          </details>
+        </details-disclosure>
+      {% else %}
+        {%- if customer -%}
+          <div class="menu-drawer__utility-account">
+            <div class="menu-drawer__utility-account-header">
+              <span class="menu-drawer__utility-name">
+                {{- customer.name -}}
+              </span>
+              <a
+                class="menu-drawer__utility-logout"
+                href="{{ routes.account_logout_url }}"
+                aria-label="{{ 'customer.log_out' | t }}"
+              >
+                {{- 'customer.log_out' | t -}}
+              </a>
+            </div>
+            <ul class="menu-drawer__utility-account-body">
+              <li class="menu-drawer__utility-account-cart">
+                <a
+                  href="{{ routes.cart_url }}"
+                  aria-label="{{ 'customer.account.shopping_cart' | t }}"
+                >
+                  {{- 'customer.account.shopping_cart' | t -}}
+                </a>
+                {%- if cart != empty -%}
+                  <div class="cart-count-bubble {% if cart.item_count >= 100 %} cart-count-bubble-very-long{% endif %}">
+                    {%- if cart.item_count < 100 -%}
+                      <span aria-hidden="true">
+                        {{- cart.item_count -}}
+                      </span>
+                    {%- else -%}
+                      <span class="cart-count-bubble-very-long-number" aria-hidden="true">99+</span>
+                    {%- endif -%}
+                    <span class="visually-hidden">
+                      {{- 'sections.header.cart_count' | t: count: cart.item_count -}}
+                    </span>
+                  </div>
+                {%- endif -%}
+              </li>
+              <li class="menu-drawer__utility-account-link">
+                <a
+                  href="{{ routes.account_profile_url }}"
+                  aria-label="{{ 'customer.account.title' | t }}"
+                >
+                  {{ 'customer.account.title' | t }}
+                </a>
+              </li>
+            </ul>
+          </div>
+        {%- else -%}
+          <a
+            href="{{ btn_link }}"
+            aria-label="{{ btn_aria }}"
+            class="button button--primary  menu-drawer__account link focus-inset"
+            {% if customer %}
+              aria-label="{{ 'customer.account_fallback' | t }}"
+            {% else %}
+              aria-label="{{ 'customer.log_in' | t }}"
+            {% endif %}
+          >
+            {%- liquid
+              if customer
+                echo 'customer.account_fallback' | t
+              else
+                echo 'customer.log_in' | t
+              endif
+            -%}
+          </a>
+        {%- endif -%}
+      {% endif %}
+    {%- endif -%}
+  </div>
+{%- endif -%}

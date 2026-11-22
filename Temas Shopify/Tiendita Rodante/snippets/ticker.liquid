@@ -1,0 +1,40 @@
+{% style %}
+  #shopify-section-{{ id }} {
+    --marquee-ticker-size: {{ ticker_size | default: '86px'  }};
+  }
+{% endstyle %}
+
+<div
+  class="section-ticker-main-container section-{{ id }}-padding"
+>
+  {% liquid
+    assign size_coeff = 1
+
+    if text_size == 'h2'
+      assign size_coeff = 2
+    endif
+
+    assign ticker_elements_count = 128 | times: size_coeff | divided_by: ticker_text.size | at_least: 1 | plus: 1
+  %}
+  <div
+    class="ticker-banner-ticker"
+    style="--ticker-banner-ticker-speed: {{ ticker_speed | times: 2 }}s;"
+  >
+    <div class="ticker-banner-ticker-wrapper">
+      <span class="ticker-banner-ticker-collection ticker-banner-ticker-collection--1">
+        {%- for i in (1..ticker_elements_count) -%}
+          <span class="ticker-banner-ticker-item {{ text_size }}">
+            {{- ticker_text -}}
+          </span>
+        {%- endfor -%}
+      </span>
+      <span class="ticker-banner-ticker-collection ticker-banner-ticker-collection--2">
+        {%- for i in (1..ticker_elements_count) -%}
+          <span class="ticker-banner-ticker-item {{ text_size }}">
+            {{- ticker_text -}}
+          </span>
+        {%- endfor -%}
+      </span>
+    </div>
+  </div>
+</div>

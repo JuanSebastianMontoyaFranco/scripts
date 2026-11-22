@@ -1,0 +1,11 @@
+<div class="product__text" {{ shopify_attributes }}>
+  {% if text != blank %}
+    {% if vendor == text and enable_vendor_link %}
+      {{ text | link_to_vendor: class: 'focus-inset' }}
+    {% else %}
+      {{ text }}
+    {% endif %}
+  {% else %}
+    {{ 'products.product.vendor_name_default' | t }}
+  {% endif %}
+</div>

@@ -1,0 +1,260 @@
+{% doc %}
+  Renders a variant list row (quick order list section).
+
+  @param {object} item - Product or Variant liquid object
+  @param {object} variant - Variant liquid object
+  @param {object} [settings] - Section settings object
+
+  @example
+  {% render 'quick-order-list-row', item: variant, variant: variant %}
+{% enddoc %}
+
+{% liquid
+  assign show_image = settings.show_image | default: false
+  assign media_ratio = settings.image_ratio | default: 'square'
+  assign media_fit = settings.image_fit | default: 'cover'
+  assign show_sku = settings.show_sku | default: false
+
+  assign cart_qty = cart | item_count_for_variant: variant.id
+  assign item_image = variant.image | default: item.featured_media | default: item.product.featured_media
+  assign item_sku = variant.sku | escape
+  assign item_title = item.title | escape
+
+  assign item_price = item.price | money
+  assign item_total_price = cart | line_items_for: item | sum: 'original_line_price' | money
+  if settings.currency_code_enabled
+    assign item_total_price = cart | line_items_for: item | sum: 'original_line_price' | money_with_currency
+  endif
+%}
+
+<tr
+  class="quick-variant-item"
+  id="Variant-{{ variant.id }}"
+  data-variant-id="{{ variant.id }}"
+>
+  <td class="quick-variant-item__details">
+    <div class="quick-variant-item__details-wrapper">
+      {%- if show_image -%}
+        {% liquid
+          assign image_ratio = '1/1'
+          assign settings_aspect_ratio = 1
+          case media_ratio
+            when 'landscape'
+              assign image_ratio = '4/3'
+              assign settings_aspect_ratio = 1.33
+            when 'portrait'
+              assign image_ratio = '3/4'
+              assign settings_aspect_ratio = 0.75
+            when 'square'
+              assign image_ratio = '1/1'
+              assign settings_aspect_ratio = 1
+          endcase
+
+          assign aspect_ratio = image_ratio | split: '/'
+          assign temp = aspect_ratio[0] | append: '.0'
+          assign padding_bottom = aspect_ratio[1] | divided_by: temp | times: 100 | round: 2
+        %}
+        <div
+          class="quick-variant-item__media{% if item_image == blank %} quick-variant-item__media--placeholder{% endif %}"
+          style="--padding-bottom: {{ padding_bottom }}%"
+        >
+          {%- if item_image != blank -%}
+            {% liquid
+              assign calc_ratio = 1
+              if media_fit == 'cover' and item_image.aspect_ratio > settings_aspect_ratio
+                assign calc_ratio = item_image.aspect_ratio | divided_by: settings_aspect_ratio | round: 2
+              endif
+            %}
+            {%- capture img_sizes -%}calc({{ calc_ratio }} * 40px){%- endcapture -%}
+            {%- capture image_styles -%}object-fit: {{ media_fit }};{%- endcapture -%}
+            {{
+              item_image
+              | image_url: width: item_image.width
+              | image_tag:
+                loading: 'lazy',
+                fetchpriority: 'low',
+                decoding: 'async',
+                sizes: img_sizes,
+                widths: '40, 80, 120, 160, 200',
+                class: 'quick-variant-item__media-item',
+                style: image_styles
+            }}
+          {%- else -%}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg quick-variant-item__media-item' }}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="quick-variant-item__info">
+        <span class="quick-variant-item__name">{{- item_title -}}</span>
+        {%- if show_sku and item_sku != blank -%}
+          <span class="quick-variant-item__sku small-font">{{- item_sku -}}</span>
+        {%- endif -%}
+      </div>
+    </div>
+  </td>
+
+  <td class="quick-variant-item__quantity">
+    <div class="quick-variant-item__quantity-wrapper">
+      {%- liquid
+        assign check_against_inventory = true
+        if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+          assign check_against_inventory = false
+        endif
+        if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+          assign quantity_rule_soldout = true
+        endif
+      -%}
+      {%- if variant.available == false or quantity_rule_soldout -%}
+        <span class="quick-variant-item__sold-out small-font">
+          {{- 'products.product.sold_out' | t -}}
+        </span>
+      {%- else -%}
+        <quantity-input class="quantity">
+          <label
+            class="visually-hidden"
+            for="Quantity-{{ variant.id }}"
+          >
+            {{- 'products.product.quantity.label' | t -}}
+          </label>
+          <button class="quantity__button no-js-hidden focus-inset" name="minus" type="button">
+            <span class="visually-hidden">
+              {{- 'products.product.quantity.decrease' | t: product: item_title -}}
+            </span>
+            {% render 'icon-minus' %}
+          </button>
+          <input
+            id="Quantity-{{ variant.id }}"
+            class="quantity__input focus-inset"
+            type="number"
+            name="quantity"
+            data-index="{{ variant.id }}"
+            data-cart-quantity="{{ cart_qty }}"
+            data-min="0"
+            min="0"
+            {% if variant.inventory_quantity %}
+              data-max="{{ variant.quantity_rule.max }}"
+              max="{{ variant.quantity_rule.max }}"
+            {% endif %}
+            step="{{ variant.quantity_rule.increment }}"
+            value="{{ cart_qty }}"
+          >
+          <button class="quantity__button no-js-hidden focus-inset" name="plus" type="button">
+            <span class="visually-hidden">
+              {{- 'products.product.quantity.increase' | t: product: item_title -}}
+            </span>
+            {% render 'icon-plus' %}
+          </button>
+        </quantity-input>
+      {%- endif -%}
+      {% if cart_qty > 0 %}
+        <div
+          id="Remove-{{ variant.id }}"
+          class="quick-variant-item__remove"
+          data-index="{{ variant.id }}"
+        >
+          <button
+            class="button button--unstyled"
+            aria-label="{{ 'sections.cart.remove_title' | t: title: item_title }}"
+            data-target="remove-{{ variant.id }}"
+          >
+            {% render 'icon-remove' %}
+          </button>
+        </div>
+      {% endif %}
+    </div>
+  </td>
+  <td class="quick-variant-item__price">
+    {%- liquid
+      assign has_vol_pricing = false
+      if variant.quantity_price_breaks.size > 0
+        assign has_vol_pricing = true
+      endif
+    -%}
+    <div class="quick-variant-item__price-wrapper">
+      {%- if item.compare_at_price -%}
+        <dl class="quick-variant-item__discounted-prices">
+          <dt class="visually-hidden">
+            {{ 'products.product.price.regular_price' | t }}
+          </dt>
+          <dd>
+            <s class="quick-variant-item__old-price">
+              {{ item.compare_at_price | money }}
+            </s>
+          </dd>
+          <dt class="visually-hidden">
+            {{ 'products.product.price.sale_price' | t }}
+          </dt>
+          <dd>
+            {%- if has_vol_pricing -%}
+              {%- liquid
+                assign volume_pricing_array = variant.quantity_price_breaks | sort: 'quantity' | reverse
+              -%}
+              {%- if cart_qty < volume_pricing_array.last.minimum_quantity -%}
+                {%- assign variant_price = variant.price | money -%}
+                <span>
+                  {{- 'sections.quick-order-list.each' | t: money: variant_price -}}
+                </span>
+              {%- else -%}
+                {%- for price_break in volume_pricing_array -%}
+                  {%- if cart_qty >= price_break.minimum_quantity -%}
+                    {%- assign price_break_price = price_break.price | money -%}
+                    <span>
+                      {{- 'sections.quick-order-list.each' | t: money: price_break_price -}}
+                    </span>
+                    {%- break -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endif -%}
+            {%- else -%}
+              <span>
+                {{- 'sections.quick-order-list.each' | t: money: item_price -}}
+              </span>
+            {%- endif -%}
+          </dd>
+        </dl>
+      {%- else -%}
+        {%- if has_vol_pricing -%}
+          {%- liquid
+            assign volume_pricing_array = variant.quantity_price_breaks | sort: 'quantity' | reverse
+          -%}
+          {%- if cart_qty < volume_pricing_array.last.minimum_quantity -%}
+            {%- assign variant_price = variant.price | money -%}
+            <span>
+              {{- 'sections.quick-order-list.each' | t: money: variant_price -}}
+            </span>
+          {%- else -%}
+            {%- for price_break in volume_pricing_array -%}
+              {%- if cart_qty >= price_break.minimum_quantity -%}
+                {%- assign price_break_price = price_break.price | money -%}
+                <span>
+                  {{- 'sections.quick-order-list.each' | t: money: price_break_price -}}
+                </span>
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- endif -%}
+        {%- else -%}
+          <span>
+            {{- 'sections.quick-order-list.each' | t: money: item_price -}}
+          </span>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- if item.available and item.unit_price_measurement -%}
+        <span class="unit-price">
+          <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+          {{- item.unit_price | unit_price_with_measurement: item.unit_price_measurement -}}
+        </span>
+      {%- endif -%}
+    </div>
+  </td>
+  <td class="quick-variant-item__totals right">
+    <div class="quick-variant-item__totals-wrapper">
+      <div class="loading-overlay__spinner hidden">
+        {%- render 'icon-spinner' -%}
+      </div>
+      <span>{{ item_total_price }}</span>
+    </div>
+  </td>
+</tr>

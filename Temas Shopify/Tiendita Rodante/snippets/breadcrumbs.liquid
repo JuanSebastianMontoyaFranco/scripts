@@ -1,0 +1,110 @@
+{% assign template_base = template | split: '.' | first %}
+
+{% unless template_base == 'index' %}
+  {% if settings.enable_breadcrumbs %}
+    <div class="container breadcrumbs-wrapper background">
+      <nav
+        id="breadcrumbs"
+        class="breadcrumb"
+        role="navigation"
+        aria-label="breadcrumbs"
+      >
+        {% render 'icon-home' %}
+        <a
+          href="{{ routes.root_url }}"
+          title="{{ 'general.breadcrumbs.home' | t }}"
+          class="focus-inset"
+          aria-label="home page"
+        >
+          {{- 'general.breadcrumbs.home' | t -}}
+        </a>
+        {% if template contains 'page' %}
+          <div class="breadcrumb__delimiter">/</div>
+          <span>{{ page.title }} </span>
+        {% elsif template == 'cart' %}
+          <div class="breadcrumb__delimiter">/</div>
+          <span>{{ 'templates.cart.cart' | t }}</span>
+        {% elsif template == 'collection' %}
+          <div class="breadcrumb__delimiter">/</div>
+          <span>{{ collection.title }}</span>
+        {% elsif template contains 'product' %}
+          <div class="breadcrumb__delimiter">/</div>
+          {% if product.collections[0] %}
+            <a
+              href="{{ product.collections[0].url }}"
+              class="focus-inset"
+              aria-label="first collection {{ product.collections[0].title }}"
+            >
+              {{- product.collections[0].title }}
+            </a>
+            <div class="breadcrumb__delimiter">/</div>
+          {% endif %}
+          <span>{{ product.title }} </span>
+        {% elsif template == 'blog' %}
+          <div class="breadcrumb__delimiter">/</div>
+          {% if current_tags %}
+            {{ blog.title | link_to: blog.url }}
+            <div class="breadcrumb__delimiter">/</div>
+            <span>{{ current_tags | join: ' + ' }} </span>
+          {% else %}
+            <span>{{ blog.title }}</span>
+          {% endif %}
+        {% elsif template == 'article' %}
+          <div class="breadcrumb__delimiter">/</div>
+          <a
+            href="{{ blog.url }}"
+            title="{{ blog.title }}"
+            class="focus-inset"
+          >
+            {{ blog.title }}
+          </a>
+          <div class="breadcrumb__delimiter">/</div>
+          <span>{{ page_title }}</span>
+        {% elsif template == 'customers/order' %}
+          <div class="breadcrumb__delimiter">/</div>
+          <a
+            href="{{ routes.account_url }}"
+            class="focus-inset"
+            aria-label="delimiter"
+          >
+            {{- 'customer.account.breadcrumb' | t }}
+          </a>
+          <div class="breadcrumb__delimiter">/</div>
+          <span>{{ 'customer.order.title' | t: name: order.name }}</span>
+        {% elsif template == 'customers/addresses' %}
+          <div class="breadcrumb__delimiter">/</div>
+          <a
+            href="{{ routes.account_url }}"
+            class="focus-inset"
+            aria-label="delimiter"
+          >
+            {{- 'customer.account.breadcrumb' | t }}
+          </a>
+          <div class="breadcrumb__delimiter">/</div>
+          <span>{{ 'customer.addresses.title' | t }} </span>
+        {% else %}
+          <div class="breadcrumb__delimiter">/</div>
+          <span>{{ page_title }} </span>
+        {% endif %}
+      </nav>
+
+      <script>
+        const calcBreadcrumbs = () => {
+          const breadcrumbs = document.querySelector('.breadcrumbs-wrapper');
+          if (breadcrumbs) {
+            const breadcrumbsObserver = new ResizeObserver((entries) => {
+              const breadcrumbsHeight = breadcrumbs.getBoundingClientRect().height;
+              document.documentElement.style.setProperty('--breadcrumbs-height', `${breadcrumbsHeight}px`);
+            });
+            breadcrumbsObserver.observe(breadcrumbs);
+          }
+        };
+        calcBreadcrumbs();
+
+        document.addEventListener('shopify:section:load', function () {
+          calcBreadcrumbs();
+        });
+      </script>
+    </div>
+  {% endif %}
+{% endunless %}

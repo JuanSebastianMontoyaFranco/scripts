@@ -1,0 +1,181 @@
+.simple-media-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.simple-media-list__wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  box-sizing: border-box;
+  width: 100%;
+  gap: var(--indent_value);
+}
+@media (min-width: 750px) {
+  .simple-media-list__wrapper--2, .simple-media-list__wrapper--3, .simple-media-list__wrapper--4, .simple-media-list__wrapper--5, .simple-media-list__wrapper--6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 990px) {
+  .simple-media-list__wrapper--3, .simple-media-list__wrapper--4, .simple-media-list__wrapper--5, .simple-media-list__wrapper--6 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1100px) {
+  .simple-media-list__wrapper--4, .simple-media-list__wrapper--5, .simple-media-list__wrapper--6 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (min-width: 1360px) {
+  .simple-media-list__wrapper--5 {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .simple-media-list__wrapper--6 {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+@media screen and (max-width: calc(750px - 1px)) {
+  .simple-media-list__wrapper--2-mobile:not(.simple-media-list__wrapper--1) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (max-width: calc(750px - 1px)) {
+  .simple-media-list__wrapper[class*="--1.6rem"] {
+    gap: 0.8rem;
+  }
+  .simple-media-list__wrapper[class*="--2.4rem"] {
+    gap: 1.6rem;
+  }
+}
+@media screen and (max-width: 989px) {
+  .swiper--media .simple-media-list__wrapper {
+    display: flex !important;
+    grid-template-columns: none;
+    gap: 0 !important;
+  }
+}
+
+.simple-cards .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: rgb(var(--color-foreground-tertiary)) !important;
+}
+
+.simple-card {
+  position: relative;
+  height: auto;
+  width: 100%;
+  border-radius: var(--border-radius-main);
+  overflow: hidden;
+  display: flex;
+}
+.simple-card svg {
+  width: 100%;
+  position: absolute;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  height: 100%;
+  object-fit: cover;
+}
+.simple-card::after {
+  content: "";
+  display: block;
+  width: 0;
+  padding-bottom: calc(100% / (var(--aspect-ratio)));
+}
+.simple-card.adapt::after {
+  content: "";
+  display: block;
+  width: 0;
+  padding-bottom: calc(100% / (var(--aspect-ratio)));
+}
+.simple-card__wrapper {
+  display: flex;
+  pointer-events: none;
+}
+.simple-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+  width: 100%;
+  pointer-events: none;
+  z-index: 4;
+  margin-top: 1.6rem;
+}
+.simple-card--center .simple-card__content {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.simple-card--left .simple-card__content {
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+}
+.simple-card__heading:last-child, .simple-card__heading:only-child, .simple-card__text:last-child, .simple-card__text:only-child {
+  margin: 0;
+}
+.simple-card__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.simple-card__heading {
+  margin: 0;
+  overflow-wrap: anywhere;
+  max-width: 33.6rem;
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
+  line-height: var(--font-heading-line-height);
+  text-transform: var(--font-heading-text-transform);
+}
+.simple-card__text {
+  max-width: 48rem;
+  opacity: 0.8;
+  color: rgb(var(--color-foreground));
+  font-weight: 400;
+  max-width: 33.6rem;
+}
+.simple-card__text p {
+  margin: 0;
+  color: rgb(var(--color-foreground));
+}
+.simple-card__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2.4rem;
+  pointer-events: all;
+  z-index: 4;
+}
+.simple-card__image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.simple-card__image.placeholder {
+  background-color: rgba(var(--color-background));
+}
+.simple-card__image .placeholder-svg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.simple-card__image > svg,
+.simple-card__image > img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  object-position: center;
+  position: relative;
+}

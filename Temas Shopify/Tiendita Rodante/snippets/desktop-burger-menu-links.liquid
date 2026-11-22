@@ -1,0 +1,114 @@
+{%- comment -%}
+  Renders burger menu navigation (with nested submenus).
+
+  Inputs:
+  - menu: Shopify link_list
+  - enable_top_level_link_navigation: boolean. When true, top-level items with submenus render as links (desktop behavior).
+{%- endcomment -%}
+
+{%- assign enable_top_level_link_navigation = enable_top_level_link_navigation | default: false -%}
+
+{%- if menu != blank and menu.links != blank -%}
+  <nav class="menu-drawer__navigation">
+    <ul class="menu-drawer__menu list-menu" role="list">
+      {%- for link in menu.links -%}
+        <li>
+          {%- if link.links != blank and enable_top_level_link_navigation -%}
+            <details>
+              <summary
+                class="menu-drawer__menu-item list-menu__item link link--text focus-inset"
+              >
+                <a
+                  href="{{ link.url }}"
+                  class="menu-drawer__menu-link link--text list-menu__item focus-inset"
+                  {% if link.current %}
+                    aria-current="page"
+                  {% endif %}
+                  aria-label="{{ link.title | escape }}"
+                >
+                  {{ link.title | escape }}
+                </a>
+                {% render 'icon-arrow' %}
+              </summary>
+              <div
+                id="link-{{ link.title | escape }}"
+                class="menu-drawer__submenu motion-reduce"
+                tabindex="-1"
+              >
+                <div class="menu-drawer__inner-submenu">
+                  <ul
+                    class="menu-drawer__menu list-menu"
+                    role="list"
+                    tabindex="-1"
+                  >
+                    {%- for childlink in link.links -%}
+                      <li>
+                        {%- if childlink.links == blank -%}
+                          <a
+                            href="{{ childlink.url }}"
+                            class="menu-drawer__menu-item link link--text list-menu__item focus-inset"
+                            {% if childlink.current %}
+                              aria-current="page"
+                            {% endif %}
+                            aria-label="{{ childlink.title | escape }}"
+                          >
+                            {{ childlink.title | escape }}
+                          </a>
+                        {%- else -%}
+                          <details>
+                            <summary
+                              class="menu-drawer__menu-item link link--text list-menu__item focus-inset"
+                            >
+                              {{ childlink.title | escape }}
+                              {% render 'icon-arrow' %}
+                            </summary>
+                            <div
+                              id="childlink-{{ link.title | escape }}-{{ childlink.title | escape }}"
+                              class="menu-drawer__submenu motion-reduce"
+                            >
+                              <ul
+                                class="menu-drawer__menu list-menu"
+                                role="list"
+                                tabindex="-1"
+                              >
+                                {%- for grandchildlink in childlink.links -%}
+                                  <li>
+                                    <a
+                                      href="{{ grandchildlink.url }}"
+                                      class="menu-drawer__menu-item link link--grandchild link--text list-menu__item focus-inset"
+                                      {% if grandchildlink.current %}
+                                        aria-current="page"
+                                      {% endif %}
+                                      aria-label="{{ grandchildlink.title | escape }}"
+                                    >
+                                      {{ grandchildlink.title | escape }}
+                                    </a>
+                                  </li>
+                                {%- endfor -%}
+                              </ul>
+                            </div>
+                          </details>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              </div>
+            </details>
+          {%- else -%}
+            <a
+              href="{{ link.url }}"
+              class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"
+              {% if link.current %}
+                aria-current="page"
+              {% endif %}
+              aria-label="{{ link.title | escape }}"
+            >
+              {{ link.title | escape }}
+            </a>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  </nav>
+{%- endif -%}

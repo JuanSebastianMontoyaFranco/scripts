@@ -1,0 +1,10 @@
+{%- assign descripcion_corta = product.metafields.custom.descripcion_corta -%}
+{%- if descripcion_corta.value != blank -%}
+  <div class="product__custom-short-description rte">
+    {%- if descripcion_corta.type == 'rich_text_field' -%}
+      {{ descripcion_corta | metafield_tag }}
+    {%- else -%}
+      {{ descripcion_corta.value | escape | newline_to_br }}
+    {%- endif -%}
+  </div>
+{%- endif -%}

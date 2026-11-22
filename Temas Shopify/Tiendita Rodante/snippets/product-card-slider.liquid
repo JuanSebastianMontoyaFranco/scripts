@@ -1,0 +1,133 @@
+{% comment %}
+  	Renders a product card
+  	Accepts:
+  	- product_card_product: {Object} Product Liquid object (optional)
+  	- media_size: {String} Size of the product image card. Values are "square" and "portrait". Default is "square" (optional)
+  	- show_vendor: {Boolean} Show the product vendor. Default: true
+  	- section_id: {String} The ID of the section that contains this card.
+  	Usage:
+  {% render 'product-card-slider', show_vendor: section.settings.show_vendor %}
+{% endcomment %}
+
+<div class="slider-card{% if media_fit == "contain" %} slider-card--background{% endif %}">
+  <span class="visually-hidden">{{ product_card_product.title | escape }}</span>
+
+  <div class="slider-card__media" style="--aspect-ratio: {{ media_size }};">
+    {%- if product_card_product.featured_media -%}
+      <a
+        href="{{ product_card_product.url | default: '#' }}"
+        class="slider-card__link--overlay"
+        aria-label="{{ 'accessibility.product_link' | t }}"
+      ></a>
+      {% capture style %}
+        {%- if media_fit == 'contain' -%}
+          object-fit: contain;
+        {%- endif -%}
+        {%- if media_fit == 'cover' -%}
+          object-fit: cover;
+        {%- endif -%}
+      {% endcapture %}
+      {{
+        product_card_product.featured_media
+        | image_url: width: 240
+        | image_tag: loading: 'lazy', widths: '120, 240', sizes: '120px, 240px', style: style
+      }}
+    {%- else -%}
+      {{ 'product-apparel-2' | placeholder_svg_tag }}
+    {%- endif -%}
+    {%- if product_card_product != blank -%}
+      <div class="slider-card__media-top">
+        {%- if settings.badge_sale_show or settings.badge_soldout_show or settings.badge_custom_show -%}
+          <div class="slider-card__badge badge">
+            {%- if product_card_product.available == false and settings.badge_soldout_show -%}
+              <span
+                class="badge badge--soldout color-background-1"
+                aria-hidden="true"
+              >
+                {{- 'products.product.sold_out' | t -}}
+              </span>
+            {%- elsif product_card_product.compare_at_price > product_card_product.price
+              and product_card_product.available
+              and settings.badge_sale_show
+            -%}
+              <span
+                class="badge badge--sale color-background-1"
+                aria-hidden="true"
+              >
+                {% if settings.badge_sale_type == 'sale' %}
+                  {{- 'products.product.on_sale' | t -}}
+                {% else %}
+                  {% comment %}{{- 'products.product.on_sale' | t -}}{% endcomment %}
+                  <span>
+                    {{
+                      product_card_product.compare_at_price
+                      | minus: product_card_product.price
+                      | times: 100
+                      | divided_by: product_card_product.compare_at_price
+                    -}}
+                    %
+                  </span>
+                {% endif %}
+              </span>
+            {%- endif -%}
+            {% if settings.badge_custom_show and product_card_product.metafields.custom.badges != blank %}
+              {% if product_card_product.metafields.custom.badges.list? %}
+                {% for badge in product_card_product.metafields.custom.badges.value %}
+                  <span
+                    class="badge badge--custom color-background-1"
+                    aria-hidden="true"
+                  >
+                    {{ badge }}
+                  </span>
+                {% endfor %}
+              {% else %}
+                <span
+                  class="badge badge--custom color-background-1"
+                  aria-hidden="true"
+                >
+                  {{ product_card_product.metafields.custom.badges }}
+                </span>
+              {% endif %}
+            {% endif %}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="slider-card__information">
+    {%- if show_vendor or show_collection -%}
+      <div class="slider-card__subtitles">
+        {%- if show_vendor and product_card_product.vendor -%}
+          <span class="visually-hidden">
+            {{- 'accessibility.vendor' | t -}}
+          </span>
+          <div class="card__subtitle slider-card__vendor">
+            {{ product_card_product.vendor }}
+          </div>
+        {%- endif -%}
+        {%- if show_collection and product_card_product.collections[0].title != blank -%}
+          <div class="card__subtitle slider-card__collection">
+            {{ product_card_product.collections[0].title }}
+          </div>
+        {%- endif -%}
+      </div>
+    {% endif %}
+
+    <h5 class="slider-card__title h5">
+      {%- if product_card_product.title -%}
+        <a
+          class="full-unstyled-link"
+          href="{{ product_card_product.url | default: '#' }}"
+          title="{{ product_card_product.title | escape }}"
+          aria-label="{{ product_card_product.title | escape }}"
+        >
+          {{- product_card_product.title | escape -}}
+        </a>
+      {%- else -%}
+        {{ 'products.product.product_heading' | t }}
+      {%- endif -%}
+    </h5>
+    {% render 'price', product: product_card_product, is_slider: true %}
+  </div>
+</div>

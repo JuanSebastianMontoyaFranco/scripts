@@ -1,0 +1,227 @@
+{% liquid
+  assign is_pre_order = false
+  if settings.enable_pre_order and product.selected_or_first_available_variant.available and product.selected_or_first_available_variant.inventory_management == 'shopify' and product.selected_or_first_available_variant.inventory_policy == 'continue' and product.selected_or_first_available_variant.inventory_quantity <= 0
+    assign is_pre_order = true
+  endif
+%}
+
+<div
+  class="
+    sticky-add-to-cart{% if block.settings.enable_border %} sticky-add-to-cart--border{% endif %} color-background-1
+    {%  if block.settings.show_sticky_add_to_cart == false %} hidden {% endif %}
+  "
+  {{ block.shopify_attributes }}
+>
+  <div class="sticky-add-to-cart__wrapper container">
+    <div class="sticky-add-to-cart__info">
+      {% if product.featured_media != blank %}
+        <div
+          class="product-card-mini__image"
+        >
+          {{
+            product.featured_media
+            | image_url: width: product.featured_media.width
+            | image_tag: loading: 'lazy', widths: '275, 550, 750'
+          }}
+        </div>
+      {% endif %}
+      <div class="product-card-mini__content animated-link__underline--multirow">
+        <p class="vendor-name">{{ product.vendor }}</p>
+        <a class="card-mini__content--title">
+          {{- product.title | escape -}}
+        </a>
+        <p
+          id="StickyVariant-{{ section.id }}"
+          class="sticky-add-to-cart__variant body-small{% if product.has_only_default_variant %} hidden{% endif %}"
+        >
+          {%- unless product.has_only_default_variant -%}
+            {{- product.selected_or_first_available_variant.title | escape -}}
+          {%- endunless -%}
+        </p>
+      </div>
+    </div>
+
+    <div class="sticky-add-to-cart__price-wrapper">
+      <div id="price-sticky-{{ section.id }}">
+        {%- render 'price', product: product, use_variant: true, show_badges: false -%}
+      </div>
+
+      <product-form
+        class="product-form"
+        data-hide-errors="{{ gift_card_recipient_feature_active }}"
+      >
+        {%- assign product_form_id_2 = 'sticky-bar-product-form-' | append: section.id -%}
+        {%- form 'product',
+          product,
+          id: product_form_id_2,
+          class: 'form',
+          novalidate: 'novalidate',
+          data-type: 'add-to-cart-form'
+        -%}
+          <input
+            type="hidden"
+            name="id"
+            value="{{ product.selected_or_first_available_variant.id }}"
+            {% if product.selected_or_first_available_variant.available == false %}
+              disabled
+            {% endif %}
+          >
+
+          <div class="product-form__buttons">
+            <div class="product-form__buttons-row">
+              <div
+                class="product-form__input product-form__quantity no-js-hidden"
+                {{ block.shopify_attributes }}
+              >
+                {%- assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id -%}
+                <quantity-input class="quantity{% if product.selected_or_first_available_variant.available == false %} disabled{% endif %}">
+                  <button
+                    class="quantity__button quantity__button--minus no-js-hidden focus-inset "
+                    name="minus"
+                    type="button"
+                    tabindex="0"
+                  >
+                    <span class="visually-hidden">
+                      {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
+                    </span>
+                    {% render 'icon-minus' %}
+                  </button>
+                  <input
+                    dir="ltr"
+                    class="quantity__input focus-inset"
+                    type="number"
+                    name="quantity"
+                    id="Quantity-Sticky-{{ section.id }}"
+                    data-cart-quantity="{{ cart_qty }}"
+                    data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                    min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                    {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                      data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                      max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                    {% endif %}
+                    step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                    {% if product.selected_or_first_available_variant.available %}
+                      value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                    {% else %}
+                      value="0"
+                    {% endif %}
+                    form="{{ product_form_id_2 }}"
+                    tabindex="0"
+                  >
+                  <label
+                    class="visually-hidden"
+                    for="Quantity-Sticky-{{ section.id }}"
+                  >
+                    {{ 'products.product.quantity.label' | t }}
+                  </label>
+                  <button
+                    class="quantity__button quantity__button--plus no-js-hidden focus-inset"
+                    name="plus"
+                    type="button"
+                    tabindex="0"
+                  >
+                    <span class="visually-hidden">
+                      {{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
+                    </span>
+                    {% render 'icon-plus' %}
+                  </button>
+                </quantity-input>
+                <div class="quantity-rules body-xs">
+                  {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
+                    <span class="quantity-rules__item">
+                      {{-
+                        'products.product.quantity.multiples_of'
+                        | t: quantity: product.selected_or_first_available_variant.quantity_rule.increment
+                      -}}
+                    </span>
+                  {%- endif -%}
+                  {%- if product.selected_or_first_available_variant.quantity_rule.min > 1 -%}
+                    <span class="quantity-rules__item">
+                      {{-
+                        'products.product.quantity.minimum_of'
+                        | t: quantity: product.selected_or_first_available_variant.quantity_rule.min
+                      -}}
+                    </span>
+                  {%- endif -%}
+                  {%- if product.selected_or_first_available_variant.quantity_rule.max != null -%}
+                    <span class="quantity-rules__item">
+                      {{-
+                        'products.product.quantity.maximum_of'
+                        | t: quantity: product.selected_or_first_available_variant.quantity_rule.max
+                      -}}
+                    </span>
+                  {%- endif -%}
+                </div>
+              </div>
+
+              <div class="button_wrapper custom-hover">
+                <button
+                  type="submit"
+                  name="add"
+                  class="product-form__submit button button--primary  focus-inset"
+                  {% if product.selected_or_first_available_variant.available == false %}
+                    disabled
+                  {% else %}
+                    data-button-text="{% if is_pre_order %}{{ settings.pre_order_button_label | escape }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endif %}"
+                  {% endif %}
+                  {% if is_pre_order %}
+                    data-status="pre-order"
+                  {% endif %}
+                  tabindex="0"
+                >
+                  {%- if is_pre_order -%}
+                    <div class="button__content">
+                      <span
+                        class="button__label"
+                        data-label="{{- settings.pre_order_button_label | escape -}}"
+                      >
+                        {{ settings.pre_order_button_label | escape }}
+                      </span>
+                    </div>
+                    <div class="loading-overlay__spinner hidden">
+                      {%- render 'icon-spinner' -%}
+                    </div>
+                  {%- elsif product.selected_or_first_available_variant.available -%}
+                    <div class="button__content">
+                      <span
+                        class="button__label"
+                        data-label="{{- 'products.product.shop_now' | t  | escape -}}"
+                      >
+                        {{ 'products.product.shop_now' | t }}
+                      </span>
+                    </div>
+                    <div class="loading-overlay__spinner hidden">
+                      {%- render 'icon-spinner' -%}
+                    </div>
+                  {%- else -%}
+                    <div class="button__content">
+                      <span
+                        class="button__label"
+                        data-label="{{- 'products.product.sold_out' | t | escape -}}"
+                      >
+                        {{ 'products.product.sold_out' | t }}
+                      </span>
+                    </div>
+                    <div class="loading-overlay__spinner hidden">
+                      {%- render 'icon-spinner' -%}
+                    </div>
+                  {%- endif -%}
+                  <span class="button_circle"> </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        {%- endform -%}
+
+        <div
+          class="product-form__error-message-wrapper"
+          role="alert"
+          hidden
+        >
+          {%- render 'icon-error' -%}
+          <span class="product-form__error-message"></span>
+        </div>
+      </product-form>
+    </div>
+  </div>
+</div>

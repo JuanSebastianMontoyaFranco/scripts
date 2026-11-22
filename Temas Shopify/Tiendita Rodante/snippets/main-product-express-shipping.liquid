@@ -1,0 +1,115 @@
+<div class="express-shipping" {{ block.shopify_attributes }}>
+  <div class="icon-wrapper">
+    {% render 'icon-shipping' %}
+  </div>
+  <div>
+    <p class="pickup-availabilit__heading">Express Shipping</p>
+    <div class="product-popup">
+      <modal-opener
+        class="no-js-hidden"
+        data-modal="#PopupModal-{{ block.id }}"
+        {{ block.shopify_attributes }}
+      >
+        <button
+          id="ProductPopup-{{ block.id }}"
+          class="button focus-inset"
+          type="button"
+          aria-haspopup="dialog"
+          tabindex="0"
+        >
+          <span class="pickup-availabilit__btn-name animated-link__underline--reverse"> Read more </span>
+        </button>
+      </modal-opener>
+
+      <modal-dialog
+        id="PopupModal-{{ block.id }}"
+        class="product-popup-modal express-shipping-modal"
+        {{ block.shopify_attributes }}
+      >
+        <div
+          role="dialog"
+          aria-label="{{ block.settings.label }}"
+          aria-modal="true"
+          class="product-popup-modal__dialog express-shipping-modal__dialog"
+          tabindex="-1"
+        >
+          <button
+            id="ModalClose-{{ block.id }}"
+            type="button"
+            class="product-popup-modal__close modal-close-button focus-inset"
+            aria-label="{{ 'accessibility.close' | t }}"
+            tabindex="0"
+          >
+            {% render 'icon-close-new' %}
+          </button>
+
+          <h3 class="express__shipping product-popup-modal__title">
+            {{ block.settings.heading }}
+          </h3>
+
+          {% if block.settings.text != blank %}
+            <div class="express__shipping product-popup-modal__text">
+              {{ block.settings.text }}
+            </div>
+          {% endif %}
+
+          <div class="product-popup-modal__content">
+            {% if block.settings.pickup_title != blank and block.settings.pickup_price != blank %}
+              <div class="pickup__wrapper">
+                <p class="pickup-title">
+                  {{ block.settings.pickup_title }}
+                </p>
+                <p class="pickup-price">
+                  {{ block.settings.pickup_price }}
+                </p>
+              </div>
+              <p class="pickup-description">
+                {{ block.settings.pickup_text }}
+              </p>
+            {% endif %}
+
+            {% if block.settings.standard_title != blank
+              and block.settings.standard_price != blank
+              and block.settings.standard_days != blank
+            %}
+              <div class="standard__wrapper">
+                <p class="standard-title">
+                  {{ block.settings.standard_title }}
+                  <span class="standard-days">
+                    {{ block.settings.standard_days }}
+                  </span>
+                </p>
+                <p class="standard-price">
+                  {{ block.settings.standard_price }}
+                </p>
+              </div>
+              <p class="standard-description">
+                {{ block.settings.standard_text }}
+              </p>
+            {% endif %}
+
+            {% if block.settings.express_title != blank
+              and block.settings.express_days != blank
+              and block.settings.express_price != blank
+            %}
+              <div class="express__wrapper">
+                <p class="express-title">
+                  {{ block.settings.express_title }}
+                  <span class="express-days">
+                    {{ block.settings.express_days }}
+                  </span>
+                </p>
+                <p class="express-price">
+                  {{ block.settings.express_price }}
+                </p>
+              </div>
+              <p class="express-description">
+                {{ block.settings.express_text }}
+              </p>
+            {% endif %}
+          </div>
+        </div>
+      </modal-dialog>
+    </div>
+  </div>
+</div>

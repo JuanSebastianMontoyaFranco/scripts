@@ -1,0 +1,385 @@
+.article-blocks-wrapper-left {
+  max-width: 92.7rem;
+}
+
+.rte > div:has(> img),
+.rte > div.block-with-two-img {
+  max-width: 100%;
+  width: 100%;
+}
+.rte h1,
+.rte h2,
+.rte h3,
+.rte h4,
+.rte h5,
+.rte h6 {
+  margin-bottom: 0.2rem;
+}
+.rte h1 + p, .rte h1 + div, .rte h1 + span,
+.rte h2 + p,
+.rte h2 + div,
+.rte h2 + span,
+.rte h3 + p,
+.rte h3 + div,
+.rte h3 + span,
+.rte h4 + p,
+.rte h4 + div,
+.rte h4 + span,
+.rte h5 + p,
+.rte h5 + div,
+.rte h5 + span,
+.rte h6 + p,
+.rte h6 + div,
+.rte h6 + span {
+  margin-top: 2.4rem;
+}
+.rte h1 + h1, .rte h1 + h2, .rte h1 + h3, .rte h1 + h4, .rte h1 + h5, .rte h1 + h6,
+.rte h2 + h1,
+.rte h2 + h2,
+.rte h2 + h3,
+.rte h2 + h4,
+.rte h2 + h5,
+.rte h2 + h6,
+.rte h3 + h1,
+.rte h3 + h2,
+.rte h3 + h3,
+.rte h3 + h4,
+.rte h3 + h5,
+.rte h3 + h6,
+.rte h4 + h1,
+.rte h4 + h2,
+.rte h4 + h3,
+.rte h4 + h4,
+.rte h4 + h5,
+.rte h4 + h6,
+.rte h5 + h1,
+.rte h5 + h2,
+.rte h5 + h3,
+.rte h5 + h4,
+.rte h5 + h5,
+.rte h5 + h6,
+.rte h6 + h1,
+.rte h6 + h2,
+.rte h6 + h3,
+.rte h6 + h4,
+.rte h6 + h5,
+.rte h6 + h6 {
+  margin-top: 2.4rem;
+}
+.rte div {
+  margin: 0;
+}
+.rte > div {
+  margin: 2.4rem auto;
+}
+.rte > div:first-child {
+  margin-top: 0;
+}
+.rte > div:last-child {
+  margin-bottom: 0;
+}
+.rte > p {
+  margin: 2.4rem auto;
+}
+.rte > p:first-child {
+  margin-top: 0;
+}
+.rte > p:last-child {
+  margin-bottom: 0;
+}
+.rte ul {
+  list-style-position: inside;
+}
+.rte li {
+  list-style: inherit;
+  margin: 0.8rem 0rem;
+}
+.rte li:last-child {
+  margin-bottom: 0;
+}
+.rte ul li::marker {
+  color: rgb(var(--color-foreground));
+}
+.rte a {
+  color: rgb(var(--color-foreground));
+  text-decoration-color: currentColor;
+  text-underline-offset: 0.3rem;
+  text-decoration-thickness: 0.1rem;
+  transition: opacity var(--duration-default) ease;
+}
+.rte a:hover {
+  cursor: pointer;
+}
+.rte figure > img {
+  margin: 0;
+}
+.rte figcaption {
+  font-size: 1.2rem;
+  line-height: 120%;
+  color: rgb(var(--color-foreground-secondary));
+}
+.rte div img,
+.rte div figure,
+.rte p img,
+.rte p figure {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.rte table tbody {
+  width: 100%;
+}
+@media screen and (min-width: 750px) {
+  .rte table td {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+}
+.rte iframe {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+}
+.rte img,
+.rte figure {
+  max-width: 100%;
+}
+.rte blockquote {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 1.6rem;
+  width: 100%;
+  padding: 2.4rem;
+  margin: 2.4rem 0;
+  border: none;
+  font-family: var(--font-heading-family);
+  border-radius: var(--border-radius-main);
+  background-color: rgb(var(--color-background-input));
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  color: rgb(var(--color-accent));
+}
+.rte blockquote > div {
+  margin: 0;
+}
+@media screen and (min-width: 1100px) {
+  .rte blockquote {
+    padding: 6.4rem;
+  }
+}
+.rte blockquote + * {
+  margin-top: 0;
+}
+.rte blockquote::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 2rem;
+  left: 3rem;
+  width: 22px;
+  height: 35px;
+  background-color: currentColor;
+  /* Standard mask properties */
+  mask-image: url("data:image/svg+xml,%3Csvg width='22' height='35' viewBox='0 0 22 35' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 26.812V23.548C1.024 23.377 1.856 22.951 2.496 22.268C3.136 21.585 3.627 20.732 3.968 19.708C4.267 18.684 4.416 17.575 4.416 16.38H0.448V8.188H8.576V15.676C8.576 18.193 8.171 20.199 7.36 21.692C6.549 23.228 5.504 24.401 4.224 25.212C2.901 26.023 1.493 26.556 0 26.812ZM12.928 26.812V23.548C13.952 23.377 14.784 22.951 15.424 22.268C16.064 21.585 16.555 20.732 16.896 19.708C17.195 18.684 17.344 17.575 17.344 16.38H13.376V8.188H21.504V15.676C21.504 18.193 21.099 20.199 20.288 21.692C19.477 23.228 18.432 24.401 17.152 25.212C15.829 26.023 14.421 26.556 12.928 26.812Z'/%3E%3C/svg%3E");
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+  /* Webkit prefixed properties for Safari */
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='22' height='35' viewBox='0 0 22 35' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 26.812V23.548C1.024 23.377 1.856 22.951 2.496 22.268C3.136 21.585 3.627 20.732 3.968 19.708C4.267 18.684 4.416 17.575 4.416 16.38H0.448V8.188H8.576V15.676C8.576 18.193 8.171 20.199 7.36 21.692C6.549 23.228 5.504 24.401 4.224 25.212C2.901 26.023 1.493 26.556 0 26.812ZM12.928 26.812V23.548C13.952 23.377 14.784 22.951 15.424 22.268C16.064 21.585 16.555 20.732 16.896 19.708C17.195 18.684 17.344 17.575 17.344 16.38H13.376V8.188H21.504V15.676C21.504 18.193 21.099 20.199 20.288 21.692C19.477 23.228 18.432 24.401 17.152 25.212C15.829 26.023 14.421 26.556 12.928 26.812Z'/%3E%3C/svg%3E");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  -webkit-mask-position: center;
+}
+@media screen and (min-width: 1100px) {
+  .rte blockquote::before {
+    top: 6.4rem;
+    left: 6.4rem;
+  }
+}
+.rte blockquote:not(:has(p))::before {
+  content: "";
+}
+@media screen and (min-width: 1100px) {
+  .rte blockquote:not(:has(p))::before {
+    left: 2.4rem;
+  }
+}
+.rte blockquote > * {
+  padding-left: 3.8rem;
+}
+.rte blockquote img {
+  margin-top: 1.6rem;
+  margin-bottom: 0;
+}
+.rte blockquote p {
+  margin: 0;
+}
+.rte .blog-image-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin: 4rem auto;
+}
+.rte .blog-image-wrapper p {
+  font-size: 1.2rem;
+}
+
+.block-with-two-img {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0.8rem 0;
+}
+@media screen and (min-width: 1100px) {
+  .block-with-two-img {
+    flex-direction: row;
+    margin: 2.4rem 0;
+  }
+}
+.block-with-two-img > img {
+  width: 100%;
+  margin: 0;
+}
+@media screen and (min-width: 1100px) {
+  .block-with-two-img > img {
+    width: calc(50% - 8px);
+  }
+}
+
+.custom_rte > div,
+.custom_rte > p,
+.custom_rte > h1,
+.custom_rte > h2,
+.custom_rte > h3,
+.custom_rte > h4,
+.custom_rte > h5,
+.custom_rte > h6,
+.custom_rte > ul,
+.custom_rte > ol,
+.custom_rte > table {
+  max-width: 68rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.custom_rte p + h1,
+.custom_rte p + h2,
+.custom_rte p + h3 {
+  margin-top: 4rem;
+}
+.custom_rte p + h4,
+.custom_rte p + h5,
+.custom_rte p + h6 {
+  margin-top: 2.4rem;
+}
+.custom_rte h3 + p {
+  margin-top: 8px;
+}
+.custom_rte ol,
+.custom_rte ul {
+  margin: 0 auto 1.6rem auto;
+  max-width: 68rem;
+}
+.custom_rte img,
+.custom_rte figure {
+  height: auto;
+  margin: 0.8rem 0;
+  border-radius: var(--border-radius-main);
+  width: 100%;
+  overflow: hidden;
+  display: block;
+  max-width: 100%;
+}
+@media screen and (min-width: 1100px) {
+  .custom_rte img,
+.custom_rte figure {
+    margin: 2.4rem 0;
+  }
+}
+.custom_rte .policy-first-heading {
+  margin-bottom: 2.4rem;
+  margin-top: 2.4rem;
+}
+@media screen and (min-width: 1100px) {
+  .custom_rte .policy-first-heading {
+    margin-bottom: 4.8rem;
+  }
+}
+@media screen and (max-width: 576px) {
+  .custom_rte p,
+.custom_rte li,
+.custom_rte a {
+    font-size: 1.6rem;
+  }
+}
+@media screen and (min-width: 576px) {
+  .custom_rte p,
+.custom_rte li,
+.custom_rte a {
+    font-size: 1.6rem;
+  }
+}
+@media screen and (min-width: 750px) {
+  .custom_rte p,
+.custom_rte li,
+.custom_rte a {
+    font-size: 1.8rem;
+  }
+}
+@media screen and (min-width: 990px) {
+  .custom_rte p,
+.custom_rte li,
+.custom_rte a {
+    font-size: 2rem;
+  }
+}
+@media screen and (min-width: 1100px) {
+  .custom_rte p,
+.custom_rte li,
+.custom_rte a {
+    font-size: 2.2rem;
+  }
+}
+.custom_rte ol,
+.custom_rte ul {
+  padding-left: 3rem;
+}
+.custom_rte ol li::marker,
+.custom_rte ul li::marker {
+  display: inline-block;
+  width: 3rem;
+  text-align: center;
+  text-indent: -3rem !important;
+}
+.custom_rte blockquote {
+  background-color: rgb(var(--color-bg-blockuote));
+}
+.custom_rte blockquote h2 {
+  margin-bottom: 0 !important;
+}
+.custom_rte blockquote em {
+  font-size: 1.6rem;
+  font-style: normal;
+  font-family: var(--font-body-family);
+  font-style: var(--font-body-style);
+  line-height: var(--font-body-line-height);
+}
+.custom_rte blockquote em a {
+  font-size: 1.6rem;
+}
+.custom_rte blockquote p {
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+.custom_rte table {
+  margin: 0.2rem;
+  display: block;
+}
+.custom_rte table tbody {
+  display: table;
+}

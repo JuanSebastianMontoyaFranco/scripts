@@ -1,0 +1,44 @@
+{% render 'countdown',
+  id: section.id,
+  section_settings: section_settings,
+  countdown_heading: countdown_heading,
+  with_bg: false,
+  class_name: 'countdown__announcement',
+  enable_mock_timer: section_settings.enable_mock_timer,
+  mock_date_picker_day: section_settings.mock_date_picker_day,
+  mock_date_picker_hours: section_settings.mock_date_picker_hours
+%}
+
+<div
+  class="announcement-bar__message announcement-bar__border"
+  style="{% if promo_link_label == blank %} padding: 0; {% endif %}"
+>
+  {%- if section_image != blank -%}
+    {%- assign alt_text = section_image.alt | default: 'Announcement image' -%}
+    <div class="announcement-bar__image-wrapper">
+      <figure class="announcement-bar__image">
+        {{
+          section_image
+          | image_url: width: section_image.width
+          | image_tag: loading: 'lazy', class: 'motion-reduce media--first', widths: '25, 50, 75', alt: alt_text
+        }}
+      </figure>
+    </div>
+  {%- endif -%}
+
+  {%- if text != blank -%}
+    <div class="announcement-bar__text">
+      {{ text }}
+    </div>
+  {%- endif -%}
+
+  {%- if promo_link_label != blank -%}
+    <a
+      href="{{ promo_link }}"
+      class="announcement-bar__link"
+      aria-label="{{ promo_link }}"
+    >
+      <span>{{ promo_link_label }}</span>
+    </a>
+  {%- endif -%}
+</div>

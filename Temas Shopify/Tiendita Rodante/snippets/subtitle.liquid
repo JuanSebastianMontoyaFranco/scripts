@@ -1,0 +1,10 @@
+{%- if text != blank -%}
+  <div
+    class="
+      {{ className }}
+      {% if pulse %} subtitle_dot{% endif %}
+    "
+  >
+    {{ text }}
+  </div>
+{%- endif -%}

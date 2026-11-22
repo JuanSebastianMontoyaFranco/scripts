@@ -1,0 +1,44 @@
+{% for block in blocks %}
+  {% if block.type == 'search_promo' and block.settings.enable_search_promo %}
+    <div class="search__modal">
+      <div class="search__container container">
+        <div class="search__inner">
+          <div class="search__scroll">
+            {% if block.settings.search_menu != blank %}
+              {% render 'promo-menu',
+                heading: block.settings.search_menu_heading,
+                menu: block.settings.search_menu,
+                button_label: block.settings.button_label,
+                button_link: block.settings.button_link,
+                button_style: 'link'
+              %}
+            {% endif %}
+
+            {% if block.settings.product_list != blank %}
+              <div class="search__modal_products quickview{%- if settings.quickview_hover -%}--hover{% endif %}">
+                {% if block.settings.search_products_heading != blank %}
+                  <span class="promo-menu__heading">
+                    {{- block.settings.search_products_heading -}}
+                  </span>
+                {% endif %}
+
+                {% for product in block.settings.product_list %}
+                  {% render 'search-product-card',
+                    product_card_product: product,
+                    media_size: block.settings.image_ratio,
+                    media_fit: block.settings.image_fit,
+                    show_secondary_image: block.settings.show_secondary_image,
+                    show_vendor: block.settings.show_vendor,
+                    show_collection: block.settings.show_collection,
+                    add_id: forloop.index,
+                    content_alignment: block.settings.content_alignment
+                  %}
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}

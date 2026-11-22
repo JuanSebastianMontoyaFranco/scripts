@@ -1,0 +1,37 @@
+{% if section_heading != blank or section_subheading != blank or description != blank %}
+  <div
+    class="section-header {% if section_settings %} has-countdown {% endif %} {{ content_alignment }}"
+  >
+    <div
+      class="section-header__wrapper {{ content_alignment }}"
+    >
+      {%- if section_subheading != blank -%}
+        <span class="section-header__subtitle subtitle  {% if pulse == true %} subtitle_dot {% endif %}">
+          {{ section_subheading }}
+        </span>
+      {% endif %}
+      {%- if section_heading != blank -%}
+        <{{ section_heading_tag | default: "h3" }}
+          class="section-header__title {{ section_heading_size }}"
+          {% if id %}
+            id="{{ id }}"
+          {% endif %}
+        >
+          {{ section_heading }}
+        </{{ section_heading_tag | default: "h3" }}>
+      {% endif %}
+      {%- if description != blank -%}
+        <span class="richtext description">{{ description }}</span>
+      {% endif %}
+    </div>
+    {% render 'countdown',
+      id: section.id,
+      section_settings: section_settings,
+      with_bg: true,
+      countdown_heading: section_settings.countdown_heading,
+      enable_mock_timer: section_settings.enable_mock_timer,
+      mock_date_picker_day: section_settings.mock_date_picker_day,
+      mock_date_picker_hours: section_settings.mock_date_picker_hours
+    %}
+  </div>
+{% endif %}

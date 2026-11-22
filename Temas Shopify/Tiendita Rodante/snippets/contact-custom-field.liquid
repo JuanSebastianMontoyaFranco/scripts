@@ -1,0 +1,82 @@
+{%- liquid
+  assign field_id = 'ContactForm-custom-' | append: section_id | append: '-' | append: block.id
+  assign field_name = block.settings.label | escape
+
+  if block.settings.type == 'checkbox'
+    assign field_name = block.settings.label_checkbox | strip_html | strip | escape
+  endif
+-%}
+
+{%- case block.settings.type -%}
+  {%- when 'textarea' -%}
+    <div class="field" {{ block.shopify_attributes }}>
+      <textarea
+        id="{{ field_id }}"
+        class="text-area field__input focus-inset"
+        name="contact[{{ field_name }}]"
+        placeholder=""
+        oninput="this.classList.toggle('has-content', this.value.length > 0)"
+        {% if block.settings.is_required %}
+          aria-required="true"
+          required
+        {% endif %}
+        tabindex="0"
+      ></textarea>
+      <label
+        class="form__label field__label floating-field hidden"
+        for="{{ field_id }}"
+      >
+        {{- block.settings.label -}}
+      </label>
+    </div>
+  {%- when 'checkbox' -%}
+    <div class="field field--checkbox" {{ block.shopify_attributes }}>
+      <input
+        type="checkbox"
+        class="focus-inset"
+        id="{{ field_id }}"
+        name="contact[{{ field_name }}]"
+        value="on"
+        {% if block.settings.is_required %}
+          required
+          oninvalid="this.classList.add('is-invalid')"
+          onchange="this.classList.remove('is-invalid')"
+        {% endif %}
+        tabindex="0"
+      >
+      <label for="{{ field_id }}">
+        {% render 'icon-checkmark' %}
+        <span class="body-small">
+          {{ block.settings.label_checkbox }}
+        </span>
+      </label>
+      {%- if block.settings.is_required -%}
+        <span class="form__message form__message--error">
+          {{- 'sections.footer.checkbox_error' | t -}}
+        </span>
+      {%- endif -%}
+    </div>
+  {%- else -%}
+    <div class="field" {{ block.shopify_attributes }}>
+      <input
+        type="text"
+        id="{{ field_id }}"
+        class="field__input focus-inset"
+        name="contact[{{ field_name }}]"
+        oninput="this.classList.toggle('has-content', this.value.length > 0)"
+        onfocus="this.classList.toggle('has-content', this.value.length > 0)"
+        onblur="this.classList.toggle('has-content', this.value.length > 0)"
+        placeholder=""
+        {% if block.settings.is_required %}
+          required
+        {% endif %}
+        tabindex="0"
+      >
+      <label
+        class="field__label floating-field hidden"
+        for="{{ field_id }}"
+      >
+        {{ block.settings.label }}
+      </label>
+    </div>
+{%- endcase -%}

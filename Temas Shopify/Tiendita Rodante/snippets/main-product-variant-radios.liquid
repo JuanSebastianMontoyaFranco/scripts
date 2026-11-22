@@ -1,0 +1,53 @@
+<variant-radios
+  id="variant-radios-{{ product.id }}"
+  class="no-js-hidden"
+  data-section="{{ section.id }}"
+  data-url="{{ product.url }}"
+  {{ block.shopify_attributes }}
+>
+  {%- for option in product.options_with_values -%}
+    {% liquid
+      assign color_trigger = settings.trigger_swatch | append: '<br />' | append: settings.trigger_swatch_other | strip | newline_to_br | split: '<br />'
+      assign name_option = option.name | handle | strip
+
+      # check is color option or not
+      assign is_color_option = false
+      # for custom swatch type
+      if settings.type_color_swatch == 'custom'
+        for item in color_trigger
+          assign item_temp = item | handle | strip
+          if name_option == item_temp
+            assign is_color_option = true
+          endif
+        endfor
+      endif
+
+      # for standart swatch type
+      if settings.type_color_swatch == 'standart'
+        for value in option.values
+          if value.swatch.color != blank
+            assign is_color_option = true
+          endif
+        endfor
+      endif
+    %}
+
+    <fieldset
+      class="product-form__controls{% if is_color_option %} product-form__controls--colors{% endif %}"
+      id="SingleOptionSelector-{{ forloop.index0 }}"
+      style="{% if is_color_option and show_swatches == false %} display: none; {% endif %}"
+    >
+      <div class="product-form__group-wrapper">
+        <legend class="product-form__group-name">{{ option.name }}:</legend>
+        <div class="product-form__controls-group">
+          {% render 'product-variant-options',
+            product: product,
+            option: option,
+            block: block,
+            show_color_swatch: is_color_option
+          %}
+        </div>
+      </div>
+    </fieldset>
+  {%- endfor -%}
+</variant-radios>

@@ -1,0 +1,146 @@
+{{ 'component-main-product-info.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign buy_box_index = 0
+  for block in section.blocks
+    if block.type == 'buy_box'
+      assign buy_box_index = forloop.index
+    endif
+  endfor
+-%}
+
+<div
+  id="ProductInfo-{{ section.id }}"
+  data-section="{{ section.id }}"
+  class="
+    product__info-container
+    {% if section.settings.desktop_column_count == '2' %}
+      product__info-container--two-columns
+    {% endif %}
+  "
+>
+  <div class="product__info-container--col without-buy-box">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'vendor_name' -%}
+          {% render 'main-product-info-vendor-name',
+            text: block.settings.text,
+            vendor: product.vendor,
+            enable_vendor_link: settings.enable_vendor_link,
+            shopify_attributes: block.shopify_attributes
+          %}
+        {%- when 'product_title' -%}
+          {% render 'main-product-info-heading',
+            badges_type: block.settings.badges_type,
+            badge_soldout_show: settings.badge_soldout_show,
+            shopify_attributes: block.shopify_attributes,
+            product_title: product.title,
+            product_available: product.available,
+            badge_sale_show: settings.badge_sale_show,
+            badges_color: 'background-1',
+            compare_at_price: product.compare_at_price,
+            product_price: product.price,
+            badge_sale_type: settings.badge_sale_type,
+            badge_custom_show: settings.badge_custom_show,
+            product_metafields: product.metafields,
+            show_badges: block.settings.show_badges,
+            heading_tag: block.settings.section_heading_tag
+          %}
+        {%- when 'short_description' -%}
+          {% assign long_description_link = product.url | append: '#description' %}
+          {% render 'main-product-short-description',
+            shopify_attributes: block.shopify_attributes,
+            show_read_more: true,
+            long_description_link: long_description_link,
+            product: product
+          %}
+        {%- when 'custom_liquid' -%}
+          {%- if buy_box_index == 0 or forloop.index < buy_box_index -%}
+            <div class="custom-liquid" {{ block.shopify_attributes }}>
+              {{ block.settings.custom_liquid }}
+            </div>
+          {%- endif -%}
+        {%- when 'sku' -%}
+          <p
+            class="product__sku no-js-hidden{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hiddenxxx{% endif %}"
+            id="Sku-{{ section.id }}"
+            role="status"
+          >
+            <span class="visually-hidden">{{- 'products.product.sku' | t }}:</span>
+            {{- product.selected_or_first_available_variant.sku -}}
+          </p>
+
+        {%- when 'variant_picker' -%}
+          {% comment %} Render linked products {% endcomment %}
+          {%- if block.settings.enable_linked_products -%}
+            {% render 'product-linked-products', product_resource: product, block_obj: block %}
+          {%- endif -%}
+
+          {% comment %} Render variant picker {% endcomment %}
+          {% render 'product-variant-picker',
+            product: product,
+            section_obj: section,
+            block_obj: block,
+            section_id: section.id,
+            product_form_id: product_form_id,
+            need_update_page_url: true
+          %}
+
+          {% render 'product-custom-short-description', product: product %}
+
+        {% when 'specs_short' %}
+          {% render 'main-product-specs-short', product: product, specs_short_link: '#specs_long', specs_size: 4 %}
+        {%- when 'size_chart' -%}
+          {% render 'main-product-size-chart', block: block %}
+        {%- when 'collapsible_info' -%}
+          {%- if buy_box_index == 0 or forloop.index < buy_box_index -%}
+            {% render 'product-block-collapsible-info', block_obj: block %}
+          {%- endif -%}
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+
+  <div class="product__info-container--col">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'buy_box' -%}
+          {% render 'buy-box', block: block %}
+          {% render 'main-product-sticky-buy-box', block: block, section: section %}
+        {%- when 'custom_liquid' -%}
+          {%- if buy_box_index > 0 and forloop.index > buy_box_index -%}
+            <div class="custom-liquid" {{ block.shopify_attributes }}>
+              {{ block.settings.custom_liquid }}
+            </div>
+          {%- endif -%}
+        {%- when 'collapsible_info' -%}
+          {%- if buy_box_index > 0 and forloop.index > buy_box_index -%}
+            {% render 'product-block-collapsible-info', block_obj: block %}
+          {%- endif -%}
+        {%- when 'countdown' -%}
+          <div class="main-product__countdown">
+            {% if block.settings.contdown_heading != blank %}
+              <p class="main-product__countdown--heading h5">
+                {{ block.settings.contdown_heading }}
+              </p>
+            {% endif %}
+
+            {% render 'countdown',
+              id: section.id,
+              section_settings: block.settings,
+              with_bg: true,
+              countdown_heading: block.settings.text_after_countdown,
+              enable_mock_timer: block.settings.enable_mock_timer,
+              mock_date_picker_day: block.settings.mock_date_picker_day,
+              mock_date_picker_hours: block.settings.mock_date_picker_hours
+            %}
+          </div>
+        {%- when 'inventory' -%}
+          {% render 'main-product-inventory', block: block %}
+        {%- when 'pickup_availability' -%}
+          {% render 'main-product-pickup-availability', block: block %}
+        {% when 'express_shipping' %}
+          {% render 'main-product-express-shipping', block: block %}
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</div>

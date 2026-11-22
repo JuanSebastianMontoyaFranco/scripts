@@ -1,0 +1,40 @@
+<div class="promo-block">
+  <div class="promo-block__image {% if image == blank %}placeholder{% endif %}">
+    {% if image != blank %}
+      {%- capture sizes -%}
+        (min-width: 1100px) 1044px, calc(100vw - 30px)
+      {%- endcapture -%}
+      {{
+        image
+        | image_url: width: 1044
+        | image_tag: loading: 'lazy', sizes: sizes, widths: '360, 400, 500, 522, 800, 1044'
+      }}
+    {% else %}
+      {{ 'hero-apparel-3' | placeholder_svg_tag }}
+    {% endif %}
+    {%- if button_link != blank -%}
+      <a
+        href="{{ button_link }}"
+        class="promo-block__link-overlay"
+        aria-label="{{ button_label }}"
+      ></a>
+    {%- endif -%}
+  </div>
+  {% if button_label != blank %}
+    <a
+      {% if button_link != blank %}
+        href="{{ button_link }}"
+        data-button-text="{{ button_label | escape }}"
+      {% endif %}
+      class="h5"
+      {% if button_link == blank %}
+        aria-disabled="true"
+      {% endif %}
+      aria-label="{{ button_label | escape }}"
+    >
+      <span>
+        {{ button_label | escape }}
+      </span>
+    </a>
+  {%- endif -%}
+</div>

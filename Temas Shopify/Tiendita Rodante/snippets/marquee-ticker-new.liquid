@@ -1,0 +1,55 @@
+{{- 'marquee-ticker-new.css' | asset_url | stylesheet_tag -}}
+
+{% if change_directon == true %}
+  <script src="{{ 'marquee-ticker.js' | asset_url }}" defer="defer"></script>
+{% endif %}
+
+{% style %}
+  {% render 'section-margin' %}
+{% endstyle %}
+
+{% liquid
+  assign section_size = 'container'
+
+  assign class_pause = ''
+  if pause_on_hover == true
+    assign class_pause = 'pause'
+  endif
+%}
+
+{% style %}
+  #shopify-section-{{ id }} {
+  	--marquee-ticker-speed: {{ ticker_speed  | default: 20 }};
+    --marquee-ticker-size: {{ ticker_size | default: '86px'  }};
+
+  	@media screen and (max-width: 990px) {
+  		--marquee-ticker-size: {{ ticker_size | times: 0.5 | round: 0 | default: '86px'  }};
+  	}
+  }
+{% endstyle %}
+
+<div
+  class="container marquee-ticker-new__container "
+  data-id="shopify-section-{{ id }}"
+  style="{% if section_size == 'full' %} display: contents;{% endif %}"
+>
+  {% if overlay_link_url != blank %}
+    <a
+      href="{{ overlay_link_url }}"
+      class="promo-banner__link-overlay"
+      aria-label="{{ overlay_link_url }}"
+    ></a>
+  {% endif %}
+  <div class="marquee-container-new {{ class_pause }}">
+    {% for i in (1..3) %}
+      <div class="marquee-tag marquee-animate">
+        {% for i in (1..50) %}
+          <p class="marquee-item__new {% if transparent_text_stroke %} transparent-text-stroke{% endif %}">
+            {{ ticker_text }}
+            <span class="gap">l</span>
+          </p>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</div>

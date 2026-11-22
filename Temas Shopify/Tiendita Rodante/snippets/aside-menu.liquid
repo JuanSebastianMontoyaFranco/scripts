@@ -1,0 +1,154 @@
+{%- if settings.enable_aside_menu -%}
+  <div class="aside-menu">
+    <div class="container">
+      <div
+        class="aside-menu__wrapper"
+        role="dialog"
+        aria-modal="true"
+        aria-label="{{ 'sections.header.aside_menu' | t }}"
+        tabindex="-1"
+      >
+        <div class="aside-menu__left">
+          {%- if settings.aside_menu.links != blank -%}
+            <div class="additional_menu_wrapper first-menu">
+              <span class="additional_menu_heading">
+                {{- settings.aside_menu_heading -}}
+              </span>
+              <ul class="burger-menu_additional_menu list-unstyled">
+                {%- for link in settings.aside_menu.links -%}
+                  <li>
+                    <a
+                      href="{{ link.url }}"
+                      class="header-burger-menu__link large-font"
+                      aria-label="{{ settings.aside_menu_heading }} {{ link.title }}"
+                    >
+                      <span>{{ link.title }}</span>
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+              {% if settings.aside_menu_button_label %}
+                {% render 'button',
+                  btn_label: settings.aside_menu_button_label,
+                  btn_link: settings.aside_menu_button_link,
+                  btn_style: 'link'
+                %}
+              {% endif %}
+            </div>
+          {%- endif -%}
+          {%- if settings.aside_menu_second.links != blank -%}
+            <div class="additional_menu_wrapper second-menu">
+              <span class="additional_menu_heading">
+                {{- settings.aside_menu_second_heading -}}
+              </span>
+              <ul class="burger-menu_additional_menu list-unstyled">
+                {%- for link in settings.aside_menu_second.links -%}
+                  <li>
+                    <a
+                      href="{{ link.url }}"
+                      class="header-burger-menu__link small-font"
+                      aria-label="{{ settings.aside_menu_heading }} {{ link.title }}"
+                    >
+                      <span>{{ link.title }}</span>
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          {%- endif -%}
+        </div>
+        {% if settings.show_promo_block_1 or settings.show_promo_block_2 %}
+        {% endif %}
+        <div class="aside-menu__right">
+          {% if settings.show_promo_block_1 %}
+            <div class="aside-menu__promo_1">
+              <a
+                href="{{ settings.button_link_1 }}"
+                class="aside-menu__promo__link--overlay"
+                aria-label="{{ 'accessibility.product_link' | t }}"
+              >
+                {{- settings.button_label_1 -}}
+              </a>
+              <div class="aside-menu_image">
+                {% if settings.promo_image_1 != blank %}
+                  {% liquid
+                    assign promo_image = settings.promo_image_1
+                    assign image_height = promo_image.width | divided_by: collectionImg.aspect_ratio
+                    assign image_width = promo_image.width
+                    assign sizes = '(min-width: 750px) 50vw, 100vw'
+                    assign alt_text = settings.burger_menu_promo_heading_1 | default: settings.button_label_1 | default: 'Promotional image'
+                  %}
+                  {{
+                    promo_image
+                    | image_url: width: 3840
+                    | image_tag:
+                      loading: 'lazy',
+                      width: image_width,
+                      height: image_height,
+                      sizes: sizes,
+                      widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+                      alt: alt_text
+                  }}
+                {%- else -%}
+                  {{ 'hero-apparel-1' | placeholder_svg_tag }}
+                {% endif %}
+              </div>
+              <h5 class="aside-menu__promo_heading h5">
+                {{ settings.burger_menu_promo_heading_1 }}
+              </h5>
+              {% render 'button',
+                btn_label: settings.button_label_1,
+                btn_link: settings.button_link_1,
+                btn_style: 'link'
+              %}
+            </div>
+          {% endif %}
+          {% if settings.show_promo_block_2 %}
+            <div class="aside-menu__promo_2">
+              <a
+                href="{{ settings.button_link_2 }}"
+                class="aside-menu__promo__link--overlay"
+                aria-label="{{ 'accessibility.product_link' | t }}"
+              >
+                {{- settings.button_label_1 -}}
+              </a>
+              <div class="aside-menu_image">
+                {% if settings.promo_image_2 != blank %}
+                  {% liquid
+                    assign promo_image = settings.promo_image_2
+                    assign image_height = promo_image.width | divided_by: collectionImg.aspect_ratio
+                    assign image_width = promo_image.width
+                    assign sizes = '(min-width: 750px) 50vw, 100vw'
+                    assign alt_text = settings.burger_menu_promo_heading_1 | default: settings.button_label_1 | default: 'Promotional image'
+                  %}
+                  {{
+                    promo_image
+                    | image_url: width: 3840
+                    | image_tag:
+                      loading: 'lazy',
+                      width: image_width,
+                      height: image_height,
+                      sizes: sizes,
+                      widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+                      alt: alt_text
+                  }}
+                {%- else -%}
+                  {{ 'hero-apparel-1' | placeholder_svg_tag }}
+                {% endif %}
+              </div>
+              <h5 class="aside-menu__promo_heading h5">
+                {{ settings.burger_menu_promo_heading_2 }}
+              </h5>
+              {% render 'button',
+                btn_label: settings.button_label_2,
+                btn_link: settings.button_link_2,
+                btn_style: 'link'
+              %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="aside-menu__overlay color-background-3"></div>
+{%- endif -%}

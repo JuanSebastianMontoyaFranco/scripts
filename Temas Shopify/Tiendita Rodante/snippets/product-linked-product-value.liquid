@@ -1,0 +1,58 @@
+{% doc %}
+  Renders a linked product value. Use in conjunction with `product-linked-products` snippet.
+
+  @param {object} linked_product - Product Liquid object
+  @param {boolean} [is_active_product] - Indicates if the linked product is the active product
+
+  @example
+  {% render 'product-linked-product-value', linked_product: product %}
+{% enddoc %}
+
+{% liquid
+  # Linked product values
+  assign linked_product_color = linked_product.metafields.custom.linked_product_color.value
+  # Linked product color metafield takes priority over Linked product option
+  assign linked_product_option = linked_product.metafields.custom.linked_product_option.value
+
+  # Fallback value
+  if linked_product_color == blank and linked_product_option == blank and linked_product.featured_media == blank
+    assign linked_product_color = '#000000'
+  endif
+
+  # Active product is rendered as non-clickable element
+  assign option_tag = 'a'
+  if is_active_product
+    assign option_tag = 'div'
+  endif
+%}
+
+{%- if linked_product != blank -%}
+  <{{ option_tag | default: 'a' }}
+    {% if option_tag == 'a' %}
+      href="{{ linked_product.url }}"
+      aria-label="{{ linked_product.title }}"
+    {% endif %}
+    class="linked-products__option{% if is_active_product %} active{% endif %}"
+  >
+    {%- if linked_product_color != blank -%}
+      <span class="linked-products__option-color" style="background: {{ linked_product_color }};"></span>
+    {%- elsif linked_product_option != blank -%}
+      {{- linked_product_option -}}
+    {%- elsif linked_product.featured_media != blank -%}
+      {% comment %} Render default state (fallback) product image {% endcomment %}
+      {% liquid
+        assign swatch_image_width = 80
+        assign swatch_image_ratio = linked_product.featured_image.aspect_ratio
+        assign swatch_calc_ratio = 1
+        if swatch_image_ratio > 1
+          assign swatch_calc_ratio = swatch_image_ratio | divided_by: 1 | round: 2
+          assign swatch_image_width = swatch_image_width | times: swatch_calc_ratio
+        endif
+
+        assign image_url = linked_product.featured_image | image_url: width: swatch_image_width
+        assign background_prop = 'url(' | append: image_url | append: ') no-repeat center/cover'
+      %}
+      <span class="linked-products__option-image" style="background: {{ background_prop }};"></span>
+    {%- endif -%}
+  </{{ option_tag | default: 'a' }}>
+{%- endif -%}

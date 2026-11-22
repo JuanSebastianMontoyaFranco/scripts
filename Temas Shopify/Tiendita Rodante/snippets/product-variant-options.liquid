@@ -1,0 +1,362 @@
+{% doc %}
+  Renders product variant options.
+
+  @param {object} product - Product Liquid object
+  @param {object} option - Current product_option object
+  @param {object} [section_obj] - Section Liquid object (optional if `section_id` or parent `section` is available)
+  @param {object} [block_obj] - Block Liquid object
+  @param {string} [section_id] - Section ID
+  @param {boolean} [has_color_swatch] - Flag for display color swatches. Default: false
+  @param {boolean} [is_product_card] - Flag for product card. Default: false
+  @param {boolean} [prevent_variant_image] - Flag for prevent display swatch as variant image. Default: false
+  @param {number} [forloop_index] - Index of loop
+  @param {number} [index_tab] - Index of tab for Popular products section
+
+  @example
+  {% render 'product-variant-options', product: product, option: option %}
+{% enddoc %}
+
+{%- liquid
+  assign effective_section_id = ''
+  if section_obj != blank
+    assign effective_section_id = section_obj.id
+  elsif section_id != blank
+    assign effective_section_id = section_id
+  endif
+  assign product_form_id = 'product-form-' | append: effective_section_id
+  assign swatch_index = 0
+
+  # picker_type: button / dropdown
+  assign picker_type = 'button'
+  assign color_swatches_type = 'color'
+  assign variant_image_ratio = 'square'
+  if block_obj != blank
+    assign picker_type = block_obj.settings.picker_type | default: 'button'
+    assign color_swatches_type = block_obj.settings.color_swatches_type | default: 'color'
+    assign variant_image_ratio = block_obj.settings.variant_image_ratio | default: 'square'
+  endif
+-%}
+
+{%- for value in option.values -%}
+  {% if settings.card_swatch_display_mode == 'compact' and is_product_card %}
+    {% assign swatch_index = swatch_index | plus: 1 %}
+  {% endif %}
+
+  {%- liquid
+    assign option_disabled = true
+    if value.available
+      assign option_disabled = false
+    endif
+
+    assign value_variant_id = value.variant.id
+  -%}
+
+  {% comment %} get color value {% endcomment %}
+  {% liquid
+    assign has_image = false
+    assign is_metafield_color_swatch = false
+    assign is_custom_color_swatch = false
+    if value.swatch.image != blank
+      assign init_color_value = value.name | handle | strip
+      assign swatch_image_width = 114
+      if is_product_card
+        assign swatch_image_width = 72
+      endif
+      assign swatch_image_ratio = value.swatch.image.aspect_ratio
+      assign swatch_calc_ratio = 1
+      assign swatch_setting_ratio = 0.75
+      if swatch_image_ratio > swatch_setting_ratio
+        assign swatch_calc_ratio = swatch_image_ratio | divided_by: swatch_setting_ratio | round: 2
+        assign swatch_image_width = swatch_image_width | times: swatch_calc_ratio
+      endif
+
+      assign image_url = value.swatch.image | image_url: width: swatch_image_width
+      assign color_value = 'url(' | append: image_url | append: ') no-repeat center/cover'
+      assign has_image = true
+    elsif value.swatch.color != blank
+      assign init_color_value = value.name | handle | strip
+      assign color_value = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+      assign is_metafield_color_swatch = true
+    else
+      assign init_color_value = value.name | handle | strip
+      assign color_value = init_color_value | remove: '-'
+    endif
+
+    # reassignment to custom colors
+    if settings.custom_colors != blank
+      assign custom_colors_string = settings.custom_colors | strip
+      assign custom_colors_arr = custom_colors_string | newline_to_br | split: '<br />'
+
+      for custom_color_obj in custom_colors_arr
+        assign custom_color_obj_strip = custom_color_obj | strip
+        assign custom_color_key = custom_color_obj_strip | split: ':' | first
+        assign custom_color_value = custom_color_obj_strip | split: ':' | last
+        assign custom_color_name = custom_color_key | handle | strip
+
+        if init_color_value == custom_color_name
+          assign custom_color_value_strip = custom_color_value | strip
+          if custom_color_value_strip contains 'gradient'
+            assign color_value = custom_color_value_strip
+          else
+            assign color_value = custom_color_value_strip | remove: '-'
+          endif
+
+          assign last_char = color_value | slice: -1
+          if last_char == ';'
+            assign color_value = color_value | replace_last: ';', ''
+          endif
+          assign is_custom_color_swatch = true
+          break
+        endif
+      endfor
+    endif
+
+    assign is_color_value_string_valid_css = false
+    assign css_colors = 'aliceblue,antiquewhite,aqua,aquamarine,azure,beige,bisque,black,blanchedalmond,blue,blueviolet,brown,burlywood,cadetblue,chartreuse,chocolate,coral,cornflowerblue,cornsilk,crimson,cyan,darkblue,darkcyan,darkgoldenrod,darkgray,darkgreen,darkgrey,darkkhaki,darkmagenta,darkolivegreen,darkorange,darkorchid,darkred,darksalmon,darkseagreen,darkslateblue,darkslategray,darkslategrey,darkturquoise,darkviolet,deeppink,deepskyblue,dimgray,dimgrey,dodgerblue,firebrick,floralwhite,forestgreen,fuchsia,gainsboro,ghostwhite,gold,goldenrod,gray,green,greenyellow,grey,honeydew,hotpink,indianred,indigo,ivory,khaki,lavender,lavenderblush,lawngreen,lemonchiffon,lightblue,lightcoral,lightcyan,lightgoldenrodyellow,lightgray,lightgreen,lightgrey,lightpink,lightsalmon,lightseagreen,lightskyblue,lightslategray,lightslategrey,lightsteelblue,lightyellow,lime,limegreen,linen,magenta,maroon,mediumaquamarine,mediumblue,mediumorchid,mediumpurple,mediumseagreen,mediumslateblue,mediumspringgreen,mediumturquoise,mediumvioletred,midnightblue,mintcream,mistyrose,moccasin,navajowhite,navy,oldlace,olive,olivedrab,orange,orangered,orchid,palegoldenrod,palegreen,paleturquoise,palevioletred,papayawhip,peachpuff,peru,pink,plum,powderblue,purple,rebeccapurple,red,rosybrown,royalblue,saddlebrown,salmon,sandybrown,seagreen,seashell,sienna,silver,skyblue,slateblue,slategray,slategrey,snow,springgreen,steelblue,tan,teal,thistle,tomato,turquoise,violet,wheat,white,whitesmoke,yellow,yellowgreen' | split: ','
+    if css_colors contains color_value
+      assign is_color_value_string_valid_css = true
+    endif
+  %}
+
+  {% comment %} 1. render color swatch options {% endcomment %}
+  {% comment %} 2.1. else 1 - render Pills variant picker or Options in product card {% endcomment %}
+  {% comment %} 2.2. else 2 - render Dropdown variant picker {% endcomment %}
+  {%- if settings.enable_color_swatch and has_color_swatch and picker_type == 'button' -%}
+    {% liquid
+      if settings.card_color_swatches_mode == 'compact' and is_product_card
+        assign swatch_index = swatch_index | plus: 1
+      endif
+    %}
+
+    {%- if settings.card_color_swatches_mode == 'compact' and swatch_index > 3 and is_product_card -%}
+      <span class="body-small">
+        {%- assign size = option.values.size | minus: 3 -%}
+        {{- 'general.card.compact_color_swatches' | t: count: size -}}
+      </span>
+      {%- break -%}
+    {%- endif -%}
+
+    {%- capture input_id -%}
+      {%- if section_id != blank -%}{{ section_id }}-{{ option.position }}-{{ forloop.index0 }}-{{ product.id }}{%- else -%}{{ effective_section_id }}-{{ option.position }}-{{ forloop.index0 }}-{{ product.id }}{%- if index_tab -%}-{{ index_tab }}{%- endif -%}{%- endif -%}{%- if forloop_index -%}-{{ forloop_index }}{%- endif -%}
+    {%- endcapture -%}
+    {%- capture input_name -%}
+      {%- if section_id != blank -%}{{ option.name }}-{{ section_id }}-{{ product.id }}{%- else -%}{{ option.name }}-{{ effective_section_id }}-{{ product.id }}{%- if index_tab -%}-{{ index_tab }}{%- endif -%}{%- endif -%}{%- if forloop_index -%}-{{ forloop_index }}{%- endif -%}
+    {%- endcapture -%}
+    <input
+      type="radio"
+      id="{{ input_id }}"
+      name="{{ input_name }}"
+      value="{{ value | escape }}"
+      {% if value_variant_id %}
+        data-variant-id="{{ value_variant_id }}"
+      {% endif %}
+      {% if product_form_id != blank %}
+        form="{{ product_form_id }}"
+      {% endif %}
+      {% if option.selected_value == value %}
+        checked
+      {% endif %}
+      {% if option_disabled %}
+        class="disabled"
+      {% endif %}
+      tabindex="0"
+      aria-label="{{- value -}}"
+      data-option-value-id="{{ value.id }}"
+      {% if value.product_url != blank %}
+        data-product-url="{{ value.product_url }}"
+      {% endif %}
+    >
+    {% liquid
+      # additional check for variant image output only for Swatch trigger option
+      assign color_trigger = settings.trigger_swatch | strip | newline_to_br | split: '<br />'
+      assign name_option = option.name | handle | strip
+      assign is_swatch_trigger_option = false
+      for item in color_trigger
+        assign item_temp = item | handle | strip
+        if name_option == item_temp
+          assign is_swatch_trigger_option = true
+        endif
+      endfor
+    %}
+
+    {%- comment %} render variant image swatch {%- endcomment %}
+    {%- if color_swatches_type == 'variant_image' and is_swatch_trigger_option and prevent_variant_image != true -%}
+      {%- liquid
+        assign has_variant_image = false
+        assign value_variant = value.variant
+        assign value_variant_image = value_variant.featured_image
+
+        # fallback value from other variants with the same option value
+        if value_variant_image == blank
+          for other_variant in product.variants
+            if other_variant.options contains value.name and other_variant != value_variant and other_variant.featured_image != blank
+              assign value_variant_image = other_variant.featured_image
+              break
+            endif
+          endfor
+        endif
+
+        # fallback value from swatch image metafield
+        if value_variant_image == blank and value.swatch.image != blank
+          assign value_variant_image = value.swatch.image
+        endif
+
+        assign fallback_product_image = blank
+        if value.product_url == blank or value.product_url == product.url
+          assign fallback_product_image = product.featured_image
+        endif
+
+        if value_variant_image != blank or fallback_product_image != blank
+          assign has_variant_image = true
+          assign variant_image = value_variant_image | default: fallback_product_image
+          assign image_width = 150
+          assign image_ratio = variant_image.aspect_ratio
+          assign calc_ratio = 1
+          assign setting_ratio = 0.75
+          if variant_image_ratio == 'portrait'
+            assign setting_ratio = 0.75
+          elsif variant_image_ratio == 'square'
+            assign setting_ratio = 1
+          elsif variant_image_ratio == 'landscape'
+            assign setting_ratio = 1.33
+          else
+            assign setting_ratio = 0.75
+          endif
+          if image_ratio > setting_ratio
+            assign calc_ratio = image_ratio | divided_by: setting_ratio | round: 2
+            assign image_width = image_width | times: calc_ratio
+          endif
+        endif
+      -%}
+
+      {% comment %}
+        Priority order for displaying values in variant image swatches (--swatch-color value):
+        1. product_option_value.featured_image or product_option_value.swatch.image
+        2. product_option_value.swatch.color
+        3. custom color from theme settings if product_option_value.name == custom_color_value
+        4. product.featured_image
+      {% endcomment %}
+      {%- capture variant_image_style -%}
+        {%- if value_variant_image != blank -%}
+          --swatch-color: url({{ variant_image | image_url: width: image_width }});
+        {%- elsif is_metafield_color_swatch or is_custom_color_swatch or is_color_value_string_valid_css -%}
+          --swatch-color: {{ color_value }};
+        {%- elsif fallback_product_image != blank -%}
+          --swatch-color: url({{ variant_image | image_url: width: image_width }});
+        {%- else -%}
+          --swatch-color: {{ color_value }};
+        {%- endif -%}
+      {%- endcapture -%}
+
+      <label
+        for="{{ input_id }}"
+        class="color-swatch variant-swatch variant-swatch--{{ variant_image_ratio }}{% if has_variant_image == false %} variant-swatch--color{% endif %}"
+        style="{{ variant_image_style }}"
+        title="{{- value -}}"
+        data-unavailable-color-label="{{- 'products.product.unavailable_color_option' | t -}}"
+      >
+        <span class="visually-hidden">{{- value -}}</span>
+      </label>
+    {%- else -%}
+      <label
+        for="{{ input_id }}"
+        class="color-swatch"
+        style="--swatch-color: {{ color_value }}; border-radius: {{ settings.swatch_border_radius }}px"
+        title="{{ value | escape }}"
+        data-unavailable-color-label="{{- 'products.product.unavailable_color_option' | t -}}"
+      >
+        <span class="{% if settings.show_color_swatch_title %}color-swatch-title{% else %}visually-hidden{% endif %}">
+          {{- value -}}
+        </span>
+      </label>
+    {%- endif -%}
+  {%- else -%}
+    {% if picker_type == 'button' %}
+      {%- capture input_id -%}
+        {%- if section_id != blank -%}{{ section_id }}-{{ option.position }}-{{ forloop.index0 }}-{{ product.id }}{%- else -%}{{ effective_section_id }}-{{ option.position }}-{{ forloop.index0 }}-{{ product.id }}{%- if index_tab -%}-{{ index_tab }}{%- endif -%}{%- endif -%}{%- if forloop_index -%}-{{ forloop_index }}{%- endif -%}
+      {%- endcapture -%}
+      {%- capture input_name -%}
+        {%- if section_id != blank -%}{{ option.name }}-{{ section_id }}-{{ product.id }}{%- else -%}{{ option.name }}-{{ effective_section_id }}-{{ product.id }}{%- if index_tab -%}-{{ index_tab }}{%- endif -%}{%- endif -%}{%- if forloop_index -%}-{{ forloop_index }}{%- endif -%}
+      {%- endcapture -%}
+      <input
+        type="radio"
+        id="{{ input_id }}"
+        name="{{ input_name }}"
+        value="{{ value | escape }}"
+        {% if is_product_card != true %}
+          form="{{ product_form_id }}"
+        {% endif %}
+        {% if value_variant_id %}
+          data-variant-id="{{ value_variant_id }}"
+        {% endif %}
+        {% if option.selected_value == value %}
+          checked
+        {% endif %}
+        {% if option_disabled %}
+          class="disabled"
+        {% endif %}
+        aria-label="{{- value -}}"
+        data-option-value-id="{{ value.id }}"
+        {% if value.product_url != blank %}
+          data-product-url="{{ value.product_url }}"
+        {% endif %}
+      >
+      <label for="{{ input_id }}">
+        {{- value -}}
+        {%- if option_disabled -%}
+          <span class="visually-hidden">{{ 'products.product.variant_sold_out_or_unavailable' | t }}</span>
+        {%- endif -%}
+      </label>
+    {% elsif picker_type == 'dropdown' %}
+      {% comment %} items for custom select {% endcomment %}
+      {%- capture input_id -%}
+        {{ effective_section_id }}-{{ option.position }}-{{ forloop.index0 }}-{{ product.id }}
+      {%- endcapture -%}
+      {%- capture input_name -%}
+        {{ option.name }}-{{ effective_section_id }}-{{ product.id }}
+      {%- endcapture -%}
+
+      <li
+        data-value="{{ value | escape }}"
+        {% if settings.enable_color_swatch and has_color_swatch %}
+          data-color="{{ color_value }}"
+        {% endif %}
+        role="option"
+        tabindex="-1"
+      >
+        <input
+          type="radio"
+          id="{{ input_id }}"
+          name="{{ input_name }}"
+          value="{{ value | escape }}"
+          {% if product_form_id != blank %}
+            form="{{ product_form_id }}"
+          {% endif %}
+          {% if option.selected_value == value %}
+            checked
+          {% endif %}
+          {% if option_disabled %}
+            class="disabled"
+          {% endif %}
+          aria-label="{{- value | escape -}}"
+          data-option-value-id="{{ value.id }}"
+          {% if value.product_url != blank %}
+            data-product-url="{{ value.product_url }}"
+          {% endif %}
+        >
+        <label for="{{ input_id }}">
+          <span
+            class="select-label{% if settings.enable_color_swatch and has_color_swatch %} select-label--color{% if has_image %} select-labels--color-image{% endif %}{% endif %}"
+            {% if settings.enable_color_swatch and has_color_swatch %}
+              style="--swatch-color: {{ color_value }}; --radius: {{ settings.swatch_border_radius }}px"
+            {% endif %}
+          >
+            {{- value | escape -}}
+          </span>
+
+          {% render 'icon-check' %}
+        </label>
+      </li>
+    {% endif %}
+  {%- endif -%}
+{%- endfor -%}

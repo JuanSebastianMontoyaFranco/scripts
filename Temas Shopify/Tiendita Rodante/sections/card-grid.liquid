@@ -1,0 +1,461 @@
+{{ 'section-card-grid.css' | asset_url | stylesheet_tag }}
+
+<script src="{{ 'card-grid.js' | asset_url }}" defer="defer"></script>
+
+<script
+  src="{{ 'magnetic-hover-effect.js' | asset_url }}"
+  defer="defer"
+></script>
+
+{%- style -%}
+  {% render 'section-margin' %}
+{%- endstyle -%}
+
+{% liquid
+  assign image_ratio = section.settings.image_ratio
+%}
+
+<div class="card-grid">
+  <div class="container">
+    {% render 'section-header',
+      section_heading: section.settings.heading,
+      section_subheading: section.settings.subheading,
+      section_heading_size: section.settings.section_heading_size,
+      section_heading_tag: section.settings.section_heading_tag,
+      pulse: section.settings.pulse_animation_text
+    %}
+    <div class="swiper swiper--cards">
+      <div
+        class="
+          card-grid__wrapper card-grid__wrapper--{{ section.settings.columns_per_row }}
+          {% if section.blocks.size > 1 %} swiper-wrapper{% endif %}
+        "
+      >
+        {% for block in section.blocks %}
+          <a
+            href="{{ block.settings.card_link }}"
+            class="{% if section.blocks.size > 1 %}swiper-slide{% endif %} card-grid__card {% if block.settings.image_height_option == 'overflow-top' %}overflow-top-card{% endif %} {% if section.settings.magnetic_hover_effect %} magnetic-hover-effect {% endif %}"
+            style="
+              --overlay-opacity: {{ block.settings.overlay_opacity }};
+              --image-ratio: {{ image_ratio }};
+              {% if block.settings.card_link == blank %} pointer-events: none; {% endif %}
+            "
+          >
+            <div class="card-grid__card_content {% if block.settings.image == blank %}no-image{% endif %}">
+              {% if block.settings.discount != blank %}
+                {% render 'discount-badge', discount: block.settings.discount, badge_size: 'badge--large' %}
+              {% endif %}
+              <{{ block.settings.heading_tag | default: 'h4' }}
+                class="card-grid__card_title {{  block.settings.heading_size }}"
+              >
+                {{ block.settings.card_title }}
+              </{{ block.settings.heading_tag | default: 'h4' }}>
+            </div>
+            <div class="card-grid__card_img {% if block.settings.image_height_option == 'overflow-top' %}overflow-top{% endif %}">
+              {% if block.settings.image != blank %}
+                {% capture sizes %}
+								(min-width: 990px) 940px, (min-width: 750px) calc((100vw - 40px) / 2), calc((100vw - 40px))
+							{% endcapture %}
+                {% liquid
+                  assign fetch_priority = 'auto'
+                  assign image_loading = 'lazy'
+                  if block.index == 1
+                    assign fetch_priority = 'high'
+                    assign image_loading = 'eager'
+                  endif
+                %}
+                {{
+                  block.settings.image
+                  | image_url: width: 1066
+                  | image_tag:
+                    loading: image_loading,
+                    fetchpriority: fetch_priority,
+                    sizes: sizes,
+                    widths: '165, 360, 535, 720, 940, 1066'
+                }}
+              {% endif %}
+            </div>
+
+            <div class="card-grid__card_bg">
+              {%- if block.settings.bg_image != blank -%}
+                {% liquid
+                  assign fetch_priority = 'auto'
+                  assign image_loading = 'lazy'
+                  if block.index == 1
+                    assign fetch_priority = 'high'
+                    assign image_loading = 'eager'
+                  endif
+                %}
+                {%- capture sizes -%}
+								(min-width: 1100px) calc((50vw - 64px)), calc((100vw - 40px))
+							{%- endcapture -%}
+                {%- assign widths = '360, 535, 720, 940, 1070, 1200, 1400, 1600' -%}
+                {{
+                  block.settings.bg_image
+                  | image_url: width: block.settings.bg_image.width
+                  | image_tag: loading: image_loading, fetchpriority: fetch_priority, sizes: sizes, widths: widths
+                }}
+              {%- endif -%}
+            </div>
+
+            <span class="visually-hidden"> Go to card </span>
+          </a>
+        {% endfor %}
+      </div>
+      {%- if section.blocks.size > 1 -%}
+        <div class="swipe-on-mobile__nav no-js-hidden">
+          <div class="categories-list__pagination swiper-pagination"></div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.card-grid.name",
+  "tag": "section",
+  "class": "card-grid-section",
+  "enabled_on": {
+    "templates": ["*"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.section-header.label"
+    },
+    {
+      "type": "range",
+      "id": "columns_per_row",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3,
+      "label": "t:sections.all.columns.label",
+      "info": "t:sections.all.columns.info"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "default": "42.85",
+      "label": "Card ratio",
+      "options": [
+        {
+          "value": "66.66",
+          "label": "t:sections.all.image.aspect_ratio.options__2.label"
+        },
+        {
+          "value": "56.25",
+          "label": "t:sections.all.image.aspect_ratio.options__5.label"
+        },
+        {
+          "value": "42.85",
+          "label": "t:sections.all.image.aspect_ratio.options__6.label"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "t:sections.card-grid.settings.heading.default",
+      "label": "t:sections.all.section-header.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "section_heading_size",
+      "options": [
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h3",
+      "label": "t:sections.all.heading_size.label",
+      "visible_if": "{{ section.settings.heading != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "section_heading_tag",
+      "default": "h3",
+      "label": "t:sections.all.heading_tag.label",
+      "info": "t:sections.all.heading_tag.info",
+      "visible_if": "{{ section.settings.heading != blank }}",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.all.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.all.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.all.heading_tag.options__7.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.all.heading_tag.options__8.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.all.heading_tag.options__9.label"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "default": "t:sections.card-grid.settings.subheading.default",
+      "label": "t:sections.all.section-header.subheading.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "pulse_animation_text",
+      "label": "t:sections.all.pulse_animation_text.label",
+      "default": false,
+      "visible_if": "{{ section.settings.subheading != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "magnetic_hover_effect",
+      "label": "t:sections.all.magnetic_hover_effect.enable",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-margin.header.content"
+    },
+    {
+      "type": "select",
+      "id": "margin_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_top.label"
+    },
+    {
+      "type": "select",
+      "id": "margin_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "m",
+      "label": "t:sections.all.section-margin.margin_bottom.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "url",
+          "id": "card_link",
+          "label": "t:sections.card-grid.blocks.card-link.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "bg_image",
+          "label": "t:sections.card-grid.blocks.bg_image.label"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "min": 0,
+          "max": 1,
+          "step": 0.1,
+          "default": 0.2,
+          "label": "t:sections.all.overlay.overlay_opacity.label_secondary"
+        },
+        {
+          "type": "text",
+          "id": "card_title",
+          "default": "t:sections.card-grid.blocks.card-title.default",
+          "label": "t:sections.card-grid.blocks.card-title.label"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            {
+              "value": "h5",
+              "label": "t:sections.all.heading_size.options__5.label"
+            },
+            {
+              "value": "h4",
+              "label": "t:sections.all.heading_size.options__4.label"
+            }
+          ],
+          "default": "h4",
+          "label": "t:sections.all.heading_size.label",
+          "visible_if": "{{ block.settings.card_title != blank }}"
+        },
+        {
+          "type": "select",
+          "id": "heading_tag",
+          "default": "h4",
+          "label": "t:sections.all.heading_tag.label",
+          "info": "t:sections.all.heading_tag.info",
+          "visible_if": "{{ block.settings.card_title != blank }}",
+          "options": [
+            {
+              "value": "h1",
+              "label": "t:sections.all.heading_tag.options__1.label"
+            },
+            {
+              "value": "h2",
+              "label": "t:sections.all.heading_tag.options__2.label"
+            },
+            {
+              "value": "h3",
+              "label": "t:sections.all.heading_tag.options__3.label"
+            },
+            {
+              "value": "h4",
+              "label": "t:sections.all.heading_tag.options__4.label"
+            },
+            {
+              "value": "h5",
+              "label": "t:sections.all.heading_tag.options__5.label"
+            },
+            {
+              "value": "h6",
+              "label": "t:sections.all.heading_tag.options__6.label"
+            },
+            {
+              "value": "div",
+              "label": "t:sections.all.heading_tag.options__7.label"
+            },
+            {
+              "value": "p",
+              "label": "t:sections.all.heading_tag.options__8.label"
+            },
+            {
+              "value": "span",
+              "label": "t:sections.all.heading_tag.options__9.label"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "discount",
+          "label": "t:settings_schema.colors.settings.badge_header.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.all.image.label"
+        },
+        {
+          "type": "select",
+          "id": "image_height_option",
+          "label": "t:sections.card-grid.settings.image_height.label",
+          "options": [
+            {
+              "value": "fit-height",
+              "label": "t:sections.card-grid.settings.image_height.options.fit-height.label"
+            },
+            {
+              "value": "overflow-top",
+              "label": "t:sections.card-grid.settings.image_height.options.overflow-top.label"
+            }
+          ],
+          "default": "fit-height"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Card grid",
+      "blocks": [
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

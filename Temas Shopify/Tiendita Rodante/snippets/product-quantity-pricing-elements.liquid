@@ -1,0 +1,46 @@
+{% comment %}
+  Renders the B2B volume pricing table for a product variant.
+
+  Accepts:
+  - variant: {Object} Variant Liquid object
+
+  Usage:
+  {% render 'product-quantity-pricing-elements', variant: variant %}
+{% endcomment %}
+{%- if variant.quantity_price_breaks.size > 0 -%}
+  <table class="volume-pricing body-xs">
+    <caption class="visually-hidden">{{ 'products.product.price.volume_pricing' | t }}</caption>
+    <thead>
+      <tr>
+        <th scope="col">{{ 'products.product.quantity.label' | t }}</th>
+        <th scope="col">{{ 'products.product.price.price' | t }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ variant.quantity_rule.min }}+</td>
+        <td>
+          {%- if settings.currency_code_enabled -%}
+            {{- variant.price | money_with_currency -}}
+          {%- else -%}
+            {{- variant.price | money -}}
+          {%- endif -%}
+          /{{ 'products.product.price.each' | t }}
+        </td>
+      </tr>
+      {%- for price_break in variant.quantity_price_breaks -%}
+        <tr>
+          <td>{{ price_break.minimum_quantity }}+</td>
+          <td>
+            {%- if settings.currency_code_enabled -%}
+              {{- price_break.price | money_with_currency -}}
+            {%- else -%}
+              {{- price_break.price | money -}}
+            {%- endif -%}
+            /{{ 'products.product.price.each' | t }}
+          </td>
+        </tr>
+      {%- endfor -%}
+    </tbody>
+  </table>
+{%- endif -%}

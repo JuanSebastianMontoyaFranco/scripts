@@ -1,0 +1,410 @@
+{{ 'section-quick-order-list.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'section-quick-order-list.js' | asset_url }}" defer="defer"></script>
+
+{%- style -%}
+  {% render 'section-padding' %}
+  {% render 'section-margin' %}
+{%- endstyle -%}
+
+{% liquid
+  assign items_in_cart = cart | line_items_for: product | sum: 'quantity'
+%}
+
+<div class="section-{{ section.id }}-padding color-{{ section.settings.color_scheme }}">
+  <div class="container">
+    <quick-order-list
+      class="quick-order-list"
+      id="{{ section.id }}-{{ product.id }}"
+      data-section="{{ section.id }}"
+      data-product-id="{{ product.id }}"
+      data-url="{{ product.url }}"
+    >
+      <form
+        action="{{ routes.cart_update_url }}"
+        class="quick-order-list__form"
+        method="post"
+        id="QuickOrderList"
+      >
+        {%- paginate product.variants by section.settings.variants_per_page -%}
+          <div class="quick-order-list__container" id="main-variant-items">
+            <table class="quick-order-list__table">
+              <caption class="visually-hidden">
+                {{- 'sections.cart.caption' | t -}}
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">
+                    {%- if product.has_only_default_variant -%}
+                      {{- 'sections.cart.headings.product' | t -}}
+                    {%- else -%}
+                      {{- 'sections.cart.headings.variant' | t -}}
+                    {%- endif -%}
+                  </th>
+                  <th scope="col">
+                    {{- 'products.product.quantity.label' | t -}}
+                  </th>
+                  <th class="right" scope="col">
+                    {{- 'sections.cart.headings.price' | t -}}
+                  </th>
+                  <th class="right" scope="col">
+                    {%- if product.has_only_default_variant -%}
+                      {{- 'sections.quick-order-list.product_total' | t -}}
+                    {%- else -%}
+                      {{- 'sections.quick-order-list.variant_total' | t -}}
+                    {%- endif -%}
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {%- if product.has_only_default_variant -%}
+                  {%- render 'quick-order-list-row',
+                    item: product,
+                    variant: product.selected_or_first_available_variant,
+                    settings: section.settings
+                  -%}
+                {%- else -%}
+                  {%- for variant in product.variants -%}
+                    {%- render 'quick-order-list-row', item: variant, variant: variant, settings: section.settings -%}
+                  {%- endfor -%}
+                {%- endif -%}
+              </tbody>
+            </table>
+          </div>
+
+          {% render 'pagination', paginate: paginate %}
+        {%- endpaginate -%}
+
+        <p
+          class="visually-hidden"
+          id="quick-order-list-live-region-text-{{ product.id }}"
+          aria-live="polite"
+          role="status"
+        ></p>
+        <p
+          class="visually-hidden"
+          id="shopping-cart-variant-item-status"
+          aria-live="polite"
+          aria-hidden="true"
+          role="status"
+        >
+          {{- 'accessibility.loading' | t -}}
+        </p>
+      </form>
+
+      {%- if product.has_only_default_variant or product.variants_count == 1 -%}
+        <span class="quick-order-list__error"></span>
+      {%- else -%}
+        <div
+          class="quick-order-list__total"
+          id="quick-order-list-total-{{ product.id }}-{{ section.id }}"
+        >
+          <div class="quick-order-list__total-info">
+            <div class="quick-order-list__total-left">
+              <div class="quick-order-list__total-buttons">
+                {% liquid
+                  assign cart_button_label = 'sections.quick-order-list.view_cart' | t
+                  assign remove_button_label = 'sections.quick-order-list.remove_all' | t
+                  assign cancel_button_label = 'sections.quick-order-list.cancel' | t
+                %}
+                {% render 'button', btn_label: cart_button_label, btn_style: 'primary', btn_link: routes.cart_url %}
+
+                <div class="quick-order-list__remove-all">
+                  <div class="loading-overlay__spinner hidden">
+                    {%- render 'icon-spinner' -%}
+                  </div>
+
+                  <quick-order-list-remove-all-button
+                    data-action="confirm"
+                    class="{% if items_in_cart == 0 %}hidden{% endif %}"
+                  >
+                    <button type="button" class="button button--secondary focus-inset">
+                      <div class="button__content">
+                        <span class="button__label" data-label="{{- remove_button_label | escape -}}">
+                          {{- remove_button_label -}}
+                        </span>
+                      </div>
+                      <span class="button_circle"> </span>
+                    </button>
+                  </quick-order-list-remove-all-button>
+                </div>
+              </div>
+              <span class="quick-order-list__error"></span>
+            </div>
+            <div class="quick-order-list__total-count">
+              <span class="small-font font-weight-bold">{{- 'sections.quick-order-list.total_items' | t -}}</span>
+              <span>
+                {{- items_in_cart -}}
+              </span>
+            </div>
+            <div class="quick-order-list__total-price">
+              <div class="quick-order-list__total-subtotal">
+                <span class="small-font font-weight-bold">
+                  {{- 'sections.quick-order-list.product_total' | t -}}
+                </span>
+                <span>
+                  {{ cart | line_items_for: product | sum: 'original_line_price' | money }}
+                </span>
+              </div>
+              <small class="tax-note small-font">
+                {{- 'sections.cart.taxes_and_shipping_at_checkout' | t -}}
+              </small>
+            </div>
+          </div>
+
+          <div class="quick-order-list__total-confirmation hidden">
+            <span class="small-font">
+              {{- 'sections.quick-order-list.remove_all_items_confirmation' | t: quantity: items_in_cart -}}
+            </span>
+
+            <quick-order-list-remove-all-button data-action="remove">
+              <button type="button" class="button button--primary focus-inset">
+                <div class="button__content">
+                  <span class="button__label" data-label="{{- remove_button_label | escape -}}">
+                    {{- remove_button_label -}}
+                  </span>
+                </div>
+                <span class="button_circle"> </span>
+              </button>
+            </quick-order-list-remove-all-button>
+
+            <quick-order-list-remove-all-button data-action="cancel">
+              <button type="button" class="button button--simple focus-inset">
+                <span>{{- cancel_button_label -}}</span>
+              </button>
+            </quick-order-list-remove-all-button>
+          </div>
+
+          <script type="application/json" data-cart-contents>
+            {{ cart | line_items_for: product | map: "variant_id" | json }}
+          </script>
+        </div>
+      {%- endif -%}
+    </quick-order-list>
+
+    <template id="QuickOrderListErrorTemplate-{{ product.id }}">
+      {% render 'icon-error' %}
+      <span class="quick-order-list__error-message small-font" role="alert"></span>
+    </template>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.quick-order-list.name",
+  "tag": "section",
+  "class": "quick-order-list-section",
+  "limit": 1,
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "background-1",
+      "label": "t:sections.all.color_scheme.label"
+    },
+    {
+      "type": "range",
+      "id": "variants_per_page",
+      "min": 5,
+      "max": 50,
+      "step": 1,
+      "default": 50,
+      "label": "t:sections.quick-order-list.settings.variants_per_page.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "default": true,
+      "label": "t:sections.quick-order-list.settings.show_image.label"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "landscape",
+          "label": "t:sections.all.card.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.all.card.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.all.card.image_ratio.options__3.label"
+        }
+      ],
+      "default": "square",
+      "label": "t:sections.all.card.image_ratio.label",
+      "visible_if": "{{ section.settings.show_image }}"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "t:sections.all.card.image_fit.label",
+      "options": [
+        {
+          "value": "contain",
+          "label": "t:sections.all.card.image_fit.options__1.label"
+        },
+        {
+          "value": "cover",
+          "label": "t:sections.all.card.image_fit.options__2.label"
+        }
+      ],
+      "default": "cover",
+      "visible_if": "{{ section.settings.show_image }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sku",
+      "default": false,
+      "label": "t:sections.all.sku.show_sku"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-padding.header.content"
+    },
+    {
+      "type": "select",
+      "id": "padding_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-padding.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-padding.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-padding.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-padding.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-padding.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-padding.options__6.label"
+        }
+      ],
+      "default": "l",
+      "label": "t:sections.all.section-padding.padding_top.label"
+    },
+    {
+      "type": "select",
+      "id": "padding_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-padding.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-padding.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-padding.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-padding.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-padding.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-padding.options__6.label"
+        }
+      ],
+      "default": "l",
+      "label": "t:sections.all.section-padding.padding_bottom.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.section-margin.header.content"
+    },
+    {
+      "type": "select",
+      "id": "margin_top",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_top.label"
+    },
+    {
+      "type": "select",
+      "id": "margin_bottom",
+      "options": [
+        {
+          "value": "no-indent",
+          "label": "t:sections.all.section-margin.options__1.label"
+        },
+        {
+          "value": "xs",
+          "label": "t:sections.all.section-margin.options__2.label"
+        },
+        {
+          "value": "s",
+          "label": "t:sections.all.section-margin.options__3.label"
+        },
+        {
+          "value": "m",
+          "label": "t:sections.all.section-margin.options__4.label"
+        },
+        {
+          "value": "l",
+          "label": "t:sections.all.section-margin.options__5.label"
+        },
+        {
+          "value": "xl",
+          "label": "t:sections.all.section-margin.options__6.label"
+        }
+      ],
+      "default": "no-indent",
+      "label": "t:sections.all.section-margin.margin_bottom.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.quick-order-list.presets.name"
+    }
+  ]
+}
+{% endschema %}

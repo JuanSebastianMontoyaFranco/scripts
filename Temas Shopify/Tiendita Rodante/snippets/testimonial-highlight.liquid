@@ -1,0 +1,56 @@
+<div class="testimonial__highlight swiper-slide">
+  <div
+    class="testimonial__highlight--image"
+    style="--object-fit-testimonial-highlight: {{ image_fit  }}; --image-ratio: {{ image_ratio }};"
+  >
+    {% if highlight_image != blank %}
+      {{
+        highlight_image
+        | image_url: width: highlight_image.width
+        | image_tag:
+          loading: 'lazy',
+          class: 'motion-reduce media--first',
+          widths: '360, 533, 720, 940, 1066, 1200, 1400, 1600, 1800, 2000, 2200, 2400, 2600',
+          sizes: ''
+      }}
+    {% else %}
+      {{ 'product-apparel-2' | placeholder_svg_tag: 'placeholder-svg' }}
+    {% endif %}
+  </div>
+  <div class="testimonial__highlight--content">
+    <div>
+      {% render 'testimonials-stars', enable_stars: enable_stars, rating: rating %}
+      <div class="block__text-title h5">
+        {{ text_title }}
+      </div>
+      <p class="block__text">
+        {{ text }}
+      </p>
+      <div class="customer-info__author">
+        <p class="customer-info__author--name">
+          {{ author_name }}
+        </p>
+        <p class="customer-info__author--position">
+          {{ author_position }}
+        </p>
+      </div>
+    </div>
+    {% if selected_product != blank %}
+      <div class="highlight__content--product-card">
+        {% render 'product-card-mini',
+          product_card_product: selected_product,
+          content_alignment: 'left',
+          media_size: '16/9',
+          media_fit: product_card_mini_image_fit,
+          show_secondary_image: false,
+          show_vendor: true,
+          show_collection: false,
+          show_desc: false,
+          columns: 1,
+          section_id: section.id,
+          add_id: forloop.index
+        %}
+      </div>
+    {% endif %}
+  </div>
+</div>

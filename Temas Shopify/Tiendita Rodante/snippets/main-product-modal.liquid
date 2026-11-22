@@ -1,0 +1,179 @@
+{% liquid
+  assign enable_video_looping = section.settings.enable_video_looping
+  assign image_fit_modal = 'contain'
+
+  assign image_fit_class = ''
+  if image_fit_modal == 'contain'
+    assign image_fit_class = 'product-media-modal__item--contain'
+  endif
+%}
+
+<product-modal id="ProductModal-{{ section.id }}" class="product-media-modal">
+  <div
+    class="product-media-modal__dialog"
+    role="dialog"
+    aria-label="{{ 'products.modal.label' | t }}"
+    aria-modal="true"
+    tabindex="-1"
+    style="--image-fit-modal: {{ image_fit_modal }};"
+  >
+    <button
+      id="ModalClose-{{ section.id }}"
+      type="button"
+      class="product-media-modal__toggle modal-close-button focus-inset"
+      aria-label="{{ 'accessibility.close' | t }}"
+      tabindex="0"
+    >
+      {% render 'icon-close' %}
+    </button>
+
+    <div
+      class="product-media-modal__content swiper js-popup-slider"
+      role="document"
+      aria-label="{{ 'products.modal.label' | t }}"
+      tabindex="0"
+    >
+      <div class="swiper-wrapper">
+        {%- for media in product.media -%}
+          <div
+            class="swiper-slide product-media-modal__item {{ image_fit_class }}"
+            data-media-modal-id="{{ section.id }}-{{ media.id }}"
+          >
+            {%- if media.media_type == 'image' -%}
+              {% capture sizes %}
+		                height 150vh
+		              {% endcapture %}
+              {% capture class %}
+		                {%- if media.media_type == 'image' -%} js-image-zoom{%- endif -%}
+		              {% endcapture %}
+              {% liquid
+                assign img_alt = product.title | append: '-' | append: media.position
+                if media.preview_image.alt != blank
+                  assign img_alt = media.preview_image.alt
+                endif
+              %}
+              {{
+                media.preview_image
+                | image_url: width: media.preview_image.width
+                | image_tag:
+                  class: class,
+                  loading: 'lazy',
+                  widths: '550, 1100, 1445, 1680, 1750, 1920, 2048, 2200, 2890, 3000, 3200, 3400, 3600, 3800, 4096',
+                  sizes: sizes,
+                  data-media-id: media.id,
+                  alt: img_alt
+              }}
+            {%- else -%}
+              {%- if media.media_type == 'model' -%}
+                <div class="product-media-modal__model" data-media-id="{{ media.id }}">
+                  <product-model class="deferred-media media">
+              {%- else -%}
+                <deferred-media class="deferred-media media" data-media-id="{{ media.id }}">
+              {%- endif -%}
+
+              <button
+                id="Deferred-Poster-Modal-{{ media.id }}"
+                class="deferred-media__poster focus-inset"
+                type="button"
+                tabindex="0"
+              >
+                <span class="deferred-media__poster-button motion-reduce">
+                  {%- if media.media_type == 'model' -%}
+                    <span class="visually-hidden">{{ 'products.product.media.play_model' | t }}</span>
+                    {%- render 'icon-3d-model' -%}
+                  {%- else -%}
+                    <span class="visually-hidden">{{ 'products.product.media.play_video' | t }}</span>
+                    {%- render 'icon-play' -%}
+                  {%- endif -%}
+                </span>
+                {% capture sizes %}
+		                  height 150vh
+		                {% endcapture %}
+                {% liquid
+                  assign img_alt = product.title | append: '-' | append: media.position
+                  if media.preview_image.alt != blank
+                    assign img_alt = media.preview_image.alt
+                  endif
+                %}
+                {{
+                  media.preview_image
+                  | image_url: width: 3600
+                  | image_tag:
+                    loading: 'lazy',
+                    widths: '550, 1100, 1445, 1680, 1750, 1920, 2048, 2200, 2890, 3000, 3200, 3400, 3600, 3800, 4096',
+                    sizes: sizes,
+                    data-media-id: media.id,
+                    alt: img_alt
+                }}
+              </button>
+              <template>
+                {%- case media.media_type -%}
+                  {%- when 'external_video' -%}
+                    {%- assign video_class = 'js-' | append: media.host -%}
+                    {%- if media.host == 'youtube' -%}
+                      {{
+                        media
+                        | external_video_url: autoplay: true, loop: enable_video_looping, playlist: media.external_id
+                        | external_video_tag: class: video_class, loading: 'lazy'
+                      }}
+                    {%- else -%}
+                      {{
+                        media
+                        | external_video_url: autoplay: true, loop: enable_video_looping
+                        | external_video_tag: class: video_class, loading: 'lazy'
+                      }}
+                    {%- endif -%}
+                  {%- when 'video' -%}
+                    {{
+                      media
+                      | media_tag:
+                        image_size: '2048x',
+                        autoplay: true,
+                        loop: enable_video_looping,
+                        controls: true,
+                        preload: 'none'
+                    }}
+                  {%- when 'model' -%}
+                    {{ media | media_tag: image_size: '2048x', toggleable: true }}
+                {%- endcase -%}
+              </template>
+
+              {%- if media.media_type == 'model' -%}
+                </product-model>
+                <button
+                  class="button button--full-width product__xr-button focus-inset"
+                  type="button"
+                  aria-label="{{ 'products.product.xr_button_label' | t }}"
+                  data-shopify-xr
+                  data-shopify-model3d-id="{{ media.id }}"
+                  data-shopify-title="title"
+                  data-shopify-xr-hidden
+                  tabindex="0"
+                >
+                  {% render 'icon-3d-model' %}
+                  {{ 'products.product.xr_button' | t }}
+                </button>
+                </div>
+              {%- else -%}
+                </deferred-media>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  {% if product.media.size > 1 %}
+    <div class="container product__pagination-wrapper">
+      <div class="product__pagination swiper-pagination"></div>
+    </div>
+
+    <div class="swipper-arrows-parent">
+      {% render 'swiper-arrows',
+        classNameWrapper: 'container product__slider-nav product__slider-nav--popup no-js-hidden',
+        classNameSwiperBox: 'container'
+      %}
+    </div>
+  {% endif %}
+</product-modal>

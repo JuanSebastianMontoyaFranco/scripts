@@ -1,0 +1,116 @@
+{% doc %}
+  Renders product collapsible info (accordion) block.
+
+  @param {object} block_obj - Block Liquid object
+
+  @example
+  {% render 'product-block-collapsible-info', block_obj: block %}
+{% enddoc %}
+
+{%- liquid
+  assign has_icon = false
+  assign has_custom_icon = false
+  if block_obj.settings.enable_icon
+    if block_obj.settings.icon != 'none' and block_obj.settings.icon != 'custom'
+      assign has_icon = true
+    elsif block_obj.settings.icon == 'custom'
+      if block_obj.settings.custom_icon != blank or block_obj.settings.custom_icon_2 != blank
+        assign has_icon = true
+        assign has_custom_icon = true
+      endif
+    endif
+  endif
+
+  assign has_toggle_content = false
+  if block_obj.settings.heading != blank or has_icon or has_custom_icon
+    assign has_toggle_content = true
+  endif
+
+  assign has_button = false
+  if block_obj.settings.show_button and block_obj.settings.button_label
+    assign has_button = true
+  endif
+
+  assign has_content = false
+  if block_obj.settings.description != blank or has_button
+    assign has_content = true
+  endif
+-%}
+{%- if has_toggle_content and has_content -%}
+  <div class="product-accordion" {{ block_obj.shopify_attributes }}>
+    <button
+      class="button button--simple product-accordion__toggle{% if block_obj.settings.default_open %} active{% endif %} focus-inset"
+      aria-label="{{ block_obj.settings.heading | escape }}"
+    >
+      <div class="button__content">
+        <span class="button__label" data-label="{{- block_obj.settings.heading | escape -}}">
+          {{- block_obj.settings.heading | escape -}}
+        </span>
+
+        {%- if has_content -%}
+          <div class="product-accordion__icon">
+            {% render 'icon-plus-dropdown' %}
+            {% render 'icon-minus-dropdown' %}
+          </div>
+        {%- endif -%}
+
+        {%- if has_icon -%}
+          <div class="product-accordion__icon product-accordion__icon--first{% if has_custom_icon and block_obj.settings.custom_icon_2 != blank %} product-accordion__icon--with-dm-icon{% endif %}">
+            {%- if block_obj.settings.icon != 'none' and block_obj.settings.icon != 'custom' -%}
+              {% render 'icon-pack-collapsible', icon: block_obj.settings.icon %}
+            {%- elsif block_obj.settings.icon == 'custom' and has_custom_icon -%}
+              {%- capture custom_icon_style -%}
+                object-fit: {{ block_obj.settings.custom_icon_fit | default: 'cover' }};
+              {%- endcapture -%}
+              {%- if block_obj.settings.custom_icon != blank -%}
+                {% assign height = 40 | divided_by: block_obj.settings.custom_icon.aspect_ratio | round: 2 %}
+                {{
+                  block_obj.settings.custom_icon
+                  | image_url: width: 120
+                  | image_tag:
+                    height: height,
+                    width: 40,
+                    widths: '40, 80, 120',
+                    style: custom_icon_style,
+                    class: 'product-accordion__icon-image'
+                }}
+              {%- endif -%}
+              {%- if block_obj.settings.custom_icon_2 != blank -%}
+                {% assign height_2 = 40 | divided_by: block_obj.settings.custom_icon_2.aspect_ratio | round: 2 %}
+                {{
+                  block_obj.settings.custom_icon_2
+                  | image_url: width: 120
+                  | image_tag:
+                    height: height_2,
+                    width: 40,
+                    widths: '40, 80, 120',
+                    style: custom_icon_style,
+                    class: 'product-accordion__icon-image product-accordion__icon-image--dark'
+                }}
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </button>
+
+    {%- if has_content -%}
+      <div class="product-accordion__content{% if block_obj.settings.default_open %} active{% endif %}">
+        {%- if block_obj.settings.description != blank -%}
+          <div class="rte rte--product">
+            {{- block_obj.settings.description -}}
+          </div>
+        {%- endif -%}
+
+        {%- if has_button -%}
+          {% render 'button',
+            btn_label: block_obj.settings.button_label,
+            btn_link: block_obj.settings.button_link,
+            btn_style: 'tertiary',
+            class: 'product-accordion__button'
+          %}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}

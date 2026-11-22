@@ -1,0 +1,62 @@
+{% style %}
+  :root {
+  	--announcement-height: 0px;
+  	--ann-height: 0px;
+  	--header-height: 0px;
+  	--breadcrumbs-height: 0px;
+  	--scrollbar-width: 0px;
+  	--vh: 1vh;
+  	--spaced-section: 5rem;
+  	--border-radius-main: {{ settings.main_border_radius }}px;
+  	--border-radius-button: {{ settings.button_border_radius }}px;
+  	--border-radius-badge: {{ settings.badge_border_radius }}px;
+  	--border-radius-icons: {{ settings.icons_border_radius }}px;
+  	--payment-terms-background-color: {{ settings.colors_background_1 }};
+  }
+
+  @media screen and (min-width: 990px) {
+  	:root {
+  		--spaced-section: 16rem;
+  	}
+  }
+
+  *,
+  *::before,
+  *::after {
+  	box-sizing: inherit;
+  }
+
+  html, body {
+  	min-height: 100%;
+  	position: relative;
+  }
+
+  html {
+  	box-sizing: border-box;
+  	font-size: 10px;
+  	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  	height: -webkit-fill-available;
+  }
+
+  body {
+  	position: relative;
+  	display: flex;
+  	flex-direction: column;
+  	min-height: -webkit-fill-available;
+  	margin: 0;
+
+  	font-size: calc(var(--font-body-scale) * 1rem);
+  	line-height: var(--font-body-line-height);
+  	font-family: var(--font-body-family);
+  	font-style: var(--font-body-style);
+  	font-weight: var(--font-body-weight);
+  	letter-spacing: calc(var(--font-body-letter-spacing) * 0.1);
+
+  	overflow-y: auto;
+  	overscroll-behavior: none;
+  }
+
+  #MainContent {
+  	flex-grow: 1;
+  }
+{% endstyle %}

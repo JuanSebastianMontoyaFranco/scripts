@@ -1,0 +1,99 @@
+.cards-grid__wrapper {
+  display: grid;
+  gap: 1.6rem;
+}
+.cards-grid .section-header {
+  max-width: 76rem;
+}
+.cards-grid .section-header .section-header__wrapper .description {
+  font-size: 1.6rem;
+}
+@media screen and (min-width: 750px) {
+  .cards-grid .section-header .section-header__wrapper .description {
+    font-size: 1.8rem;
+  }
+}
+@media screen and (min-width: 990px) {
+  .cards-grid .section-header .section-header__wrapper .description {
+    font-size: 2rem;
+  }
+}
+@media screen and (min-width: 1100px) {
+  .cards-grid .section-header .section-header__wrapper .description {
+    font-size: 2.2rem;
+  }
+}
+.cards-grid .section-header .section-header__wrapper {
+  gap: 0.8rem;
+}
+.cards-grid__item {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgb(var(--color-border));
+  border-radius: var(--border-radius-main);
+  padding: 3.2rem;
+  min-height: 200px;
+}
+.cards-grid__item .value__wrapper {
+  display: flex;
+  gap: 1.6rem;
+}
+.cards-grid__item .value {
+  font-size: 6.4rem;
+  margin-bottom: 4.7rem;
+  color: rgb(var(--color-accent));
+  font-family: var(--font-product-count);
+  font-weight: var(--font-product-count-weight);
+  font-style: var(--font-product-count-style);
+}
+.cards-grid__item .superscript {
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: rgb(var(--color-accent));
+}
+@media screen and (min-width: 990px) {
+  .cards-grid__item--narrow .cards-grid__heading,
+.cards-grid__item--narrow .cards-grid-text {
+    max-width: 100%;
+  }
+}
+.cards-grid .cards-grid__info-item-btns {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.6rem 2.4rem;
+  margin-top: 2rem;
+}
+@media screen and (min-width: 990px) {
+  .cards-grid .cards-grid__info-item-btns {
+    margin-top: 4rem;
+  }
+}
+.cards-grid .cards-grid__heading {
+  display: block;
+  margin: 0;
+  text-align: left;
+  font-weight: 600;
+  text-transform: var(--font-heading-text-transform);
+}
+@media screen and (min-width: 990px) {
+  .cards-grid .cards-grid__heading.cards-grid__item--narrow {
+    max-width: 65%;
+  }
+}
+.cards-grid .cards-grid__item-block {
+  position: relative;
+  display: flex;
+  height: 100%;
+}
+.cards-grid .cards-grid-text {
+  margin-top: 0.4rem;
+  text-align: left;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+@media screen and (min-width: 990px) {
+  .cards-grid .cards-grid-text.cards-grid__item--narrow {
+    max-width: 65%;
+  }
+}

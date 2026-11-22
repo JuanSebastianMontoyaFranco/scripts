@@ -1,0 +1,27 @@
+{% if btn_label != blank %}
+  <div
+    class="button_wrapper {% if btn_style == 'primary' %}custom-hover{% endif %}  focus-inset"
+    tabindex="0"
+    aria-label="{{ btn_label | escape }}"
+  >
+    <a
+      {% if btn_link != blank %}
+        href="{{ btn_link }}"
+        data-button-text="{{ btn_label | escape }}"
+      {% endif %}
+      {% if btn_link == blank %}
+        aria-disabled="true"
+      {% endif %}
+      aria-label="{{ btn_label | escape }}"
+      class="button button--{{ btn_style }} {{ class_btn_link_disabled }}"
+    >
+      <div class="button__content">
+        <span class="button__label" data-label="{{- btn_label | escape -}}">
+          {{ btn_label | escape }}
+        </span>
+      </div>
+
+      <span class="button_circle"> </span>
+    </a>
+  </div>
+{% endif %}

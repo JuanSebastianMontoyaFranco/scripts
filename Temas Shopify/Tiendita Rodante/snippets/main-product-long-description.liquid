@@ -1,0 +1,19 @@
+<div class="rte" role="tabpanel" aria-labelledby="1" id="description">
+  {% render 'section-header',
+    section_heading: block.settings.title,
+    section_heading_size: block.settings.heading_size,
+    section_subheading: block.settings.subtitle,
+    description: '',
+    content_alignment: 'left',
+    pulse: block.settings.pulse_animation_text
+  %}
+
+  {% if product.description != blank %}
+    <div
+      class="rte {% if settings.rte_style == "custom" %} custom_rte main-product__long-desc{% endif %}"
+      {{ block.shopify_attributes }}
+    >
+      {{- product.description -}}
+    </div>
+  {% endif %}
+</div>

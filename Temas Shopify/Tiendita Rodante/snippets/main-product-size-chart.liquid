@@ -1,0 +1,70 @@
+{% comment %}
+  Renders the Size Chart block for the product page.
+
+  Displays a button that opens a modal with the content of a merchant-selected page.
+  The block is not rendered when no page is selected.
+
+  Accepts:
+  - block: {Object} The size_chart block object.
+
+  Usage:
+  {% render 'main-product-size-chart', block: block %}
+{% endcomment %}
+
+{%- liquid
+  assign size_chart_page = block.settings.page
+  assign button_label = block.settings.button_label | default: 'Size chart'
+-%}
+
+{%- if size_chart_page != blank -%}
+  <div class="size-chart" {{ block.shopify_attributes }}>
+    <modal-opener class="no-js-hidden" data-modal="#SizeChartModal-{{ block.id }}">
+      <button
+        id="SizeChartOpener-{{ block.id }}"
+        class="size-chart__button focus-inset"
+        type="button"
+        aria-haspopup="dialog"
+        tabindex="0"
+      >
+        <span class="size-chart__button-label animated-link__underline--reverse">
+          {{ button_label }}
+        </span>
+      </button>
+    </modal-opener>
+
+    <modal-dialog
+      id="SizeChartModal-{{ block.id }}"
+      class="product-popup-modal size-chart-modal"
+    >
+      <div
+        role="dialog"
+        aria-label="{{ size_chart_page.title | escape }}"
+        aria-modal="true"
+        class="product-popup-modal__dialog size-chart-modal__dialog"
+        tabindex="-1"
+      >
+        <button
+          id="ModalClose-{{ block.id }}"
+          type="button"
+          class="product-popup-modal__close modal-close-button focus-inset"
+          aria-label="{{ 'accessibility.close' | t }}"
+          tabindex="0"
+        >
+          {% render 'icon-close-new' %}
+        </button>
+
+        {%- if size_chart_page.title != blank -%}
+          <h3 class="product-popup-modal__title size-chart-modal__title">
+            {{ size_chart_page.title }}
+          </h3>
+        {%- endif -%}
+
+        <div class="product-popup-modal__content size-chart-modal__content">
+          <div class="rte">
+            {{ size_chart_page.content }}
+          </div>
+        </div>
+      </div>
+    </modal-dialog>
+  </div>
+{%- endif -%}

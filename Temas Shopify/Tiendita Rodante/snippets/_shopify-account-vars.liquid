@@ -1,0 +1,31 @@
+{% comment %}
+  Source: https://shopify.dev/docs/api/storefront-web-components/components/shopify-account#css%20variables
+{% endcomment %}
+{% style %}
+  shopify-account {
+    --shopify-account-color-accent: rgb(var(--color-foreground));
+    --shopify-account-color-accent-hover: rgba(var(--color-foreground), 0.8);
+    --shopify-account-color-accent-text: rgb(var(--color-background));
+    --shopify-account-color-background: rgb(var(--color-background));
+    --shopify-account-color-background-subdued: rgb(var(--color-background-secondary));
+    --shopify-account-color-border: rgb(var(--color-border));
+    --shopify-account-color-card-background: rgb(var(--color-background));
+    --shopify-account-color-control-background: rgb(var(--color-background));
+    --shopify-account-color-shadow: 0px 8px 14px 0px rgba(var(--color-shadow), 0.08);
+    --shopify-account-color-text: rgb(var(--color-foreground));
+    --shopify-account-color-text-subdued: rgb(var(--color-foreground));
+    --shopify-account-dialog-position-top: calc(var(--header-height) + var(--ann-height) + 8px);
+    --shopify-account-font-body: var(--font-body-family);
+    --shopify-account-font-body-weight: var(--font-body-weight);
+    --shopify-account-font-heading: var(--font-heading-family);
+    --shopify-account-font-heading-weight: var(--font-heading-weight);
+    --shopify-account-radius-base: var(--border-radius-block);
+    --shopify-account-radius-button: var(--border-radius-button);
+    --shopify-account-radius-button-small: min(var(--border-radius-button), 0.4rem);
+    --shopify-account-radius-dialog: 0.2rem; /* or var(--border-radius-block) */
+    --shopify-account-radius-input: var(--border-radius-input);
+    --shopify-account-signed-in-avatar-color-background: rgb(var(--color-foreground));
+    --shopify-account-signed-in-avatar-color-text: rgb(var(--color-background));
+    --shopify-account-signed-in-avatar-size: 28px;
+  }
+{% endstyle %}

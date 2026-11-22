@@ -1,0 +1,433 @@
+{% liquid
+  assign color_scheme = 'background-1'
+  assign heading = section.settings.heading
+  assign heading_size = section.settings.heading_size
+  assign position = section.settings.position
+  assign banner_link = section.settings.link
+  assign countdown_heading = section.settings.countdown_heading
+%}
+
+<div
+  class="
+    notification-banner
+    notification-banner__countdown
+    popup popup--{{ position }}
+    color-{{ color_scheme }} background
+  "
+  {% if section.settings['popup-id'] != blank %}
+    id="{{ section.settings.popup-id }}"
+  {% endif %}
+  data-limit-display="{{ section.settings.limit-display }}"
+  data-limit-lifetime="{{ section.settings.limit-cache }}"
+  data-open-trigger="{{ section.settings.trigger-open }}"
+  data-open-delay-number="{{ section.settings.trigger-open-delay }}"
+  data-open-scroll-position="{{ section.settings.open-scroll-position }}"
+  data-open-scroll-type="{{ section.settings.open-scroll-type }}"
+  {% if section.settings['manual-selector'] != blank %}
+    data-open-manual-selector="{{ section.settings.manual-selector }}"
+  {% endif %}
+  data-close-trigger="{{ section.settings.trigger-close }}"
+  data-close-delay-number="{{ section.settings.trigger-close-delay }}"
+  data-close-scroll-position="{{ section.settings.close-scroll-position }}"
+  data-close-scroll-type="{{ section.settings.close-scroll-type }}"
+  data-open-animation="popupOpen{{ section.settings.open-animation }}"
+  data-exit-animation="popupExit{{ section.settings.exit-animation }}"
+  data-overlay="{{ section.settings.show-overlay }}"
+  data-mobile-disable="false"
+  data-body-scroll-disable="false"
+  data-overlay-close="{{ section.settings.overlay-close }}"
+  data-esc-close="{{ section.settings.esc-close }}"
+  data-f4-close="{{ section.settings.f4-close }}"
+  data-id="{{ section.id }}"
+  data-heading="{{ heading }}"
+>
+  <div class="popup-wrap">
+    <div class="popup-container">
+      <div class="popup-outer {% if heading == blank %} no-heading {% endif %} ">
+        {% if heading != blank %}
+          <h2 class="popup-heading {{ heading_size }} {% if section.settings.date_picker == blank %} no-countdown {% endif %}">
+            {{ heading }}
+          </h2>
+        {% endif %}
+        {% render 'countdown',
+          id: section.id,
+          section_settings: section.settings,
+          with_bg: true,
+          countdown_heading: countdown_heading
+        %}
+      </div>
+    </div>
+  </div>
+  {% if banner_link != blank %}
+    <a
+      href="{{ banner_link }}"
+      class="notification-banner__countdown--link"
+      aria-label="banner link"
+    >
+    </a>
+  {% endif %}
+</div>
+
+{% if section.settings['show-overlay'] %}
+  <div class="popup-overlay" style="z-index: 1000;"></div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "t:sections.overlay-group.notification-banner.notification_countdown",
+  "limit": 1,
+  "enabled_on": {
+    "groups": ["custom.overlay"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.all.content_options.header.content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Here can be your main title",
+      "label": "t:sections.all.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h4",
+          "label": "t:sections.all.heading_size.options__4.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.all.heading_size.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.all.heading_size.options__2.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.all.heading_size.options__3.label"
+        }
+      ],
+      "default": "h3",
+      "label": "t:sections.all.heading_size.label"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "date_picker",
+      "default": "2025-10-01",
+      "info": "YYYY-MM-DD",
+      "label": "t:sections.countdown.settings.date_picker.label"
+    },
+    {
+      "type": "text",
+      "id": "time_picker",
+      "default": "00:00",
+      "info": "hh:mm",
+      "label": "t:sections.countdown.settings.time_picker.label"
+    },
+    {
+      "type": "select",
+      "id": "completed_countdown",
+      "options": [
+        {
+          "value": "hide_section",
+          "label": "t:sections.countdown.settings.completed_countdown.options_3.label"
+        },
+        {
+          "value": "show_text",
+          "label": "t:sections.countdown.settings.completed_countdown.options_2.label"
+        }
+      ],
+      "default": "show_text",
+      "label": "t:sections.countdown.settings.completed_countdown.label"
+    },
+    {
+      "type": "text",
+      "id": "countdown_heading",
+      "default": "Header after countdown",
+      "info": "t:sections.countdown.settings.show_text",
+      "label": "t:sections.countdown.settings.countdown_heading.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.content_options.header.content"
+    },
+    {
+      "type": "range",
+      "id": "limit-display",
+      "min": 0,
+      "max": 100,
+      "default": 0,
+      "label": "t:sections.overlay-group.all.settings.limit-display.label",
+      "info": "t:sections.overlay-group.all.settings.limit-display.info"
+    },
+    {
+      "type": "number",
+      "id": "limit-cache",
+      "default": 30,
+      "label": "t:sections.overlay-group.all.settings.limit-cache.label"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "t:sections.overlay-group.all.settings.position.options__1.label"
+        },
+        {
+          "value": "top",
+          "label": "t:sections.overlay-group.all.settings.position.options__2.label"
+        },
+        {
+          "value": "top-right",
+          "label": "t:sections.overlay-group.all.settings.position.options__3.label"
+        },
+        {
+          "value": "left",
+          "label": "t:sections.overlay-group.all.settings.position.options__4.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.overlay-group.all.settings.position.options__5.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.overlay-group.all.settings.position.options__6.label"
+        },
+        {
+          "value": "bottom-left",
+          "label": "t:sections.overlay-group.all.settings.position.options__7.label"
+        },
+        {
+          "value": "bottom",
+          "label": "t:sections.overlay-group.all.settings.position.options__8.label"
+        },
+        {
+          "value": "bottom-right",
+          "label": "t:sections.overlay-group.all.settings.position.options__9.label"
+        }
+      ],
+      "default": "bottom",
+      "label": "t:sections.overlay-group.all.settings.position.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.overlay-group.all.settings.trigger.header.content"
+    },
+    {
+      "type": "text",
+      "id": "popup-id",
+      "label": "t:sections.overlay-group.all.settings.popup-id.label"
+    },
+    {
+      "type": "select",
+      "id": "trigger-open",
+      "label": "t:sections.overlay-group.all.settings.trigger-open.label",
+      "options": [
+        {
+          "value": "delay",
+          "label": "t:sections.overlay-group.all.settings.trigger.options__1.label"
+        },
+        {
+          "value": "scroll",
+          "label": "t:sections.overlay-group.all.settings.trigger.options__2.label"
+        },
+        {
+          "value": "exit",
+          "label": "t:sections.overlay-group.all.settings.trigger.options__3.label"
+        },
+        {
+          "value": "manual",
+          "label": "t:sections.overlay-group.all.settings.trigger.options__4.label"
+        }
+      ],
+      "default": "delay"
+    },
+    {
+      "type": "range",
+      "id": "trigger-open-delay",
+      "label": "t:sections.overlay-group.all.settings.trigger-open-delay.label",
+      "min": 0,
+      "max": 100,
+      "unit": "sec",
+      "default": 1
+    },
+    {
+      "type": "select",
+      "id": "open-scroll-type",
+      "options": [
+        {
+          "value": "px",
+          "label": "t:sections.overlay-group.all.settings.scroll-type.options__1.label"
+        },
+        {
+          "value": "%",
+          "label": "t:sections.overlay-group.all.settings.scroll-type.options__2.label"
+        }
+      ],
+      "default": "%",
+      "label": "t:sections.overlay-group.all.settings.open-scroll-type.label"
+    },
+    {
+      "type": "number",
+      "id": "open-scroll-position",
+      "default": 50,
+      "label": "t:sections.overlay-group.all.settings.open-scroll-position.label"
+    },
+    {
+      "type": "text",
+      "id": "manual-selector",
+      "label": "t:sections.overlay-group.all.settings.manual-selector.label",
+      "info": "t:sections.overlay-group.all.settings.manual-selector.info"
+    },
+    {
+      "type": "select",
+      "id": "trigger-close",
+      "label": "t:sections.overlay-group.all.settings.trigger-close.label",
+      "options": [
+        {
+          "value": "delay",
+          "label": "t:sections.overlay-group.all.settings.trigger.options__1.label"
+        },
+        {
+          "value": "scroll",
+          "label": "t:sections.overlay-group.all.settings.trigger.options__2.label"
+        },
+        {
+          "value": "none",
+          "label": "t:sections.overlay-group.all.settings.trigger.options__5.label"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "trigger-close-delay",
+      "label": "t:sections.overlay-group.all.settings.trigger-close-delay.label",
+      "min": 1,
+      "max": 100,
+      "unit": "sec",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "close-scroll-type",
+      "options": [
+        {
+          "value": "px",
+          "label": "t:sections.overlay-group.all.settings.scroll-type.options__1.label"
+        },
+        {
+          "value": "%",
+          "label": "t:sections.overlay-group.all.settings.scroll-type.options__2.label"
+        }
+      ],
+      "default": "%",
+      "label": "t:sections.overlay-group.all.settings.close-scroll-type.label"
+    },
+    {
+      "type": "number",
+      "id": "close-scroll-position",
+      "default": 50,
+      "label": "t:sections.overlay-group.all.settings.close-scroll-position.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.overlay-group.all.settings.animation.header.content"
+    },
+    {
+      "type": "select",
+      "id": "open-animation",
+      "label": "t:sections.overlay-group.all.settings.open-animation.label",
+      "options": [
+        {
+          "value": "Fade",
+          "label": "t:sections.overlay-group.all.settings.animation.options__1.label"
+        },
+        {
+          "value": "Slide",
+          "label": "t:sections.overlay-group.all.settings.animation.options__2.label"
+        },
+        {
+          "value": "Zoom",
+          "label": "t:sections.overlay-group.all.settings.animation.options__3.label"
+        },
+        {
+          "value": "SlideFade",
+          "label": "t:sections.overlay-group.all.settings.animation.options__4.label"
+        }
+      ],
+      "default": "Fade"
+    },
+    {
+      "type": "select",
+      "id": "exit-animation",
+      "label": "t:sections.overlay-group.all.settings.exit-animation.label",
+      "options": [
+        {
+          "value": "Fade",
+          "label": "t:sections.overlay-group.all.settings.animation.options__1.label"
+        },
+        {
+          "value": "Slide",
+          "label": "t:sections.overlay-group.all.settings.animation.options__2.label"
+        },
+        {
+          "value": "Zoom",
+          "label": "t:sections.overlay-group.all.settings.animation.options__3.label"
+        },
+        {
+          "value": "SlideFade",
+          "label": "t:sections.overlay-group.all.settings.animation.options__4.label"
+        }
+      ],
+      "default": "Fade"
+    },
+    {
+      "type": "checkbox",
+      "id": "show-overlay",
+      "label": "t:sections.overlay-group.all.settings.show-overlay.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.overlay-group.all.settings.advanced.header.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "overlay-close",
+      "label": "t:sections.overlay-group.all.settings.advanced.overlay-close.label",
+      "info": "t:sections.overlay-group.all.settings.advanced.overlay-close.info",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "esc-close",
+      "label": "t:sections.overlay-group.all.settings.advanced.esc-close.label",
+      "info": "t:sections.overlay-group.all.settings.advanced.esc-close.info",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "f4-close",
+      "label": "t:sections.overlay-group.all.settings.advanced.f4-close.label",
+      "info": "t:sections.overlay-group.all.settings.advanced.f4-close.info",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.overlay-group.notification-banner.notification_countdown"
+    }
+  ]
+}
+{% endschema %}

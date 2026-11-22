@@ -1,0 +1,34 @@
+<div
+  class="cart-shipping"
+  data-min-spend="{{ settings.min_spend | times: 100.0 }}"
+  data-total="{{ cart.total_price }}"
+  data-message=" {{ settings.message_shipping }}"
+>
+  <div class="cart-shipping__message-wrapper">
+    {% render 'discount-badge', discount: 'Free' %}
+    <p
+      class="cart-shipping__message cart-shipping__message_default body-small active"
+    ></p>
+    <p class="cart-shipping__message cart-shipping__message_success body-small">
+      <span class="cart-shipping__message_success-wow">Wow!</span>
+      {{ settings.message_shipping_free }}
+    </p>
+  </div>
+  <div class="cart-shipping__progress-wrapper">
+    <span
+      class="cart-shipping__thumb cart-shipping__thumb--left"
+      aria-hidden="true"
+    ></span>
+    <span class="cart-shipping__progress">
+      <span class="cart-shipping__progress-current"></span>
+    </span>
+    <span
+      class="cart-shipping__thumb cart-shipping__thumb--right"
+      aria-hidden="true"
+    ></span>
+  </div>
+  <div class="cart-shipping__labels">
+    <p class="cart-shipping__label extra-small-font">Your Order</p>
+    <p class="cart-shipping__label extra-small-font cart-shipping__label--right">Free Shipping</p>
+  </div>
+</div>

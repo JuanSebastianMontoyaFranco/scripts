@@ -1,0 +1,14 @@
+{% if enable_stars %}
+  <div class="testimonials__slide-stars">
+    {% for i in (1..5) %}
+      {% liquid
+        if i <= rating
+          assign active = true
+        else
+          assign active = false
+        endif
+      %}
+      {% render 'icon-star', star_active: active %}
+    {% endfor %}
+  </div>
+{% endif %}

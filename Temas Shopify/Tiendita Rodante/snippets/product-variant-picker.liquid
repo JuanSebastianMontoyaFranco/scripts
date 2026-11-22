@@ -1,0 +1,373 @@
+{% doc %}
+  Renders product variant picker block.
+
+  @param {object} product - Product Liquid object
+  @param {object} section_obj - Section Liquid object
+  @param {object} block_obj - Block Liquid object
+  @param {string} section_id - Section ID
+  @param {string} product_form_id - ID of the form that is used in the Buy buttons block
+  @param {boolean} need_update_page_url - Update page URL when product variant changes
+
+  @example
+  {% render 'product-variant-picker', product: product, section_obj: section, block_obj: block %}
+{% enddoc %}
+
+{%- unless product.has_only_default_variant -%}
+  {% liquid
+    assign swatches_as_variant_image_already_shown = false
+
+    if product_form_id == blank
+      assign product_form_id = 'product-form-' | append: section_id
+    endif
+
+    assign is_high_variant_product = false
+    if product.variants_count > 250
+      assign is_high_variant_product = true
+    endif
+
+    assign need_update_page_url = need_update_page_url | default: false
+  %}
+  <div
+    class="product-parameters product-parameters--{{ block_obj.settings.picker_type }}"
+    {{ block_obj.shopify_attributes }}
+  >
+    {%- if block_obj.settings.picker_type == 'button' -%}
+      <variant-radios
+        id="variant-picker-{{ section_id }}"
+        class="no-js-hidden"
+        data-section="{{ section_id }}"
+        data-url="{{ product.url }}"
+        data-is-high-variant-product="{{ is_high_variant_product }}"
+        data-update-url="{{ need_update_page_url }}"
+        data-variant-media-display="{{ section_obj.settings.variant_media_display | default: 'show_all' }}"
+      >
+        {%- for option in product.options_with_values -%}
+          {% liquid
+            assign is_color_option = false
+            assign color_option_match_with_color_trigger = false
+
+            # for metafields color
+            for value in option.values
+              if settings.enable_color_swatch and value.swatch.color != blank
+                assign is_color_option = true
+              endif
+            endfor
+
+            # for custom option color
+            assign color_trigger = settings.trigger_swatch | strip | newline_to_br | split: '<br />'
+            assign name_option = option.name | handle | strip
+            for item in color_trigger
+              assign item_temp = item | handle | strip
+              if settings.enable_color_swatch and name_option == item_temp
+                assign is_color_option = true
+                assign color_option_match_with_color_trigger = true
+              endif
+            endfor
+
+            assign option_position = option.position | times: 1.00
+
+            assign is_variant_image_option = false
+            if block_obj.settings.color_swatches_type == 'variant_image' and color_option_match_with_color_trigger and swatches_as_variant_image_already_shown == false
+              assign is_variant_image_option = true
+            endif
+          %}
+          <fieldset
+            class="product-form__controls{% if is_color_option %} product-form__controls--colors{% if is_variant_image_option %} product-form__controls--variant-image{% endif %}{% endif %}"
+            id="SingleOptionSelector-{{ forloop.index0 }}"
+            data-option-position="{{ option.position }}"
+            {% if is_variant_image_option -%}
+              data-is-variant-image-swatch="true"
+            {%- endif %}
+          >
+            <legend class="product-form__group-name body-small">
+              {{- option.name -}}
+              {% if is_color_option %}
+                <span id="ColorName-{{ section_id }}-{{name_option}}" class="body-small">
+                  {{- option.selected_value -}}
+                </span>
+              {% endif %}
+
+              {% comment %} render inventory info {% endcomment %}
+              {%- if block_obj.settings.type_inventory_info != 'none'
+                and option_position == product.options_with_values.size
+              -%}
+                <span
+                  id="PickerInventory-{{ section_id }}"
+                  class="product-form__inventory{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
+                  role="status"
+                >
+                  {%- if product.selected_or_first_available_variant.inventory_management == 'shopify' -%}
+                    {%- liquid
+                      assign inventory_quantity = product.selected_or_first_available_variant.inventory_quantity
+                      assign threshold_value = block_obj.settings.inventory_threshold
+
+                      assign status = 'in-stock'
+                      if inventory_quantity > 0 and inventory_quantity < threshold_value
+                        assign status = 'low-stock'
+                      elsif inventory_quantity == 0
+                        assign status = 'out-of-stock'
+                        if block_obj.settings.type_inventory_info != 'all'
+                          assign status = 'hidden'
+                        endif
+                      else
+                        assign status = 'in-stock'
+                        if block_obj.settings.type_inventory_info != 'all'
+                          assign status = 'hidden'
+                        endif
+                      endif
+                    -%}
+
+                    <span class="body-small product-form__inventory--{{ status }}">
+                      {%- if status == 'in-stock' -%}
+                        {%- if block_obj.settings.show_inventory_quantity -%}
+                          {{ 'products.product.inventory_in_stock_show_count' | t: quantity: inventory_quantity -}}
+                        {%- else -%}
+                          {{- 'products.product.inventory_in_stock' | t -}}
+                        {%- endif -%}
+                      {%- elsif status == 'low-stock' %}
+                        {%- if block_obj.settings.show_inventory_quantity -%}
+                          {{- 'products.product.inventory_low_stock_show_count' | t: quantity: inventory_quantity -}}
+                        {%- else -%}
+                          {{- 'products.product.inventory_low_stock' | t -}}
+                        {%- endif -%}
+                      {%- elsif status == 'out-of-stock' -%}
+                        {{- 'products.product.inventory_out_of_stock' | t -}}
+                      {%- endif -%}
+                    </span>
+                  {%- endif -%}
+                </span>
+              {% endif %}
+            </legend>
+            <div class="product-form__controls-group">
+              {% render 'product-variant-options',
+                product: product,
+                option: option,
+                section_obj: section_obj,
+                block_obj: block_obj,
+                has_color_swatch: is_color_option,
+                prevent_variant_image: swatches_as_variant_image_already_shown
+              %}
+
+              {% liquid
+                if color_option_match_with_color_trigger and swatches_as_variant_image_already_shown == false
+                  assign swatches_as_variant_image_already_shown = true
+                endif
+              %}
+            </div>
+          </fieldset>
+        {%- endfor -%}
+
+        <script type="application/json" data-all-variants-no-high>
+          {{ product.variants | json }}
+        </script>
+
+        <script type="application/json" data-selected-variant>
+          {{ product.selected_or_first_available_variant | json }}
+        </script>
+      </variant-radios>
+    {%- else -%}
+      <variant-selects
+        id="variant-picker-{{ section_id }}"
+        class="no-js-hidden"
+        data-section="{{ section_id }}"
+        data-url="{{ product.url }}"
+        data-is-high-variant-product="{{ is_high_variant_product }}"
+        data-update-url="{{ need_update_page_url }}"
+        data-variant-media-display="{{ section_obj.settings.variant_media_display | default: 'show_all' }}"
+      >
+        {%- for option in product.options_with_values -%}
+          {% liquid
+            assign is_color_option = false
+
+            # for metafields color
+            for value in option.values
+              if settings.enable_color_swatch and value.swatch.color != blank
+                assign is_color_option = true
+              endif
+            endfor
+
+            # for custom option color
+            assign color_trigger = settings.trigger_swatch | strip | newline_to_br | split: '<br />'
+            assign name_option = option.name | handle | strip
+            for item in color_trigger
+              assign item_temp = item | handle | strip
+              if settings.enable_color_swatch and name_option == item_temp
+                assign is_color_option = true
+              endif
+            endfor
+
+            # get color_value for selected color option
+            if is_color_option
+              assign color_value = blank
+              for value in option.values
+                if settings.enable_color_swatch and option.selected_value == value
+                  if value.swatch.image != blank
+                    assign init_color_value = value.name | handle | strip
+                    assign color_image = value.swatch.image | image_url: width: 60
+                    assign color_value = 'url(' | append: color_image | append: ') no-repeat center/cover'
+                  elsif value.swatch.color != blank
+                    assign init_color_value = value.name | handle | strip
+                    assign color_value = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+                  else
+                    assign init_color_value = value.name | handle | strip
+                    assign color_value = init_color_value | remove: '-'
+                  endif
+
+                  if settings.custom_colors != blank
+                    assign custom_colors_string = settings.custom_colors | strip
+                    assign custom_colors_obj = custom_colors_string | newline_to_br | split: '<br />'
+
+                    for obj in custom_colors_obj
+                      assign obj_strip = obj | strip
+                      assign obj_key = obj_strip | split: ':' | first
+                      assign obj_value = obj_strip | split: ':' | last
+                      assign obj_color_name = obj_key | handle | strip
+
+                      if init_color_value == obj_color_name
+                        assign obj_color_value = obj_value | strip
+                        if obj_color_value contains 'gradient'
+                          assign color_value = obj_color_value
+                        else
+                          assign color_value = obj_color_value | remove: '-'
+                        endif
+                        break
+                      endif
+                    endfor
+                  endif
+                endif
+              endfor
+            endif
+
+            assign has_color_swatch = false
+            if is_color_option and color_value != blank
+              assign has_color_swatch = true
+            endif
+          %}
+
+          <fieldset
+            class="product-form__controls product-form__controls--dropdown"
+            id="SingleOptionSelector-{{ forloop.index0 }}"
+            data-option-position="{{ option.position }}"
+          >
+            <variant-dropdown-select
+              class="dropdown-select"
+              form="{{ product_form_id }}"
+            >
+              <div
+                class="dropdown-select__current{% if has_color_swatch %} dropdown-select__current--with-color{% endif %} focus-inset"
+                role="button"
+                tabindex="0"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+                {% if has_color_swatch %}
+                  style="--swatch-color: {{ color_value }}; --radius: {{ settings.swatch_border_radius }}px;"
+                {% endif %}
+              >
+                <div>
+                  <span class="form-active-placeholder-text">
+                    {{- option.name -}}
+                  </span>
+                  <span class="form-text" data-dropdown-current-value>
+                    {{- option.selected_value }}
+                  </span>
+                </div>
+
+                {% render 'icon-caret' %}
+              </div>
+
+              <div class="dropdown-select__options" role="listbox" tabindex="-1">
+                <ul class="product-form__controls-group list-unstyled">
+                  {% render 'product-variant-options',
+                    product: product,
+                    option: option,
+                    section_obj: section_obj,
+                    block_obj: block_obj,
+                    has_color_swatch: has_color_swatch
+                  %}
+                </ul>
+              </div>
+
+              <input
+                id="HiddenInput-{{ section_id }}-{{ option.name }}-{{ forloop.index0 }}"
+                type="hidden"
+                name="{{ option.name }}"
+                value="{{ option.selected_value }}"
+                {% if is_color_option %}
+                  data-color-swatch="{{ color_value }}"
+                {% endif %}
+              >
+            </variant-dropdown-select>
+          </fieldset>
+        {%- endfor -%}
+
+        {% comment %} first 250 variants of product {% endcomment %}
+        <script type="application/json" data-all-variants-no-high>
+          {{ product.variants | json }}
+        </script>
+
+        {% comment %} selected variant of product {% endcomment %}
+        <script type="application/json" data-selected-variant>
+          {{ product.selected_or_first_available_variant | json }}
+        </script>
+      </variant-selects>
+    {%- endif -%}
+
+    {%- if is_high_variant_product == false -%}
+      <noscript class="product-form__noscript-wrapper-{{ section_id }}">
+        <fieldset class="product-form__controls {% if product.has_only_default_variant %} hidden{% endif %}">
+          <label for="Variants-{{ section_id }}" class="product-form__group-name">
+            {{- 'products.product.product_variants' | t -}}
+          </label>
+          <div class="product-form__controls-group">
+            <div class="select">
+              <select
+                name="id"
+                id="Variants-{{ section_id }}"
+                class="select__select"
+                form="{{ product_form_id }}"
+              >
+                {%- for variant in product.variants -%}
+                  <option
+                    {% if variant == product.selected_or_first_available_variant %}
+                      selected="selected"
+                    {% endif %}
+                    {% if variant.available == false %}
+                      disabled
+                    {% endif %}
+                    value="{{ variant.id }}"
+                  >
+                    {%- liquid
+                      echo variant.title
+                      if settings.currency_code_enabled
+                        echo variant.price | money_with_currency | strip_html | prepend: ' - '
+                      else
+                        echo variant.price | money | strip_html | prepend: ' - '
+                      endif
+                      if variant.available == false
+                        echo 'products.product.sold_out' | t | prepend: ' - '
+                      endif
+                      if variant.quantity_rule.increment > 1
+                        echo 'products.product.quantity.multiples_of' | t: quantity: variant.quantity_rule.increment | prepend: ' - '
+                      endif
+                      if variant.quantity_rule.min > 1
+                        echo 'products.product.quantity.minimum_of' | t: quantity: variant.quantity_rule.min | prepend: ' - '
+                      endif
+                      if variant.quantity_rule.max != null
+                        echo 'products.product.quantity.maximum_of' | t: quantity: variant.quantity_rule.max | prepend: ' - '
+                      endif
+                      assign cart_quantity = cart | item_count_for_variant: variant.id
+                      if cart_quantity > 0
+                        echo 'products.product.quantity.in_cart_html' | t: quantity: cart_quantity | prepend: ' - '
+                      endif
+                    -%}
+                  </option>
+                {%- endfor -%}
+              </select>
+              {% render 'icon-caret' %}
+            </div>
+          </div>
+        </fieldset>
+      </noscript>
+    {%- endif -%}
+  </div>
+{%- endunless -%}

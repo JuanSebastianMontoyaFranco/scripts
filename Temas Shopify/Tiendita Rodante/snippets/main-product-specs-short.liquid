@@ -1,0 +1,44 @@
+<div class="product-specs__short">
+  {% if product.metafields.custom.specs.value %}
+    <p class="product-specs__short--title">Specs</p>
+    {% assign specs = product.metafields.custom.specs.value %}
+
+    {% for spec in specs limit: specs_size %}
+      {% if spec[1] != blank %}
+        <div class="specs-list__item">
+          <h6>{{ spec[0] }}</h6>
+          <p>{{ spec[1] }}</p>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'specs_long' -%}
+          {% if specs.size > specs_size %}
+            <a
+              href="{{ specs_short_link }}"
+              class=" animated-link__underline--reverse specs-short__link"
+              aria-label="link to view all specifications"
+            >
+              {{ 'products.product.view_all' | t -}}
+            </a>
+          {% endif %}
+      {% endcase %}
+    {% endfor %}
+
+    {% if show_more %}
+      {% if specs.size > specs_size %}
+        <a
+          href="{{ specs_short_link }}"
+          class=" animated-link__underline--reverse specs-short__link"
+          aria-label="link to view all specifications"
+        >
+          {{ 'products.product.view_all' | t -}}
+        </a>
+      {% endif %}
+    {% endif %}
+  {% else %}
+    {% comment %}<li class="no-specs">No specifications added yet.</li>{% endcomment %}
+  {% endif %}
+</div>

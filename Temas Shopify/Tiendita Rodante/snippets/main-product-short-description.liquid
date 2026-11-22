@@ -1,0 +1,41 @@
+{% liquid
+  assign short_description = product.metafields.custom.short_description
+%}
+
+{% if short_description != blank %}
+  <div
+    class="main-product__short-desc"
+    {{ shopify_attributes }}
+  >
+    <p>
+      {{- short_description | escape -}}
+    </p>
+
+    {% if show_read_more == true %}
+      <a
+        href="{{ long_description_link }}"
+        class="short-desc__read-more-link animated-link__underline--reverse"
+        aria-label="link to read more"
+      >
+        {{- 'products.product.read_more' | t -}}
+      </a>
+    {% endif %}
+  </div>
+{% else %}
+  <div
+    class="main-product__short-desc"
+    {{ shopify_attributes }}
+  >
+    {{ 'products.product.description_default' | t }}
+
+    {% if show_read_more == true %}
+      <a
+        href="{{ long_description_link }}"
+        class="short-desc__read-more-link animated-link__underline--reverse"
+        aria-label="link to read more"
+      >
+        {{- 'products.product.read_more' | t -}}
+      </a>
+    {% endif %}
+  </div>
+{% endif %}

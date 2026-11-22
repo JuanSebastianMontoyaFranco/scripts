@@ -1,0 +1,53 @@
+{% for block in blocks %}
+  {% assign mega_menu_trigger = block.settings.mega_menu_trigger | handle | strip %}
+  {% if link.handle == mega_menu_trigger %}
+    {% if block.settings.show_promo_block_1
+      or block.settings.show_promo_block_2
+      or block.settings.show_promo_block_3
+      or block.settings.show_promo_block_4
+      or block.settings.show_promo_block_5
+    %}
+      <div class="container">
+        <div class="mega-menu__items">
+          <div class="mega-menu__promo-blocks">
+            {% if block.settings.show_promo_block_1 %}
+              {% render 'promo-block',
+                image: block.settings.image_1,
+                button_label: block.settings.button_label_1,
+                button_link: block.settings.button_link_1
+              %}
+            {% endif %}
+            {% if block.settings.show_promo_block_2 %}
+              {% render 'promo-block',
+                image: block.settings.image_2,
+                button_label: block.settings.button_label_2,
+                button_link: block.settings.button_link_2
+              %}
+            {% endif %}
+            {% if block.settings.show_promo_block_3 %}
+              {% render 'promo-block',
+                image: block.settings.image_3,
+                button_label: block.settings.button_label_3,
+                button_link: block.settings.button_link_3
+              %}
+            {% endif %}
+            {% if block.settings.show_promo_block_4 %}
+              {% render 'promo-block',
+                image: block.settings.image_4,
+                button_label: block.settings.button_label_4,
+                button_link: block.settings.button_link_4
+              %}
+            {% endif %}
+            {% if block.settings.show_promo_block_5 %}
+              {% render 'promo-block',
+                image: block.settings.image_5,
+                button_label: block.settings.button_label_5,
+                button_link: block.settings.button_link_5
+              %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+{% endfor %}

@@ -1,0 +1,111 @@
+.marquee-ticker_s_container {
+  height: calc(var(--marquee-ticker-size) * 1px + 20px);
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 3.6rem;
+}
+@media screen and (min-width: 990px) {
+  .marquee-ticker_s_container {
+    margin-bottom: 6.6rem;
+    margin-left: auto;
+  }
+}
+
+.marquee-container {
+  width: 100%;
+  position: relative;
+  display: flex;
+  gap: 4rem;
+}
+
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee-content {
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+}
+
+.marquee-tag {
+  display: flex;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@keyframes slideReverse {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+.marquee-animate {
+  animation: slide calc(10s * var(--marquee-ticker-speed)) infinite linear;
+}
+
+.marquee-container.pause:hover .marquee-tag {
+  animation-play-state: paused;
+}
+
+.marquee-ticker-new__container {
+  z-index: 5;
+}
+.marquee-ticker-new__container .marquee-container-new {
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+.marquee-ticker-new__container .marquee-content {
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+}
+.marquee-ticker-new__container .marquee-item__new {
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee linear infinite;
+  animation-duration: calc(10s * var(--marquee-ticker-speed));
+  animation-direction: var(--marquee-direction, normal);
+  font-size: calc(var(--marquee-ticker-size) * 0.8px);
+  user-select: none;
+  pointer-events: none;
+  color: rgb(var(--color-border-input));
+  display: flex;
+  width: max-content;
+  align-items: center;
+  font-family: var(--font-img-banner-ticker-font);
+  font-weight: var(--font-img-banner-ticker-weight);
+  font-style: var(--font-img-banner-ticker-style);
+  line-height: var(--font-body-line-height);
+}
+@media only screen and (min-width: 576px) {
+  .marquee-ticker-new__container .marquee-item__new {
+    font-size: calc(var(--marquee-ticker-size) * 0.9px);
+  }
+}
+@media only screen and (min-width: 1100px) {
+  .marquee-ticker-new__container .marquee-item__new {
+    font-size: calc(var(--marquee-ticker-size) * 1px);
+  }
+}
+.marquee-ticker-new__container .gap {
+  visibility: hidden;
+}

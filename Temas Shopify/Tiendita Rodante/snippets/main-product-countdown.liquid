@@ -1,0 +1,84 @@
+<script src="{{ 'countdown.js' | asset_url }}" defer="defer"></script>
+
+{% liquid
+  assign countdown_block_font = section_settings.countdown_block_font
+  assign date_picker = section_settings.date_picker
+  assign time_picker = section_settings.time_picker
+  assign completed_countdown = section_settings.completed_countdown
+  assign timezone = 'now' | date: '%Z'
+  assign timezone = timezone | divided_by: 100 | times: 3600 | plus: 1800
+
+  assign date_merge = section_settings.date_picker | append: '-' | append: section_settings.time_picker | append: ':00'
+  assign date_now = 'now' | date: '%s'
+  assign date_settings = date_merge | date: '%s'
+
+  assign distance = date_settings | minus: date_now
+
+  if distance > 0
+    assign days = distance | divided_by: 86400 | floor
+    assign hours = distance | modulo: 86400 | divided_by: 3600 | floor
+    assign minutes = distance | modulo: 3600 | divided_by: 60 | floor
+    assign seconds = distance | modulo: 60 | floor
+  else
+    assign days = 0
+    assign hours = 0
+    assign minutes = 0
+    assign seconds = 0
+  endif
+
+  assign days = days | prepend: '0' | slice: -2, 2
+  assign hours = hours | prepend: '0' | slice: -2, 2
+  assign minutes = minutes | prepend: '0' | slice: -2, 2
+  assign seconds = seconds | prepend: '0' | slice: -2, 2
+%}
+
+{% assign time_units = 'days,hours,minutes,seconds' | split: ',' %}
+{% assign time_values = days
+  | append: ','
+  | append: hours
+  | append: ','
+  | append: minutes
+  | append: ','
+  | append: seconds
+  | split: ','
+%}
+
+{% assign date_merge = section_settings.date_picker
+  | append: ' '
+  | append: section_settings.time_picker
+  | append: ':00'
+%}
+{% assign target_ts = date_merge | date: '%s' %}
+
+{%- if date_picker != blank -%}
+  <countdown-timer
+    class="countdown js-countdown js-countdown-{{ section_settings.id }}"
+    data-target-ts="{{ target_ts }}"
+    data-completed="{{ completed_countdown }}"
+    data-completed-text="{{ countdown_heading }}"
+  >
+    <div
+      class="
+        countdown__main {{ class_name }}
+        {% if with_bg %} countdown__section--with-bg {% endif %}
+        countdown__main--font-{{ countdown_block_font }}
+      "
+    >
+      {% render 'icon-timer' %}
+
+      {% for i in (0..3) %}
+        <div>
+          <p class="countdown__block countdown-block-font {{ countdown_block_font }}">
+            <span class="countdown_block_{{ time_units[i] }}">
+              {{ time_values[i] | prepend: '0' | slice: -2, 2 }}
+            </span>
+            <span class="countdown__block-word">
+              {{- 'general.countdown' | append: '.' | append: time_units[i] | t | slice: 0, 1 | capitalize -}}
+            </span>
+            <span class="countdown_block_{{ time_units[i] }}--separator"> : </span>
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  </countdown-timer>
+{%- endif -%}

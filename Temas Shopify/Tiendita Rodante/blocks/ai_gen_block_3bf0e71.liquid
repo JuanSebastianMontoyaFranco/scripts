@@ -1,0 +1,141 @@
+{% doc %}
+  @prompt
+    Create a new custom Shopify OS 2.0 section called "Payment Icons" for the footer. Requirements:
+    - An image_picker setting to select a single image containing all payment method icons
+    - A range slider setting for image width (e.g., 100px to 600px, default 300px)
+    - A select setting for alignment: left, center (default), right
+    - A range slider for top margin (0–80px)
+    - A range slider for bottom margin (0–80px)
+    - A checkbox setting to hide the section on mobile devices
+    - The image must be responsive, maintain aspect ratio, and use Shopify best practices: image_picker, image_url, image_tag
+    - Centered by default with a small, elegant appearance similar to premium Shopify store payment icons
+    - No JavaScript
+    - Fully compatible with the visual theme editor (OS 2.0)
+    - No hardcoded images; everything configurable from the Theme Editor
+{% enddoc %}
+{% style %}
+  .payment-icons-section {
+    width: 100%;
+    margin-top: {{ section.settings.top_margin }}px;
+    margin-bottom: {{ section.settings.bottom_margin }}px;
+    text-align: {{ section.settings.alignment }};
+  }
+
+  .payment-icons-section__wrapper {
+    display: inline-block;
+    max-width: 100%;
+  }
+
+  .payment-icons-section__image {
+    width: {{ section.settings.image_width }}px;
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+  }
+
+  {% if section.settings.hide_on_mobile %}
+    @media screen and (max-width: 749px) {
+      .payment-icons-section {
+        display: none;
+      }
+    }
+  {% endif %}
+{% endstyle %}
+
+<div class="payment-icons-section" {{ block.shopify_attributes }}>
+  {% if section.settings.payment_icons_image %}
+    <div class="payment-icons-section__wrapper">
+      {{
+        section.settings.payment_icons_image
+        | image_url: width: 1200
+        | image_tag: class: 'payment-icons-section__image', loading: 'lazy', widths: '200, 300, 400, 500, 600, 800, 1000, 1200'
+      }}
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Payment icons",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_icons_image",
+      "label": "Payment icons image"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 100,
+      "max": 600,
+      "step": 10,
+      "unit": "px",
+      "label": "Image width",
+      "default": 300
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "top_margin",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Top margin",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "bottom_margin",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom margin",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_mobile",
+      "label": "Hide on mobile",
+      "default": false
+    }
+  ],
+  "presets": [
+    {
+      "name": "Payment icons"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,65 @@
+<div
+  class="product__title__wrapper badges-type--{{ badges_type }}"
+>
+  {% if product_title %}
+    <{{ heading_tag | default: 'h2' }}
+      class="product__title"
+      id="ProductTitle-{{ section.id }}"
+      {{ shopify_attributes }}
+    >
+      {{ product_title | escape }}
+    </{{ heading_tag | default: 'h2' }}>
+  {% else %}
+    <{{ heading_tag | default: 'h2' }}
+      class="product__title"
+      id="ProductTitle-{{ section.id }}"
+      {{ shopify_attributes }}
+    >
+      {{ 'products.product.product_title_default' | t }}
+    </{{ heading_tag | default: 'h2' }}>
+  {% endif %}
+  {%- if product_available == false and badge_soldout_show and show_badges -%}
+    <span
+      class="badge badge--soldout color-{{ badges_color }}"
+      aria-hidden="true"
+    >
+      {{- 'products.product.sold_out' | t -}}
+    </span>
+  {%- elsif compare_at_price > product_price and product_available and badge_sale_show and show_badges -%}
+    <span
+      class="badge badge--sale color-{{ badges_color }}"
+      aria-hidden="true"
+    >
+      {% if badge_sale_type == 'sale' %}
+        {{- 'products.product.on_sale' | t -}}
+      {% else %}
+        {% comment %}{{- 'products.product.on_sale' | t -}}{% endcomment %}
+        <span>
+          {{ compare_at_price | minus: product_price | times: 100 | divided_by: compare_at_price -}}
+          %
+        </span>
+      {% endif %}
+    </span>
+  {% endif %}
+  {% if badge_custom_show and product_metafields.custom.badges != blank and show_badges %}
+    <div class="custom__badge--wrapper">
+      {% if product_metafields.custom.badges.list? %}
+        {% for badge in product_metafields.custom.badges.value %}
+          <span
+            class="badge badge--custom color-{{ badges_color }}"
+            aria-hidden="true"
+          >
+            {{ badge }}
+          </span>
+        {% endfor %}
+      {% else %}
+        <span
+          class="badge badge--custom color-{{ badges_color }}"
+          aria-hidden="true"
+        >
+          {{ product_metafields.custom.badges }}
+        </span>
+      {% endif %}
+    </div>
+  {%- endif -%}
+</div>

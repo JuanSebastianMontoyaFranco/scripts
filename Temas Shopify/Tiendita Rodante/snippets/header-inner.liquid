@@ -1,0 +1,1001 @@
+<div class="header__first-level">
+  <div class="header__first-level-wrapper container">
+    {%- if section.settings.enable_country_selector or section.settings.enable_language_selector -%}
+      <div class="header__localization-wrapper">
+        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+          <div class="header__localization">
+            <noscript>
+              {%- form 'localization', id: 'HeaderCountryFormNoScript', class: 'localization-form' -%}
+                <div class="localization-form__select">
+                  <h2
+                    class="visually-hidden"
+                    id="HeaderCountryLabelNoScript"
+                  >
+                    {{ 'localization.country_label' | t }}
+                  </h2>
+                  <select
+                    class="localization-selector link"
+                    name="country_code"
+                    aria-labelledby="HeaderCountryLabelNoScript"
+                  >
+                    {%- for country in localization.available_countries -%}
+                      <option
+                        value="{{ country.iso_code }}"
+                        {%- if country.iso_code == localization.country.iso_code %}
+                          selected
+                        {% endif %}
+                      >
+                        {{ country.name }} ({{ country.currency.iso_code }}
+                        {{ country.currency.symbol }})
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                  {% render 'icon-caret' %}
+                </div>
+
+                <div class="button_wrapper custom-hover">
+                  <button
+                    class="button button--secondary button--small focus-inset"
+                    data-button-text="{{ 'localization.update_country' | t }}"
+                  >
+                    <div class="button__content">
+                      <span
+                        class="button__label"
+                        data-label="{{- 'localization.update_country' | t | escape -}}"
+                      >
+                        {{ 'localization.update_country' | t }}
+                      </span>
+                    </div>
+                    <span class="button_circle"> </span>
+                  </button>
+                </div>
+              {%- endform -%}
+            </noscript>
+            <localization-form>
+              {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
+                <div class="no-js-hidden">
+                  <div class="disclosure">
+                    <button
+                      type="button"
+                      class="disclosure__button localization-selector focus-inset"
+                      aria-expanded="false"
+                      aria-controls="HeaderCountryList"
+                      aria-describedby="HeaderCountryLabel"
+                      tabindex="0"
+                    >
+                      <span class="currency-country">
+                        {%- if section.settings.show_country_flag -%}
+                          {{
+                            localization.country
+                            | image_url: width: 32
+                            | image_tag: loading: 'lazy', class: 'localization-country-flag'
+                          }}
+                        {%- endif -%}
+                        {{- localization.country.name }}
+                        {{ localization.country.currency.iso_code }}
+                        {{ localization.country.currency.symbol -}}
+                      </span>
+                      {% render 'icon-caret' %}
+                    </button>
+                    <div
+                      id="HeaderCountryList"
+                      role="list"
+                      class="disclosure__list color-background-1"
+                      hidden
+                    >
+                      <div class="disclosure__list-label extra-small-font">
+                        {{- 'localization.region_label' | t -}}
+                      </div>
+                      <ul class="disclosure__list-items list-unstyled">
+                        {%- for country in localization.available_countries -%}
+                          <li class="disclosure__item" tabindex="-1">
+                            <a
+                              class="disclosure__link focus-inset"
+                              href="#"
+                              {% if country.iso_code == localization.country.iso_code %}
+                                aria-current="true"
+                              {% endif %}
+                              aria-label="{{ country.name }}"
+                              data-value="{{ country.iso_code }}"
+                            >
+                              <span>
+                                <span class="small-font font-weight-bold">
+                                  {%- if section.settings.show_country_flag -%}
+                                    {{
+                                      country
+                                      | image_url: width: 32
+                                      | image_tag: loading: 'lazy', class: 'localization-country-flag'
+                                    }}
+                                  {%- endif -%}
+                                  {{- country.name }}
+                                  {% if country.iso_code == localization.country.iso_code %}
+                                    {% render 'icon-check' %}
+                                  {% endif -%}
+                                </span>
+                                <span class="localization-form__currency extra-small-font">
+                                  {{ country.currency.iso_code }}
+                                  {{ country.currency.symbol }}
+                                </span>
+                              </span>
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                    <div class="disclosure__overlay"></div>
+                  </div>
+                  <input
+                    type="hidden"
+                    name="country_code"
+                    value="{{ localization.country.iso_code }}"
+                  >
+                </div>
+              {%- endform -%}
+            </localization-form>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
+          <div class="header__localization header__localization--language">
+            <noscript>
+              {%- form 'localization', id: 'HeaderLanguageFormNoScript', class: 'localization-form' -%}
+                <div class="localization-form__select">
+                  <h2
+                    class="visually-hidden"
+                    id="HeaderLanguageLabelNoScript"
+                  >
+                    {{ 'localization.language_label' | t }}
+                  </h2>
+                  <select
+                    class="localization-selector link"
+                    name="locale_code"
+                    aria-labelledby="HeaderLanguageLabelNoScript"
+                  >
+                    {%- for language in localization.available_languages -%}
+                      <option
+                        value="{{ language.iso_code }}"
+                        lang="{{ language.iso_code }}"
+                        {%- if language.iso_code == localization.language.iso_code %}
+                          selected
+                        {% endif %}
+                      >
+                        {{ language.endonym_name | capitalize }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                  {% render 'icon-caret' %}
+                </div>
+
+                <div class="button_wrapper custom-hover">
+                  <button
+                    class="button button--secondary button--small focus-inset"
+                    data-button-text="{{ 'localization.update_language' | t }}"
+                  >
+                    <div class="button__content">
+                      <span
+                        class="button__label"
+                        data-label="{{- 'localization.update_language' | t | escape -}}"
+                      >
+                        {{ 'localization.update_language' | t }}
+                      </span>
+                    </div>
+                    <span class="button_circle"> </span>
+                  </button>
+                </div>
+              {%- endform -%}
+            </noscript>
+            <localization-form>
+              {%- form 'localization', id: 'HeaderLanguageForm', class: 'localization-form' -%}
+                <div class="no-js-hidden">
+                  <div class="disclosure">
+                    <button
+                      type="button"
+                      class="disclosure__button localization-selector focus-inset"
+                      aria-expanded="false"
+                      aria-controls="HeaderLanguageList"
+                      aria-describedby="HeaderLanguageLabel"
+                      tabindex="0"
+                    >
+                      <span class="value">
+                        {{ localization.language.endonym_name | capitalize }}
+                      </span>
+                      {% render 'icon-caret' -%}
+                    </button>
+                    <div
+                      id="HeaderLanguageList"
+                      role="list"
+                      class="disclosure__list color-background-1"
+                      hidden
+                    >
+                      <div class="disclosure__list-label extra-small-font">
+                        {{- 'localization.language_label' | t -}}
+                      </div>
+                      <ul class="disclosure__list-items list-unstyled">
+                        {%- for language in localization.available_languages -%}
+                          <li class="disclosure__item" tabindex="-1">
+                            <a
+                              class="disclosure__link focus-inset"
+                              href="#"
+                              hreflang="{{ language.iso_code }}"
+                              lang="{{ language.iso_code }}"
+                              {% if language.iso_code == localization.language.iso_code %}
+                                aria-current="true"
+                              {% endif %}
+                              aria-label="{{ language.endonym_name }}"
+                              data-value="{{ language.iso_code }}"
+                            >
+                              <span class="small-font font-weight-bold">
+                                {{ language.endonym_name | capitalize }}
+                                {% if language.iso_code == localization.language.iso_code %}
+                                  {% render 'icon-check' %}
+                                {% endif %}
+                              </span>
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                    <div class="disclosure__overlay"></div>
+                  </div>
+                  <input
+                    type="hidden"
+                    name="locale_code"
+                    value="{{ localization.language.iso_code }}"
+                  >
+                </div>
+              {%- endform -%}
+            </localization-form>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.menu_top != blank -%}
+      <nav class="header__inline-menu-top">
+        <ul class="list-menu list-menu--inline" role="list">
+          {%- for link in section.settings.menu_top.links -%}
+            {% liquid
+              assign mega_menu = false
+            %}
+
+            {% if section.blocks.size > 0 %}
+              {% for block in section.blocks %}
+                {% liquid
+                  assign mega_menu_trigger = block.settings.mega_menu_trigger | handle | strip
+
+                  if link.handle == mega_menu_trigger
+                    assign mega_menu = true
+                  endif
+                %}
+              {% endfor %}
+            {% endif %}
+            <li class="list-menu-item{% if link.current and link.url != '/' %} list-menu-item--active{% endif %}">
+              <a
+                href="{{ link.url }}"
+                class="menu-top-item list-menu__item extra-small-font focus-inset{% if link.current and link.url != '/' %} header__active-menu-item{% endif %}"
+                {% if link.current and link.url != '/' %}
+                  aria-current="page"
+                {% endif %}
+                aria-label="{{ link.title | escape }}"
+              >
+                <span title="{{ link.title | escape }}">
+                  {{ link.title | escape }}
+                </span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
+  </div>
+</div>
+<div class="header__second-level container">
+  <div class="header__left">
+    {%- if section.settings.menu != blank -%}
+      {% render 'header-drawer' %}
+    {%- endif -%}
+
+    {%- assign desktop_burger_menu_rendered = false -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'desktop_burger_menu'
+        and desktop_burger_menu_rendered == false
+        and block.settings.menu != blank
+      -%}
+        {%- assign desktop_burger_menu_rendered = true -%}
+        <div class="desktop-burger-menu">
+          <menu-drawer data-breakpoint="tablet">
+            <details class="menu-drawer-container">
+              <summary
+                class="header__icon header__icon--menu header__icon--summary link link--text focus-inset"
+                aria-label="{{ 'sections.header.menu' | t }}"
+              >
+                <span>
+                  {% render 'icon-menu' %}
+                  {% render 'icon-close-mobile-menu' %}
+                </span>
+              </summary>
+              <div
+                id="desktop-burger-menu-{{ block.id }}"
+                class="menu-drawer motion-reduce color-{{ block.settings.color_scheme }}"
+                tabindex="-1"
+              >
+                <div class="menu-drawer__inner-container">
+                  <button
+                    class="menu-drawer__close-button button--unstyled focus-inset"
+                    type="button"
+                    aria-label="{{ 'accessibility.close' | t }}"
+                  >
+                    {% render 'icon-close-mobile-menu' %}
+                  </button>
+                  <div class="menu-drawer__navigation-container">
+                    {%- render 'desktop-burger-menu-links',
+                      menu: block.settings.menu,
+                      enable_top_level_link_navigation: block.settings.enable_top_level_link_navigation
+                    -%}
+
+                    <div class="menu-drawer__bottom">
+                      {%- if block.settings.bottom_text != blank -%}
+                        <div class="menu-drawer__bottom-text">
+                          {{ block.settings.bottom_text }}
+                        </div>
+                      {%- endif -%}
+
+                      {%- if block.settings.enable_social_media_links -%}
+                        <ul class="list list-social list-unstyled" role="list">
+                          {%- if settings.social_twitter_link != blank -%}
+                            <li class="list-social__item">
+                              <a
+                                href="{{ settings.social_twitter_link }}"
+                                {% if settings.new_tab %}
+                                  target="_blank"
+                                {% endif %}
+                                class="link link--text list-social__link"
+                                aria-describedby="a11y-external-message"
+                              >
+                                {%- render 'icon-twitter' -%}
+                                <span class="visually-hidden">
+                                  {{- 'general.social.links.twitter' | t -}}
+                                </span>
+                              </a>
+                            </li>
+                          {%- endif -%}
+                          {%- if settings.social_facebook_link != blank -%}
+                            <li class="list-social__item">
+                              <a
+                                href="{{ settings.social_facebook_link }}"
+                                {% if settings.new_tab %}
+                                  target="_blank"
+                                {% endif %}
+                                class="link link--text list-social__link"
+                                aria-describedby="a11y-external-message"
+                              >
+                                {%- render 'icon-facebook' -%}
+                                <span class="visually-hidden">
+                                  {{- 'general.social.links.facebook' | t -}}
+                                </span>
+                              </a>
+                            </li>
+                          {%- endif -%}
+                          {%- if settings.social_pinterest_link != blank -%}
+                            <li class="list-social__item">
+                              <a
+                                href="{{ settings.social_pinterest_link }}"
+                                {% if settings.new_tab %}
+                                  target="_blank"
+                                {% endif %}
+                                class="link link--text list-social__link"
+                                aria-describedby="a11y-external-message"
+                              >
+                                {%- render 'icon-pinterest' -%}
+                                <span class="visually-hidden">
+                                  {{- 'general.social.links.pinterest' | t -}}
+                                </span>
+                              </a>
+                            </li>
+                          {%- endif -%}
+                          {%- if settings.social_instagram_link != blank -%}
+                            <li class="list-social__item">
+                              <a
+                                href="{{ settings.social_instagram_link }}"
+                                {% if settings.new_tab %}
+                                  target="_blank"
+                                {% endif %}
+                                class="link link--text list-social__link"
+                                aria-describedby="a11y-external-message"
+                              >
+                                {%- render 'icon-instagram' -%}
+                                <span class="visually-hidden">
+                                  {{- 'general.social.links.instagram' | t -}}
+                                </span>
+                              </a>
+                            </li>
+                          {%- endif -%}
+                          {%- if settings.social_tiktok_link != blank -%}
+                            <li class="list-social__item">
+                              <a
+                                href="{{ settings.social_tiktok_link }}"
+                                {% if settings.new_tab %}
+                                  target="_blank"
+                                {% endif %}
+                                class="link link--text list-social__link"
+                                aria-describedby="a11y-external-message"
+                              >
+                                {%- render 'icon-tiktok' -%}
+                                <span class="visually-hidden">
+                                  {{- 'general.social.links.tiktok' | t -}}
+                                </span>
+                              </a>
+                            </li>
+                          {%- endif -%}
+                          {%- if settings.social_tumblr_link != blank -%}
+                            <li class="list-social__item">
+                              <a
+                                href="{{ settings.social_tumblr_link }}"
+                                {% if settings.new_tab %}
+                                  target="_blank"
+                                {% endif %}
+                                class="link link--text list-social__link"
+                                aria-describedby="a11y-external-message"
+                              >
+                                {%- render 'icon-tumblr' -%}
+                                <span class="visually-hidden">
+                                  {{- 'general.social.links.tumblr' | t -}}
+                                </span>
+                              </a>
+                            </li>
+                          {%- endif -%}
+                          {%- if settings.social_snapchat_link != blank -%}
+                            <li class="list-social__item">
+                              <a
+                                href="{{ settings.social_snapchat_link }}"
+                                {% if settings.new_tab %}
+                                  target="_blank"
+                                {% endif %}
+                                class="link link--text list-social__link"
+                                aria-describedby="a11y-external-message"
+                              >
+                                {%- render 'icon-snapchat' -%}
+                                <span class="visually-hidden">
+                                  {{- 'general.social.links.snapchat' | t -}}
+                                </span>
+                              </a>
+                            </li>
+                          {%- endif -%}
+                          {%- if settings.social_youtube_link != blank -%}
+                            <li class="list-social__item">
+                              <a
+                                href="{{ settings.social_youtube_link }}"
+                                {% if settings.new_tab %}
+                                  target="_blank"
+                                {% endif %}
+                                class="link link--text list-social__link"
+                                aria-describedby="a11y-external-message"
+                              >
+                                {%- render 'icon-youtube' -%}
+                                <span class="visually-hidden">
+                                  {{- 'general.social.links.youtube' | t -}}
+                                </span>
+                              </a>
+                            </li>
+                          {%- endif -%}
+                          {%- if settings.social_vimeo_link != blank -%}
+                            <li class="list-social__item">
+                              <a
+                                href="{{ settings.social_vimeo_link }}"
+                                {% if settings.new_tab %}
+                                  target="_blank"
+                                {% endif %}
+                                class="link link--text list-social__link"
+                                aria-describedby="a11y-external-message"
+                              >
+                                {%- render 'icon-vimeo' -%}
+                                <span class="visually-hidden">
+                                  {{- 'general.social.links.vimeo' | t -}}
+                                </span>
+                              </a>
+                            </li>
+                          {%- endif -%}
+                          {%- if settings.social_linkedin_link != blank -%}
+                            <li class="list-social__item">
+                              <a
+                                href="{{ settings.social_linkedin_link }}"
+                                {% if settings.new_tab %}
+                                  target="_blank"
+                                {% endif %}
+                                class="link link--text list-social__link"
+                                aria-describedby="a11y-external-message"
+                              >
+                                {%- render 'icon-linkedin' -%}
+                                <span class="visually-hidden">
+                                  {{- 'general.social.links.linkedin' | t -}}
+                                </span>
+                              </a>
+                            </li>
+                          {%- endif -%}
+                        </ul>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </details>
+          </menu-drawer>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if settings.enable_aside_menu and section.settings.header_type != 'left-logo-second' -%}
+      <button
+        class="header__offcanvas-toggle aside-menu__toggle aside-menu__toggle--open-btn button--unstyled focus-inset js-aside-menu-toggle"
+        aria-label="{{ 'sections.header.aside_menu' | t }}"
+      >
+        {% render 'icon-menu' %}
+        {% comment %}{% render 'icon-close-mobile-menu' %}{% endcomment %}
+      </button>
+      {%- if settings.enable_aside_menu -%}
+        {%- render 'aside-menu' -%}
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if section.settings.header_type == 'left-logo' or section.settings.header_type == 'left-logo-second' -%}
+      {% render 'header-logo', header_type: section.settings.header_type %}
+    {%- endif -%}
+
+    {%- if section.settings.menu != blank -%}
+      <nav class="header__inline-menu">
+        {%- if settings.enable_aside_menu and section.settings.header_type == 'left-logo-second' -%}
+          <button
+            class="header__offcanvas-toggle aside-menu__toggle aside-menu__toggle--open-btn button--unstyled focus-inset js-aside-menu-toggle"
+            aria-label="{{ 'sections.header.aside_menu' | t }}"
+          >
+            {% render 'icon-menu' %}
+            {% render 'icon-close-mobile-menu' %}
+          </button>
+          {%- if settings.enable_aside_menu -%}
+            {%- render 'aside-menu' -%}
+          {%- endif -%}
+        {%- endif -%}
+        <ul class="list-menu list-menu--inline" role="list">
+          {%- for link in section.settings.menu.links -%}
+            {% liquid
+              assign mega_menu = false
+              assign simple_mega_menu = false
+            %}
+
+            {% if section.blocks.size > 0 %}
+              {% for block in section.blocks %}
+                {% liquid
+                  assign mega_menu_trigger = block.settings.mega_menu_trigger | handle | strip
+                  assign simple_mega_menu_trigger = block.settings.simple_mega_menu_trigger | handle | strip
+
+                  if link.handle == mega_menu_trigger
+                    assign mega_menu = true
+                  elsif link.handle == simple_mega_menu_trigger
+                    assign simple_mega_menu = true
+                  endif
+                %}
+              {% endfor %}
+            {% endif %}
+
+            {%- if mega_menu -%}
+              <li
+                class="list-menu-item list-menu--megamenu{% if link.current and link.url != '/' %} list-menu-item--active{% endif %}"
+                {{ shopify_attributes }}
+              >
+                <a
+                  href="{{ link.url }}"
+                  class="header__menu-item list-menu__item link focus-inset{% if link.current and link.url != '/' %} header__active-menu-item{% endif %}"
+                  {% if link.current and link.url != '/' %}
+                    aria-current="page"
+                  {% endif %}
+                  aria-label="{{ link.title | escape }}"
+                >
+                  <span title="{{ link.title | escape }}">
+                    {{ link.title | escape }}
+                  </span>
+                </a>
+                <div class="header__mega-menu mega-menu color-background-1">
+                  {% render 'mega-menu', link: link, blocks: section.blocks %}
+                </div>
+              </li>
+            {%- elsif link.links != blank -%}
+              <li
+                class="list-menu-item list-menu--submenu{% if link.current and link.url != '/' %} list-menu-item--active{% endif %}"
+                {{ shopify_attributes }}
+              >
+                <a
+                  href="{{ link.url }}"
+                  class="header__menu-item list-menu__item link focus-inset{% if link.current and link.url != '/' %} header__active-menu-item{% endif %}"
+                  {% if link.current and link.url != '/' %}
+                    aria-current="page"
+                  {% endif %}
+                  aria-label="{{ link.title | escape }}"
+                >
+                  <span title="{{ link.title | escape }}">
+                    {{ link.title | escape }}
+                  </span>
+                  {% render 'icon-caret' %}
+                </a>
+                {% render 'submenu', link: link, simple_mega_menu: simple_mega_menu %}
+              </li>
+            {%- else -%}
+              <li class="list-menu-item{% if link.current and link.url != '/' %} list-menu-item--active{% endif %}">
+                <a
+                  href="{{ link.url }}"
+                  class="header__menu-item list-menu__item link focus-inset{% if link.current and link.url != '/' %} header__active-menu-item{% endif %}"
+                  {% if link.current and link.url != '/' %}
+                    aria-current="page"
+                  {% endif %}
+                  aria-label="{{ link.title | escape }}"
+                >
+                  <span title="{{ link.title | escape }}">
+                    {{ link.title | escape }}
+                  </span>
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+          <li id="blob"></li>
+        </ul>
+        {% if section.settings.header_type == 'left-logo-second' and section.settings.enable_search %}
+          {% if request.page_type != 'search' %}
+            <div class="header__search">
+              <div
+                class="header__icon header__icon--search header__icon--summary focus-inset search-open-btn"
+                aria-haspopup="dialog"
+                aria-label="Open search"
+                role="button"
+              >
+                {% render 'icon-search' %}
+                <div
+                  class="header__search-mobile-close modal-close-button"
+                  aria-label="Close search"
+                >
+                  {%- render 'icon-close' -%}
+                </div>
+              </div>
+              <div
+                class="header__search-inner search color-background-1"
+                role="dialog"
+                aria-modal="true"
+                aria-label="{{ 'general.search.search' | t }}"
+              >
+                <div class="search__content">
+                  <div class="search__main">
+                    {%- if settings.predictive_search_enabled -%}
+                      <predictive-search
+                        class="search-modal__form"
+                        data-loading-text="{{ 'accessibility.loading' | t }}"
+                      >
+                    {%- endif -%}
+                    <div class="search__container container">
+                      <form
+                        action="{{ routes.search_url }}"
+                        method="get"
+                        role="search"
+                        class="search search__form"
+                      >
+                        <label class="field" for="search-input-header">
+                          <button
+                            class="search__button button focus-inset"
+                            aria-label="{{ 'general.search.search' | t }}"
+                          >
+                            {% render 'icon-search' %}
+                          </button>
+                          <input
+                            id="search-input-header"
+                            dir="ltr"
+                            class="search__input field__input focus-inset"
+                            id="Search-In-Modal-1"
+                            type="search"
+                            name="q"
+                            value="{{ search.terms | escape }}"
+                            placeholder="{{ 'general.search.placeholder' | t }}"
+                            {%- if settings.predictive_search_enabled -%}
+                              role="combobox"
+                              aria-expanded="false"
+                              aria-owns="predictive-search-results-list"
+                              aria-controls="predictive-search-results-list"
+                              aria-haspopup="listbox"
+                              aria-autocomplete="list"
+                              autocorrect="off"
+                              autocomplete="off"
+                              autocapitalize="off"
+                              spellcheck="false"
+                            {%- endif -%}
+                            tabindex="0"
+                          >
+                          <label
+                            class="visually-hidden"
+                            for="Search-In-Modal-1"
+                          >
+                            {{- 'general.search.search' | t -}}
+                          </label>
+                          <input
+                            type="hidden"
+                            name="options[prefix]"
+                            value="last"
+                          >
+                          <div class="button_wrapper custom-hover">
+                            <button
+                              type="submit"
+                              class="button button--primary focus-inset"
+                              data-button-text="{{ 'general.search.search' | t }}"
+                              tabindex="0"
+                            >
+                              <div class="button__content">
+                                <span
+                                  class="button__label"
+                                  data-label="{{- 'general.search.search' | t | escape -}}"
+                                >
+                                  {{- 'general.search.search' | t -}}
+                                </span>
+                              </div>
+                              <span class="button_circle"> </span>
+                            </button>
+                          </div>
+                        </label>
+                        {%- if settings.predictive_search_enabled -%}
+                          <div
+                            class="predictive-search predictive-search--header"
+                            tabindex="-1"
+                            data-predictive-search
+                          >
+                            <div class="predictive-search__loading-state">
+                              {% render 'icon-spinner' %}
+                            </div>
+                          </div>
+
+                          <span
+                            class="predictive-search-status visually-hidden"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                        {%- endif -%}
+                      </form>
+                    </div>
+                    {%- if settings.predictive_search_enabled -%}
+                      </predictive-search>
+                    {%- endif -%}
+                    {% render 'search-modal', blocks: section.blocks %}
+                  </div>
+
+                  <span
+                    class="skip-to-close-button visually-hidden focus-inset"
+                    aria-label="{{- 'accessibility.skip_to_close' | t -}}"
+                    tabindex="0"
+                  >
+                    {{- 'accessibility.skip_to_close' | t -}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          {%- else -%}
+            <div class="header__search">
+              <a
+                href="{{ routes.search_url }}"
+                class="header__icon header__icon--search   header__icon--summary search-open-btn focus-inset"
+                title="{{ 'general.search.search' | t }}"
+                aria-label="{{ 'general.search.search' | t }}"
+              >
+                {% render 'icon-search' %}
+              </a>
+            </div>
+          {%- endif -%}
+          <noscript>
+            <div class="header__search">
+              <a
+                href="{{ routes.search_url }}"
+                class="header__icon header__icon--search link--text  header__icon--summary search-open-btn focus-inset"
+                title="{{ 'general.search.search' | t }}"
+                aria-label="{{ 'general.search.search' | t }}"
+              >
+                {% render 'icon-search' %}
+              </a>
+            </div>
+          </noscript>
+        {% endif %}
+      </nav>
+      <div class="header__submenu__overlay color-background-3"></div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.header_type == 'center-logo' -%}
+    {% render 'header-logo', header_type: section.settings.header_type %}
+  {%- endif -%}
+
+  <div class="header__icons">
+    <div class="header__icons-wrapper">
+      <div class="{% if section.settings.header_type == 'left-logo-second' %}header__search-hide-desktop{% endif %}">
+        {%- if section.settings.enable_search -%}
+          {% if request.page_type != 'search' %}
+            <div class="header__search">
+              <div
+                class="header__icon header__icon--search link--text header__icon--summary focus-inset modal__toggle search-open-btn"
+                aria-haspopup="dialog"
+                role="button"
+                aria-label="Open search"
+              >
+                {% render 'icon-search' %}
+                <div
+                  class="header__search-mobile-close modal-close-button"
+                  aria-label="Close search"
+                >
+                  {%- render 'icon-close' -%}
+                </div>
+              </div>
+              <div
+                class="header__search-inner search color-background-1"
+                role="dialog"
+                aria-modal="true"
+                aria-label="{{ 'general.search.search' | t }}"
+              >
+                <div class="search__content">
+                  <div class="search__main">
+                    {%- if settings.predictive_search_enabled -%}
+                      <predictive-search
+                        class="search-modal__form"
+                        data-loading-text="{{ 'accessibility.loading' | t }}"
+                      >
+                    {%- endif -%}
+                    <div class="search__container container">
+                      <form
+                        action="{{ routes.search_url }}"
+                        method="get"
+                        role="search"
+                        class="search search__form"
+                      >
+                        <label class="field" for="search-input-header">
+                          <button
+                            class="search__button button focus-inset"
+                            aria-label="{{ 'general.search.search' | t }}"
+                          >
+                            {% render 'icon-search' %}
+                          </button>
+                          <input
+                            dir="ltr"
+                            id="search-input-header"
+                            class="search__input field__input focus-inset"
+                            id="Search-In-Modal-1"
+                            type="search"
+                            name="q"
+                            value="{{ search.terms | escape }}"
+                            placeholder="{{ 'general.search.placeholder' | t }}"
+                            {%- if settings.predictive_search_enabled -%}
+                              role="combobox"
+                              aria-expanded="false"
+                              aria-owns="predictive-search-results-list"
+                              aria-controls="predictive-search-results-list"
+                              aria-haspopup="listbox"
+                              aria-autocomplete="list"
+                              autocorrect="off"
+                              autocomplete="off"
+                              autocapitalize="off"
+                              spellcheck="false"
+                            {%- endif -%}
+                            tabindex="0"
+                          >
+                          <label
+                            class="visually-hidden"
+                            for="Search-In-Modal-1"
+                          >
+                            {{- 'general.search.search' | t -}}
+                          </label>
+                          <input
+                            type="hidden"
+                            name="options[prefix]"
+                            value="last"
+                          >
+                          <div class="button_wrapper custom-hover">
+                            <button
+                              type="submit"
+                              class="button button--primary focus-inset"
+                              data-button-text="{{ 'general.search.search' | t }}"
+                              tabindex="0"
+                            >
+                              <div class="button__content">
+                                <span
+                                  class="button__label"
+                                  data-label="{{- 'general.search.search' | t | escape -}}"
+                                >
+                                  {{- 'general.search.search' | t -}}
+                                </span>
+                              </div>
+                              <span class="button_circle"> </span>
+                            </button>
+                          </div>
+                        </label>
+
+                        {%- if settings.predictive_search_enabled -%}
+                          <div
+                            class="predictive-search predictive-search--header"
+                            tabindex="-1"
+                            data-predictive-search
+                          >
+                            <div class="predictive-search__loading-state">
+                              {% render 'icon-spinner' %}
+                            </div>
+                          </div>
+
+                          <span
+                            class="predictive-search-status visually-hidden"
+                            role="status"
+                            aria-hidden="true"
+                          ></span>
+                        {%- endif -%}
+                      </form>
+                    </div>
+                    {%- if settings.predictive_search_enabled -%}
+                      </predictive-search>
+                    {%- endif -%}
+                    {% render 'search-modal', blocks: section.blocks %}
+                  </div>
+
+                  <span
+                    class="skip-to-close-button visually-hidden focus-inset"
+                    aria-label="{{- 'accessibility.skip_to_close' | t -}}"
+                    tabindex="0"
+                  >
+                    {{- 'accessibility.skip_to_close' | t -}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          {%- else -%}
+            <div class="header__search">
+              <a
+                href="{{ routes.search_url }}"
+                class="header__icon header__icon--search link--text  header__icon--summary search-open-btn focus-inset"
+                title="{{ 'general.search.search' | t }}"
+                aria-label="{{ 'general.search.search' | t }}"
+              >
+                {% render 'icon-search' %}
+              </a>
+            </div>
+          {%- endif -%}
+          <noscript>
+            <div class="header__search">
+              <a
+                href="{{ routes.search_url }}"
+                class="header__icon header__icon--search link--text  header__icon--summary search-open-btn focus-inset"
+                title="{{ 'general.search.search' | t }}"
+                aria-label="{{ 'general.search.search' | t }}"
+              >
+                {% render 'icon-search' %}
+              </a>
+            </div>
+          </noscript>
+        {%- endif -%}
+      </div>
+
+      {% render 'header-account' %}
+
+      <div class="{% if request.page_type != 'cart' %}header__cart {% else %} header__cart--page{% endif %}">
+        <a
+          href="{{ routes.cart_url }}"
+          class=" header__icon header__icon--cart {% if cart.item_count > 0  %}header__cart-has-items{% endif %} link focus-inset"
+          id="cart-icon-bubble"
+          aria-label="{{ 'general.cart.view' | t }}"
+        >
+          {% render 'icon-cart' %}
+          <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
+          {%- if cart.item_count > 0 -%}
+            <div class="cart-count-bubble {% if cart.item_count >= 100 %} cart-count-bubble-very-long{% endif %}">
+              {%- if cart.item_count < 100 -%}
+                <span aria-hidden="true">{{ cart.item_count }}</span>
+              {%- else -%}
+                <span
+                  class="cart-count-bubble-very-long-number"
+                  aria-hidden="true"
+                  >99+</span
+                >
+              {%- endif -%}
+              <span class="visually-hidden">
+                {{- 'sections.header.cart_count' | t: count: cart.item_count -}}
+              </span>
+            </div>
+          {%- endif -%}
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

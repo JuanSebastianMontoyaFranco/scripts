@@ -1,0 +1,32 @@
+<div
+  class="product-specs__long"
+  id="specs_long"
+  role="tabpanel"
+  aria-labelledby="2"
+>
+  {% render 'section-header',
+    section_heading: block.settings.title,
+    section_heading_size: block.settings.heading_size,
+    section_subheading: block.settings.subtitle,
+    description: '',
+    content_alignment: 'left',
+    pulse: block.settings.pulse_animation_text
+  %}
+
+  <div class="specs-list">
+    {% if product.metafields.custom.specs.value %}
+      {% assign specs = product.metafields.custom.specs.value %}
+
+      {% for spec in specs %}
+        {% if spec[1] != blank %}
+          <div class="specs-list__item">
+            <h5>{{ spec[0] }}</h5>
+            <p>{{ spec[1] }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <div>No specifications added yet.</div>
+    {% endif %}
+  </div>
+</div>
