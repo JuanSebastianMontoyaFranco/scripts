@@ -40,7 +40,7 @@ class QuickView {
         const productInfo = html.querySelector("product-info");
         const colorScheme = productInfo.dataset.colorScheme;
         this.modal.appendChild(this.modalContent);
-        this.modal.setWidth("400px");
+        this.modal.setWidth("360px");
 
         const sectionWrapper = this.modal.modal.querySelector('#MainProduct-quick-view__content');
 

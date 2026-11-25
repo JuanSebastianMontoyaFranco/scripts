@@ -49,15 +49,21 @@
     <div class="m-main-product--wrapper m:display-flex">
       <product-recently-viewed data-product-id="{{ product.id }}" class="m:hidden"></product-recently-viewed>
       <div class="m-product-quickview--media m:w-full md:m:w-1/2">
-        <span class="krika-quickview-sale">Oferta</span>
-        {% render 'product-media',
-          product: product,
-          section: section,
-          media_layout: 'layout-4',
-          show_nav: true,
-          show_thumbnails: false,
-          context: 'quick-view'
-        %}
+        <krika-preview-gallery class="krika-preview-gallery" aria-label="Imágenes de {{ product.title | escape }}">
+          <div class="krika-preview-track" tabindex="0" role="region" aria-label="Fotos del producto">
+            {% for image in product.images %}
+              <div class="krika-preview-slide">
+                {{ image | image_url: width: 960 | image_tag: loading: 'eager', widths: '320, 480, 640, 960', sizes: '(max-width: 767px) 85vw, 320px', class: 'krika-preview-image' }}
+              </div>
+            {% else %}
+              <div class="krika-preview-slide">{{ 'product-1' | placeholder_svg_tag }}</div>
+            {% endfor %}
+          </div>
+          {% if product.images.size > 1 %}
+            <button type="button" class="krika-preview-prev" aria-label="Foto anterior"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+            <button type="button" class="krika-preview-next" aria-label="Foto siguiente"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+          {% endif %}
+        </krika-preview-gallery>
       </div>
       <div class="m-product-quickview--info m-scrollbar--vertical m:display-flex m:w-full md:m:w-1/2">
         <div class="m-product-info--wrapper m:w-full">
@@ -80,10 +86,21 @@
               price_text_size: 'm:text-xl md:m:text-2xl'
             %}
           </div>
+          <div class="main-product__block main-product__block-discount">
+            <span class="krika-quickview-sale">¡En oferta!</span>
+          </div>
           <div class="main-product__block main-product__block-description">
-            <a class="m-product-quickview--viewmore m:block" href="{{ product.url }}">
-              Ver más
-            </a>
+            {% if product.description != blank %}
+              <details class="krika-preview-description">
+                <summary class="m-product-quickview--viewmore">
+                  <span class="krika-description-more">Ver más</span>
+                  <span class="krika-description-less">Ver menos</span>
+                </summary>
+                <div class="krika-preview-description-content rte">
+                  {{ product.description }}
+                </div>
+              </details>
+            {% endif %}
           </div>
 
           <div class="main-product__block main-product__block-inventory_status">
@@ -197,6 +214,41 @@
   {%- if product.options_with_values.size > 0 -%}
     <script src="{{ 'variant-picker.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
+
+
+  <script>
+    if (!customElements.get('krika-preview-gallery')) {
+      customElements.define('krika-preview-gallery', class extends HTMLElement {
+        connectedCallback() {
+          if (this.ready) return;
+          this.ready = true;
+          const track = this.querySelector('.krika-preview-track');
+          const prev = this.querySelector('.krika-preview-prev');
+          const next = this.querySelector('.krika-preview-next');
+          if (!prev || !next) return;
+          const update = () => {
+            prev.disabled = track.scrollLeft <= 1;
+            next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 1;
+          };
+          const move = (direction) => {
+            track.scrollBy({ left: direction * track.clientWidth, behavior: 'auto' });
+          };
+          prev.addEventListener('click', () => move(-1));
+          next.addEventListener('click', () => move(1));
+          track.addEventListener('scroll', update, { passive: true });
+          track.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+              event.preventDefault(); move(event.key === 'ArrowLeft' ? -1 : 1);
+            }
+          });
+          this.observer = new ResizeObserver(update);
+          this.observer.observe(track);
+          update();
+        }
+        disconnectedCallback() { this.observer?.disconnect(); }
+      });
+    }
+  </script>
 
   <script src="{{ 'product-info.js' | asset_url }}" defer="defer"></script>
 </div>

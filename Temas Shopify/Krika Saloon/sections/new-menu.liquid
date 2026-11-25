@@ -301,7 +301,7 @@
               <div class="krika-mega-cats krika-mega-cats--kits">
                 <div class="krika-mega-col">
                   <h5>MARCAS</h5>
-                  <ul data-kits-brand-list>
+                  <ul data-kits-brand-list data-brand-collection="kits">
                     <li><span class="krika-kits-loading">Cargando marcas...</span></li>
                   </ul>
                   <b><a href="/collections/kits" class="krika-mega-vermas">Ver Todos los Kits</a></b>
@@ -309,6 +309,32 @@
               </div>
             </div>
             <div class="krika-mega-products" data-collection="kits"><p class="krika-mega-loading">Cargando...</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="krika-mega-item" data-menu="descuentos">
+      <a href="/collections/sale" class="krika-mega-link">Descuentos
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">DESCUENTOS</h4>
+              <div class="krika-mega-cats krika-mega-cats--kits">
+                <div class="krika-mega-col">
+                  <h5>EXPLORA LAS OFERTAS</h5>
+                  <ul>
+                    <li><a href="/collections/sale?sort_by=best-selling">Más vendidos</a></li>
+                    <li><a href="/collections/sale?sort_by=price-ascending">Menor precio</a></li>
+                    <li><a href="/collections/sale?sort_by=created-descending">Novedades</a></li>
+                  </ul>
+                  <b><a href="/collections/sale" class="krika-mega-vermas">Ver Todos los Descuentos</a></b>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="sale"><p class="krika-mega-loading">Cargando...</p></div>
           </div>
         </div>
       </div>
@@ -339,6 +365,7 @@
         <button class="kr-cat" data-sub="corporal">Corporal<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
         <button class="kr-cat" data-sub="unas">Uñas<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
         <button class="kr-cat" data-sub="kits">Kits<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="kr-cat" data-sub="descuentos">Descuentos<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
       </div>
       <div class="kr-dv-foot">
         <p>Mi cuenta</p>
@@ -566,17 +593,17 @@
   .krika-mega-nav .krika-mega-products {
     min-width: 0;
   }
-  .krika-mega-nav [data-menu="kits"] [data-kits-brand-list] {
+  .krika-mega-nav :is([data-menu="kits"], [data-menu="descuentos"]) [data-kits-brand-list] {
     columns: auto;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px 18px;
   }
-  .krika-mega-nav [data-menu="kits"] [data-kits-brand-list] li {
+  .krika-mega-nav :is([data-menu="kits"], [data-menu="descuentos"]) [data-kits-brand-list] li {
     margin: 0;
     overflow-wrap: anywhere;
   }
-  .krika-mega-nav [data-menu="kits"] [data-kits-brand-list] a {
+  .krika-mega-nav :is([data-menu="kits"], [data-menu="descuentos"]) [data-kits-brand-list] a {
     display: block;
     font-size: 12px;
     line-height: 1.5;
@@ -883,16 +910,17 @@
       scope.querySelectorAll('a[href*="filter.p.vendor"]').forEach(function(a){fixParam(a,'filter.p.vendor',VMAP)});
       scope.querySelectorAll('a[href*="filter.p.product_type"]').forEach(function(a){fixParam(a,'filter.p.product_type',TMAP)});
     }
-    return {norm:norm,norm2:norm2,shuffle:shuffle,pimg:pimg,ok:ok,wurl:wurl,fmtCOP:fmtCOP,addMaps:addMaps,fixLinks:fixLinks,VMAP:VMAP,TMAP:TMAP,CK:'krika10_c_',AK:'krika9_all'};
+    return {norm:norm,norm2:norm2,shuffle:shuffle,pimg:pimg,ok:ok,wurl:wurl,fmtCOP:fmtCOP,addMaps:addMaps,fixLinks:fixLinks,VMAP:VMAP,TMAP:TMAP,CK:'krika11_c_',AK:'krika9_all'};
   })();
 
   /* ===== MEGA MENÚS WEB ===== */
   (function(){
     var K=window.KRIKA;
-    var MENUS=['gafas','perfumes','capilar','skincare','maquillaje','corporal','unas','kits'];
+    var MENUS=['gafas','perfumes','capilar','skincare','maquillaje','corporal','unas','kits','descuentos'];
     function priceOf(p){try{return parseFloat(p.variants[0].price)||0}catch(e){return 0}}
-    function renderKitsBrands(products){
-      var lists=document.querySelectorAll('[data-kits-brand-list]');
+    function renderKitsBrands(products,collectionKey){
+      collectionKey=collectionKey||'kits';
+      var lists=document.querySelectorAll('[data-brand-collection="'+collectionKey+'"]');
       if(!lists.length)return;
       var brands={};
       (products||[]).forEach(function(p){
@@ -912,21 +940,24 @@
         names.forEach(function(name){
           var li=document.createElement('li');
           var a=document.createElement('a');
-          a.href='/collections/kits?filter.p.vendor='+encodeURIComponent(name);
-          a.textContent=name;
+          a.href='/collections/'+(collectionKey==='descuentos'?'sale':collectionKey)+'?filter.p.vendor='+encodeURIComponent(name);
+          a.textContent=name.toLocaleLowerCase('es').replace(/(^|[\s-])(\p{L})/gu,function(match,separator,letter){
+            return separator+letter.toLocaleUpperCase('es');
+          });
           li.appendChild(a);
           list.appendChild(li);
         });
       });
     }
     K.renderKitsBrands=renderKitsBrands;
-    function fetchKitsProducts(){
-      var page=1,all=[];
+    function fetchKitsProducts(collectionKey){
+      collectionKey=collectionKey==='descuentos'?'sale':(collectionKey||'kits');
+      var page=1,all=[],limit=collectionKey==='sale'?50:250;
       function next(){
-        return fetch('/collections/kits/products.json?limit=250&page='+page).then(function(r){return r.json()}).then(function(data){
+        return fetch('/collections/'+collectionKey+'/products.json?limit='+limit+'&page='+page).then(function(r){if(!r.ok)throw new Error('Collection HTTP '+r.status);return r.json()}).then(function(data){
           var batch=(data&&data.products)||[];
           all=all.concat(batch);
-          if(batch.length===250&&page<20){page++;return next()}
+          if(collectionKey!=='sale'&&batch.length===limit&&page<20){page++;return next()}
           return all;
         });
       }
@@ -944,20 +975,20 @@
         container.insertAdjacentHTML('beforeend','<div class="krika-mega-card"><a href="/products/'+p.handle+'"><div class="krika-mega-img">'+(img?'<img src="'+img+'" alt="" loading="lazy">':'')+'</div><div class="krika-mega-info"><span class="krika-mega-brand">'+(p.vendor||'').toUpperCase()+'</span><h4 class="krika-mega-name">'+p.title+'</h4><span class="krika-mega-price">'+priceF+'</span></div></a></div>');
       });
     }
-    function cacheOf(key){var c=sessionStorage.getItem(K.CK+key);if(c){try{return JSON.parse(c)}catch(e){}}return null}
+    function cacheOf(key){var c=sessionStorage.getItem(K.CK+key);if(c){try{var products=JSON.parse(c);if(Array.isArray(products)&&products.length)return products}catch(e){}}return null}
     function loadMenu(key){
       var container=document.querySelector('[data-menu="'+key+'"] .krika-mega-products');
       if(!container)return;
       var cached=cacheOf(key);
-      if(cached){K.addMaps(cached);if(key==='kits')renderKitsBrands(cached);K.fixLinks(document.querySelector('[data-menu="'+key+'"]'));renderProducts(cached,container);return}
-      var request=key==='kits'?fetchKitsProducts():fetch('/collections/'+key+'/products.json?limit=50').then(function(r){return r.json()}).then(function(data){return (data&&data.products)||[]});
+      if(cached){K.addMaps(cached);if((key==='kits'||key==='descuentos'))renderKitsBrands(cached,key);K.fixLinks(document.querySelector('[data-menu="'+key+'"]'));renderProducts(cached,container);return}
+      var request=(key==='kits'||key==='descuentos')?fetchKitsProducts(key):fetch('/collections/'+key+'/products.json?limit=50').then(function(r){return r.json()}).then(function(data){return (data&&data.products)||[]});
       request.then(function(prods){
-        try{sessionStorage.setItem(K.CK+key,JSON.stringify(prods))}catch(e){}
+        try{if(prods.length)sessionStorage.setItem(K.CK+key,JSON.stringify(prods))}catch(e){}
         K.addMaps(prods);
-        if(key==='kits')renderKitsBrands(prods);
+        if((key==='kits'||key==='descuentos'))renderKitsBrands(prods,key);
         K.fixLinks(document.querySelector('[data-menu="'+key+'"]'));
         renderProducts(prods,container);
-      }).catch(function(){container.innerHTML=''});
+      }).catch(function(){container.style.display='';container.innerHTML='<p class="krika-mega-loading">No fue posible cargar los productos. Vuelve a intentarlo.</p>'});
     }
     function init(){
       MENUS.forEach(function(k){
@@ -976,7 +1007,7 @@
   (function(){
     var K=window.KRIKA;
     var INIT=12, ADD=8, LS='krika_recent_searches', WK='krika_wishlist';
-    var CATS=['gafas','perfumes','capilar','skincare','maquillaje','corporal','unas','kits'];
+    var CATS=['gafas','perfumes','capilar','skincare','maquillaje','corporal','unas','kits','descuentos'];
     var ov=document.getElementById('searchOverlay');
     var sInput=document.getElementById('searchInput');
     var btnClear=document.getElementById('btnClear');
@@ -1210,12 +1241,12 @@
         var hasGroups=cats&&cats.querySelector('h5');
         document.getElementById('krSubTitle').textContent=title;
         var body=document.getElementById('krSubBody');
-        var html='<div class="kr-sub-panel"><h4 class="kr-sub-panel-t">'+(key==='kits'?'MARCAS':(hasGroups?'CATEGORÍAS':'MARCAS'))+'</h4>';
+        var html='<div class="kr-sub-panel"><h4 class="kr-sub-panel-t">'+(key==='descuentos'?'EXPLORA LAS OFERTAS':(key==='kits'?'MARCAS':(hasGroups?'CATEGORÍAS':'MARCAS')))+'</h4>';
         html+=cats?'<div class="kr-sub-cats">'+cats.innerHTML+'</div>':'';
-        html+='<a class="kr-sub-vermas" href="'+((vermas&&vermas.getAttribute('href'))||('/collections/'+key))+'">Ver Todo '+title+'</a></div>';
+        html+='<a class="kr-sub-vermas" href="'+((vermas&&vermas.getAttribute('href'))||('/collections/'+(key==='descuentos'?'sale':key)))+'">Ver Todo '+title+'</a></div>';
         html+='<div class="kr-sub-prods" id="krSubProds"><p class="krika-mega-loading">Cargando...</p></div>';
         body.innerHTML=html;
-        if(key==='kits')body.querySelectorAll('.kr-sub-cats h5').forEach(function(el){el.remove()});
+        if((key==='kits'||key==='descuentos'))body.querySelectorAll('.kr-sub-cats h5').forEach(function(el){el.remove()});
         body.querySelectorAll('.kr-sub-cats .krika-mega-vermas').forEach(function(el){el.remove()});
         body.querySelectorAll('.kr-sub-cats b').forEach(function(el){if(!el.textContent.trim())el.remove()});
         K.fixLinks(body);
@@ -1229,12 +1260,12 @@
           }).join('')||'';
         };
         var c=sessionStorage.getItem(K.CK+key);
-        if(c){try{var cached=JSON.parse(c);if(key==='kits')K.renderKitsBrands(cached);done(cached);return}catch(e){}}
-        var kitRequest=key==='kits'?K.fetchKitsProducts():fetch('/collections/'+key+'/products.json?limit=8').then(function(r){return r.json()}).then(function(d){return (d&&d.products)||[]});
+        if(c){try{var cached=JSON.parse(c);if((key==='kits'||key==='descuentos'))K.renderKitsBrands(cached,key);done(cached);return}catch(e){}}
+        var kitRequest=(key==='kits'||key==='descuentos')?K.fetchKitsProducts(key):fetch('/collections/'+key+'/products.json?limit=8').then(function(r){return r.json()}).then(function(d){return (d&&d.products)||[]});
         kitRequest.then(function(prods){
-          if(key==='kits'){
-            try{sessionStorage.setItem(K.CK+key,JSON.stringify(prods))}catch(e){}
-            K.renderKitsBrands(prods);
+          if((key==='kits'||key==='descuentos')){
+            try{if(prods.length)sessionStorage.setItem(K.CK+key,JSON.stringify(prods))}catch(e){}
+            K.renderKitsBrands(prods,key);
           }
           K.addMaps(prods);K.fixLinks(body);
           done(prods);

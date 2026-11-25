@@ -482,3 +482,16 @@ pickup-availability-drawer address,
 .kf-pcard-swatch[data-selected="true"] {
   border-color: #222 !important;
 }
+/* Compact search-results heading on mobile only. */
+@media screen and (max-width: 767px) {
+  .m-search .m-page-header__title {
+    font-size: clamp(12px, 3.2vw, 16px) !important;
+    line-height: 1.4;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

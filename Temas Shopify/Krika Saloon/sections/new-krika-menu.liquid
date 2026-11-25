@@ -1,0 +1,2146 @@
+{% comment %}
+  Krika Menú Horizontal - Header + Buscador + Navegación (v9 - oculta sin stock y sin foto)
+{% endcomment %}
+
+<!-- Alternative header with a two-level side navigation. -->
+<div class="krika-header-full">
+  <div class="kh-left">
+    <button type="button" class="kh-burger" id="alt_krikaBurger" aria-label="Abrir menú" aria-controls="alt_krikaDrawer" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h18M3 12h18M3 19h18"/></svg><span class="kr-alt_menu-label">Menú</span>
+    </button>
+    <a href="/collections/all" class="kh-link">Productos</a>
+    <a href="/pages/services" class="kh-link">Servicios</a>
+  </div>
+  <div class="kh-logo">
+    <a href="/" title="Krika Salon">
+      <img
+        src="//cdn.shopify.com/s/files/1/0719/4027/6375/files/logo-krika-salon.png?v=1775796192"
+        alt="Krika Salon"
+        width="150"
+      >
+    </a>
+  </div>
+<nav class="krika-mega-nav">
+  <div class="krika-mega-nav-inner">
+    <div class="krika-mega-item" data-menu="gafas">
+      <a href="/collections/gafas" class="krika-mega-link">Gafas
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">GAFAS</h4>
+              <div class="krika-mega-cats">
+                <div class="krika-mega-col">
+                  <ul>
+                    <li><a href="/collections/gafas?filter.p.vendor=Prada">Prada</a></li>
+                    <li><a href="/collections/gafas?filter.p.vendor=Versace">Versace</a></li>
+                    <li><a href="/collections/gafas?filter.p.vendor=Dolce%20%26%20Gabbana">Dolce &amp; Gabbana</a></li>
+                    <li><a href="/collections/gafas?filter.p.vendor=Miu%20Miu">Miu Miu</a></li>
+                  </ul>
+                  <b><a href="/collections/gafas" class="krika-mega-vermas">Ver Todo Gafas</a></b>
+                </div>
+                <div class="krika-mega-col">
+                  <ul>
+                    <li><a href="/collections/gafas?filter.p.vendor=Burberry">Burberry</a></li>
+                    <li><a href="/collections/gafas?filter.p.vendor=Ray-Ban">Ray-Ban</a></li>
+                    <li><a href="/collections/gafas?filter.p.vendor=Tiffany">Tiffany &amp; Co.</a></li>
+                    <li><a href="/collections/gafas?filter.p.vendor=Vogue">Vogue</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="gafas"><p class="krika-mega-loading">Cargando...</p></div>
+            {% liquid
+              assign menu_collection = collections['gafas']
+              assign menu_visual = menu_collection.image | default: menu_collection.products.first.featured_image
+              assign menu_visual_title = menu_collection.title
+              for block in section.blocks
+                if block.settings.collection.handle == 'gafas'
+                  assign menu_visual = block.settings.image | default: menu_visual
+                  assign menu_visual_title = block.settings.caption | default: menu_visual_title
+                endif
+              endfor
+            %}
+            <a class="kr-alt-feature" href="{{ menu_collection.url | default: '/collections/gafas' }}">
+              {% if menu_visual != blank %}
+                {{ menu_visual | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'kr-alt-feature-image', sizes: '40vw' }}
+              {% endif %}
+              <span class="kr-alt-feature-caption">{{ menu_visual_title | escape }}<span>Descubre la colección</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="krika-mega-item" data-menu="perfumes">
+      <a href="/collections/perfumes" class="krika-mega-link">Perfumes
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">PERFUMES</h4>
+              <div class="krika-mega-cats">
+                <div class="krika-mega-col">
+                  <ul>
+                    <li><a href="/collections/perfumes?filter.p.vendor=Acqua%20di%20Parma">Acqua di Parma</a></li>
+                    <li><a href="/collections/perfumes?filter.p.vendor=Carolina%20Herrera">Carolina Herrera</a></li>
+                    <li><a href="/collections/perfumes?filter.p.vendor=Paco%20Rabanne">Paco Rabanne</a></li>
+                  </ul>
+                  <b><a href="/collections/perfumes" class="krika-mega-vermas">Ver Todo Perfumes</a></b>
+                </div>
+                <div class="krika-mega-col">
+                  <ul>
+                    <li><a href="/collections/perfumes?filter.p.vendor=Giorgio%20Armani">Giorgio Armani</a></li>
+                    <li><a href="/collections/perfumes?filter.p.vendor=Versace">Versace</a></li>
+                    <li><a href="/collections/perfumes?filter.p.vendor=Dolce%20%26%20Gabbana">Dolce &amp; Gabbana</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="perfumes"><p class="krika-mega-loading">Cargando...</p></div>
+            {% liquid
+              assign menu_collection = collections['perfumes']
+              assign menu_visual = menu_collection.image | default: menu_collection.products.first.featured_image
+              assign menu_visual_title = menu_collection.title
+              for block in section.blocks
+                if block.settings.collection.handle == 'perfumes'
+                  assign menu_visual = block.settings.image | default: menu_visual
+                  assign menu_visual_title = block.settings.caption | default: menu_visual_title
+                endif
+              endfor
+            %}
+            <a class="kr-alt-feature" href="{{ menu_collection.url | default: '/collections/perfumes' }}">
+              {% if menu_visual != blank %}
+                {{ menu_visual | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'kr-alt-feature-image', sizes: '40vw' }}
+              {% endif %}
+              <span class="kr-alt-feature-caption">{{ menu_visual_title | escape }}<span>Descubre la colección</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="krika-mega-item" data-menu="capilar">
+      <a href="/collections/capilar" class="krika-mega-link">Capilar
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">CAPILAR</h4>
+              <div class="krika-mega-cats">
+                <div class="krika-mega-col">
+                  <h5>SHAMPOO / ACONDICIONADORES</h5>
+                  <ul>
+                    <li><a href="/collections/capilar?filter.p.product_type=Nutricion%20e%20hidratacion">Nutricion e hidratacion</a></li>
+                    <li><a href="/collections/capilar?filter.p.product_type=Disciplina%20y%20control">Disciplina y control</a></li>
+                    <li><a href="/collections/capilar?filter.p.product_type=Limpieza%20profunda">Limpieza profunda</a></li>
+                    <li><a href="/collections/capilar?filter.p.product_type=Smooth">Smooth</a></li>
+                  </ul>
+                  <b><a href="/collections/capilar" class="krika-mega-vermas">Ver Todo Capilar</a></b>
+                </div>
+                <div class="krika-mega-col">
+                  <h5>TRATAMIENTOS</h5>
+                  <ul>
+                    <li><a href="/collections/capilar?filter.p.product_type=Linea%20Detox">Linea Detox</a></li>
+                    <li><a href="/collections/capilar?filter.p.product_type=Reparacion%20intensiva">Reparacion intensiva</a></li>
+                    <li><a href="/collections/capilar?filter.p.product_type=Brillo%20saludable">Brillo saludable</a></li>
+                    <li><a href="/collections/capilar?filter.p.product_type=Control%20frizz">Control frizz</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="capilar"><p class="krika-mega-loading">Cargando...</p></div>
+            {% liquid
+              assign menu_collection = collections['capilar']
+              assign menu_visual = menu_collection.image | default: menu_collection.products.first.featured_image
+              assign menu_visual_title = menu_collection.title
+              for block in section.blocks
+                if block.settings.collection.handle == 'capilar'
+                  assign menu_visual = block.settings.image | default: menu_visual
+                  assign menu_visual_title = block.settings.caption | default: menu_visual_title
+                endif
+              endfor
+            %}
+            <a class="kr-alt-feature" href="{{ menu_collection.url | default: '/collections/capilar' }}">
+              {% if menu_visual != blank %}
+                {{ menu_visual | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'kr-alt-feature-image', sizes: '40vw' }}
+              {% endif %}
+              <span class="kr-alt-feature-caption">{{ menu_visual_title | escape }}<span>Descubre la colección</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="krika-mega-item" data-menu="skincare">
+      <a href="/collections/skincare" class="krika-mega-link">Skincare
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">SKINCARE</h4>
+              <div class="krika-mega-cats">
+                <div class="krika-mega-col">
+                  <h5>LIMPIADORES</h5>
+                  <ul>
+                    <li><a href="/collections/skincare?filter.p.product_type=Gel%20limpiador">Gel limpiador</a></li>
+                    <li><a href="/collections/skincare?filter.p.product_type=Agua%20micelar">Agua micelar</a></li>
+                    <li><a href="/collections/skincare?filter.p.product_type=Espumas%20limpiadoras">Espumas limpiadoras</a></li>
+                    <li><a href="/collections/skincare?filter.p.product_type=Exfoliantes">Exfoliantes</a></li>
+                  </ul>
+                  <b><a href="/collections/skincare" class="krika-mega-vermas">Ver Todo Skincare</a></b>
+                </div>
+                <div class="krika-mega-col">
+                  <h5>HIDRATACION</h5>
+                  <ul>
+                    <li><a href="/collections/skincare?filter.p.product_type=Cremas%20hidratantes">Cremas hidratantes</a></li>
+                    <li><a href="/collections/skincare?filter.p.product_type=Cremas%20de%20noche">Cremas de noche</a></li>
+                    <li><a href="/collections/skincare?filter.p.product_type=Gel%20hidratante">Gel hidratante</a></li>
+                    <li><a href="/collections/skincare?filter.p.product_type=Mascarillas%20hidratantes">Mascarillas hidratantes</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="skincare"><p class="krika-mega-loading">Cargando...</p></div>
+            {% liquid
+              assign menu_collection = collections['skincare']
+              assign menu_visual = menu_collection.image | default: menu_collection.products.first.featured_image
+              assign menu_visual_title = menu_collection.title
+              for block in section.blocks
+                if block.settings.collection.handle == 'skincare'
+                  assign menu_visual = block.settings.image | default: menu_visual
+                  assign menu_visual_title = block.settings.caption | default: menu_visual_title
+                endif
+              endfor
+            %}
+            <a class="kr-alt-feature" href="{{ menu_collection.url | default: '/collections/skincare' }}">
+              {% if menu_visual != blank %}
+                {{ menu_visual | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'kr-alt-feature-image', sizes: '40vw' }}
+              {% endif %}
+              <span class="kr-alt-feature-caption">{{ menu_visual_title | escape }}<span>Descubre la colección</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="krika-mega-item" data-menu="maquillaje">
+      <a href="/collections/maquillaje" class="krika-mega-link">Maquillaje
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">MAQUILLAJE</h4>
+              <div class="krika-mega-cats">
+                <div class="krika-mega-col">
+                  <h5>ROSTRO</h5>
+                  <ul>
+                    <li><a href="/collections/maquillaje?filter.p.product_type=Bases">Bases</a></li>
+                    <li><a href="/collections/maquillaje?filter.p.product_type=Correctores">Correctores</a></li>
+                    <li><a href="/collections/maquillaje?filter.p.product_type=Polvos">Polvos</a></li>
+                    <li><a href="/collections/maquillaje?filter.p.product_type=Rubores">Rubores</a></li>
+                  </ul>
+                  <b><a href="/collections/maquillaje" class="krika-mega-vermas">Ver Todo Maquillaje</a></b>
+                </div>
+                <div class="krika-mega-col">
+                  <h5>OJOS</h5>
+                  <ul>
+                    <li><a href="/collections/maquillaje?filter.p.product_type=Sombras">Sombras</a></li>
+                    <li><a href="/collections/maquillaje?filter.p.product_type=Delineadores">Delineadores</a></li>
+                    <li><a href="/collections/maquillaje?filter.p.product_type=Mascaras%20de%20pestanas">Mascaras de pestanas</a></li>
+                    <li><a href="/collections/maquillaje?filter.p.product_type=Labiales">Labiales</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="maquillaje"><p class="krika-mega-loading">Cargando...</p></div>
+            {% liquid
+              assign menu_collection = collections['maquillaje']
+              assign menu_visual = menu_collection.image | default: menu_collection.products.first.featured_image
+              assign menu_visual_title = menu_collection.title
+              for block in section.blocks
+                if block.settings.collection.handle == 'maquillaje'
+                  assign menu_visual = block.settings.image | default: menu_visual
+                  assign menu_visual_title = block.settings.caption | default: menu_visual_title
+                endif
+              endfor
+            %}
+            <a class="kr-alt-feature" href="{{ menu_collection.url | default: '/collections/maquillaje' }}">
+              {% if menu_visual != blank %}
+                {{ menu_visual | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'kr-alt-feature-image', sizes: '40vw' }}
+              {% endif %}
+              <span class="kr-alt-feature-caption">{{ menu_visual_title | escape }}<span>Descubre la colección</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="krika-mega-item" data-menu="corporal">
+      <a href="/collections/corporal" class="krika-mega-link">Corporal
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">CORPORAL</h4>
+              <div class="krika-mega-cats">
+                <div class="krika-mega-col">
+                  <h5>BANO</h5>
+                  <ul>
+                    <li><a href="/collections/corporal?filter.p.product_type=Jabones">Jabones</a></li>
+                    <li><a href="/collections/corporal?filter.p.product_type=Exfoliantes">Exfoliantes</a></li>
+                  </ul>
+                  <b><a href="/collections/corporal" class="krika-mega-vermas">Ver Todo Corporal</a></b>
+                </div>
+                <div class="krika-mega-col">
+                  <h5>HIDRATACION</h5>
+                  <ul>
+                    <li><a href="/collections/corporal?filter.p.product_type=Cremas%20corporales">Cremas corporales</a></li>
+                    <li><a href="/collections/corporal?filter.p.product_type=Aceites%20corporales">Aceites corporales</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="corporal"><p class="krika-mega-loading">Cargando...</p></div>
+            {% liquid
+              assign menu_collection = collections['corporal']
+              assign menu_visual = menu_collection.image | default: menu_collection.products.first.featured_image
+              assign menu_visual_title = menu_collection.title
+              for block in section.blocks
+                if block.settings.collection.handle == 'corporal'
+                  assign menu_visual = block.settings.image | default: menu_visual
+                  assign menu_visual_title = block.settings.caption | default: menu_visual_title
+                endif
+              endfor
+            %}
+            <a class="kr-alt-feature" href="{{ menu_collection.url | default: '/collections/corporal' }}">
+              {% if menu_visual != blank %}
+                {{ menu_visual | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'kr-alt-feature-image', sizes: '40vw' }}
+              {% endif %}
+              <span class="kr-alt-feature-caption">{{ menu_visual_title | escape }}<span>Descubre la colección</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="krika-mega-item" data-menu="unas">
+      <a href="/collections/unas" class="krika-mega-link">Uñas
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">UÑAS</h4>
+              <div class="krika-mega-cats">
+                <div class="krika-mega-col">
+                  <h5>ESMALTES</h5>
+                  <ul>
+                    <li><a href="/collections/unas?filter.p.product_type=Tradicionales">Tradicionales</a></li>
+                    <li><a href="/collections/unas?filter.p.product_type=Semipermanentes">Semipermanentes</a></li>
+                  </ul>
+                  <b><a href="/collections/unas" class="krika-mega-vermas">Ver Todo Uñas</a></b>
+                </div>
+                <div class="krika-mega-col">
+                  <h5>TRATAMIENTOS</h5>
+                  <ul>
+                    <li><a href="/collections/unas?filter.p.product_type=Fortalecedores">Fortalecedores</a></li>
+                    <li><a href="/collections/unas?filter.p.product_type=Aceites%20para%20cuticula">Aceites para cuticula</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="unas"><p class="krika-mega-loading">Cargando...</p></div>
+            {% liquid
+              assign menu_collection = collections['unas']
+              assign menu_visual = menu_collection.image | default: menu_collection.products.first.featured_image
+              assign menu_visual_title = menu_collection.title
+              for block in section.blocks
+                if block.settings.collection.handle == 'unas'
+                  assign menu_visual = block.settings.image | default: menu_visual
+                  assign menu_visual_title = block.settings.caption | default: menu_visual_title
+                endif
+              endfor
+            %}
+            <a class="kr-alt-feature" href="{{ menu_collection.url | default: '/collections/unas' }}">
+              {% if menu_visual != blank %}
+                {{ menu_visual | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'kr-alt-feature-image', sizes: '40vw' }}
+              {% endif %}
+              <span class="kr-alt-feature-caption">{{ menu_visual_title | escape }}<span>Descubre la colección</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="krika-mega-item" data-menu="kits">
+      <a href="/collections/kits" class="krika-mega-link">Kits
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">KITS</h4>
+              <div class="krika-mega-cats krika-mega-cats--kits">
+                <div class="krika-mega-col">
+                  <h5>MARCAS</h5>
+                  <ul data-kits-brand-list data-brand-collection="kits">
+                    <li><span class="krika-kits-loading">Cargando marcas...</span></li>
+                  </ul>
+                  <b><a href="/collections/kits" class="krika-mega-vermas">Ver Todos los Kits</a></b>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="kits"><p class="krika-mega-loading">Cargando...</p></div>
+            {% liquid
+              assign menu_collection = collections['kits']
+              assign menu_visual = menu_collection.image | default: menu_collection.products.first.featured_image
+              assign menu_visual_title = menu_collection.title
+              for block in section.blocks
+                if block.settings.collection.handle == 'kits'
+                  assign menu_visual = block.settings.image | default: menu_visual
+                  assign menu_visual_title = block.settings.caption | default: menu_visual_title
+                endif
+              endfor
+            %}
+            <a class="kr-alt-feature" href="{{ menu_collection.url | default: '/collections/kits' }}">
+              {% if menu_visual != blank %}
+                {{ menu_visual | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'kr-alt-feature-image', sizes: '40vw' }}
+              {% endif %}
+              <span class="kr-alt-feature-caption">{{ menu_visual_title | escape }}<span>Descubre la colección</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="krika-mega-item" data-menu="descuentos">
+      <a href="/collections/sale" class="krika-mega-link">Descuentos
+        <svg viewBox="0 0 10 6" fill="currentColor" style="width:10px;height:10px;"><path d="M1 1l4 4 4-4"/></svg>
+      </a>
+      <div class="krika-mega-dropdown">
+        <div class="krika-mega-container">
+          <div class="krika-mega-row">
+            <div class="krika-mega-left">
+              <h4 class="krika-mega-col-title">DESCUENTOS</h4>
+              <div class="krika-mega-cats krika-mega-cats--kits">
+                <div class="krika-mega-col">
+                  <h5>EXPLORA LAS OFERTAS</h5>
+                  <ul>
+                    <li><a href="/collections/sale?sort_by=best-selling">Más vendidos</a></li>
+                    <li><a href="/collections/sale?sort_by=price-ascending">Menor precio</a></li>
+                    <li><a href="/collections/sale?sort_by=created-descending">Novedades</a></li>
+                  </ul>
+                  <b><a href="/collections/sale" class="krika-mega-vermas">Ver Todos los Descuentos</a></b>
+                </div>
+              </div>
+            </div>
+            <div class="krika-mega-products" data-collection="sale"><p class="krika-mega-loading">Cargando...</p></div>
+            {% liquid
+              assign menu_collection = collections['sale']
+              assign menu_visual = menu_collection.image | default: menu_collection.products.first.featured_image
+              assign menu_visual_title = menu_collection.title
+              for block in section.blocks
+                if block.settings.collection.handle == 'sale'
+                  assign menu_visual = block.settings.image | default: menu_visual
+                  assign menu_visual_title = block.settings.caption | default: menu_visual_title
+                endif
+              endfor
+            %}
+            <a class="kr-alt-feature" href="{{ menu_collection.url | default: '/collections/sale' }}">
+              {% if menu_visual != blank %}
+                {{ menu_visual | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'kr-alt-feature-image', sizes: '40vw' }}
+              {% endif %}
+              <span class="kr-alt-feature-caption">{{ menu_visual_title | escape }}<span>Descubre la colección</span></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+  <div class="kh-right">
+    <button type="button" class="kr-alt-close-desktop" aria-label="Cerrar navegación" hidden><span aria-hidden="true">×</span></button>
+    <button type="button" id="alt_krikaSearchTrigger" aria-label="Buscar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5 5"/></svg>
+    </button>
+    <a class="kr-alt-header-wishlist" href="{{ pages[settings.wishlist_page].url | default: '/pages/wishlist' }}" aria-label="Favoritos">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>
+      <sup class="m-wishlist-count kr-alt-wishlist-count m:hidden" aria-live="polite" aria-atomic="true"></sup>
+    </a>
+    <a href="/pages/sedes" aria-label="Sedes">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg>
+    </a>
+    <a href="/cart" aria-label="Carrito">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16v14H4zM8 9V6a4 4 0 0 1 8 0v3"/></svg>
+      <span class="kh-cart-n" id="alt_khCartCount"></span>
+    </a>
+  </div>
+</div>
+
+<!-- === NAVBAR WEB === -->
+
+
+<!-- === DRAWER MÓVIL === -->
+<div class="kr-drawer" id="alt_krikaDrawer" inert>
+  <div class="kr-overlay" id="alt_krOverlay"></div>
+  <div class="kr-panel" role="dialog" aria-modal="true" aria-label="Navegación principal">
+    <div class="kr-dv-main">
+      <div class="kr-mhead">
+        <span>Menú</span>
+        <button class="kr-x" id="alt_krCloseDrawer" aria-label="Cerrar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="kr-dv-cats">
+        <a class="kr-cat" href="/pages/services">Servicios
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <button class="kr-cat" data-sub="gafas">Gafas<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="kr-cat" data-sub="perfumes">Perfumes<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="kr-cat" data-sub="capilar">Capilar<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="kr-cat" data-sub="skincare">Skincare<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="kr-cat" data-sub="maquillaje">Maquillaje<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="kr-cat" data-sub="corporal">Corporal<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="kr-cat" data-sub="unas">Uñas<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="kr-cat" data-sub="kits">Kits<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="kr-cat" data-sub="descuentos">Descuentos<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="kr-dv-foot">
+        <p>Mi cuenta</p>
+        <a class="kr-btn kr-btn--dark" href="{{ routes.account_login_url }}">Inicia sesión</a>
+        <a class="kr-btn" href="{{ routes.account_register_url }}">Crea una cuenta</a>
+      </div>
+    </div>
+    <div class="kr-dv-sub">
+      <button class="kr-sub-head" id="alt_krSubBack">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 6l-6 6 6 6"/></svg>
+        <span id="alt_krSubTitle"></span>
+      </button>
+      <div class="kr-sub-body" id="alt_krSubBody"></div>
+    </div>
+  </div>
+</div>
+
+<!-- === BUSCADOR === -->
+<div class="krika-search-overlay" id="alt_searchOverlay">
+  <div class="krika-search-inner" id="alt_searchInner">
+    <div class="ks-mhead">
+      <span>Buscar</span>
+      <button class="kr-x" id="alt_btnCloseM" aria-label="Cerrar">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="krika-search-top-bar">
+      <input type="text" class="krika-search-input" id="alt_searchInput" placeholder="Buscar aquí" autocomplete="off">
+      <button class="krika-btn-clear" id="alt_btnClear">Eliminar</button>
+      <button class="kr-x kr-close-desk" id="alt_btnCloseSearch" aria-label="Cerrar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="krika-search-meta-bar" id="alt_searchMeta"></div>
+    <div class="krika-search-toolbar" id="alt_searchToolbar">
+      <a href="/search" class="krika-toolbar-btn krika-see-all" id="alt_krikaSeeAll">Ver todos los resultados</a>
+      <div class="krika-sort-wrap">
+        <button type="button" class="krika-toolbar-btn" id="alt_btnSort">Ordenar por</button>
+        <div class="krika-sort-menu" id="alt_sortMenu">
+          <button type="button" data-sort="relevance" class="is-selected">Relevancia</button>
+          <button type="button" data-sort="price-asc">Precio: menor a mayor</button>
+          <button type="button" data-sort="price-desc">Precio: mayor a menor</button>
+          <button type="button" data-sort="title-asc">Nombre: A-Z</button>
+        </div>
+      </div>
+      <a href="/search" class="krika-toolbar-btn" id="alt_btnFilters">Filtros</a>
+    </div>
+    <div class="krika-search-content-body">
+      <div class="krika-suggestions-col">
+        <div id="alt_recentBox"></div>
+        <div id="alt_querySugs"></div>
+        <h4>Sugerencias</h4>
+        <ul class="krika-suggestions-list">
+          <li><a href="/collections/all">Nuevos Productos</a></li>
+          <li><a href="/collections/gafas">Gafas</a></li>
+          <li><a href="/collections/perfumes">Perfumes</a></li>
+          <li><a href="/collections/skincare">Skincare</a></li>
+          <li><a href="/collections/maquillaje">Maquillaje</a></li>
+          <li><a href="/collections/capilar">Capilar</a></li>
+        </ul>
+      </div>
+      <div class="kr-slider">
+        <button type="button" class="kr-s-arrow kr-s-prev" id="alt_krSlidePrev" aria-label="Anterior">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <div class="krika-products-grid" id="alt_productsGrid"></div>
+        <button type="button" class="kr-s-arrow kr-s-next" id="alt_krSlideNext" aria-label="Siguiente">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+    <button type="button" class="krika-more-btn" id="alt_btnMore">Cargar más (+8)</button>
+  </div>
+</div>
+
+<style>
+  :root {
+    --krika-bg: #fff;
+    --krika-text: #000;
+    --krika-muted: #707070;
+    --krika-border: #000;
+    --krika-divider: #eaeaea;
+    --krika-sale: #c0392b;
+    --krika-wish: #c0392b;
+    --krika-cardline: #e5e5e5;
+    --krika-card-w: 190px;
+    --krika-card-h: 265px;
+  }
+  body.krika-lock { overflow: hidden; }
+
+  /* HEADER */
+  .krika-header-full {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 12px 100px;
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
+  .kh-left { display: flex; align-items: center; gap: 18px; }
+  .kh-link {
+    font-size: 13px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.05em; color: #000; text-decoration: none;
+  }
+  .kh-logo a { display: block; line-height: 0; }
+  .kh-logo img { width: 95px; height: auto; display: block; margin: 1rem 0; }
+  .kh-right { display: flex; justify-content: flex-end; align-items: center; gap: 4px; padding-left: 24px; }
+  .kh-right a, .kh-right button {
+    color: #000; display: inline-flex; align-items: center; justify-content: center;
+    background: none; border: none; cursor: pointer; padding: 9px 10px;
+    text-decoration: none; position: relative; outline: none;
+  }
+  .kh-cart-n {
+    position: absolute; top: 3px; right: 3px; background: #000; color: #fff;
+    font-size: 9px; min-width: 14px; height: 14px; border-radius: 999px;
+    display: none; align-items: center; justify-content: center; padding: 0 3px;
+  }
+  .kh-burger { background: none; border: none; cursor: pointer; padding: 6px; color: #000; }
+
+  /* NAVBAR + MEGA */
+  .krika-mega-nav { background: #fff; border-bottom: 1px solid #eee; padding: 8px 30px; position: relative; }
+  .krika-mega-nav-inner { display: flex; justify-content: center; align-items: center; gap: 28px; }
+  .krika-mega-item { position: static; }
+  .krika-mega-link {
+    display: flex; align-items: center; gap: 6px; text-decoration: none; color: #000;
+    font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 8px 2px; cursor: pointer; background: none; border: none;
+  }
+  .krika-mega-link:hover { opacity: 0.6; }
+  .krika-mega-link svg { transition: transform 0.3s; }
+  .krika-mega-item:hover .krika-mega-link svg { transform: rotate(180deg); }
+  .krika-mega-dropdown {
+    position: absolute; top: 100%; left: 0; right: 0; background: #f2f2f2;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); opacity: 0; visibility: hidden;
+    transition: opacity 0.25s, visibility 0.25s; z-index: 998;
+  }
+  .krika-mega-item:hover .krika-mega-dropdown { opacity: 1; visibility: visible; }
+  .krika-mega-container { padding: 10px 300px; background: #fff; }
+  .krika-mega-row {
+    display: grid; grid-template-columns: 405px 1fr; gap: 50px;
+    align-items: start; background: #f2f2f2; padding: 2rem;
+  }
+  .krika-mega-col-title {
+    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    color: #1a1a1a; margin: 0; padding-bottom: 12px; border-bottom: 1px solid #cfcfcf;
+  }
+  .krika-mega-cats { display: flex; gap: 26px; margin-top: 14px; }
+  .krika-mega-col { flex: 1; min-width: 0; }
+  .krika-mega-col h5 {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: #1a1a1a; margin: 0 0 10px;
+  }
+  .krika-mega-col ul { list-style: none; padding: 0; margin: 0; }
+  .krika-mega-col li { margin-bottom: 10px; }
+  .krika-mega-col li a { font-size: 13px; color: #666; text-decoration: none; line-height: 1.3; }
+  .krika-mega-col li a:hover { color: #000; }
+  .krika-mega-cats--kits .krika-mega-col { width: 100%; }
+  .krika-mega-cats--kits [data-kits-brand-list] { columns: 2; column-gap: 24px; }
+  .krika-mega-cats--kits [data-kits-brand-list] li { break-inside: avoid; }
+  .krika-mega-vermas {
+    display: inline-block; margin-top: 6px; font-size: 13px; font-weight: 900 !important;
+    color: #666; text-decoration: underline; text-underline-offset: 4px;
+  }
+  .krika-mega-vermas:hover { color: #000; }
+
+  /* TARJETAS */
+  .krika-mega-products { display: grid; grid-template-columns: repeat(4, var(--krika-card-w)); gap: 14px; }
+  .krika-mega-card, .krika-product-card, .kr-sub-card {
+    position: relative; display: flex; flex-direction: column;
+    height: var(--krika-card-h); background: #fff;
+    border: 1px solid var(--krika-cardline); overflow: hidden;
+  }
+  .krika-mega-card { width: var(--krika-card-w); }
+  .krika-mega-card::after, .krika-product-card::after, .kr-sub-card::after {
+    content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px;
+    background: #000; transform: scaleX(0); transform-origin: left center; transition: transform 0.25s ease;
+  }
+  .krika-mega-card:hover::after, .krika-mega-card:active::after,
+  .krika-product-card:hover::after, .krika-product-card:active::after,
+  .kr-sub-card:hover::after, .kr-sub-card:active::after { transform: scaleX(1); }
+  .krika-mega-card a { display: flex; flex-direction: column; height: 100%; text-decoration: none; color: inherit; }
+  .krika-mega-img, .krika-product-thumb, .kr-sub-card .im {
+    flex: 1; min-height: 0; background: #fff;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .krika-mega-img img, .krika-product-thumb img, .kr-sub-card .im img {
+    max-width: 80%; max-height: 80%; object-fit: contain;
+  }
+  .krika-mega-info, .krika-product-info, .kr-sub-card .in {
+    padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 4px;
+  }
+  .krika-mega-brand, .krika-product-brand, .kr-sub-card .b {
+    font-size: 9px; font-weight: 600; color: #999; letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .krika-mega-name, .krika-product-title, .kr-sub-card .n {
+    font-size: 11px; font-weight: 700; color: #000; margin: 0;
+    text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.35;
+  }
+  .krika-product-title {
+    text-decoration: none; display: -webkit-box; -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .krika-mega-price, .krika-product-prices, .kr-sub-card .p { font-size: 11px; color: #000; font-weight: 500; }
+  .krika-mega-loading { grid-column: 1/-1; font-size: 11px; color: #888; text-align: center; padding: 40px 20px; }
+  @media (max-width: 1200px) {
+    .krika-mega-products { grid-template-columns: repeat(4, 1fr); }
+    .krika-mega-card { width: auto; }
+  }
+
+  /* Keep every desktop dropdown and its cards within the available viewport. */
+  .krika-mega-nav .krika-mega-container {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px 24px;
+  }
+  .krika-mega-nav .krika-mega-row {
+    grid-template-columns: minmax(260px, 1fr) minmax(0, 2fr);
+    gap: 28px;
+    padding: 24px;
+  }
+  .krika-mega-nav .krika-mega-left,
+  .krika-mega-nav .krika-mega-products {
+    min-width: 0;
+  }
+  .krika-mega-nav :is([data-menu="kits"], [data-menu="descuentos"]) [data-kits-brand-list] {
+    columns: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 18px;
+  }
+  .krika-mega-nav :is([data-menu="kits"], [data-menu="descuentos"]) [data-kits-brand-list] li {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  .krika-mega-nav :is([data-menu="kits"], [data-menu="descuentos"]) [data-kits-brand-list] a {
+    display: block;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  .krika-mega-nav .krika-mega-vermas {
+    margin-top: 20px;
+  }
+  .krika-mega-nav .krika-mega-products {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .krika-mega-nav .krika-mega-card {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    height: 265px;
+  }
+  .krika-mega-nav .krika-mega-info {
+    min-height: 100px;
+    box-sizing: border-box;
+  }
+  .krika-mega-nav .krika-mega-name {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    line-height: 1.35;
+  }
+  .krika-mega-nav .krika-mega-price {
+    margin-top: auto;
+  }
+  @media (min-width: 769px) and (max-width: 1100px) {
+    .krika-mega-nav .krika-mega-row {
+      grid-template-columns: minmax(240px, 1fr) minmax(0, 1.4fr);
+      gap: 20px;
+      padding: 20px;
+    }
+    .krika-mega-nav .krika-mega-products {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .krika-mega-nav .krika-mega-dropdown {
+      max-height: 75vh;
+      overflow-y: auto;
+    }
+  }
+
+  /* DRAWER */
+  .kr-drawer { position: fixed; inset: 0; z-index: 99999; pointer-events: none; }
+  .kr-drawer.is-open { pointer-events: auto; }
+  .kr-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.35); opacity: 0; transition: 0.25s; }
+  .kr-drawer.is-open .kr-overlay { opacity: 1; }
+  .kr-panel {
+    position: absolute; top: 0; bottom: 0; left: 0; width: min(85vw, 340px);
+    background: #fff; transform: translateX(-100%); transition: 0.28s; overflow: hidden;
+  }
+  .kr-drawer.is-open .kr-panel { transform: none; }
+  .kr-dv-main { display: flex; flex-direction: column; height: 100%; }
+  .kr-mhead { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; font-size: 14px; }
+  .kr-x { background: none; border: none; cursor: pointer; color: #000; padding: 4px; display: inline-flex; }
+  .kr-dv-cats { flex: 1; overflow: auto; padding: 4px 0; }
+  .kr-cat {
+    display: flex; justify-content: space-between; align-items: center; width: 100%;
+    padding: 15px 20px; font-size: 15px; color: #333; background: none; border: 0;
+    cursor: pointer; text-decoration: none; text-align: left;
+  }
+  .kr-dv-foot { padding: 18px 20px; border-top: 1px solid #eee; }
+  .kr-dv-foot p { margin: 0 0 12px; font-size: 15px; }
+  .kr-btn {
+    display: block; width: 100%; padding: 12px; text-align: center; font-size: 14px;
+    text-decoration: none; margin-bottom: 10px; border: 1px solid #000; color: #000;
+  }
+  .kr-btn--dark { background: #222; color: #fff; }
+  .kr-dv-sub {
+    position: absolute; inset: 0; background: #fff; transform: translateX(100%);
+    transition: 0.28s; display: flex; flex-direction: column;
+  }
+  .kr-drawer.sub-open .kr-dv-sub { transform: none; }
+  .kr-sub-head {
+    display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+    border-bottom: 1px solid #eee; background: none; border-left: 0; border-right: 0;
+    border-top: 0; font-size: 15px; cursor: pointer;
+  }
+  .kr-sub-body { flex: 1; overflow: auto; padding: 16px; }
+  .kr-sub-body,
+  .kr-sub-body .kr-sub-panel,
+  .kr-sub-body .kr-sub-card,
+  .kr-sub-body .kr-sub-card .im,
+  .kr-sub-body .kr-sub-card .in {
+    background: #f7f7f7;
+  }
+  .kr-sub-body .kr-sub-card .im img {
+    mix-blend-mode: multiply;
+  }
+
+  /* SUB MÓVIL (panel como captura) */
+  .kr-sub-panel { background: #f7f7f7; margin: 0 -16px; padding: 14px 16px 12px; }
+  .kr-sub-panel-t {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #1a1a1a; margin: 0; padding-bottom: 10px; border-bottom: 1px solid #dcdcdc;
+  }
+  .kr-sub-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 18px; margin-top: 6px; }
+  .kr-sub-cats .krika-mega-col { flex: none; min-width: 0; }
+  .kr-sub-cats ul { list-style: none; margin: 0; padding: 0; }
+  .kr-sub-cats:has([data-kits-brand-list]) { display: block; }
+  .kr-sub-cats [data-kits-brand-list] {
+    display: block;
+    columns: 2;
+    column-gap: 18px;
+  }
+  .kr-sub-cats [data-kits-brand-list] li {
+    min-width: 0;
+    break-inside: avoid;
+  }
+  .kr-sub-cats [data-kits-brand-list] a { overflow-wrap: anywhere; }
+  .kr-sub-cats li { margin: 0; }
+  .kr-sub-cats li a {
+    display: block;
+    padding: 9px 0;
+    font-family: var(--font-stack-body);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: normal;
+    color: #7a7a7a;
+    text-decoration: none;
+  }
+  .kr-sub-cats li a::after { content: none; }
+  .kr-sub-cats li a:hover { color: #000; }
+  .kr-sub-cats h5 {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; margin: 10px 0 4px; color: #1a1a1a;
+  }
+  .kr-sub-vermas {
+    display: block; text-align: center; margin: 10px 0 0; font-size: 13px; font-weight: 700;
+    color: #666; text-decoration: underline; text-underline-offset: 4px;
+  }
+  .kr-sub-prods { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+  .kr-sub-card { height: 235px; text-decoration: none; color: inherit; }
+  .kr-sub-card .im img { max-width: 85%; max-height: 85%; }
+  .kr-sub-card .in { padding: 8px 10px 10px; }
+  .kr-sub-card .n {
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+
+  /* BUSCADOR */
+  .krika-search-overlay {
+    position: fixed; inset: 0; z-index: 999999; display: none; overflow: hidden;
+    background: rgba(250,250,250,0.6);
+  }
+  .krika-search-overlay.is-open { display: block; }
+  .krika-search-inner {
+    background: #fff; padding: 18px 40px 30px; max-height: 82vh; overflow-y: auto;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+  }
+  .ks-mhead { display: none; }
+  .krika-search-top-bar { display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--krika-border); padding-bottom: 14px; }
+  .krika-search-input {
+    flex: 1; max-width: 700px; border: 1px solid #9a9a9a; outline: none; font-size: 13px;
+    background: transparent; color: var(--krika-text); padding: 10px 12px; font-family: inherit;
+  }
+  .krika-btn-clear { background: none; border: none; font-size: 12px; text-decoration: underline; cursor: pointer; display: none; }
+  .krika-search-overlay.has-q .krika-btn-clear { display: block; }
+  .kr-close-desk { margin-left: auto; }
+  .krika-search-meta-bar { display: none; }
+  .krika-search-toolbar { display: none; }
+  .kr-recent-t { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--krika-muted); margin: 0 0 10px; }
+  .kr-recent-t button { background: none; border: none; font-size: 11px; text-decoration: underline; cursor: pointer; color: var(--krika-muted); }
+  .kr-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .kr-chip {
+    display: inline-flex; align-items: center; gap: 6px; border: 1px solid #d9d9d9;
+    border-radius: 999px; background: #fff; padding: 7px 12px; font-size: 12px; cursor: pointer; color: #000;
+  }
+  .kr-chip:hover { border-color: #000; }
+  .kr-chip-x { border: none; background: none; cursor: pointer; color: #999; font-size: 14px; line-height: 1; padding: 0; margin-left: 2px; }
+  .kr-chip-x:hover { color: var(--krika-sale); }
+  #alt_querySugs { margin-bottom: 6px; }
+  .krika-search-content-body { margin-top: 24px; display: grid; grid-template-columns: 250px 1fr; gap: 44px; }
+  .krika-suggestions-col h4 { font-size: 12px; font-weight: 500; color: var(--krika-muted); margin: 0 0 16px; }
+  .krika-suggestions-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
+  .krika-suggestions-list a { text-decoration: none; color: var(--krika-text); font-size: 13px; }
+  .krika-suggestions-list a:hover { opacity: 0.5; }
+  .kr-slider { position: relative; }
+  .krika-products-grid {
+    display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 70px) / 6);
+    gap: 14px; overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+  }
+  .krika-products-grid::-webkit-scrollbar { display: none; }
+  .kr-s-arrow {
+    position: absolute; top: 110px; transform: translateY(-50%); width: 34px; height: 34px;
+    border-radius: 50%; border: 1px solid #e2e2e2; background: #fff; color: #000; cursor: pointer;
+    display: none; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    transition: border-color 0.2s, opacity 0.2s; z-index: 2;
+  }
+  .kr-s-arrow:hover { border-color: #000; }
+  .kr-s-prev { left: -14px; }
+  .kr-s-next { right: -14px; }
+  .krika-product-card { min-width: 0; color: var(--krika-text); }
+  .krika-product-title-row { display: flex; justify-content: space-between; gap: 6px; }
+  .krika-wishlist-btn { background: none; border: none; cursor: pointer; padding: 0; color: #000; line-height: 0; flex-shrink: 0; }
+  .krika-wishlist-btn svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.5px; }
+  .krika-wishlist-btn.is-active svg { fill: var(--krika-wish); stroke: var(--krika-wish); }
+  .krika-compare-price { text-decoration: line-through; color: var(--krika-muted); font-weight: 400; margin-right: 5px; }
+  .krika-current-price.is-sale { color: var(--krika-sale); }
+  .krika-product-tag { font-size: 8px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--krika-muted); }
+  .krika-more-btn { display: none; margin: 22px auto 0; background: #fff; border: 1px solid var(--krika-border); padding: 11px 28px; font-size: 12px; cursor: pointer; }
+  .krika-more-btn.is-visible { display: block; }
+  @media (min-width: 769px) {
+    .kh-burger { display: none; }
+    .ks-mhead { display: none !important; }
+    .kr-s-arrow { display: flex; }
+  }
+  @media (max-width: 1100px) and (min-width: 769px) {
+    .krika-products-grid { grid-auto-columns: calc((100% - 42px) / 4); }
+  }
+  /* MÓVIL */
+  @media (max-width: 768px) {
+    .kh-link { display: none; }
+    .kh-burger { display: inline-flex; }
+    .kh-logo img { width: 100px; }
+    .kh-right { padding-left: 10px; }
+    .kh-right a[aria-label="Sedes"] { display: none; }
+    .krika-header-full { padding: 10px 16px; }
+    .krika-mega-nav { display: none; }
+    .krika-search-overlay { background: #fff; }
+    .krika-search-inner { height: 100dvh; max-height: none; padding: 14px 16px 24px; box-shadow: none; }
+    .ks-mhead { display: flex; justify-content: space-between; align-items: center; padding: 2px 0 12px; font-size: 14px; }
+    .kr-close-desk { display: none; }
+    .krika-search-top-bar { border-bottom: none; padding-bottom: 0; gap: 12px; }
+    .krika-search-input { border: none; border-bottom: 1px solid var(--krika-border); padding: 8px 0; font-size: 15px; max-width: none; }
+    .krika-search-meta-bar { display: flex; margin-top: 12px; font-size: 12px; color: #444; min-height: 18px; }
+    .krika-search-toolbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; margin-top: 8px; border-top: 1px solid var(--krika-divider); font-size: 13px;
+    }
+    .krika-toolbar-btn { background: none; border: none; cursor: pointer; font-size: 13px; color: #000; text-decoration: none; }
+    .krika-sort-wrap { position: relative; }
+    .krika-sort-menu {
+      position: absolute; top: calc(100% + 10px); left: 0; background: #fff;
+      border: 1px solid #000; min-width: 210px; display: none; flex-direction: column; z-index: 30;
+    }
+    .krika-sort-menu.is-open { display: flex; }
+    .krika-sort-menu button { background: none; border: none; text-align: left; padding: 10px 14px; font-size: 13px; cursor: pointer; }
+    .krika-sort-menu button.is-selected { background: #f5f5f5; font-weight: 700; }
+    .krika-search-content-body { grid-template-columns: 1fr; gap: 14px; margin-top: 6px; }
+    .krika-suggestions-col h4 { margin-bottom: 10px; }
+    .krika-suggestions-list { grid-template-columns: 1fr 1fr; gap: 10px 16px; }
+    .krika-suggestions-list a { font-size: 12px; }
+    .krika-products-grid { display: grid; grid-template-columns: 1fr 1fr; grid-auto-flow: row; gap: 12px 10px; overflow: visible; }
+    .kr-s-arrow { display: none; }
+  }
+</style>
+
+<script>
+  {% raw %}
+  /* ===== HELPERS COMPARTIDOS v9 ===== */
+  window.KRIKA_ALT = (function(){
+    function norm(s){return ((s||'')+'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+    function norm2(s){return norm(s).replace(/[^a-z0-9]/g,'')}
+    function shuffle(a){var r=a.slice();for(var i=r.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=r[i];r[i]=r[j];r[j]=t}return r}
+    function pimg(p){
+      if(!p)return '';
+      var cand=[p.featured_image,p.image,(p.images&&p.images[0]),(p.media&&p.media[0]&&(p.media[0].preview_image||p.media[0].src))];
+      for(var i=0;i<cand.length;i++){
+        var v=cand[i];
+        if(!v)continue;
+        if(typeof v==='string')return v;
+        if(typeof v==='object'){if(v.src)return v.src;if(v.url)return v.url;}
+      }
+      return '';
+    }
+    /* v9: solo productos CON STOCK y CON FOTO */
+    function ok(p){
+      if(!p)return false;
+      if(!pimg(p))return false;
+      var av=(typeof p.available==='boolean')?p.available:true;
+      if(!av&&p.variants&&p.variants.length){
+        for(var i=0;i<p.variants.length;i++){if(p.variants[i].available){av=true;break}}
+      }
+      return !!av;
+    }
+    function wurl(u){return u?(u.indexOf('?')!==-1?u+'&width=400':u+'?width=400'):u}
+    function fmtCOP(v){return new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',minimumFractionDigits:0,maximumFractionDigits:0}).format(v||0)}
+    var VMAP={},TMAP={};
+    function addMaps(list){
+      (list||[]).forEach(function(p){
+        if(p&&p.vendor)VMAP[norm2(p.vendor)]=p.vendor;
+        var t=p.type||p.product_type;
+        if(t)TMAP[norm2(t)]=t;
+      });
+    }
+    function fixParam(a,param,map){
+      var href=a.getAttribute('href')||'';
+      var idx=href.indexOf(param+'=');
+      if(idx===-1)return;
+      var val=href.slice(idx+param.length+1),rest='';
+      var amp=val.indexOf('&');
+      if(amp>-1){rest=val.slice(amp);val=val.slice(0,amp);}
+      try{val=decodeURIComponent(val.replace(/\+/g,' '))}catch(e){}
+      var real=map[norm2(val)];
+      if(real){a.setAttribute('href',href.slice(0,idx)+param+'='+encodeURIComponent(real)+rest);}
+    }
+    function fixLinks(scope){
+      if(!scope)return;
+      scope.querySelectorAll('a[href*="filter.p.vendor"]').forEach(function(a){fixParam(a,'filter.p.vendor',VMAP)});
+      scope.querySelectorAll('a[href*="filter.p.product_type"]').forEach(function(a){fixParam(a,'filter.p.product_type',TMAP)});
+    }
+    return {norm:norm,norm2:norm2,shuffle:shuffle,pimg:pimg,ok:ok,wurl:wurl,fmtCOP:fmtCOP,addMaps:addMaps,fixLinks:fixLinks,VMAP:VMAP,TMAP:TMAP,CK:'krika_alt_v2_c_',AK:'krika9_all'};
+  })();
+
+  /* ===== MEGA MENÚS WEB ===== */
+  (function(){
+    var K=window.KRIKA_ALT;
+    var MENUS=['gafas','perfumes','capilar','skincare','maquillaje','corporal','unas','kits','descuentos'];
+    function priceOf(p){try{return parseFloat(p.variants[0].price)||0}catch(e){return 0}}
+    function renderKitsBrands(products,collectionKey){
+      collectionKey=collectionKey||'kits';
+      var lists=document.querySelectorAll('[data-brand-collection="'+collectionKey+'"]');
+      if(!lists.length)return;
+      var brands={};
+      (products||[]).forEach(function(p){
+        var vendor=(p&&p.vendor||'').toString().trim();
+        var vendorKey=K.norm2(vendor);
+        if(vendorKey&&vendorKey!=='krikasalon')brands[vendorKey]=vendor;
+      });
+      var names=Object.keys(brands).map(function(key){return brands[key]}).sort(function(a,b){return a.localeCompare(b,'es')});
+      lists.forEach(function(list){
+        list.innerHTML='';
+        if(!names.length){
+          var empty=document.createElement('li');
+          empty.textContent='No hay proveedores disponibles en la colección.';
+          list.appendChild(empty);
+          return;
+        }
+        names.forEach(function(name){
+          var li=document.createElement('li');
+          var a=document.createElement('a');
+          a.href='/collections/'+(collectionKey==='descuentos'?'sale':collectionKey)+'?filter.p.vendor='+encodeURIComponent(name);
+          a.textContent=name.toLocaleLowerCase('es').replace(/(^|[\s-])(\p{L})/gu,function(match,separator,letter){
+            return separator+letter.toLocaleUpperCase('es');
+          });
+          li.appendChild(a);
+          list.appendChild(li);
+        });
+      });
+    }
+    K.renderKitsBrands=renderKitsBrands;
+    function fetchKitsProducts(collectionKey){
+      collectionKey=collectionKey==='descuentos'?'sale':(collectionKey||'kits');
+      var page=1,all=[],limit=collectionKey==='sale'?50:250;
+      function next(){
+        return fetch('/collections/'+collectionKey+'/products.json?limit='+limit+'&page='+page).then(function(r){if(!r.ok)throw new Error('Collection HTTP '+r.status);return r.json()}).then(function(data){
+          var batch=(data&&data.products)||[];
+          all=all.concat(batch);
+          if(collectionKey!=='sale'&&batch.length===limit&&page<20){page++;return next()}
+          return all;
+        });
+      }
+      return next();
+    }
+    K.fetchKitsProducts=fetchKitsProducts;
+    function renderProducts(products,container){
+      container.innerHTML='';
+      var vis=(products||[]).filter(K.ok); /* v9: sin stock / sin foto fuera */
+      if(!vis.length){container.style.display='none';return}
+      container.style.display='';
+      K.shuffle(vis).slice(0,4).forEach(function(p){
+        var img=K.wurl(K.pimg(p));
+        var priceF=K.fmtCOP(priceOf(p));
+        container.insertAdjacentHTML('beforeend','<div class="krika-mega-card"><a href="/products/'+p.handle+'"><div class="krika-mega-img">'+(img?'<img src="'+img+'" alt="" loading="lazy">':'')+'</div><div class="krika-mega-info"><span class="krika-mega-brand">'+(p.vendor||'').toUpperCase()+'</span><h4 class="krika-mega-name">'+p.title+'</h4><span class="krika-mega-price">'+priceF+'</span></div></a></div>');
+      });
+    }
+    function cacheOf(key){var c=sessionStorage.getItem(K.CK+key);if(c){try{var products=JSON.parse(c);if(Array.isArray(products)&&products.length)return products}catch(e){}}return null}
+    function loadMenu(key){
+      var container=document.querySelector('[data-menu="'+key+'"] .krika-mega-products');
+      if(!container)return;
+      var cached=cacheOf(key);
+      if(cached){K.addMaps(cached);if((key==='kits'||key==='descuentos'))renderKitsBrands(cached,key);K.fixLinks(document.querySelector('[data-menu="'+key+'"]'));renderProducts(cached,container);return}
+      var request=(key==='kits'||key==='descuentos')?fetchKitsProducts(key):fetch('/collections/'+key+'/products.json?limit=50').then(function(r){return r.json()}).then(function(data){return (data&&data.products)||[]});
+      request.then(function(prods){
+        try{if(prods.length)sessionStorage.setItem(K.CK+key,JSON.stringify(prods))}catch(e){}
+        K.addMaps(prods);
+        if((key==='kits'||key==='descuentos'))renderKitsBrands(prods,key);
+        K.fixLinks(document.querySelector('[data-menu="'+key+'"]'));
+        renderProducts(prods,container);
+      }).catch(function(){container.style.display='';container.innerHTML='<p class="krika-mega-loading">No fue posible cargar los productos. Vuelve a intentarlo.</p>'});
+    }
+    function init(){
+      MENUS.forEach(function(k){
+        loadMenu(k);
+        var item=document.querySelector('[data-menu="'+k+'"]');
+        if(item)item.addEventListener('mouseenter',function(){
+          var c=cacheOf(k);
+          if(c)renderProducts(c,document.querySelector('[data-menu="'+k+'"] .krika-mega-products'));
+        });
+      });
+    }
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else setTimeout(init,50);
+  })();
+
+  /* ===== BUSCADOR + DRAWER MÓVIL ===== */
+  (function(){
+    var K=window.KRIKA_ALT;
+    var INIT=12, ADD=8, LS='krika_recent_searches', WK='krika_wishlist';
+    var CATS=['gafas','perfumes','capilar','skincare','maquillaje','corporal','unas','kits','descuentos'];
+    var ov=document.getElementById('alt_searchOverlay');
+    var sInput=document.getElementById('alt_searchInput');
+    var alt_btnClear=document.getElementById('alt_btnClear');
+    var sMeta=document.getElementById('alt_searchMeta');
+    var pGrid=document.getElementById('alt_productsGrid');
+    var alt_btnMore=document.getElementById('alt_btnMore');
+    var alt_btnSort=document.getElementById('alt_btnSort');
+    var alt_sortMenu=document.getElementById('alt_sortMenu');
+    var alt_btnFilters=document.getElementById('alt_btnFilters');
+    var drawer=document.getElementById('alt_krikaDrawer');
+    var aPrev=document.getElementById('alt_krSlidePrev');
+    var aNext=document.getElementById('alt_krSlideNext');
+
+    var allProds=[],allLoaded=false,shuffled=[];
+    var state={q:'',sort:'relevance',visible:INIT,loading:false,suggestProds:[],suggestQueries:[]};
+
+    function priceOf(p){
+      if(p._sug)return p._price||0;
+      try{return parseFloat(p.variants[0].price)||0}catch(e){return 0}
+    }
+    function cmpOf(p){
+      if(p._sug)return p._cmp||0;
+      try{var c=parseFloat(p.variants[0].compare_at_price);return isNaN(c)?0:c}catch(e){return 0}
+    }
+    function getWL(){try{return JSON.parse(localStorage.getItem(WK))||[]}catch(e){return[]}}
+    function toggleWL(id){var l=getWL();var i=l.indexOf(id);if(i>-1)l.splice(i,1);else l.push(id);localStorage.setItem(WK,JSON.stringify(l));return l.indexOf(id)>-1}
+
+    function loadAll(cb){
+      if(allLoaded){cb&&cb();return}
+      var c=sessionStorage.getItem(K.AK);
+      if(c){try{allProds=JSON.parse(c);allLoaded=true;K.addMaps(allProds);cb&&cb();return}catch(e){}}
+      fetch('/collections/all/products.json?limit=250').then(function(r){return r.json()}).then(function(d){
+        allProds=(d&&d.products)||[];allLoaded=true;
+        try{sessionStorage.setItem(K.AK,JSON.stringify(allProds))}catch(e){}
+        K.addMaps(allProds);
+        K.fixLinks(document);
+        cb&&cb();
+      }).catch(function(){allLoaded=true;cb&&cb()});
+    }
+
+    function fromSuggest(p){
+      var url=p.url||'';
+      var handle=(url.split('/products/')[1]||'').split('?')[0];
+      return {
+        _sug:true, id:p.id, title:p.title||'', handle:handle,
+        vendor:p.vendor||'', type:p.type||'', tags:p.tags||[],
+        available:p.available!==false,
+        image:p.image||p.featured_image||'',
+        _price:parseFloat(p.price_min!=null?p.price_min:(p.price!=null?p.price:0))||0,
+        _cmp:parseFloat(p.compare_at_price_min!=null?p.compare_at_price_min:(p.compare_at_price!=null?p.compare_at_price:0))||0
+      };
+    }
+
+    var seq=0;
+    function fetchSuggest(q,cb){
+      var my=++seq;
+      state.loading=true;
+      fetch('/search/suggest.json?q='+encodeURIComponent(q)+'&resources[type]=product,query&resources[limit]=24')
+        .then(function(r){return r.json()})
+        .then(function(d){
+          if(my!==seq)return;
+          var res=((d&&d.resources)||{}).results||{};
+          state.suggestProds=(res.products||[]).map(fromSuggest);
+          state.suggestQueries=(res.queries||[]).map(function(x){return x.text});
+          state.loading=false;cb&&cb();
+        })
+        .catch(function(){
+          if(my!==seq)return;
+          state.suggestProds=[];state.suggestQueries=[];state.loading=false;cb&&cb();
+        });
+    }
+
+    function getRecent(){try{return JSON.parse(localStorage.getItem(LS))||[]}catch(e){return[]}}
+    function saveRecent(q){q=(q||'').trim();if(!q)return;
+      var r=getRecent().filter(function(x){return K.norm(x)!==K.norm(q)});r.unshift(q);
+      try{localStorage.setItem(LS,JSON.stringify(r.slice(0,8)))}catch(e){}
+      renderRecent();}
+    function removeRecent(q){
+      var r=getRecent().filter(function(x){return K.norm(x)!==K.norm(q)});
+      try{localStorage.setItem(LS,JSON.stringify(r))}catch(e){}
+      renderRecent();}
+    function clearRecent(){try{localStorage.removeItem(LS)}catch(e){}renderRecent()}
+    function renderRecent(){
+      var el=document.getElementById('alt_recentBox');if(!el)return;
+      var r=getRecent();
+      if(!r.length){el.innerHTML='';return}
+      el.innerHTML='<p class="kr-recent-t">Búsquedas recientes <button type="button" class="kr-rec-clear">Borrar todo</button></p>'+
+        '<div class="kr-chips">'+r.map(function(x){
+          return '<span class="kr-chip" data-q="'+x.replace(/"/g,'&quot;')+'">'+x+'<button type="button" class="kr-chip-x" data-delq="'+x.replace(/"/g,'&quot;')+'" aria-label="Eliminar búsqueda">&times;</button></span>';
+        }).join('')+'</div>';
+    }
+    function renderQuerySugs(){
+      var el=document.getElementById('alt_querySugs');if(!el)return;
+      if(!state.suggestQueries.length||!K.norm(state.q)){el.innerHTML='';return}
+      el.innerHTML='<p class="kr-recent-t">Quizás busques</p><div class="kr-chips">'+
+        state.suggestQueries.slice(0,6).map(function(x){
+          return '<span class="kr-chip kr-chip--sug" data-q="'+x.replace(/"/g,'&quot;')+'">'+x+'</span>';
+        }).join('')+'</div>';
+    }
+
+    function results(){
+      var q=K.norm2(state.q);
+      if(!q)return shuffled.filter(K.ok); /* v9 */
+      var list=[],ids={};
+      state.suggestProds.forEach(function(p){ids[String(p.id)]=1;list.push(p)});
+      allProds.forEach(function(p){
+        if(ids[String(p.id)])return;
+        var hit=K.norm(p.title).indexOf(K.norm(state.q))>-1||
+                K.norm2(p.vendor).indexOf(q)>-1||
+                K.norm2(p.type||p.product_type||'').indexOf(q)>-1||
+                (p.tags||[]).some(function(t){return K.norm(t).indexOf(K.norm(state.q))>-1});
+        if(hit){ids[String(p.id)]=1;list.push(p)}
+      });
+      CATS.forEach(function(k){
+        var nk=K.norm2(k);
+        if(nk.indexOf(q)===-1&&q.indexOf(nk)===-1)return;
+        var c=sessionStorage.getItem(K.CK+k);
+        if(!c)return;
+        try{JSON.parse(c).forEach(function(p){if(!ids[String(p.id)]){ids[String(p.id)]=1;list.push(p)}})}catch(e){}
+      });
+      list=list.filter(K.ok); /* v9: sin stock / sin foto fuera */
+      if(state.sort==='price-asc')list.sort(function(a,b){return priceOf(a)-priceOf(b)});
+      else if(state.sort==='price-desc')list.sort(function(a,b){return priceOf(b)-priceOf(a)});
+      else if(state.sort==='title-asc')list.sort(function(a,b){return (a.title||'').localeCompare(b.title||'')});
+      return list;
+    }
+    function card(p){
+      var id=String(p.id),fav=getWL().indexOf(id)>-1;
+      var pr=priceOf(p),cp=cmpOf(p),hs=cp>pr&&cp>0;
+      var img=K.wurl(K.pimg(p));
+      var ft=null,ta=p.tags||[];
+      for(var t=0;t<ta.length;t++){if(/personalizable|custom|nuevo|new/i.test(ta[t])){ft=ta[t];break}}
+      var href=p.handle?('/products/'+p.handle):(p.url||'#');
+      return '<div class="krika-product-card"><a href="'+href+'" style="display:contents;color:inherit;text-decoration:none"><div class="krika-product-thumb">'+(img?'<img src="'+img+'" alt="" loading="lazy">':'')+'</div></a>'+
+        '<div class="krika-product-info"><span class="krika-product-brand">'+(p.vendor||'').toUpperCase()+'</span>'+
+        '<div class="krika-product-title-row"><a href="'+href+'" class="krika-product-title">'+p.title+'</a>'+
+        '<button type="button" class="krika-wishlist-btn'+(fav?' is-active':'')+'" data-wishlist-btn data-product-id="'+id+'" aria-label="Favoritos"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-10-9.1C.5 8.8 2 5 5.5 5c2 0 3.4 1.1 4.2 2.4C10.5 6.1 11.9 5 13.9 5 17.4 5 18.9 8.8 17.4 11.9 15 16.4 12 21 12 21z"/></svg></button></div>'+
+        '<div class="krika-product-prices">'+(hs?'<span class="krika-compare-price">'+K.fmtCOP(cp)+'</span>':'')+'<span class="krika-current-price'+(hs?' is-sale':'')+'">'+K.fmtCOP(pr)+'</span></div>'+
+        (ft?'<div class="krika-product-tag">'+ft+'</div>':'')+'</div></div>';
+    }
+    function updateArrows(){
+      var max=pGrid.scrollWidth-pGrid.clientWidth-4;
+      aPrev.style.opacity=pGrid.scrollLeft<=4?'.35':'1';
+      aNext.style.opacity=pGrid.scrollLeft>=max?'.35':'1';
+    }
+    function render(){
+      var hasQ=!!K.norm(state.q);
+      ov.classList.toggle('has-q',hasQ);
+      if(state.loading){sMeta.innerHTML='Buscando...';}
+      else{
+        var list=results();
+        sMeta.textContent=list.length+' resultado(s)';
+        alt_btnFilters.href='/search'+(hasQ?'?q='+encodeURIComponent(state.q):'');
+        pGrid.innerHTML=list.slice(0,state.visible).map(card).join('')||'<div style="color:#707070;padding:10px 0;grid-column:1/-1">No se encontraron productos.</div>';
+        alt_btnMore.classList.toggle('is-visible',list.length>state.visible);
+        pGrid.scrollLeft=0;
+        requestAnimationFrame(updateArrows);
+      }
+      renderQuerySugs();
+      if(!hasQ)renderRecent();
+    }
+
+    function openSearch(){
+      ov.classList.add('is-open');document.body.classList.add('krika-lock');
+      state.q='';sInput.value='';state.visible=INIT;state.suggestProds=[];state.suggestQueries=[];
+      loadAll(function(){shuffled=K.shuffle(allProds.filter(K.ok));render()}); /* v9 */
+      renderRecent();
+      setTimeout(function(){sInput.focus()},80);
+    }
+    function closeSearch(){ov.classList.remove('is-open');document.body.classList.remove('krika-lock')}
+
+    var trigger=document.getElementById('alt_krikaSearchTrigger');
+    if(trigger){var cl=trigger.cloneNode(true);trigger.parentNode.replaceChild(cl,trigger);
+      cl.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();openSearch()},true);}
+    document.getElementById('alt_btnCloseSearch').addEventListener('click',closeSearch);
+    document.getElementById('alt_btnCloseM').addEventListener('click',closeSearch);
+    ov.addEventListener('click',function(e){if(e.target===ov)closeSearch()});
+    alt_btnClear.addEventListener('click',function(){state.q='';sInput.value='';state.visible=INIT;shuffled=K.shuffle(allProds.filter(K.ok));state.suggestProds=[];state.suggestQueries=[];render();sInput.focus()});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeSearch();drawer.classList.remove('is-open','sub-open');document.body.classList.remove('krika-lock')}});
+
+    var deb;
+    sInput.addEventListener('input',function(){
+      state.q=sInput.value;state.visible=INIT;
+      clearTimeout(deb);
+      deb=setTimeout(function(){
+        if(K.norm(state.q)){fetchSuggest(state.q,render);render();}
+        else{state.suggestProds=[];state.suggestQueries=[];render();}
+      },220);
+    });
+    function goToFullSearch(e){
+      var q=sInput.value.trim();
+      if(!q)return;
+      e.preventDefault();
+      saveRecent(q);
+      window.location.href='/search?q='+encodeURIComponent(q)+
+        '&options[prefix]=last&options[unavailable_products]=last&options[fields]=title,vendor,product_type,tag,body,variants.title,variants.sku';
+    }
+    sInput.addEventListener('keydown',function(e){if(e.key==='Enter')goToFullSearch(e)});
+    document.getElementById('alt_krikaSeeAll').addEventListener('click',goToFullSearch);
+    alt_btnMore.addEventListener('click',function(){state.visible+=ADD;render()});
+
+    aPrev.addEventListener('click',function(){pGrid.scrollBy({left:-pGrid.clientWidth*0.9,behavior:'smooth'})});
+    aNext.addEventListener('click',function(){pGrid.scrollBy({left:pGrid.clientWidth*0.9,behavior:'smooth'})});
+    pGrid.addEventListener('scroll',function(){requestAnimationFrame(updateArrows)},{passive:true});
+    window.addEventListener('resize',updateArrows);
+
+    alt_btnSort.addEventListener('click',function(e){e.stopPropagation();alt_sortMenu.classList.toggle('is-open')});
+    document.addEventListener('click',function(e){
+      if(!alt_sortMenu.contains(e.target)&&e.target!==alt_btnSort)alt_sortMenu.classList.remove('is-open');
+      var del=e.target.closest('.kr-chip-x');
+      if(del){removeRecent(del.getAttribute('data-delq'));return}
+      var chip=e.target.closest('.kr-chip');
+      if(chip){state.q=chip.getAttribute('data-q');sInput.value=state.q;state.visible=INIT;
+        if(K.norm(state.q)){fetchSuggest(state.q,render);render();}else render();
+        return}
+      if(e.target.closest('.kr-rec-clear')){clearRecent();return}
+    });
+    alt_sortMenu.querySelectorAll('button[data-sort]').forEach(function(b){
+      b.addEventListener('click',function(){
+        alt_sortMenu.querySelectorAll('button').forEach(function(x){x.classList.remove('is-selected')});
+        b.classList.add('is-selected');state.sort=b.getAttribute('data-sort');
+        alt_sortMenu.classList.remove('is-open');state.visible=INIT;render();
+      });
+    });
+
+    pGrid.addEventListener('click',function(e){var b=e.target.closest('[data-wishlist-btn]');if(!b)return;e.preventDefault();e.stopPropagation();b.classList.toggle('is-active',toggleWL(b.getAttribute('data-product-id')))});
+
+    /* ===== DRAWER MÓVIL ===== */
+    document.getElementById('alt_krikaBurger').addEventListener('click',function(){drawer.classList.add('is-open');document.body.classList.add('krika-lock')});
+    document.getElementById('alt_krCloseDrawer').addEventListener('click',function(){drawer.classList.remove('is-open','sub-open');document.body.classList.remove('krika-lock')});
+    document.getElementById('alt_krOverlay').addEventListener('click',function(){drawer.classList.remove('is-open','sub-open');document.body.classList.remove('krika-lock')});
+    document.getElementById('alt_krSubBack').addEventListener('click',function(){drawer.classList.remove('sub-open')});
+    document.querySelectorAll('[data-sub]').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var key=btn.getAttribute('data-sub');
+        var title=btn.textContent.trim();
+        var src=document.querySelector('[data-menu="'+key+'"] .krika-mega-left');
+        var cats=src?src.querySelector('.krika-mega-cats'):null;
+        var vermas=src?src.querySelector('.krika-mega-vermas'):null;
+        var hasGroups=cats&&cats.querySelector('h5');
+        document.getElementById('alt_krSubTitle').textContent=title;
+        var body=document.getElementById('alt_krSubBody');
+        var html='<div class="kr-sub-panel"><h4 class="kr-sub-panel-t">'+(key==='descuentos'?'EXPLORA LAS OFERTAS':(key==='kits'?'MARCAS':(hasGroups?'CATEGORÍAS':'MARCAS')))+'</h4>';
+        html+=cats?'<div class="kr-sub-cats">'+cats.innerHTML+'</div>':'';
+        html+='<a class="kr-sub-vermas" href="'+((vermas&&vermas.getAttribute('href'))||('/collections/'+(key==='descuentos'?'sale':key)))+'">Ver Todo '+title+'</a></div>';
+        html+='<div class="kr-sub-prods" id="alt_krSubProds"><p class="krika-mega-loading">Cargando...</p></div>';
+        body.innerHTML=html;
+        if((key==='kits'||key==='descuentos'))body.querySelectorAll('.kr-sub-cats h5').forEach(function(el){el.remove()});
+        body.querySelectorAll('.kr-sub-cats .krika-mega-vermas').forEach(function(el){el.remove()});
+        body.querySelectorAll('.kr-sub-cats b').forEach(function(el){if(!el.textContent.trim())el.remove()});
+        K.fixLinks(body);
+        drawer.classList.add('sub-open');
+        var pc=document.getElementById('alt_krSubProds');
+        var done=function(prods){
+          var vis=(prods||[]).filter(K.ok); /* v9 */
+          pc.innerHTML=vis.slice(0,4).map(function(p){
+            var img=K.wurl(K.pimg(p));
+            return '<a class="kr-sub-card" href="/products/'+p.handle+'"><div class="im">'+(img?'<img src="'+img+'" alt="" loading="lazy">':'')+'</div><div class="in"><span class="b">'+(p.vendor||'').toUpperCase()+'</span><div class="n">'+p.title+'</div><div class="p">'+K.fmtCOP(priceOf(p))+'</div></div></a>';
+          }).join('')||'';
+        };
+        var c=sessionStorage.getItem(K.CK+key);
+        if(c){try{var cached=JSON.parse(c);if((key==='kits'||key==='descuentos'))K.renderKitsBrands(cached,key);done(cached);return}catch(e){}}
+        var kitRequest=(key==='kits'||key==='descuentos')?K.fetchKitsProducts(key):fetch('/collections/'+key+'/products.json?limit=8').then(function(r){return r.json()}).then(function(d){return (d&&d.products)||[]});
+        kitRequest.then(function(prods){
+          if((key==='kits'||key==='descuentos')){
+            try{if(prods.length)sessionStorage.setItem(K.CK+key,JSON.stringify(prods))}catch(e){}
+            K.renderKitsBrands(prods,key);
+          }
+          K.addMaps(prods);K.fixLinks(body);
+          done(prods);
+        }).catch(function(){pc.innerHTML=''});
+      });
+    });
+
+    fetch('/cart.js').then(function(r){return r.json()}).then(function(c){
+      var n=c.item_count||0,el=document.getElementById('alt_khCartCount');
+      if(n>0){el.textContent=n;el.style.display='flex'}
+    }).catch(function(){});
+
+    renderRecent();
+  })();
+  {% endraw %}
+</script>
+
+
+<style>
+  /* Alternative navigation: compact header, categories on the left, details beside them. */
+  #shopify-section-{{ section.id }} .krika-header-full {
+    padding: 20px 32px; min-height: 80px; background: #fff; border-bottom: 0;
+  }
+  #shopify-section-{{ section.id }} .kh-burger {
+    display: inline-flex; align-items: center; gap: 12px; padding: 8px 0;
+  }
+  #shopify-section-{{ section.id }} .kr-alt_menu-label {
+    font-family: var(--font-stack-body); font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
+  }
+  #shopify-section-{{ section.id }} .kh-link,
+  #shopify-section-{{ section.id }} .krika-mega-nav { display: none; }
+  #shopify-section-{{ section.id }} .kh-logo img { width: 140px; }
+  #shopify-section-{{ section.id }} .kr-panel { width: min(94vw, 1000px); }
+  #shopify-section-{{ section.id }} .kr-dv-main { width: 280px; border-right: 1px solid #e8e8e8; }
+  #shopify-section-{{ section.id }} .kr-mhead { padding: 24px; text-transform: uppercase; letter-spacing: .08em; font-size: 11px; }
+  #shopify-section-{{ section.id }} .kr-dv-cats { padding: 24px 0; }
+  #shopify-section-{{ section.id }} .kr-cat { padding: 14px 24px; font-size: 13px; letter-spacing: .03em; }
+  #shopify-section-{{ section.id }} .kr-cat:hover,
+  #shopify-section-{{ section.id }} .kr-cat[aria-expanded="true"] { background: #f4f4f4; }
+  #shopify-section-{{ section.id }} .kr-dv-foot { padding: 24px; }
+  #shopify-section-{{ section.id }} .kr-dv-foot .kr-btn { border: 0; padding: 6px 0; background: transparent; color: #222; text-align: left; font-size: 12px; }
+  #shopify-section-{{ section.id }} .kr-dv-foot p { font-size: 11px; text-transform: uppercase; letter-spacing: .08em; }
+  #shopify-section-{{ section.id }} .kr-dv-sub { left: 280px; visibility: hidden; transform: translateX(24px); opacity: 0; }
+  #shopify-section-{{ section.id }} .sub-open .kr-dv-sub { visibility: visible; transform: none; opacity: 1; }
+  #shopify-section-{{ section.id }} .kr-sub-head { min-height: 72px; padding: 20px 24px; font-size: 13px; }
+  #shopify-section-{{ section.id }} .kr-sub-body { padding: 24px; }
+  #shopify-section-{{ section.id }} .kr-sub-panel { margin: 0 -24px; padding: 8px 24px 20px; }
+  #shopify-section-{{ section.id }} .kr-sub-body,
+  #shopify-section-{{ section.id }} .kr-sub-panel,
+  #shopify-section-{{ section.id }} .kr-sub-card,
+  #shopify-section-{{ section.id }} .kr-sub-card .im,
+  #shopify-section-{{ section.id }} .kr-sub-card .in { background: #fff; }
+  #shopify-section-{{ section.id }} .kr-sub-card { border: 0; height: 240px; }
+  #shopify-section-{{ section.id }} .kr-sub-prods { gap: 20px; }
+  #shopify-section-{{ section.id }} .kr-sub-vermas { font-size: 12px; text-align: left; font-weight: 400; margin-top: 18px; }
+  #shopify-section-{{ section.id }} .kr-sub-panel-t { font-size: 10px; font-weight: 500; }
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .krika-header-full { min-height: 64px; padding: 12px 16px; }
+    #shopify-section-{{ section.id }} .kh-logo img { width: 110px; }
+    #shopify-section-{{ section.id }} .kr-alt_menu-label { display: none; }
+    #shopify-section-{{ section.id }} .kr-panel { width: min(92vw, 430px); }
+    #shopify-section-{{ section.id }} .kr-dv-main { width: 100%; border: 0; }
+    #shopify-section-{{ section.id }} .kr-dv-sub { left: 0; transform: translateX(100%); }
+    #shopify-section-{{ section.id }} .sub-open .kr-dv-sub { transform: none; }
+    #shopify-section-{{ section.id }} .sub-open .kr-dv-main { visibility: hidden; }
+    #shopify-section-{{ section.id }} .kr-sub-body { padding: 16px; }
+    #shopify-section-{{ section.id }} .kr-sub-panel { margin: 0 -16px; padding: 8px 16px 16px; }
+    #shopify-section-{{ section.id }} .kr-sub-prods { gap: 12px; }
+    #shopify-section-{{ section.id }} .kr-sub-card { height: 220px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .kr-panel,
+    #shopify-section-{{ section.id }} .kr-dv-sub { transition: none; }
+  }
+</style>
+<script>
+(function(){
+  function initAltNavigation(){
+    var root=document.getElementById('shopify-section-{{ section.id }}');
+    if(!root||root.dataset.altNavigationReady)return;
+    root.dataset.altNavigationReady='true';
+    var drawer=root.querySelector('#alt_krikaDrawer');
+    var burger=root.querySelector('#alt_krikaBurger');
+    var panel=drawer.querySelector('.kr-panel');
+    var close=root.querySelector('#alt_krCloseDrawer');
+    var lastCategory=null;
+    function sync(){
+      var open=drawer.classList.contains('is-open');
+      drawer.inert=!open;
+      root.querySelector('.kr-dv-main').inert=open&&drawer.classList.contains('sub-open');
+      root.querySelector('.kr-dv-sub').inert=!open||!drawer.classList.contains('sub-open');
+      burger.setAttribute('aria-expanded',String(open));
+      root.querySelectorAll('[data-sub]').forEach(function(btn){
+        btn.setAttribute('aria-expanded',String(open&&drawer.classList.contains('sub-open')&&btn.textContent.trim()===root.querySelector('#alt_krSubTitle').textContent));
+      });
+    }
+    new MutationObserver(sync).observe(drawer,{attributes:true,attributeFilter:['class']});
+    burger.addEventListener('click',function(){
+      if(window.matchMedia('(min-width: 769px)').matches&&!drawer.classList.contains('sub-open'))root.querySelector('[data-sub]').click();
+      sync();close.focus({preventScroll:true});
+    });
+    root.querySelectorAll('[data-sub]').forEach(function(btn){btn.addEventListener('click',function(){
+      lastCategory=btn;
+      sync();
+      if(window.matchMedia('(max-width: 768px)').matches)root.querySelector('#alt_krSubBack').focus({preventScroll:true});
+    })});
+    root.querySelector('#alt_krSubBack').addEventListener('click',function(){sync();if(lastCategory)lastCategory.focus({preventScroll:true})});
+    close.addEventListener('click',function(){burger.focus({preventScroll:true})});
+    root.querySelector('#alt_krOverlay').addEventListener('click',function(){burger.focus({preventScroll:true})});
+    document.addEventListener('keydown',function(e){
+      if(!drawer.classList.contains('is-open'))return;
+      if(e.key==='Escape'){burger.focus({preventScroll:true});return}
+      if(e.key!=='Tab')return;
+      var focusable=Array.from(panel.querySelectorAll('a[href],button,input,select,[tabindex="0"]')).filter(function(el){return !el.disabled&&!el.closest('[inert]')&&el.getClientRects().length&&getComputedStyle(el).visibility!=='hidden'});
+      var first=focusable[0],last=focusable[focusable.length-1];
+      if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus({preventScroll:true})}
+      else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus({preventScroll:true})}
+    });
+    sync();
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initAltNavigation);else initAltNavigation();
+  document.addEventListener('shopify:section:load',initAltNavigation);
+})();
+</script>
+
+
+<style>
+  /* Desktop: logo and visible category navigation in a single header row. */
+  @media (min-width: 769px) {
+    #shopify-section-{{ section.id }} .krika-header-full {
+      position: relative;
+      display: grid;
+      grid-template-columns: 75px minmax(0, 1fr) auto;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 28px;
+      padding: 6px 28px;
+      min-height: 48px;
+    }
+    #shopify-section-{{ section.id }} .kh-left { display: none; }
+    #shopify-section-{{ section.id }} .kh-logo {
+      position: static; transform: none; flex: 0 0 auto; width: auto;
+    }
+    #shopify-section-{{ section.id }} .kh-logo img {
+      width: 75px;
+      height: 40px;
+      object-fit: contain;
+    }
+    #shopify-section-{{ section.id }} .kh-logo a,
+    #shopify-section-{{ section.id }} .kh-logo img { display: block; }
+    #shopify-section-{{ section.id }} .krika-mega-nav {
+      display: block; position: static; flex: 1; min-width: 0;
+      background: transparent; border: 0; padding: 0;
+      align-self: center;
+      margin: 0 0 8px !important;
+    }
+    #shopify-section-{{ section.id }} .krika-mega-nav-inner {
+      justify-content: flex-start; gap: clamp(10px, 1.5vw, 26px);
+    }
+    #shopify-section-{{ section.id }} .krika-mega-link {
+      font-family: var(--font-stack-body); font-size: 13px;
+      text-transform: none; letter-spacing: 0; white-space: nowrap;
+      font-weight: 400; padding: 0; line-height: 1.2;
+    }
+    #shopify-section-{{ section.id }} .krika-mega-link svg { display: none; }
+    #shopify-section-{{ section.id }} .krika-mega-item:hover > .krika-mega-link,
+    #shopify-section-{{ section.id }} .krika-mega-item:focus-within > .krika-mega-link {
+      text-decoration: underline; text-underline-offset: 5px;
+    }
+    #shopify-section-{{ section.id }} .krika-mega-item:focus-within .krika-mega-dropdown {
+      visibility: visible; opacity: 1;
+    }
+    #shopify-section-{{ section.id }} .kh-right { flex: 0 0 auto; width: auto; margin-left: auto; }
+  }
+  @media (min-width: 769px) and (max-width: 1100px) {
+    #shopify-section-{{ section.id }} .krika-header-full { gap: 16px; padding: 6px 16px; }
+    #shopify-section-{{ section.id }} .kh-logo img { width: 75px; }
+    #shopify-section-{{ section.id }} .krika-mega-link { font-size: 11px; }
+    #shopify-section-{{ section.id }} .kh-right { gap: 0; }
+    #shopify-section-{{ section.id }} .kh-right a[aria-label="Sedes"] { display: none; }
+  }
+</style>
+
+
+<style>
+@media (min-width: 769px) {
+  /* Keep every desktop dropdown and its cards within the available viewport. */
+  #shopify-section-{{ section.id }} .krika-mega-nav .krika-mega-container {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 16px 24px;
+  }
+  #shopify-section-{{ section.id }} .krika-mega-nav .krika-mega-row {
+    grid-template-columns: minmax(260px, 1fr) minmax(0, 2fr);
+    gap: 28px;
+    padding: 24px;
+  }
+  #shopify-section-{{ section.id }} .krika-mega-nav .krika-mega-left,
+  #shopify-section-{{ section.id }} .krika-mega-nav .krika-mega-products {
+    min-width: 0;
+  }
+  #shopify-section-{{ section.id }} .krika-mega-nav :is([data-menu="kits"], [data-menu="descuentos"]) [data-kits-brand-list] {
+    columns: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 18px;
+  }
+  #shopify-section-{{ section.id }} .krika-mega-nav :is([data-menu="kits"], [data-menu="descuentos"]) [data-kits-brand-list] li {
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+  #shopify-section-{{ section.id }} .krika-mega-nav :is([data-menu="kits"], [data-menu="descuentos"]) [data-kits-brand-list] a {
+    display: block;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  #shopify-section-{{ section.id }} .krika-mega-nav .krika-mega-vermas {
+    margin-top: 20px;
+  }
+  #shopify-section-{{ section.id }} .krika-mega-nav .krika-mega-products {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+  #shopify-section-{{ section.id }} .krika-mega-nav .krika-mega-card {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    height: 265px;
+  }
+  #shopify-section-{{ section.id }} .krika-mega-nav .krika-mega-info {
+    min-height: 100px;
+    box-sizing: border-box;
+  }
+  #shopify-section-{{ section.id }} .krika-mega-nav .krika-mega-name {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    line-height: 1.35;
+  }
+  #shopify-section-{{ section.id }} .krika-mega-nav .krika-mega-price {
+    margin-top: auto;
+  }
+  @media (min-width: 769px) and (max-width: 1100px) {
+    #shopify-section-{{ section.id }} .krika-mega-nav .krika-mega-row {
+      grid-template-columns: minmax(240px, 1fr) minmax(0, 1.4fr);
+      gap: 20px;
+      padding: 20px;
+    }
+    #shopify-section-{{ section.id }} .krika-mega-nav .krika-mega-products {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    #shopify-section-{{ section.id }} .krika-mega-nav .krika-mega-dropdown {
+      max-height: 75vh;
+      overflow-y: auto;
+    }
+  }
+
+
+  #shopify-section-{{ section.id }} .krika-mega-dropdown {
+    background: #f2f2f2; height: auto; max-height: var(--kr-menu-available,75vh); overflow-y: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,.08); border-top: 0;
+  }
+  #shopify-section-{{ section.id }} .krika-mega-container { height: auto; background: #fff; }
+  #shopify-section-{{ section.id }} .krika-mega-row { align-items: start; background: #f2f2f2; }
+  #shopify-section-{{ section.id }} .krika-mega-left { padding: 0; }
+  #shopify-section-{{ section.id }} .krika-mega-col-title { display: block; }
+  #shopify-section-{{ section.id }} .krika-mega-cats { display: flex; flex-direction: row; gap: 26px; margin-top: 14px; }
+  #shopify-section-{{ section.id }} .krika-mega-col li { margin-bottom: 10px; }
+  #shopify-section-{{ section.id }} .krika-mega-col li a { font-size: 13px; line-height: 1.3; color: #666; }
+  #shopify-section-{{ section.id }} .krika-mega-col h5 { font-size: 10px; margin-bottom: 10px; }
+  #shopify-section-{{ section.id }} .krika-mega-card { border: 1px solid var(--krika-cardline); background: #fff; }
+  #shopify-section-{{ section.id }} .krika-mega-card::after { display: block; }
+  #shopify-section-{{ section.id }} .krika-mega-img { aspect-ratio: auto; flex: 1; background: #fff; }
+  #shopify-section-{{ section.id }} .krika-mega-img img { max-width: 80%; max-height: 80%; }
+  #shopify-section-{{ section.id }} .krika-mega-info { padding: 10px 12px 12px; }
+  #shopify-section-{{ section.id }} .krika-mega-brand,
+  #shopify-section-{{ section.id }} .krika-mega-price { display: block; }
+  #shopify-section-{{ section.id }} .krika-mega-name { font-size: 11px; font-weight: 700; text-transform: uppercase; }
+  #shopify-section-{{ section.id }} .krika-mega-vermas { font-weight: 900 !important; }
+  #shopify-section-{{ section.id }} .kr-alt-feature,
+  #shopify-section-{{ section.id }} .kr-alt-close-desktop { display: none !important; }
+  #shopify-section-{{ section.id }} .krika-mega-item:hover .krika-mega-dropdown,
+  #shopify-section-{{ section.id }} .krika-mega-item:focus-within .krika-mega-dropdown,
+  #shopify-section-{{ section.id }} .krika-mega-item.is-active .krika-mega-dropdown { visibility: visible; opacity: 1; pointer-events: auto; }
+
+}
+</style>
+<script>
+(function(){
+ function init(){
+  var root=document.getElementById('shopify-section-{{ section.id }}');
+  if(!root||root.dataset.horizontalReady)return;
+  root.dataset.horizontalReady='true';
+  var header=root.querySelector('.krika-header-full'),close=root.querySelector('.kr-alt-close-desktop');
+  var items=Array.from(root.querySelectorAll('.krika-mega-nav .krika-mega-item[data-menu]'));
+  var desktop=window.matchMedia('(min-width: 769px)');
+  function size(){root.style.setProperty('--kr-menu-available',Math.max(100,window.innerHeight-header.getBoundingClientRect().bottom)+'px')}
+  function shut(){
+    items.forEach(function(item){item.classList.remove('is-active');item.querySelector('.krika-mega-link').setAttribute('aria-expanded','false');item.querySelector('.krika-mega-dropdown').inert=true});
+    close.hidden=true;root.classList.remove('kr-navigation-open');
+  }
+  function open(item){if(!desktop.matches)return;shut();size();item.classList.add('is-active');item.querySelector('.krika-mega-link').setAttribute('aria-expanded','true');item.querySelector('.krika-mega-dropdown').inert=false;close.hidden=false;root.classList.add('kr-navigation-open')}
+  items.forEach(function(item){
+    var link=item.querySelector('.krika-mega-link');link.setAttribute('aria-haspopup','true');
+    item.addEventListener('mouseenter',function(){open(item)});
+    link.addEventListener('focus',function(){open(item)});
+    link.addEventListener('click',function(e){if(desktop.matches&&!item.classList.contains('is-active')){e.preventDefault();open(item)}});
+  });
+  close.addEventListener('click',shut);
+  root.querySelectorAll('.krika-mega-item:not([data-menu]) > .krika-mega-link').forEach(function(link){
+    link.addEventListener('mouseenter',shut);
+    link.addEventListener('focus',shut);
+  });
+  header.addEventListener('mouseleave',shut);
+  root.addEventListener('keydown',function(e){if(e.key==='Escape'){shut();close.blur()}});
+  document.addEventListener('click',function(e){if(!root.contains(e.target))shut()});
+  header.addEventListener('focusout',function(e){if(!header.contains(e.relatedTarget))shut()});
+  window.addEventListener('resize',function(){if(!desktop.matches)shut();else size()});
+  shut();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+ document.addEventListener('shopify:section:load',init);
+})();
+</script>
+
+
+<style>
+  /* Mobile first: navigation stays primary, product suggestions are optional. */
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .kr-mhead,
+    #shopify-section-{{ section.id }} .kr-sub-head { min-height: 60px; padding: 16px 20px; }
+    #shopify-section-{{ section.id }} .kr-dv-cats { padding: 12px 20px; }
+    #shopify-section-{{ section.id }} .kr-cat {
+      padding: 14px 0; min-height: 48px; font-size: 14px; letter-spacing: 0;
+      border-bottom: 1px solid #eee; text-transform: none;
+    }
+    #shopify-section-{{ section.id }} .kr-cat svg { width: 12px; height: 12px; color: #777; }
+    #shopify-section-{{ section.id }} .kr-sub-body { padding: 20px; background: #f7f7f7; }
+    #shopify-section-{{ section.id }} .kr-sub-panel { margin: 0; padding: 0; background: transparent; }
+    #shopify-section-{{ section.id }} .kr-sub-panel-t { font-size: 10px; letter-spacing: .08em; padding-bottom: 12px; }
+    #shopify-section-{{ section.id }} .kr-sub-cats { margin-top: 12px; gap: 16px; }
+    #shopify-section-{{ section.id }} .kr-sub-cats li a { min-height: 44px; padding: 11px 0; font-size: 13px; line-height: 1.5; }
+    #shopify-section-{{ section.id }} .kr-sub-vermas {
+      min-height: 44px; display: flex; align-items: center; margin-top: 16px;
+      padding: 10px 0; font-size: 13px; font-weight: 500;
+    }
+    #shopify-section-{{ section.id }} .kr-sub-prods { margin-top: 24px; gap: 12px; }
+    #shopify-section-{{ section.id }} .kr-sub-card { height: 180px; background: #fff; }
+    #shopify-section-{{ section.id }} .kr-sub-card .im,
+    #shopify-section-{{ section.id }} .kr-sub-card .in { background: #fff; }
+    #shopify-section-{{ section.id }} .kr-sub-card .b,
+    #shopify-section-{{ section.id }} .kr-sub-card .p { display: none; }
+    #shopify-section-{{ section.id }} .kr-sub-card .n { font-size: 10px; font-weight: 400; text-transform: none; }
+  }
+
+</style>
+
+
+<style>
+  #shopify-section-{{ section.id }} .kr-alt-subbar { display: flex; align-items: center; border-bottom: 1px solid #e5e5e5; background: #fff; }
+  #shopify-section-{{ section.id }} .kr-alt-subbar .kr-sub-head { flex: 1; min-width: 0; border: 0; text-align: left; }
+  #shopify-section-{{ section.id }} .kr-alt-sub-close { font-size: 28px; margin-right: 20px; }
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .kr-dv-main { overflow-y: auto; }
+    #shopify-section-{{ section.id }} .kr-mhead { flex-shrink: 0; }
+    #shopify-section-{{ section.id }} .kr-dv-cats { flex: 0 0 auto; overflow: visible; padding-top: 0; padding-bottom: 0; }
+    #shopify-section-{{ section.id }} .kr-dv-foot { flex: 0 0 auto; margin-top: 20px; padding: 20px; }
+    #shopify-section-{{ section.id }} .kr-sub-body { background: #fff; padding: 16px 20px 24px; }
+    #shopify-section-{{ section.id }} .kr-sub-panel-t,
+    #shopify-section-{{ section.id }} .kr-sub-cats h5 { display: none; }
+    #shopify-section-{{ section.id }} .kr-sub-cats { display: block; margin: 10px 0 0; }
+    #shopify-section-{{ section.id }} .kr-sub-cats [data-kits-brand-list] { columns: 1; }
+    #shopify-section-{{ section.id }} .kr-sub-cats .krika-mega-col + .krika-mega-col { margin-top: 16px; }
+    #shopify-section-{{ section.id }} .kr-sub-cats li a,
+    #shopify-section-{{ section.id }} .kr-sub-vermas { color: #777; font-size: 15px; font-weight: 400; line-height: 1.4; padding: 10px 0; min-height: 44px; }
+    #shopify-section-{{ section.id }} .kr-sub-vermas { margin: 0; text-decoration: none; }
+    #shopify-section-{{ section.id }} .kr-sub-prods {
+      display: grid; grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 44%;
+      gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 28px -20px 0 0;
+      padding: 0 20px 8px 0; scrollbar-width: thin; overscroll-behavior-x: contain;
+    }
+    #shopify-section-{{ section.id }} .kr-sub-prods[hidden] { display: none; }
+    #shopify-section-{{ section.id }} .kr-sub-card { height: auto; min-width: 0; scroll-snap-align: start; background: #fff; }
+    #shopify-section-{{ section.id }} .kr-sub-card .im { aspect-ratio: 3 / 4; flex: none; background: #f2f2f2; }
+    #shopify-section-{{ section.id }} .kr-sub-card .in { padding: 8px 0; background: #fff; }
+    #shopify-section-{{ section.id }} .kr-sub-card .n { font-size: 12px; line-height: 1.4; font-weight: 400; text-transform: none; text-decoration: underline; text-underline-offset: 3px; }
+  }
+</style>
+
+
+<style>
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .kr-cat {
+      gap: 16px;
+      padding-right: 8px;
+      box-sizing: border-box;
+    }
+    #shopify-section-{{ section.id }} .kr-cat svg {
+      display: block;
+      flex: 0 0 16px;
+      width: 16px;
+      height: 16px;
+      stroke-width: 1.5;
+      color: #666;
+      overflow: visible;
+    }
+    #shopify-section-{{ section.id }} .kr-cat:last-child { border-bottom: 0; }
+    #shopify-section-{{ section.id }} .kr-dv-foot { border-top: 0; margin-top: 8px; }
+    #shopify-section-{{ section.id }} .kr-cat:hover { background: transparent; }
+    #shopify-section-{{ section.id }} .kr-cat:focus-visible { outline: 1px solid #777; outline-offset: 3px; }
+  }
+</style>
+
+
+<style>
+  #shopify-section-{{ section.id }} .kr-alt-header-wishlist { display: inline-flex; position: relative; }
+  #shopify-section-{{ section.id }} .kr-alt-wishlist-count {
+    position: absolute;
+    top: 1px;
+    right: 0;
+    width: 16px;
+    min-width: 16px;
+    max-width: 16px;
+    height: 16px;
+    min-height: 16px;
+    padding: 0;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background: #222;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 500;
+    line-height: 16px;
+    text-align: center;
+    pointer-events: none;
+  }
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .krika-header-full {
+      display: flex; justify-content: flex-start; align-items: center; gap: 0;
+      padding: 12px 14px; min-height: 68px;
+    }
+    #shopify-section-{{ section.id }} .kh-logo {
+      order: 0; position: static; transform: none; width: auto; flex: 0 1 120px; min-width: 70px;
+    }
+    #shopify-section-{{ section.id }} .kh-logo img { width: 120px; max-width: 100%; height: auto; }
+    #shopify-section-{{ section.id }} .kh-right {
+      order: 1; display: flex; flex: 0 0 auto; width: auto; padding: 0;
+      margin-left: auto; gap: 0;
+    }
+    #shopify-section-{{ section.id }} .kh-left {
+      order: 2; display: flex; flex: 0 0 auto; width: auto; padding: 0;
+    }
+    #shopify-section-{{ section.id }} .kh-right > a,
+    #shopify-section-{{ section.id }} .kh-right > button,
+    #shopify-section-{{ section.id }} .kh-burger {
+      width: 36px; height: 44px; padding: 7px; display: inline-flex;
+      align-items: center; justify-content: center; box-sizing: border-box;
+    }
+    #shopify-section-{{ section.id }} .kh-right > a[aria-label="Sedes"],
+    #shopify-section-{{ section.id }} .kh-right > .kr-alt-close-desktop { display: none; }
+    #shopify-section-{{ section.id }} .kh-right svg,
+    #shopify-section-{{ section.id }} .kh-burger svg { width: 23px; height: 23px; }
+    #shopify-section-{{ section.id }} .kh-right > a[aria-label="Carrito"] { position: relative; }
+    #shopify-section-{{ section.id }} .kh-cart-n { right: -2px; top: 0; }
+    #shopify-section-{{ section.id }} .kr-alt_menu-label { display: none; }
+  }
+</style>
+
+<style>
+@media (max-width: 768px) {
+
+#shopify-section-{{ section.id }} .kr-drawer { position: fixed; inset: 0; z-index: 99999; pointer-events: none; }
+#shopify-section-{{ section.id }} .kr-drawer.is-open { pointer-events: auto; }
+#shopify-section-{{ section.id }} .kr-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.35); opacity: 0; transition: 0.25s; }
+#shopify-section-{{ section.id }} .kr-drawer.is-open .kr-overlay { opacity: 1; }
+#shopify-section-{{ section.id }} .kr-panel {
+    position: absolute; top: 0; bottom: 0; left: 0; width: min(85vw, 340px);
+    background: #fff; transform: translateX(-100%); transition: 0.28s; overflow: hidden;
+  }
+#shopify-section-{{ section.id }} .kr-drawer.is-open .kr-panel { transform: none; }
+#shopify-section-{{ section.id }} .kr-dv-main { display: flex; flex-direction: column; height: 100%; }
+#shopify-section-{{ section.id }} .kr-mhead { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; font-size: 14px; }
+#shopify-section-{{ section.id }} .kr-x { background: none; border: none; cursor: pointer; color: #000; padding: 4px; display: inline-flex; }
+#shopify-section-{{ section.id }} .kr-dv-cats { flex: 1; overflow: auto; padding: 4px 0; }
+#shopify-section-{{ section.id }} .kr-cat {
+    display: flex; justify-content: space-between; align-items: center; width: 100%;
+    padding: 15px 20px; font-size: 15px; color: #333; background: none; border: 0;
+    cursor: pointer; text-decoration: none; text-align: left;
+  }
+#shopify-section-{{ section.id }} .kr-dv-foot { padding: 18px 20px; border-top: 1px solid #eee; }
+#shopify-section-{{ section.id }} .kr-dv-foot p { margin: 0 0 12px; font-size: 15px; }
+#shopify-section-{{ section.id }} .kr-btn {
+    display: block; width: 100%; padding: 12px; text-align: center; font-size: 14px;
+    text-decoration: none; margin-bottom: 10px; border: 1px solid #000; color: #000;
+  }
+#shopify-section-{{ section.id }} .kr-btn--dark { background: #222; color: #fff; }
+#shopify-section-{{ section.id }} .kr-dv-sub {
+    position: absolute; inset: 0; background: #fff; transform: translateX(100%);
+    transition: 0.28s; display: flex; flex-direction: column;
+  }
+#shopify-section-{{ section.id }} .kr-drawer.sub-open .kr-dv-sub { transform: none; }
+#shopify-section-{{ section.id }} .kr-sub-head {
+    display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+    border-bottom: 1px solid #eee; background: none; border-left: 0; border-right: 0;
+    border-top: 0; font-size: 15px; cursor: pointer;
+  }
+#shopify-section-{{ section.id }} .kr-sub-body { flex: 1; overflow: auto; padding: 16px; }
+#shopify-section-{{ section.id }} .kr-sub-body,
+#shopify-section-{{ section.id }} .kr-sub-body .kr-sub-panel,
+#shopify-section-{{ section.id }} .kr-sub-body .kr-sub-card,
+#shopify-section-{{ section.id }} .kr-sub-body .kr-sub-card .im,
+#shopify-section-{{ section.id }} .kr-sub-body .kr-sub-card .in {
+    background: #f7f7f7;
+  }
+#shopify-section-{{ section.id }} .kr-sub-body .kr-sub-card .im img {
+    mix-blend-mode: multiply;
+  }
+#shopify-section-{{ section.id }} .kr-sub-panel { background: #f7f7f7; margin: 0 -16px; padding: 14px 16px 12px; }
+#shopify-section-{{ section.id }} .kr-sub-panel-t {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    color: #1a1a1a; margin: 0; padding-bottom: 10px; border-bottom: 1px solid #dcdcdc;
+  }
+#shopify-section-{{ section.id }} .kr-sub-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 18px; margin-top: 6px; }
+#shopify-section-{{ section.id }} .kr-sub-cats .krika-mega-col { flex: none; min-width: 0; }
+#shopify-section-{{ section.id }} .kr-sub-cats ul { list-style: none; margin: 0; padding: 0; }
+#shopify-section-{{ section.id }} .kr-sub-cats:has([data-kits-brand-list]) { display: block; }
+#shopify-section-{{ section.id }} .kr-sub-cats [data-kits-brand-list] {
+    display: block;
+    columns: 2;
+    column-gap: 18px;
+  }
+#shopify-section-{{ section.id }} .kr-sub-cats [data-kits-brand-list] li {
+    min-width: 0;
+    break-inside: avoid;
+  }
+#shopify-section-{{ section.id }} .kr-sub-cats [data-kits-brand-list] a { overflow-wrap: anywhere; }
+#shopify-section-{{ section.id }} .kr-sub-cats li { margin: 0; }
+#shopify-section-{{ section.id }} .kr-sub-cats li a {
+    display: block;
+    padding: 9px 0;
+    font-family: var(--font-stack-body);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: normal;
+    color: #7a7a7a;
+    text-decoration: none;
+  }
+#shopify-section-{{ section.id }} .kr-sub-cats li a::after { content: none; }
+#shopify-section-{{ section.id }} .kr-sub-cats li a:hover { color: #000; }
+#shopify-section-{{ section.id }} .kr-sub-cats h5 {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; margin: 10px 0 4px; color: #1a1a1a;
+  }
+#shopify-section-{{ section.id }} .kr-sub-vermas {
+    display: block; text-align: center; margin: 10px 0 0; font-size: 13px; font-weight: 700;
+    color: #666; text-decoration: underline; text-underline-offset: 4px;
+  }
+#shopify-section-{{ section.id }} .kr-sub-prods { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; }
+#shopify-section-{{ section.id }} .kr-sub-card { height: 235px; text-decoration: none; color: inherit; }
+#shopify-section-{{ section.id }} .kr-sub-card .im img { max-width: 85%; max-height: 85%; }
+#shopify-section-{{ section.id }} .kr-sub-card .in { padding: 8px 10px 10px; }
+#shopify-section-{{ section.id }} .kr-sub-card .n {
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+
+
+#shopify-section-{{ section.id }} .kr-dv-main { width: 100%; visibility: visible; overflow: hidden; border: 0; }
+#shopify-section-{{ section.id }} .kr-dv-sub { left: 0; opacity: 1; visibility: visible; }
+#shopify-section-{{ section.id }} .kr-dv-sub:not(:focus-within) { pointer-events: auto; }
+#shopify-section-{{ section.id }} .kr-cat { box-sizing: border-box; border-bottom: 0; min-height: auto; gap: 0; letter-spacing: normal; }
+#shopify-section-{{ section.id }} .kr-cat svg { flex: 0 0 16px; width: 16px; height: 16px; }
+#shopify-section-{{ section.id }} .kr-mhead { min-height: auto; flex-shrink: 0; }
+#shopify-section-{{ section.id }} .kr-dv-cats { flex: 1; overflow: auto; }
+#shopify-section-{{ section.id }} .kr-dv-foot { margin-top: 0; flex-shrink: 0; }
+#shopify-section-{{ section.id }} .kr-dv-foot .kr-btn { display: block; width: 100%; padding: 12px; text-align: center; font-size: 14px; margin-bottom: 10px; border: 1px solid #000; color: #000; background: #fff; }
+#shopify-section-{{ section.id }} .kr-dv-foot .kr-btn--dark { color: #fff; background: #222; }
+#shopify-section-{{ section.id }} .kr-dv-foot p { font-size: 15px; letter-spacing: normal; text-transform: none; }
+#shopify-section-{{ section.id }} .kr-cat:hover { background: none; }
+#shopify-section-{{ section.id }} .kr-sub-head { min-height: auto; }
+#shopify-section-{{ section.id }} .kr-sub-cats h5 { display: block; }
+#shopify-section-{{ section.id }} .kr-sub-panel-t { display: block; }
+#shopify-section-{{ section.id }} .kr-sub-cats .krika-mega-col + .krika-mega-col { margin-top: 0; }
+#shopify-section-{{ section.id }} .kr-sub-cats li a { min-height: auto; }
+#shopify-section-{{ section.id }} .kr-sub-vermas { min-height: auto; padding: 0; }
+#shopify-section-{{ section.id }} .kr-sub-prods { grid-auto-flow: row; grid-auto-columns: auto; overflow: visible; scroll-snap-type: none; padding: 0; margin-right: 0; }
+#shopify-section-{{ section.id }} .kr-sub-card { border: 1px solid var(--krika-cardline); }
+#shopify-section-{{ section.id }} .kr-sub-card .im { aspect-ratio: auto; flex: 1; min-height: 0; }
+#shopify-section-{{ section.id }} .kr-sub-card .b { display: block; }
+#shopify-section-{{ section.id }} .kr-sub-card .p { display: block; }
+#shopify-section-{{ section.id }} .kr-sub-card .n { font-size: 11px; line-height: 1.35; font-weight: 700; text-transform: uppercase; text-decoration: none; }
+
+}
+</style>
+
+
+<style>
+  /* A single icon family for desktop and mobile header controls. */
+  #shopify-section-{{ section.id }} .kh-right > a,
+  #shopify-section-{{ section.id }} .kh-right > button,
+  #shopify-section-{{ section.id }} .kh-burger {
+    width: 36px; height: 44px; padding: 7px; box-sizing: border-box;
+    align-items: center; justify-content: center; color: #111;
+  }
+  #shopify-section-{{ section.id }} .kh-right svg,
+  #shopify-section-{{ section.id }} .kh-burger svg {
+    display: block; width: 22px; height: 22px; flex-shrink: 0;
+    fill: none; stroke: currentColor; stroke-width: 1.7;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+</style>
+
+
+<style>
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .kr-panel,
+    #shopify-section-{{ section.id }} .kr-dv-sub {
+      transition: transform 220ms ease;
+      overflow-anchor: none;
+    }
+    #shopify-section-{{ section.id }} .kr-overlay { transition: opacity 220ms ease; }
+    #shopify-section-{{ section.id }} .kr-drawer.sub-open .kr-dv-main { visibility: visible; }
+    #shopify-section-{{ section.id }} .kr-sub-body,
+    #shopify-section-{{ section.id }} .kr-dv-cats { scroll-behavior: auto; overflow-anchor: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .kr-panel,
+    #shopify-section-{{ section.id }} .kr-dv-sub,
+    #shopify-section-{{ section.id }} .kr-overlay { transition: none; }
+  }
+</style>
+
+
+<style>
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .kr-sub-body .kr-sub-card,
+    #shopify-section-{{ section.id }} .kr-sub-body .kr-sub-card .im,
+    #shopify-section-{{ section.id }} .kr-sub-body .kr-sub-card .in {
+      background: #fff !important;
+    }
+    #shopify-section-{{ section.id }} .kr-sub-body .kr-sub-card .im img {
+      mix-blend-mode: normal;
+    }
+  }
+</style>
+
+
+<style>
+  @media (hover: hover) and (pointer: fine) {
+    #shopify-section-{{ section.id }} .kh-logo img,
+    #shopify-section-{{ section.id }} .kh-right svg,
+    #shopify-section-{{ section.id }} .kh-burger svg {
+      transition: transform 160ms ease;
+      transform-origin: center;
+    }
+    #shopify-section-{{ section.id }} .kh-logo a:hover img,
+    #shopify-section-{{ section.id }} .kh-right > a:hover svg,
+    #shopify-section-{{ section.id }} .kh-right > button:hover svg,
+    #shopify-section-{{ section.id }} .kh-burger:hover svg {
+      transform: scale(1.05);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #shopify-section-{{ section.id }} .kh-logo img,
+    #shopify-section-{{ section.id }} .kh-right svg,
+    #shopify-section-{{ section.id }} .kh-burger svg {
+      transition: none;
+      transform: none !important;
+    }
+  }
+</style>
+
+
+<style>
+  @media (max-width: 768px) {
+    #shopify-section-{{ section.id }} .kr-mhead > span { display: none; }
+    #shopify-section-{{ section.id }} .kr-mhead { justify-content: flex-end; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Krika Menú Horizontal",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Krika Menú Horizontal"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category_visual",
+      "name": "Imagen de categoría",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Colección"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen destacada vertical"
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Título de la imagen"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

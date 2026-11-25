@@ -36,6 +36,10 @@ if (!customElements.get("media-gallery")) {
         this.init();
       }
 
+      disconnectedCallback() {
+        this.quickViewResizeObserver?.disconnect();
+      }
+
       init() {
         this.section = this.closest('product-info');
         this.domNodes = queryDomNodes(this.selectors, this);
@@ -154,6 +158,18 @@ if (!customElements.get("media-gallery")) {
               }
             }
         }
+        if (this.context === 'quick-view') {
+          Object.assign(this.sliderOptions, {
+            slidesPerView: 1,
+            slidesPerGroup: 1,
+            spaceBetween: 0,
+            centeredSlides: false,
+            breakpoints: {},
+            observer: true,
+            observeParents: true,
+            resizeObserver: true,
+          });
+        }
       }
 
       initSlider() {
@@ -175,6 +191,13 @@ if (!customElements.get("media-gallery")) {
           galleryList.classList.add('swiper-wrapper');
 
           this.slider = new MinimogLibs.Swiper(slider, this.sliderOptions);
+          if (this.context === 'quick-view') {
+            this.quickViewResizeObserver?.disconnect();
+            this.quickViewResizeObserver = new ResizeObserver(() => {
+              if (this.slider && !this.slider.destroyed) this.slider.update();
+            });
+            this.quickViewResizeObserver.observe(slider);
+          }
 
           // Handle slide change for variant group images
           if (!this.enableVariantGroupImages) this.handleSlideChange();
@@ -182,6 +205,7 @@ if (!customElements.get("media-gallery")) {
       }
 
       destroySlider() {
+        this.quickViewResizeObserver?.disconnect();
         const { slider, galleryList } = this.domNodes;
 
         slider.classList.remove('swiper-container');

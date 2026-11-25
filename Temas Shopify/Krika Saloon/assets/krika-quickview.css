@@ -1,20 +1,35 @@
-/* A vertical, centered product preview. Scoped to the quick-view modal. */
+/* Centered product preview: brand, title, image, price, offer and purchase controls. */
+.m-modal:has(.m-product-quickview) {
+  z-index: 1000001 !important;
+  margin: 0 !important;
+  padding: 16px !important;
+  width: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
 .m-modal--content:has(.m-product-quickview) {
   background: #fff !important;
   border-radius: 0;
   border: 0;
   overflow: hidden;
+  max-width: 100%;
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  box-sizing: border-box;
 }
 .m-modal--content:has(.m-product-quickview) .m-modal--content-inner {
   overflow: visible;
 }
 .m-product-quickview {
+  --quickview-image-height: clamp(60px, calc(88vh - 360px), 240px);
+  --quickview-image-height: clamp(60px, calc(88dvh - 360px), 240px);
   background: #fff;
   border-radius: 0;
   max-height: 88vh;
   max-height: 88dvh;
   overflow-y: auto;
-  padding: 30px 16px 28px;
+  padding: 22px 16px 18px;
   box-sizing: border-box;
 }
 .m-product-quickview .m-main-product--wrapper {
@@ -38,13 +53,15 @@
 }
 .m-product-quickview .krika-quickview-vendor {
   order: 0;
-  width: 100%;
+  width: calc(100% - 24px);
   text-align: center;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: .2em;
   text-transform: uppercase;
-  margin-bottom: 12px;
+  margin: 0 auto 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #777;
 }
 .m-product-quickview .main-product__block-title { order: 1; }
 .m-product-quickview .product-block-group--title {
@@ -56,7 +73,7 @@
 }
 .m-product-quickview .m-product-title {
   font-family: var(--font-stack-header);
-  font-size: clamp(12px, 2.5vw, 16px);
+  font-size: 11px;
   line-height: 1.25;
   font-weight: 400;
   margin: 0 auto 8px !important;
@@ -64,24 +81,29 @@
   max-width: 100%;
   width: 100%;
   text-align: center !important;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
 }
 .m-product-quickview .m-product-title a {
-  display: block;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
   width: 100%;
   text-align: center !important;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
-.m-product-quickview .main-product__block-price { order: 2; margin-bottom: 10px; }
-.m-product-quickview .m-price { justify-content: center; font-size: 16px; }
+.m-product-quickview .main-product__block-price { order: 3; margin-bottom: 8px; text-align: center; }
+.m-product-quickview .m-price { justify-content: center; font-size: 14px; }
+.m-product-quickview .m-price .m-price-item { font-size: 14px !important; }
+.m-product-quickview .m-price__sale .m-price-item--regular { font-size: 12px !important; }
 .m-product-quickview .m-price__sale { justify-content: center; flex-wrap: wrap; }
 .m-product-quickview .m-product-quickview--media {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
-  order: 3;
+  order: 2;
   width: 100% !important;
   max-width: 320px;
   margin: 0 auto 10px;
@@ -92,13 +114,13 @@
 .m-product-quickview .krika-quickview-sale {
   text-transform: uppercase;
   display: none;
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  z-index: 2;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
+  order: 1;
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  padding: 5px 10px;
+  border-radius: 12px;
   background: #222;
   color: #fff;
   align-items: center;
@@ -108,46 +130,89 @@
   line-height: 1;
 }
 .m-product-quickview:has(.m-price--on-sale) .krika-quickview-sale {
-  display: flex;
+  display: inline-flex;
 }
-.m-product-quickview .m-media-gallery,
-.m-product-quickview .m-media-gallery__wrapper,
-.m-product-quickview .m-media-gallery__inner {
-  width: 100%;
-  margin: 0 !important;
-  padding: 0 !important;
+.m-product-quickview .main-product__block-discount { order: 4; display: none; }
+.m-product-quickview:has(.m-price--on-sale) .main-product__block-discount { display: block; margin-bottom: 10px; }
+/* Isolated gallery: browser scrolling keeps slide widths and centering in sync. */
+.m-product-quickview .krika-preview-gallery { display: block; position: relative; width: 100%; min-width: 0; }
+.m-product-quickview .krika-preview-track {
+  display: flex; width: 100%; height: var(--quickview-image-height);
+  overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory;
+  scrollbar-width: none; overscroll-behavior-x: contain; direction: ltr;
 }
-.m-product-quickview .m-product-media--item {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-  box-sizing: border-box;
+.m-product-quickview .krika-preview-track::-webkit-scrollbar { display: none; }
+.m-product-quickview .krika-preview-slide {
+  flex: 0 0 100%; width: 100%; min-width: 0; height: 100%;
+  display: flex; align-items: center; justify-content: center; scroll-snap-align: start;
 }
-.m-product-quickview .m-product-media > responsive-image {
-  display: block;
-  height: clamp(160px, calc(88vh - 300px), 360px);
-  height: clamp(160px, calc(88dvh - 300px), 360px);
-  padding-bottom: 0 !important;
-  aspect-ratio: auto !important;
+.m-product-quickview .krika-preview-image,
+.m-product-quickview .krika-preview-slide > svg {
+  display: block; position: static; width: 100%; height: 100%;
+  max-width: 100%; max-height: 100%; object-fit: contain; object-position: center;
+  margin: 0; transform: none; animation: none;
 }
-.m-product-quickview .m-product-media img {
-  object-fit: contain !important;
-  object-position: center;
-  width: 100% !important;
-  height: 100% !important;
-  max-height: 100%;
+.m-product-quickview .krika-preview-prev,
+.m-product-quickview .krika-preview-next {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; padding: 0; background: #222;
+  border: 0; border-radius: 50%; color: #fff; line-height: 1;
 }
+.m-product-quickview .krika-preview-prev { left: 0; }
+.m-product-quickview .krika-preview-next { right: 0; }
+.m-product-quickview .krika-preview-gallery button:disabled { opacity: .3; cursor: default; }
 .m-product-quickview .main-product__block-description {
-  order: 4;
+  order: 5;
   font-size: 13px;
   line-height: 1.4;
   margin-bottom: 10px;
 }
 .m-product-quickview .m-product-quickview--viewmore { font-size: 12px; }
-.m-product-quickview .main-product__block-variant_picker { order: 5; margin-bottom: 8px; }
+.m-product-quickview .krika-preview-description > summary {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.m-product-quickview .krika-preview-description > summary::-webkit-details-marker { display: none; }
+.m-product-quickview .krika-description-less,
+.m-product-quickview .krika-preview-description[open] .krika-description-more { display: none; }
+.m-product-quickview .krika-preview-description[open] .krika-description-less { display: inline; }
+.m-product-quickview .krika-preview-description-content {
+  margin-top: 12px;
+  text-align: left;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  overflow-x: auto;
+}
+.m-product-quickview .krika-preview-description-content img {
+  max-width: 100%;
+  height: auto;
+}
+.m-product-quickview .main-product__block-variant_picker { display: none !important; }
+.m-product-quickview .main-product__block-variant_picker .m-product-option {
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+.m-product-quickview .main-product__block-variant_picker .m-product-option--label {
+  font-size: 12px;
+  line-height: 18px;
+  margin-bottom: 4px;
+}
+.m-product-quickview .m-product-option--button .m-product-option--node__label {
+  font-size: 12px;
+  padding: 5px 8px;
+  margin: 2px;
+  min-height: 30px;
+}
 .m-product-quickview .main-product__block-buy_buttons { order: 6; padding: 0 !important; }
 .m-product-quickview .m-product-form--wrapper {
   width: 100%;
-  max-width: 360px;
+  max-width: 100%;
   margin-left: auto !important;
   margin-right: auto !important;
   flex-wrap: nowrap;
@@ -178,5 +243,5 @@
 }
 @media (max-width: 767px) {
   .m-modal--content:has(.m-product-quickview) { border-radius: 0; }
-  .m-product-quickview { padding: 28px 12px 24px; border-radius: 0; }
+  .m-product-quickview { padding: 22px 12px 16px; border-radius: 0; }
 }
