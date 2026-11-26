@@ -17,7 +17,9 @@
   </ul>
   {%- endif -%}
 </div>
-<script type="application/json" id="kf-money-sample">{{ 123456 | money | json }}</script>
+{% unless static_preview %}
+  <script type="application/json" id="kf-money-sample">{{ 123456 | money | json }}</script>
+{% endunless %}
 <style>
 .kf-top{margin:4px 0 14px}
 .kf-codes{font-size:12px;color:#777;display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px}
@@ -25,6 +27,7 @@
 .kf-benefits li{display:flex;gap:8px;align-items:flex-start;font-size:14px;line-height:1.45;margin:0 0 6px;color:#222}
 .kf-benefits svg{flex:0 0 16px;margin-top:3px}
 </style>
+{% unless static_preview %}
 <script>
 (function(){
   if (window.__kfVariantListener) return; window.__kfVariantListener = true;
@@ -50,3 +53,4 @@
   });
 })();
 </script>
+{% endunless %}

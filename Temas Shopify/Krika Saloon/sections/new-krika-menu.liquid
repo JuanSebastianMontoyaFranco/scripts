@@ -1062,7 +1062,7 @@
       scope.querySelectorAll('a[href*="filter.p.vendor"]').forEach(function(a){fixParam(a,'filter.p.vendor',VMAP)});
       scope.querySelectorAll('a[href*="filter.p.product_type"]').forEach(function(a){fixParam(a,'filter.p.product_type',TMAP)});
     }
-    return {norm:norm,norm2:norm2,shuffle:shuffle,pimg:pimg,ok:ok,wurl:wurl,fmtCOP:fmtCOP,addMaps:addMaps,fixLinks:fixLinks,VMAP:VMAP,TMAP:TMAP,CK:'krika_alt_v2_c_',AK:'krika9_all'};
+    return {norm:norm,norm2:norm2,shuffle:shuffle,pimg:pimg,ok:ok,wurl:wurl,fmtCOP:fmtCOP,addMaps:addMaps,fixLinks:fixLinks,VMAP:VMAP,TMAP:TMAP,CK:'krika_alt_v3_c_',AK:'krika9_all'};
   })();
 
   /* ===== MEGA MENÚS WEB ===== */
@@ -1116,6 +1116,29 @@
       return next();
     }
     K.fetchKitsProducts=fetchKitsProducts;
+    var productRequests={};
+    function loadMenuProducts(key){
+      if(productRequests[key])return productRequests[key];
+      var cached=null;
+      try{cached=JSON.parse(sessionStorage.getItem(K.CK+key))}catch(e){}
+      if(Array.isArray(cached)&&cached.filter(K.ok).length>=4)return Promise.resolve(cached);
+      var page=1,all=[],limit=50;
+      function next(){
+        return fetch('/collections/'+key+'/products.json?limit='+limit+'&page='+page)
+          .then(function(r){if(!r.ok)throw new Error('Collection HTTP '+r.status);return r.json()})
+          .then(function(data){
+            var batch=(data&&data.products)||[];
+            all=all.concat(batch);
+            if(all.filter(K.ok).length<4&&batch.length===limit){page++;return next()}
+            try{if(all.length)sessionStorage.setItem(K.CK+key,JSON.stringify(all))}catch(e){}
+            return all;
+          });
+      }
+      productRequests[key]=next().finally(function(){delete productRequests[key]});
+      return productRequests[key];
+    }
+    K.loadMenuProducts=loadMenuProducts;
+
     function renderProducts(products,container){
       container.innerHTML='';
       var vis=(products||[]).filter(K.ok); /* v9: sin stock / sin foto fuera */
@@ -1132,8 +1155,8 @@
       var container=document.querySelector('[data-menu="'+key+'"] .krika-mega-products');
       if(!container)return;
       var cached=cacheOf(key);
-      if(cached){K.addMaps(cached);if((key==='kits'||key==='descuentos'))renderKitsBrands(cached,key);K.fixLinks(document.querySelector('[data-menu="'+key+'"]'));renderProducts(cached,container);return}
-      var request=(key==='kits'||key==='descuentos')?fetchKitsProducts(key):fetch('/collections/'+key+'/products.json?limit=50').then(function(r){return r.json()}).then(function(data){return (data&&data.products)||[]});
+      if(cached&&cached.filter(K.ok).length>=4){K.addMaps(cached);if((key==='kits'||key==='descuentos'))renderKitsBrands(cached,key);K.fixLinks(document.querySelector('[data-menu="'+key+'"]'));renderProducts(cached,container);return}
+      var request=(key==='kits'||key==='descuentos')?fetchKitsProducts(key):loadMenuProducts(key);
       request.then(function(prods){
         try{if(prods.length)sessionStorage.setItem(K.CK+key,JSON.stringify(prods))}catch(e){}
         K.addMaps(prods);
@@ -1421,8 +1444,8 @@
           }).join('')||'';
         };
         var c=sessionStorage.getItem(K.CK+key);
-        if(c){try{var cached=JSON.parse(c);if((key==='kits'||key==='descuentos'))K.renderKitsBrands(cached,key);done(cached);return}catch(e){}}
-        var kitRequest=(key==='kits'||key==='descuentos')?K.fetchKitsProducts(key):fetch('/collections/'+key+'/products.json?limit=8').then(function(r){return r.json()}).then(function(d){return (d&&d.products)||[]});
+        if(c){try{var cached=JSON.parse(c);if(cached.filter(K.ok).length>=4){if((key==='kits'||key==='descuentos'))K.renderKitsBrands(cached,key);done(cached);return}}catch(e){}}
+        var kitRequest=(key==='kits'||key==='descuentos')?K.fetchKitsProducts(key):K.loadMenuProducts(key);
         kitRequest.then(function(prods){
           if((key==='kits'||key==='descuentos')){
             try{if(prods.length)sessionStorage.setItem(K.CK+key,JSON.stringify(prods))}catch(e){}
@@ -2107,6 +2130,14 @@
   @media (max-width: 768px) {
     #shopify-section-{{ section.id }} .kr-mhead > span { display: none; }
     #shopify-section-{{ section.id }} .kr-mhead { justify-content: flex-end; }
+  }
+</style>
+
+
+<style>
+  #shopify-section-{{ section.id }} .krika-mega-item[data-menu="descuentos"] > .krika-mega-link,
+  #shopify-section-{{ section.id }} .kr-cat[data-sub="descuentos"] {
+    color: #a12d35;
   }
 </style>
 

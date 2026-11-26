@@ -90,14 +90,18 @@
             <span class="krika-quickview-sale">¡En oferta!</span>
           </div>
           <div class="main-product__block main-product__block-description">
-            {% if product.description != blank %}
+            {% if product.metafields.custom.beneficios != blank or product.description != blank %}
               <details class="krika-preview-description">
                 <summary class="m-product-quickview--viewmore">
                   <span class="krika-description-more">Ver más</span>
                   <span class="krika-description-less">Ver menos</span>
                 </summary>
                 <div class="krika-preview-description-content rte">
-                  {{ product.description }}
+                  {% if product.metafields.custom.beneficios != blank %}
+                    {% render 'krika-ficha-top', product: product, static_preview: true %}
+                  {% else %}
+                    {{ product.description }}
+                  {% endif %}
                 </div>
               </details>
             {% endif %}

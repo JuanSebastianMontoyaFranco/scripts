@@ -122,7 +122,7 @@
           "type": "custom_liquid",
           "name": "Opciones de pago",
           "settings": {
-            "custom_liquid": "<img class=\"noMobile\" src=\"https://cdn.shopify.com/s/files/1/0719/4027/6375/files/METODOS_DE_PAGO-01.png?v=1784125855\" width=\"\" alt=\"Payment Methods\" style=\"width: 100%;\">\n<img class=\"noDesk\" src=\"https://cdn.shopify.com/s/files/1/0719/4027/6375/files/METODOS_DE_PAGO-01.png?v=1784125855\" width=\"\" alt=\"Payment Methods\"  style=\"width: 100%;>"
+            "custom_liquid": "<img class=\"noMobile\" src=\"https://cdn.shopify.com/s/files/1/0719/4027/6375/files/METODOS_DE_PAGO-01.png?v=1784125855\" width=\"\" alt=\"Payment Methods\" style=\"width: 100%;\">\n<img class=\"noDesk\" src=\"https://cdn.shopify.com/s/files/1/0719/4027/6375/files/METODOS_DE_PAGO-01.png?v=1784125855\" width=\"\" alt=\"Payment Methods\"  style=\"width: 100%;\">"
           }
         },
         "custom_liquid_J6NYTd": {
