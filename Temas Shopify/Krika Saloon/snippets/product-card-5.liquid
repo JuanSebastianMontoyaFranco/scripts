@@ -311,7 +311,7 @@
           {%- if settings.on_sale_badge == 'show_text' -%}
             {{ 'products.product.on_sale' | t }}
           {%- elsif settings.on_sale_badge == 'show_percentage' -%}
-            {{ discount | append: '%' | prepend: '-' }}
+            {{ discount | append: '% OFF' | prepend: '-' }}
           {%- endif -%}
         </span>
       {% endif %}
